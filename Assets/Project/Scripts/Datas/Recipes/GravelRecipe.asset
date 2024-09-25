@@ -15,7 +15,7 @@ MonoBehaviour:
   reqItems:
   - item: {fileID: 11400000, guid: cddc0177552d6d3488cfa1a00d7cfa62, type: 2}
     count: 1
-  - item: {fileID: 11400000, guid: 58af58b516bdf904c81643e6f2c7d880, type: 2}
+  - item: {fileID: 11400000, guid: a6b3021066972864c9e0cb7b8d0f2cf3, type: 2}
     count: 1
   - item: {fileID: 11400000, guid: 0f9c9c079dd8c2b4582c0d0a7eac72da, type: 2}
     count: 1

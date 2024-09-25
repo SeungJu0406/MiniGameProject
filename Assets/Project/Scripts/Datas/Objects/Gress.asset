@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Gress
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
-  type: 0
-  itemName: 
+  type: 4
+  itemName: "\uD480"

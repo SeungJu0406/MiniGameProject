@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Stone
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
-  type: 0
-  itemName: 
+  type: 1
+  itemName: "\uB3CC"

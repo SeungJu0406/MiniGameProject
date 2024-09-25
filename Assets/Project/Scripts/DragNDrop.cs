@@ -4,16 +4,24 @@ using UnityEngine;
 
 public class DragNDrop : MonoBehaviour
 {
-    [SerializeField] Transform objectPos;
-    [SerializeField] float dragSpeed;
+    public static DragNDrop Instance;
+
+    [SerializeField] Transform cardPos;
+    [SerializeField] Card choiceCard;
+    [SerializeField] public float dragSpeed;
     [SerializeField] float dragHeight;
     Vector3 movePos;
-    int objectLayer;
+    int cardLayer;
     int backGroundLayer;
+
+    public bool isClick {  get; private set; }
 
     private void Awake()
     {
-        objectLayer = LayerMask.GetMask("Card");
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+
+        cardLayer = LayerMask.GetMask("Card");
         backGroundLayer = LayerMask.GetMask("BackGround");
     }
 
@@ -34,10 +42,13 @@ public class DragNDrop : MonoBehaviour
     }
     void Click()
     {
+        isClick = true;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, 100f, objectLayer))
+        if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, 100f, cardLayer))
         {
-            objectPos = hit.transform;
+            cardPos = hit.transform;
+            choiceCard = hit.collider.gameObject.GetComponent<Card>();
+            choiceCard.Click();
         }
         if (dragRoutine == null)
         {
@@ -48,9 +59,9 @@ public class DragNDrop : MonoBehaviour
     Coroutine dragRoutine;
     private void Drag()
     {
-        if (objectPos != null)
+        if (cardPos != null)
         {
-            objectPos.position = Vector3.Lerp(objectPos.position, movePos, dragSpeed * Time.deltaTime);
+            cardPos.position = Vector3.Lerp(cardPos.position, movePos, dragSpeed * Time.deltaTime);
         }
     }
     WaitForSeconds delay = new WaitForSeconds(0.05f);
@@ -69,15 +80,18 @@ public class DragNDrop : MonoBehaviour
 
     void UnClick()
     {
+        isClick = false;
         if (dragRoutine != null)
         {
             StopCoroutine(dragRoutine);
             dragRoutine = null;
         }
-        if (objectPos != null)
+        if (cardPos != null)
         {
-            objectPos.position = new Vector3(movePos.x, movePos.y, 0);
-            objectPos = null;
+            choiceCard.UnClick();
+            cardPos.position = new Vector3(movePos.x, movePos.y, 0);
+            cardPos = null;
+            choiceCard = null;
         }
     }
 

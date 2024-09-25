@@ -11,8 +11,8 @@ TagManager:
   - BackGround
   - Water
   - UI
-  - Object
-  - 
+  - Card
+  - IgnoreCollider
   - 
   - 
   - 
@@ -41,7 +41,7 @@ TagManager:
   - name: BackGround
     uniqueID: 3384214209
     locked: 0
-  - name: Object
+  - name: Card
     uniqueID: 1543442145
     locked: 0
   - name: Default

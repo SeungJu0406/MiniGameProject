@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Gravel
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
-  type: 0
-  itemName: 
+  type: 3
+  itemName: "\uC790\uAC08"

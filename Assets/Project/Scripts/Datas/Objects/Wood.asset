@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Wood
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
-  type: 0
-  itemName: 
+  type: 2
+  itemName: "\uB098\uBB34"

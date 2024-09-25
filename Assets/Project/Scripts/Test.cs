@@ -14,7 +14,7 @@ public class Test : MonoBehaviour
 
         CardData water = Dic.Card.GetValue(CardType.Water);
         AddIngredint(water);
-        //AddIngredint(water);
+        //AddIngredient(water);
 
         CardData wood = Dic.Card.GetValue(CardType.Wood);
         AddIngredint(wood);
