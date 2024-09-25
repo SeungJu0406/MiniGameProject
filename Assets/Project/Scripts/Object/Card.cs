@@ -15,9 +15,6 @@ public class Card : MonoBehaviour
     [SerializeField] public CardData data;
 
     [SerializeField] public Card topCard;
-    public Card TopCard { get { return topCard; } set { OnChangeTopBefore?.Invoke() ; topCard = value; OnChangeTopAfter?.Invoke(); } }
-    public event UnityAction OnChangeTopBefore;
-    public event UnityAction OnChangeTopAfter;
     [SerializeField] public Card parentCard;
     [SerializeField] public Card childCard;
     public Card ChildCard { get { return childCard; } set { childCard = value; OnChangeChild?.Invoke(); } }
@@ -35,8 +32,6 @@ public class Card : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         OnChangeChild += InitChangeChild;
-        OnChangeTopBefore += RemoveCombineList;
-        OnChangeTopAfter += AddCombineList;
         rb.drag = 50;
         topCard = this;
         cardLayer = LayerMask.NameToLayer("Card");
@@ -54,7 +49,12 @@ public class Card : MonoBehaviour
             TraceParent();
         }
     }
-
+    void TraceParent()
+    {
+        Vector3 parentPos = parentCard.transform.position;
+        Vector3 pos = new Vector3(parentPos.x, parentPos.y - 0.4f, parentPos.z);
+        transform.position = Vector3.Lerp(transform.position, pos, DragNDrop.Instance.dragSpeed * Time.deltaTime);
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if (DragNDrop.Instance.isClick) return;
@@ -62,13 +62,12 @@ public class Card : MonoBehaviour
         if (collision.gameObject.layer == cardLayer)
         {
             Card parent = collision.gameObject.GetComponent<Card>();
-            if (TopCard == parent.TopCard) return;
+            if (topCard == parent.topCard) return;
             if (parent.ChildCard != null) return;
             // 부모 자식 카드 지정
-            TopCard = parent.TopCard;
+            ChangeTopChild(parent.topCard);
             parentCard = parent;
-            parent.ChildCard = this;
-            // 조합 배열에 넣기  
+            parent.ChildCard = this; 
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -78,14 +77,12 @@ public class Card : MonoBehaviour
         if (other.gameObject.layer == cardLayer)
         {
             Card parent = other.gameObject.GetComponent<Card>();
-            if (TopCard == parent.TopCard) return;
+            if (topCard == parent.topCard) return;
             if (parent.ChildCard != null) return;
             // 부모 자식 카드 지정
-            TopCard = parent.TopCard;
+            ChangeTopChild(parent.topCard);
             parentCard = parent;
             parent.ChildCard = this;
-
-            // 조합 배열에 넣기
         }
     }
 
@@ -111,17 +108,16 @@ public class Card : MonoBehaviour
             parentCard = null;           
         }
         isChoice = true;
-        ClickChild(this);
-        
+        ChangeTopChild(this);
+        ClickChild();     
     }
-    void ClickChild(Card top)
+    void ClickChild()
     {
-        TopCard = top;
         gameObject.layer = ignoreLayer;
         rb.velocity = Vector3.zero;    
         if (ChildCard != null) 
         {
-            ChildCard.ClickChild(top);
+            ChildCard.ClickChild();
         }
     }
     public void UnClick()
@@ -143,12 +139,7 @@ public class Card : MonoBehaviour
             ChildCard.UnClickChild();
         }
     }
-    void TraceParent()
-    {
-        Vector3 parentPos = parentCard.transform.position;
-        Vector3 pos = new Vector3(parentPos.x, parentPos.y - 0.4f, parentPos.z);
-        transform.position = Vector3.Lerp(transform.position, pos, DragNDrop.Instance.dragSpeed * Time.deltaTime);
-    }
+
 
     public void TryCombine()
     {
@@ -163,7 +154,7 @@ public class Card : MonoBehaviour
         {
             CraftingItemInfo result = Dic.Recipe.GetValue(key);
             Debug.Log($"{result.item.itemName} , {result.count}");
-
+      
             CreateResultCard(result.item.prefab, result.count);
         }
         else
@@ -172,14 +163,32 @@ public class Card : MonoBehaviour
         }
     }
 
+    void ChangeTop(Card top)
+    {
+        if (top != topCard)
+        {
+            RemoveCombineList();
+            topCard = top;
+            AddCombineList();
+        }
+    }
+    void ChangeTopChild(Card top)
+    {   
+        ChangeTop(top);
+        if (ChildCard != null)
+        {
+            ChildCard.ChangeTopChild(top);
+        }
+    }
+
     void AddCombineList()
     {
-        TopCard.AddIngredient(data);
+        topCard.AddIngredient(data);
     }
 
     void RemoveCombineList()
     {
-        TopCard.RemoveIngredient(data);
+        topCard.RemoveIngredient(data);
     }
     void AddIngredient(CardData data)
     {
@@ -214,6 +223,7 @@ public class Card : MonoBehaviour
 
     void CreateResultCard(Card result, int count)
     {
+        if (result == null) return;
         for (int i = 0; i < count; i++)
         {
             Vector3 randomPos = new Vector3(transform.position.x + Random.Range(-10, 10), transform.position.y + Random.Range(-10, 10), 0);

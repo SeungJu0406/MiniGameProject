@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
   m_Name: Stone
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 1719549034884507588, guid: d7bbac6689a108149970192a545e2427, type: 3}
   type: 1
   itemName: "\uB3CC"
