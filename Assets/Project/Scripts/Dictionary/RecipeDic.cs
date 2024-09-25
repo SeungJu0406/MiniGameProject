@@ -10,7 +10,7 @@ public class RecipeDic : MonoBehaviour
 
     [SerializeField] CraftingRecipe[] recipes;
 
-    public Dictionary<string, CraftingItemInfo> recipeDic = new Dictionary<string, CraftingItemInfo>();
+    public Dictionary<string, CraftingItemInfo> dic = new Dictionary<string, CraftingItemInfo>();
 
     StringBuilder sb = new StringBuilder();
     private void Awake()
@@ -25,12 +25,12 @@ public class RecipeDic : MonoBehaviour
         foreach (CraftingRecipe recipe in recipes)
         {
             Array.Sort(recipe.reqItems, (s1, s2) => s1.item.type.CompareTo(s2.item.type));
-            recipeDic.Add(GetKey(recipe.reqItems), recipe.resultItem);
+            dic.Add(GetKey(recipe.reqItems), recipe.resultItem);
         }
     }
-    public CraftingItemInfo GetInfo(string key)
+    public CraftingItemInfo GetValue(string key)
     {
-        return recipeDic[key];
+        return dic[key];
     }
 
     public string GetKey(CraftingItemInfo[] reqItems) 

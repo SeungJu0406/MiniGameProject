@@ -8,7 +8,7 @@ public class ItemDic : MonoBehaviour
 
     [SerializeField] ItemData[] items;
 
-    public Dictionary<ItemType, ItemData> itemDic = new Dictionary<ItemType, ItemData>();
+    public Dictionary<ItemType, ItemData> dic = new Dictionary<ItemType, ItemData>();
 
     private void Awake()
     {
@@ -19,15 +19,15 @@ public class ItemDic : MonoBehaviour
 
     public void Init()
     {     
-        itemDic.Clear();
+        dic.Clear();
         foreach (ItemData item in items)
         {
-            itemDic.Add(item.type, item);
+            dic.Add(item.type, item);
         }
     }
 
-    public ItemData GetInfo(ItemType type)
+    public ItemData GetValue(ItemType key)
     {
-        return itemDic[type];
+        return dic[key];
     }
 }
