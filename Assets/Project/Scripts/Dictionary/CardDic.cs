@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemDic : MonoBehaviour
+public class CardDic : MonoBehaviour
 {
-    public static ItemDic Instance;
+    public static CardDic Instance;
 
-    [SerializeField] ItemData[] items;
+    [SerializeField] CardData[] objects;
 
-    public Dictionary<ItemType, ItemData> dic = new Dictionary<ItemType, ItemData>();
+    public Dictionary<CardType, CardData> dic = new Dictionary<CardType, CardData>();
 
     private void Awake()
     {
@@ -20,13 +20,13 @@ public class ItemDic : MonoBehaviour
     public void Init()
     {     
         dic.Clear();
-        foreach (ItemData item in items)
+        foreach (CardData obj in objects)
         {
-            dic.Add(item.type, item);
+            dic.Add(obj.type, obj);
         }
     }
 
-    public ItemData GetValue(ItemType key)
+    public CardData GetValue(CardType key)
     {
         return dic[key];
     }

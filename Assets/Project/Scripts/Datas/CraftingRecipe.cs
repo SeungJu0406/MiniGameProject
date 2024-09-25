@@ -16,10 +16,10 @@ public class CraftingRecipe : ScriptableObject
 [System.Serializable]
 public struct CraftingItemInfo
 {
-    [SerializeField] public ItemData item;
+    [SerializeField] public CardData item;
     [SerializeField] public int count;
 
-    public CraftingItemInfo(ItemData item, int count)
+    public CraftingItemInfo(CardData item, int count)
     {
         this.item = item;
         this.count = count;

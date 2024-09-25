@@ -4,6 +4,6 @@ using UnityEngine;
 
 public static class Dic
 {
-    public static ItemDic Item { get { return ItemDic.Instance; } }
+    public static CardDic Card { get { return CardDic.Instance; } }
     public static RecipeDic Recipe { get { return RecipeDic.Instance; } }
 }

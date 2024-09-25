@@ -9,14 +9,14 @@ public class Test : MonoBehaviour
     private void Start()
     {
         ingredients.Clear();
-        ItemData rock = Dic.Item.GetValue(ItemType.Rock);
+        CardData rock = Dic.Card.GetValue(CardType.Rock);
         AddIngredint(rock);
 
-        ItemData water = Dic.Item.GetValue(ItemType.Water);
+        CardData water = Dic.Card.GetValue(CardType.Water);
         AddIngredint(water);
         //AddIngredint(water);
 
-        ItemData wood = Dic.Item.GetValue(ItemType.Wood);
+        CardData wood = Dic.Card.GetValue(CardType.Wood);
         AddIngredint(wood);
 
         ingredients.Sort((s1, s2) => s1.item.type.CompareTo(s2.item.type));
@@ -32,7 +32,7 @@ public class Test : MonoBehaviour
             Debug.Log("조합 없음");
         }
     }
-    void AddIngredint(ItemData item)
+    void AddIngredint(CardData item)
     {
         if (ingredients.Any(ingredients => ingredients.item.Equals(item)))
         {

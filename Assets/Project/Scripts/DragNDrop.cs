@@ -1,17 +1,20 @@
 using System.Collections;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class DragNDrop : MonoBehaviour
 {
-    [SerializeField] Transform objectPos; 
+    [SerializeField] Transform objectPos;
     [SerializeField] float dragSpeed;
+    [SerializeField] float dragHeight;
     Vector3 movePos;
     int objectLayer;
-
+    int backGroundLayer;
 
     private void Awake()
     {
-        objectLayer = LayerMask.GetMask("Object");
+        objectLayer = LayerMask.GetMask("Card");
+        backGroundLayer = LayerMask.GetMask("BackGround");
     }
 
     private void Update()
@@ -32,7 +35,6 @@ public class DragNDrop : MonoBehaviour
     void Click()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red, 0.5f);
         if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, 100f, objectLayer))
         {
             objectPos = hit.transform;
@@ -57,10 +59,9 @@ public class DragNDrop : MonoBehaviour
         while (true)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red, 0.5f);
-            if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, 100f))
+            if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, 100f, backGroundLayer))
             {
-                movePos = hit.point;
+                movePos = new Vector3(hit.point.x, hit.point.y, hit.point.z - dragHeight);
             }
             yield return delay;
         }
@@ -73,7 +74,11 @@ public class DragNDrop : MonoBehaviour
             StopCoroutine(dragRoutine);
             dragRoutine = null;
         }
-        objectPos = null;
+        if (objectPos != null)
+        {
+            objectPos.position = new Vector3(movePos.x, movePos.y, 0);
+            objectPos = null;
+        }
     }
 
 }
