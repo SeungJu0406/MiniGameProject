@@ -40,9 +40,11 @@ public class Card : MonoBehaviour
         rb.drag = 50;
         topCard = this;
         cardLayer = LayerMask.NameToLayer("Card");
-        ignoreLayer = LayerMask.NameToLayer("IgnoreCollider");
-
-        AddIngredient(data);
+        ignoreLayer = LayerMask.NameToLayer("IgnoreCollider");      
+    }
+    private void Start()
+    {
+        AddCombineList();
     }
 
     private void Update()
@@ -112,7 +114,7 @@ public class Card : MonoBehaviour
         ClickChild(this);
         
     }
-    public void ClickChild(Card top)
+    void ClickChild(Card top)
     {
         TopCard = top;
         gameObject.layer = ignoreLayer;
@@ -133,7 +135,7 @@ public class Card : MonoBehaviour
         yield return delay;
         isChoice = false;       
     }
-    public void UnClickChild()
+    void UnClickChild()
     {
         gameObject.layer = cardLayer;
         if (ChildCard != null)
@@ -148,11 +150,12 @@ public class Card : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, pos, DragNDrop.Instance.dragSpeed * Time.deltaTime);
     }
 
-    public void TryCombine(CardType type)
+    public void TryCombine()
     {
-        CardData obj = Dic.Card.GetValue(CardType.Rock);
-        AddIngredient(obj);
-
+        if (ingredients.Count <= 0) return;
+        if (ingredients.Count == 1 && ingredients[0].count <=1)
+            return;
+    
         ingredients.Sort((s1, s2) => s1.item.type.CompareTo(s2.item.type));
         string key = RecipeDic.Instance.GetKey(ingredients.ToArray());
 
@@ -160,6 +163,8 @@ public class Card : MonoBehaviour
         {
             CraftingItemInfo result = Dic.Recipe.GetValue(key);
             Debug.Log($"{result.item.itemName} , {result.count}");
+
+            CreateResultCard(result.item.prefab, result.count);
         }
         else
         {
@@ -176,23 +181,24 @@ public class Card : MonoBehaviour
     {
         TopCard.RemoveIngredient(data);
     }
-    void AddIngredient(CardData card)
+    void AddIngredient(CardData data)
     {
-        if (ingredients.Any(ingredients => ingredients.item.Equals(card)))
+        if (ingredients.Any(ingredients => ingredients.item.Equals(data)))
         {
-            int index = ingredients.FindIndex(ingredients => ingredients.item.Equals(card));
+            int index = ingredients.FindIndex(ingredients => ingredients.item.Equals(data));
             CraftingItemInfo findCard = ingredients[index];
             findCard.count++;
             ingredients[index] = findCard;
         }
         else
         {
-            ingredients.Add(new CraftingItemInfo(card, 1));
+            ingredients.Add(new CraftingItemInfo(data, 1));
         }
+        TryCombine();
     }
-    void RemoveIngredient(CardData card)
+    void RemoveIngredient(CardData data)
     {
-        int index = ingredients.FindIndex(ingredients => ingredients.item.Equals(card));
+        int index = ingredients.FindIndex(ingredients => ingredients.item.Equals(data));
         if (ingredients[index].count <= 1)
         {
             ingredients.RemoveAt(index);
@@ -202,6 +208,16 @@ public class Card : MonoBehaviour
             CraftingItemInfo findCard = ingredients[index];
             findCard.count--;
             ingredients[index] = findCard;
+        }
+        TryCombine();
+    }
+
+    void CreateResultCard(Card result, int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            Vector3 randomPos = new Vector3(transform.position.x + Random.Range(-10, 10), transform.position.y + Random.Range(-10, 10), 0);
+            Instantiate(result, randomPos , transform.rotation);
         }
     }
 }
