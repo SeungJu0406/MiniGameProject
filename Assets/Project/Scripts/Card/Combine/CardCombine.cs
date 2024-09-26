@@ -110,9 +110,14 @@ public abstract class CardCombine : MonoBehaviour
             yield return delay;
         }
         timerBar.gameObject.SetActive(false);
-        Card instanceCard = Instantiate(result.resultItem.item.prefab, transform.position, transform.rotation);
-        CardManager.Instance.MoveResultCard(instanceCard, SelectRandomPos());
+        // 생성
+        for (int i = 0; i < result.resultItem.count; i++)
+        {
+            Card instanceCard = Instantiate(result.resultItem.item.prefab, transform.position, transform.rotation);
+            CardManager.Instance.MoveResultCard(instanceCard, SelectRandomPos());
+        }
 
+        // 생성 후 재료아이템 처리
         if(model.data.isFactory) model.BottomCard = model.ChildCard;
         model.BottomCard.combine.CompleteCreateParent();
     }
@@ -137,20 +142,9 @@ public abstract class CardCombine : MonoBehaviour
         timerBar.value = CraftingCurTime;
     }
 
-    protected const float CreatePos = 2;
-    protected Vector3[] directions =
-    {
-        new Vector3(-CreatePos,CreatePos,0),    // 좌상
-        new Vector3(0,CreatePos,0),     // 상
-        new Vector3(CreatePos,CreatePos,0),     // 우상
-        new Vector3(-CreatePos,0,0),    // 좌
-        new Vector3(CreatePos,0,0),     // 우
-        new Vector3(-CreatePos,-CreatePos,0),   // 좌하
-        new Vector3(CreatePos,-CreatePos,0),    // 우하
-    };
     protected Vector3 SelectRandomPos()
     {
-        Vector2 dir = Random.insideUnitCircle * CreatePos;
+        Vector2 dir = Random.insideUnitCircle * CardManager.Instance.createPosDistance;
 
         return transform.position + (Vector3)dir;
     }

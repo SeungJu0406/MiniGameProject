@@ -31,7 +31,7 @@ public class Card : MonoBehaviour
         model.Card = this;
         model.OnChangeChild += InitChangeChild;
 
-        rb.drag = 50;
+        rb.drag = 5;
         cardLayer = LayerMask.NameToLayer("Card");
         ignoreLayer = LayerMask.NameToLayer("IgnoreCollider");
 
@@ -62,6 +62,16 @@ public class Card : MonoBehaviour
         Vector3 pos = new Vector3(parentPos.x, parentPos.y - 0.4f, parentPos.z);
         transform.position = Vector3.Lerp(transform.position, pos, DragNDrop.Instance.dragSpeed * Time.deltaTime);
     }
+    public void InitInStack(Card parent)
+    {
+        if (!model.data.canGetParent) return;
+        if (!parent.model.data.canGetChild) return;
+        model.ParentCard = parent;
+        parent.model.ChildCard = this;
+        ChangeTopChild(parent.model.TopCard); // 본인 + 자식에게 top 설정           
+        ChangeBottomParent(model.BottomCard); // 본인 + 부모에게 bottom 설정
+        parent.rb.velocity = Vector3.zero;
+    }
     private void OnCollisionEnter(Collision other)
     {
         if (!model.data.canGetParent) return;
@@ -76,9 +86,10 @@ public class Card : MonoBehaviour
             if (parent.model.ChildCard != null) return;
             // 부모 자식 카드 지정
             model.ParentCard = parent;
-            parent.model.ChildCard = this;
+            parent.model.ChildCard = this;            
             ChangeTopChild(parent.model.TopCard); // 본인 + 자식에게 top 설정           
             ChangeBottomParent(model.BottomCard); // 본인 + 부모에게 bottom 설정
+            parent.rb.velocity = Vector3.zero;
         }
     }
     private void OnTriggerEnter(Collider other)

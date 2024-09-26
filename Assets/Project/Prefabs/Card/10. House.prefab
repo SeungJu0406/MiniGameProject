@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 6197996326476540310}
   - component: {fileID: 4597446524359002569}
   - component: {fileID: 6197996326476540308}
-  - component: {fileID: 9185104017773104708}
+  - component: {fileID: 3126760010105679079}
   m_Layer: 6
-  m_Name: 7.CoinBox
+  m_Name: 10. House
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32ff8d72382bfdc428e2a9649fd657c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 1c95162ceaf953f4aa4233f620ef893e, type: 2}
+  data: {fileID: 11400000, guid: 0d60825e67160ea4c8988c1c8c438c66, type: 2}
   card: {fileID: 0}
   topCard: {fileID: 0}
   parentCard: {fileID: 0}
@@ -156,7 +156,7 @@ MonoBehaviour:
   model: {fileID: 0}
   combine: {fileID: 0}
   isChoice: 0
---- !u!114 &9185104017773104708
+--- !u!114 &3126760010105679079
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6197996326476540304}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0931627a6d3cf124cb3503d568cc03d1, type: 3}
+  m_Script: {fileID: 11500000, guid: e7e79239e95d0f14298299ace355caa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 0}
@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 6197996327663481858}
   - component: {fileID: 6197996327663481869}
   m_Layer: 6
-  m_Name: BrickFactpry
+  m_Name: House
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -244,7 +244,7 @@ SpriteRenderer:
   m_SortingLayerID: 1543442145
   m_SortingLayer: -1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3c9c96082b50e9c449951618301af14e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6434f804e69ede6419434d377c55f6df, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

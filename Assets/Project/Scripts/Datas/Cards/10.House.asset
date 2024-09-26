@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
-  m_Name: 9.Lumbercamp
+  m_Name: 10.House
   m_EditorClassIdentifier: 
-  prefab: {fileID: 6197996326476540308, guid: fb16da1febd9d994abe4ea10ba4bae62, type: 3}
-  id: 9
-  cardName: "\uBC8C\uBAA9\uC7A5"
-  isFactory: 1
+  prefab: {fileID: 6197996326476540308, guid: c300e4a53f809324fb599869bdd83674, type: 3}
+  id: 10
+  cardName: "\uC9D1"
+  isFactory: 0
   canGetParent: 0
   canGetChild: 1

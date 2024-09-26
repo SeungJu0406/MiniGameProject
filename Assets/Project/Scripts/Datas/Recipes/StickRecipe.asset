@@ -19,5 +19,5 @@ MonoBehaviour:
     count: 1
   resultItem:
     item: {fileID: 11400000, guid: e83dba01981f646419044760d469de5e, type: 2}
-    count: 1
-  craftingTime: 5
+    count: 2
+  craftingTime: 10
