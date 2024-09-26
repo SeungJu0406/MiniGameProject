@@ -15,13 +15,6 @@ public class Card : MonoBehaviour
     [SerializeField] public Rigidbody rb;
     [SerializeField] public CardModel model;
     [SerializeField] public CardCombine combine;
-
-
-    // 모델화, 모델이 바뀌었을때 이벤트 발생
-    // 드래그앤드랍 <-> 모델(스택) <-> 조합 구분
-
-
-
    
     [Space(30)]
     int cardLayer;
@@ -30,22 +23,23 @@ public class Card : MonoBehaviour
     public bool isChoice;
     private void Awake()
     {
+
         boxCollider = GetComponent<BoxCollider>();
         rb = GetComponent<Rigidbody>();
         model = GetComponent<CardModel>();
         combine = GetComponent<CardCombine>();
 
         model.OnChangeChild += InitChangeChild;
-        rb.drag = 50;
-        model.TopCard = this;
+
         cardLayer = LayerMask.NameToLayer("Card");
         ignoreLayer = LayerMask.NameToLayer("IgnoreCollider");      
     }
-    private void Start()
-    {
-        combine.AddCombineList();
-    }
 
+    private void Start()
+    {        
+        rb.drag = 50;
+        model.TopCard = this;
+    }
     private void Update()
     {
         if (model.parentCard != null) 

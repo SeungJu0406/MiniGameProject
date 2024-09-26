@@ -11,6 +11,10 @@ public class CraftingRecipe : ScriptableObject
 
     [Header("결과 아이템")]
     [SerializeField] public CraftingItemInfo resultItem;
+
+    [Space(30)]
+    [Header("제작 시간")]
+    [SerializeField] public float craftingTime; 
 }
 
 [System.Serializable]

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class CardModel : MonoBehaviour
 {
@@ -12,8 +13,8 @@ public class CardModel : MonoBehaviour
         get { return topCard; }
         set
         {
-            if (value != topCard)
-            {
+            if (topCard != value)
+            {               
                 OnChangeTopBefore?.Invoke();
                 topCard = value;
                 OnChangeTopAfter?.Invoke();
@@ -31,9 +32,14 @@ public class CardModel : MonoBehaviour
 
     [SerializeField] public List<CraftingItemInfo> ingredients = new List<CraftingItemInfo>();
 
+    [SerializeField] Slider timerBar;
+    public Slider TimerBar { get { return timerBar; } set { timerBar = value; OnChangeTimerBar?.Invoke(); } }
+    public event UnityAction OnChangeTimerBar;
+
 
     private void Awake()
     {
-        topCard = GetComponent<Card>();
+        //topCard = GetComponent<Card>();
+        timerBar = GetComponentInChildren<Slider>();
     }
 }
