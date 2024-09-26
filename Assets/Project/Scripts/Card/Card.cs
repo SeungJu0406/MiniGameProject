@@ -23,7 +23,6 @@ public class Card : MonoBehaviour
     public bool isChoice;
     private void Awake()
     {
-
         boxCollider = GetComponent<BoxCollider>();
         rb = GetComponent<Rigidbody>();
         model = GetComponent<CardModel>();
@@ -33,7 +32,9 @@ public class Card : MonoBehaviour
 
         rb.drag = 50;
         cardLayer = LayerMask.NameToLayer("Card");
-        ignoreLayer = LayerMask.NameToLayer("IgnoreCollider");      
+        ignoreLayer = LayerMask.NameToLayer("IgnoreCollider");
+
+        StartCoroutine(InitIgnoreColliderRoutine());
     }
 
     private void Start()
@@ -46,6 +47,12 @@ public class Card : MonoBehaviour
         {
             TraceParent();
         }
+    }
+    IEnumerator InitIgnoreColliderRoutine() 
+    {       
+        gameObject.layer = ignoreLayer;
+        yield return new WaitForSeconds(1f);
+        gameObject.layer = cardLayer;
     }
     void TraceParent()
     {

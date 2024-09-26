@@ -169,6 +169,7 @@ MonoBehaviour:
   model: {fileID: 0}
   timerBar: {fileID: 0}
   craftingCurTime: 0
+  completeResultMoveSpeed: 10
 --- !u!1 &6197996327663481871
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,9 +10,10 @@ public class CardCombine : MonoBehaviour
     [SerializeField] CardModel model;
     [SerializeField] Slider timerBar;
     [SerializeField] float craftingCurTime;
+    [SerializeField] float completeResultMoveSpeed;
     public float CraftingCurTime { get { return craftingCurTime; } set { craftingCurTime = value; OnChangeTimerBar?.Invoke(); } }
     public event UnityAction OnChangeTimerBar;
-
+   
 
     private void Awake()
     {
@@ -82,8 +83,8 @@ public class CardCombine : MonoBehaviour
 
         if (Dic.Recipe.dic.ContainsKey(key))
         {
-            CraftingItemInfo result = Dic.Recipe.GetValue(key);
-            CreateResultCard(result, 5 );
+            CraftingRecipe result = Dic.Recipe.GetValue(key);
+            CreateResultCard(result);
             return true;
         }
         else
@@ -91,37 +92,51 @@ public class CardCombine : MonoBehaviour
             return false;
         }
     }
-    void CreateResultCard(CraftingItemInfo result, float craftingTime)
+    void CreateResultCard(CraftingRecipe result)
     {
-        if (result.item == null) return;
-        for (int i = 0; i < result.count; i++)
+        if (result.resultItem.item == null) return;
+        for (int i = 0; i < result.resultItem.count; i++)
         {
-            StartCreate(result, craftingTime);
+            StartCreate(result);
         }
     }
     const float DelayTime = 0.1f;
     WaitForSeconds delay = new WaitForSeconds(DelayTime);
     Coroutine createRoutine;
-    IEnumerator CreateRoutine(CraftingItemInfo result, float craftingTime)
+    IEnumerator CreateRoutine(CraftingRecipe result)
     {
         timerBar.gameObject.SetActive(true);
-        timerBar.maxValue = craftingTime;
-        CraftingCurTime = craftingTime;    
+        timerBar.maxValue = result.craftingTime;
+        CraftingCurTime = result.craftingTime;    
         while (true) 
         {
             CraftingCurTime -= DelayTime;
             if(CraftingCurTime < 0) break;
             yield return delay;          
         }
-        timerBar.gameObject.SetActive(false);
-        Vector3 randomPos = new Vector3(transform.position.x + Random.Range(-10, 10), transform.position.y + Random.Range(-10, 10), 0);
-        Instantiate(result.item.prefab, randomPos, transform.rotation);
+        timerBar.gameObject.SetActive(false);    
+        Card instanceCard = Instantiate(result.resultItem.item.prefab, transform.position, transform.rotation);
+        StartCoroutine(MoveCardRoutine(instanceCard, SelectRandomPos()));
     }
-    void StartCreate(CraftingItemInfo result, float craftingTime)
+
+    IEnumerator MoveCardRoutine(Card instanceCard, Vector3 pos)
+    {
+        while (true)
+        {
+            instanceCard.transform.position = Vector3.Lerp(instanceCard.transform.position, pos, completeResultMoveSpeed * Time.deltaTime);
+            if(Vector3.Distance(instanceCard.transform.position, pos) < 0.01f)
+            {
+                Debug.Log("³¡");
+                yield break;
+            }
+            yield return null;
+        }
+    }
+    void StartCreate(CraftingRecipe result)
     {
         if (createRoutine == null)
         {
-            createRoutine = StartCoroutine(CreateRoutine(result, craftingTime));
+            createRoutine = StartCoroutine(CreateRoutine(result));
         }
     }
     void StopCreate()
@@ -136,5 +151,22 @@ public class CardCombine : MonoBehaviour
     public void UpdateTimerBar()
     {
         timerBar.value = CraftingCurTime;
+    }
+
+    const float CreatePos = 2;
+    Vector3[] directions =
+    {
+        new Vector3(-CreatePos,CreatePos,0),    // ÁÂ»ó
+        new Vector3(0,CreatePos,0),     // »ó
+        new Vector3(CreatePos,CreatePos,0),     // ¿ì»ó
+        new Vector3(-CreatePos,0,0),    // ÁÂ
+        new Vector3(CreatePos,0,0),     // ¿ì
+        new Vector3(-CreatePos,-CreatePos,0),   // ÁÂÇÏ
+        new Vector3(CreatePos,-CreatePos,0),    // ¿ìÇÏ
+    };
+    Vector3 SelectRandomPos()
+    {
+        Vector3 dir = directions[Util.Random(0,directions.Length-1)];
+        return new Vector3(transform.position.x + dir.x, transform.position.y + dir.y, 0);
     }
 }

@@ -253,6 +253,7 @@ MonoBehaviour:
   model: {fileID: 0}
   timerBar: {fileID: 0}
   craftingCurTime: 0
+  completeResultMoveSpeed: 10
 --- !u!1001 &2618737083499501783
 PrefabInstance:
   m_ObjectHideFlags: 0

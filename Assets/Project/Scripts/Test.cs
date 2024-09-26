@@ -24,8 +24,8 @@ public class Test : MonoBehaviour
 
         if (Dic.Recipe.dic.ContainsKey(key))
         {
-            CraftingItemInfo result = Dic.Recipe.GetValue(key);
-            Debug.Log($"{result.item.itemName} , {result.count}");
+            //CraftingItemInfo result = Dic.Recipe.GetValue(key);
+            //Debug.Log($"{result.item.itemName} , {result.count}");
         }
         else
         {
