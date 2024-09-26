@@ -32,14 +32,9 @@ public class CardModel : MonoBehaviour
 
     [SerializeField] public List<CraftingItemInfo> ingredients = new List<CraftingItemInfo>();
 
-    [SerializeField] Slider timerBar;
-    public Slider TimerBar { get { return timerBar; } set { timerBar = value; OnChangeTimerBar?.Invoke(); } }
-    public event UnityAction OnChangeTimerBar;
-
 
     private void Awake()
     {
-        //topCard = GetComponent<Card>();
-        timerBar = GetComponentInChildren<Slider>();
+        
     }
 }

@@ -2,28 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class CardCombine : MonoBehaviour
 {
     [SerializeField] CardModel model;
+    [SerializeField] Slider timerBar;
+    [SerializeField] float craftingCurTime;
+    public float CraftingCurTime { get { return craftingCurTime; } set { craftingCurTime = value; OnChangeTimerBar?.Invoke(); } }
+    public event UnityAction OnChangeTimerBar;
+
 
     private void Awake()
     {
         model = GetComponent<CardModel>();
+        timerBar = GetComponentInChildren<Slider>();
         model.OnChangeTopBefore += RemoveCombineList;
         model.OnChangeTopAfter += AddCombineList;
-        model.OnChangeTimerBar += UpdateTimerBar;
+        OnChangeTimerBar += UpdateTimerBar;
     }
     private void Start()
     {
-        model.TimerBar.gameObject.SetActive(false);
+        timerBar.gameObject.SetActive(false);
     }
     public void AddCombineList()
     {
-        Debug.Log($"2 {model.TopCard }");
         if (model.TopCard == null) return;
-        Debug.Log($"3 {model.TopCard}");
         model.TopCard.combine.AddIngredient(model.data);
     }
 
@@ -34,6 +39,8 @@ public class CardCombine : MonoBehaviour
     }
     void AddIngredient(CardData data)
     {
+        StopCreate();
+
         if (model.ingredients.Any(ingredients => ingredients.item.Equals(data)))
         {
             int index = model.ingredients.FindIndex(ingredients => ingredients.item.Equals(data));
@@ -49,6 +56,8 @@ public class CardCombine : MonoBehaviour
     }
     void RemoveIngredient(CardData data)
     {
+        StopCreate();
+
         int index = model.ingredients.FindIndex(ingredients => ingredients.item.Equals(data));
         if (model.ingredients[index].count <= 1)
         {
@@ -74,8 +83,6 @@ public class CardCombine : MonoBehaviour
         if (Dic.Recipe.dic.ContainsKey(key))
         {
             CraftingItemInfo result = Dic.Recipe.GetValue(key);
-
-            Debug.Log($"{result.item.itemName} , {result.count}");
             CreateResultCard(result, 5 );
             return true;
         }
@@ -89,28 +96,45 @@ public class CardCombine : MonoBehaviour
         if (result.item == null) return;
         for (int i = 0; i < result.count; i++)
         {
-            Vector3 randomPos = new Vector3(transform.position.x + Random.Range(-10, 10), transform.position.y + Random.Range(-10, 10), 0);
-            Instantiate(result.item.prefab, randomPos, transform.rotation);
+            StartCreate(result, craftingTime);
         }
     }
     const float DelayTime = 0.1f;
     WaitForSeconds delay = new WaitForSeconds(DelayTime);
+    Coroutine createRoutine;
     IEnumerator CreateRoutine(CraftingItemInfo result, float craftingTime)
     {
-        model.TimerBar.gameObject.SetActive(true);
-        float curTime = craftingTime;
-        model.TimerBar.value = curTime;
+        timerBar.gameObject.SetActive(true);
+        timerBar.maxValue = craftingTime;
+        CraftingCurTime = craftingTime;    
         while (true) 
         {
-            curTime -= DelayTime;
-            if(curTime < 0) break;
+            CraftingCurTime -= DelayTime;
+            if(CraftingCurTime < 0) break;
             yield return delay;          
         }
-        model.TimerBar.gameObject.SetActive(false);
+        timerBar.gameObject.SetActive(false);
+        Vector3 randomPos = new Vector3(transform.position.x + Random.Range(-10, 10), transform.position.y + Random.Range(-10, 10), 0);
+        Instantiate(result.item.prefab, randomPos, transform.rotation);
     }
-    
+    void StartCreate(CraftingItemInfo result, float craftingTime)
+    {
+        if (createRoutine == null)
+        {
+            createRoutine = StartCoroutine(CreateRoutine(result, craftingTime));
+        }
+    }
+    void StopCreate()
+    {
+        if (createRoutine != null)
+        {
+            StopCoroutine(createRoutine);
+            createRoutine = null;
+            timerBar.gameObject.SetActive(false);
+        }
+    }
     public void UpdateTimerBar()
     {
-
+        timerBar.value = CraftingCurTime;
     }
 }

@@ -31,13 +31,13 @@ public class Card : MonoBehaviour
 
         model.OnChangeChild += InitChangeChild;
 
+        rb.drag = 50;
         cardLayer = LayerMask.NameToLayer("Card");
         ignoreLayer = LayerMask.NameToLayer("IgnoreCollider");      
     }
 
     private void Start()
-    {        
-        rb.drag = 50;
+    {          
         model.TopCard = this;
     }
     private void Update()

@@ -221,7 +221,6 @@ MonoBehaviour:
   parentCard: {fileID: 0}
   childCard: {fileID: 0}
   ingredients: []
-  timerBar: {fileID: 0}
 --- !u!114 &1719549034884507588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,6 +251,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 0}
+  timerBar: {fileID: 0}
+  craftingCurTime: 0
 --- !u!1001 &2618737083499501783
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -359,6 +360,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TimerBar
       objectReference: {fileID: 0}
+    - target: {fileID: 4113261971175521244, guid: d3b8ac0ab81c24541b3f06cc8f98d618, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4113261971653563183, guid: d3b8ac0ab81c24541b3f06cc8f98d618, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -366,6 +371,10 @@ PrefabInstance:
     - target: {fileID: 4113261971653563183, guid: d3b8ac0ab81c24541b3f06cc8f98d618, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4113261972122506283, guid: d3b8ac0ab81c24541b3f06cc8f98d618, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3b8ac0ab81c24541b3f06cc8f98d618, type: 3}
