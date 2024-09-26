@@ -7,5 +7,5 @@ public class CardData : ScriptableObject
 {
     [SerializeField] public Card prefab;
     [SerializeField] public CardType type;
-    [SerializeField] public string itemName;
+    [SerializeField] public string cardName;
 }

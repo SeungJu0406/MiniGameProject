@@ -38,7 +38,7 @@ public class RecipeDic : MonoBehaviour
         sb.Clear();
         foreach (CraftingItemInfo item in reqItems)
         {
-            sb.Append($"{item.item.itemName}{item.count}");
+            sb.Append($"{item.item.cardName}{item.count}");
         }
         return sb.ToString();
     }

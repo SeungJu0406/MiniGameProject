@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
 
-public enum CardType { Water, Rock, Wood, Gravel, Gress }
+
 [RequireComponent(typeof(CardModel))]
 [RequireComponent(typeof(CardCombine))]
 public class Card : MonoBehaviour
@@ -64,6 +65,7 @@ public class Card : MonoBehaviour
     {
         if (DragNDrop.Instance.isClick) return;
         if (!isChoice) return;
+        if (model.parentCard != null) return;
         if (collision.gameObject.layer == cardLayer)
         {
             Card parent = collision.gameObject.GetComponent<Card>();
@@ -79,6 +81,7 @@ public class Card : MonoBehaviour
     {
         if (DragNDrop.Instance.isClick) return;
         if (!isChoice) return;
+        if(model.parentCard != null) return;
         if (other.gameObject.layer == cardLayer)
         {
             Card parent = other.gameObject.GetComponent<Card>();
