@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 1719549034884507588}
   - component: {fileID: 786327181950337642}
   m_Layer: 6
-  m_Name: 1.StoneCard
+  m_Name: 1.Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -202,7 +202,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.99999994, y: 0.98999995, z: 1}
+  m_Size: {x: 0.99999994, y: 0.98999995, z: 0.3}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3783399357752596021
 MonoBehaviour:
@@ -221,6 +221,7 @@ MonoBehaviour:
   topCard: {fileID: 0}
   parentCard: {fileID: 0}
   childCard: {fileID: 0}
+  bottomCard: {fileID: 0}
   ingredients: []
 --- !u!114 &1719549034884507588
 MonoBehaviour:
@@ -254,7 +255,6 @@ MonoBehaviour:
   model: {fileID: 0}
   timerBar: {fileID: 0}
   craftingCurTime: 0
-  completeResultMoveSpeed: 10
 --- !u!1001 &2618737083499501783
 PrefabInstance:
   m_ObjectHideFlags: 0

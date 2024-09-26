@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35999a93e03f75d42980dca4291da188, type: 3}
-  m_Name: StoneRecipe
+  m_Name: StoneRecipe1
   m_EditorClassIdentifier: 
   reqItems:
   - item: {fileID: 11400000, guid: a6b3021066972864c9e0cb7b8d0f2cf3, type: 2}

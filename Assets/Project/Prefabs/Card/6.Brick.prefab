@@ -118,7 +118,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.99999994, y: 0.98999995, z: 1}
+  m_Size: {x: 0.99999994, y: 0.98999995, z: 0.3}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4597446524359002569
 MonoBehaviour:
@@ -135,9 +135,9 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 9845ef43cf5ad52449e11a7233401e2b, type: 2}
   card: {fileID: 0}
   topCard: {fileID: 0}
-  bottomCard: {fileID: 0}
   parentCard: {fileID: 0}
   childCard: {fileID: 0}
+  bottomCard: {fileID: 0}
   ingredients: []
 --- !u!114 &6197996326476540308
 MonoBehaviour:

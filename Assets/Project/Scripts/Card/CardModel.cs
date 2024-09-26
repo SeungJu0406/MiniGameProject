@@ -5,7 +5,8 @@ using UnityEngine.Events;
 public class CardModel : MonoBehaviour
 {
     [SerializeField] public CardData data;
-    [SerializeField] public Card card;
+    [SerializeField] Card card;
+    public Card Card { get { return card; } set { card = value; } }
     [Space(10)]
     [Header("Stack")]
     [SerializeField] Card topCard;

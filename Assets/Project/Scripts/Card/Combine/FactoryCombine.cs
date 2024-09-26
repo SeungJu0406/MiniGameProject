@@ -8,6 +8,7 @@ public class FactoryCombine : CardCombine
     {
         base.Awake();
         model.OnChangeChild += TryFactoryCombine;
+        model.OnChangeChild += StopFactoryCreate;
     }
     protected override void Start()
     {
@@ -25,6 +26,13 @@ public class FactoryCombine : CardCombine
             model.ingredients.Clear(); // 리스트 초기화
             AddIngredient(model.data); // 본인카드 리스트 입력
             AddIngredient(model.ChildCard.model.data); // 자식카드 리스트 입력         
+        }
+    }
+    void StopFactoryCreate()
+    {
+        if(model.ChildCard == null)
+        {
+            StopCreate();
         }
     }
 } 

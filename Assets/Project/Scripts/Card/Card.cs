@@ -28,7 +28,7 @@ public class Card : MonoBehaviour
         model = GetComponent<CardModel>();       
         combine = GetComponent<CardCombine>();
 
-        model.card = this;
+        model.Card = this;
         model.OnChangeChild += InitChangeChild;
 
         rb.drag = 50;
@@ -105,12 +105,10 @@ public class Card : MonoBehaviour
     {
         if (model.ChildCard != null)
         {
-            boxCollider.size = new Vector3(boxCollider.size.x, boxCollider.size.y, 0.01f);
             boxCollider.isTrigger = true;
         }
         else
         {
-            boxCollider.size = new Vector3(boxCollider.size.x, boxCollider.size.y, 1);
             boxCollider.isTrigger = false;
         }
     }

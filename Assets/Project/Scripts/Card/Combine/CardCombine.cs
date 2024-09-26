@@ -43,7 +43,6 @@ public abstract class CardCombine : MonoBehaviour
     protected void AddIngredient(CardData data)
     {
         StopCreate();
-
         if (model.ingredients.Any(ingredients => ingredients.item.Equals(data)))
         {
             int index = model.ingredients.FindIndex(ingredients => ingredients.item.Equals(data));
@@ -60,7 +59,6 @@ public abstract class CardCombine : MonoBehaviour
     protected void RemoveIngredient(CardData data)
     {
         StopCreate();
-
         int index = model.ingredients.FindIndex(ingredients => ingredients.item.Equals(data));
         if (model.ingredients[index].count <= 1)
         {

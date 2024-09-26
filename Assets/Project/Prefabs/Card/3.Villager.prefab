@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 6197996326476540310}
   - component: {fileID: 4597446524359002569}
   - component: {fileID: 6197996326476540308}
-  - component: {fileID: -4962970707615987986}
+  - component: {fileID: 7950940761972694450}
   m_Layer: 6
-  m_Name: 5.BrickFactory
+  m_Name: 3.Villager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8a813ab74ec830946ae0b30deac65602, type: 3}
-  m_Color: {r: 0.9490197, g: 0.7176471, b: 0.6627451, a: 1}
+  m_Color: {r: 1, g: 0.65038824, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32ff8d72382bfdc428e2a9649fd657c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 9f6bb5a18a8c65e4fae0ac8b22607340, type: 2}
+  data: {fileID: 11400000, guid: e8fa344028dfb814892591d5129c50c1, type: 2}
   card: {fileID: 0}
   topCard: {fileID: 0}
   parentCard: {fileID: 0}
@@ -156,7 +156,7 @@ MonoBehaviour:
   model: {fileID: 0}
   combine: {fileID: 0}
   isChoice: 0
---- !u!114 &-4962970707615987986
+--- !u!114 &7950940761972694450
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6197996326476540304}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a62062a7c3ac9c43b88528da547cf14, type: 3}
+  m_Script: {fileID: 11500000, guid: e7e79239e95d0f14298299ace355caa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 0}
@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 6197996327663481858}
   - component: {fileID: 6197996327663481869}
   m_Layer: 6
-  m_Name: BrickFactpry
+  m_Name: Villager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -197,7 +197,7 @@ Transform:
   m_GameObject: {fileID: 6197996327663481871}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.01, z: 0}
-  m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6197996326476540305}
@@ -244,7 +244,7 @@ SpriteRenderer:
   m_SortingLayerID: 1543442145
   m_SortingLayer: -1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e3bc514db830d6b4295f1ede29ddfe59, type: 3}
+  m_Sprite: {fileID: 21300000, guid: aa986578da3993a43bc7ce96c454134b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

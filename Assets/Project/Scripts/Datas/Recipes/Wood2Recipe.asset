@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
-  m_Name: 7.CoinBox
+  m_Script: {fileID: 11500000, guid: 35999a93e03f75d42980dca4291da188, type: 3}
+  m_Name: Wood2Recipe
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
-  id: 7
-  cardName: "\uCF54\uC778 \uC0C1\uC790"
-  isFactory: 0
-  canGetParent: 0
-  canGetChild: 0
+  reqItems: []
+  resultItem:
+    item: {fileID: 0}
+    count: 0
+  craftingTime: 0
