@@ -21,6 +21,7 @@ public class Card : MonoBehaviour
     int ignoreLayer;
 
     public bool isChoice;
+    bool isInitInStack;
     private void Awake()
     {
         boxCollider = GetComponent<BoxCollider>();
@@ -39,9 +40,13 @@ public class Card : MonoBehaviour
     }
 
     private void Start()
-    {          
-        model.TopCard = this;
-        model.BottomCard = this;
+    {
+        if (!isInitInStack)
+        {
+            model.TopCard = this;
+            model.BottomCard = this;
+        }
+        isInitInStack = false;
     }
     private void Update()
     {
@@ -66,9 +71,12 @@ public class Card : MonoBehaviour
     {
         if (!model.data.canGetParent) return;
         if (!parent.model.data.canGetChild) return;
+        isInitInStack = true;
+        model.TopCard = this;
+        model.BottomCard = this;
         model.ParentCard = parent;
         parent.model.ChildCard = this;
-        ChangeTopChild(parent.model.TopCard); // 본인 + 자식에게 top 설정           
+        ChangeTopChild(parent.model.TopCard); // 본인 + 자식에게 top 설정
         ChangeBottomParent(model.BottomCard); // 본인 + 부모에게 bottom 설정
         parent.rb.velocity = Vector3.zero;
     }

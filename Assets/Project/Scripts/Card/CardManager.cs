@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CardManager : MonoBehaviour
@@ -28,14 +27,11 @@ public class CardManager : MonoBehaviour
         for (int i = 0; i < hits.Length; i++)
         {
             if (hits[i] == null) break;
-            if (hits[i].isTrigger == false)
+            Card other = hits[i].GetComponent<Card>();
+            if (other.model.BottomCard.model.data == instanceCard.model.data)
             {
-                Card other = hits[i].GetComponent<Card>();
-                if (other.model.data == instanceCard.model.data) 
-                {
-                    instanceCard.InitInStack(other);
-                    return;
-                }
+                instanceCard.InitInStack(other.model.BottomCard);
+                return;
             }
         }
         StartCoroutine(MoveCardRoutine(instanceCard, pos));
