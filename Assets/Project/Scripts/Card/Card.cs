@@ -8,7 +8,6 @@ using UnityEngine.Events;
 
 
 [RequireComponent(typeof(CardModel))]
-[RequireComponent(typeof(CardCombine))]
 public class Card : MonoBehaviour
 {
     [Header("GetComponent")]
@@ -63,14 +62,16 @@ public class Card : MonoBehaviour
         Vector3 pos = new Vector3(parentPos.x, parentPos.y - 0.4f, parentPos.z);
         transform.position = Vector3.Lerp(transform.position, pos, DragNDrop.Instance.dragSpeed * Time.deltaTime);
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision other)
     {
+        if (!model.data.canGetParent) return;
         if (DragNDrop.Instance.isClick) return;
         if (!isChoice) return;
         if (model.ParentCard != null) return;
-        if (collision.gameObject.layer == cardLayer)
+        if (other.gameObject.layer == cardLayer)
         {
-            Card parent = collision.gameObject.GetComponent<Card>();
+            Card parent = other.gameObject.GetComponent<Card>();
+            if (!parent.model.data.canGetChild) return;
             if (model.TopCard == parent.model.TopCard) return;
             if (parent.model.ChildCard != null) return;
             // 부모 자식 카드 지정
@@ -82,12 +83,14 @@ public class Card : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        if (!model.data.canGetParent) return;
         if (DragNDrop.Instance.isClick) return;
         if (!isChoice) return;
         if(model.ParentCard != null) return;
         if (other.gameObject.layer == cardLayer)
         {
             Card parent = other.gameObject.GetComponent<Card>();
+            if (!parent.model.data.canGetChild) return;
             if (model.TopCard == parent.model.TopCard) return;
             if (parent.model.ChildCard != null) return;
             // 부모 자식 카드 지정

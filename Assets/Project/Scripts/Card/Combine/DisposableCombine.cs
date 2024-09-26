@@ -31,7 +31,8 @@ public class DisposableCombine : CardCombine
             }
         }
         RemoveCombineList();    //본인을 조합리스트에서 제거
-                                // 본인이 탑일 경우, 또한 자식카드가 있는 경우
+
+        // 본인이 탑일 경우, 또한 자식카드가 있는 경우
         if (model.TopCard.combine == this && model.ChildCard != null)
         {
             // 본인의 조합 리스트를 맞자식의 조합리스트에 복사

@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -11,10 +9,10 @@ public abstract class CardCombine : MonoBehaviour
     [SerializeField] protected CardModel model;
     [SerializeField] protected Slider timerBar;
     [SerializeField] protected float craftingCurTime;
-    
+
     public float CraftingCurTime { get { return craftingCurTime; } set { craftingCurTime = value; OnChangeTimerBar?.Invoke(); } }
     public event UnityAction OnChangeTimerBar;
-   
+
 
     protected virtual void Awake()
     {
@@ -32,12 +30,14 @@ public abstract class CardCombine : MonoBehaviour
     protected void AddCombineList()
     {
         if (model.TopCard == null) return;
+        if (model.TopCard.model.data.isFactory) return;
         model.TopCard.combine.AddIngredient(model.data);
     }
 
     protected void RemoveCombineList()
     {
         if (model.TopCard == null) return;
+        if (model.TopCard.model.data.isFactory) return;
         model.TopCard.combine.RemoveIngredient(model.data);
     }
     protected void AddIngredient(CardData data)
@@ -74,11 +74,11 @@ public abstract class CardCombine : MonoBehaviour
         }
         TryCombine();
     }
-    protected bool TryCombine()
+    protected void TryCombine()
     {
-        if (model.ingredients.Count <= 0) return false;
-        if (model.ingredients.Count == 1 && model.ingredients[0].count <= 1)
-            return false;
+        if (model.ingredients.Count <= 0) return;
+        if (model.ingredients.Count == 1 && model.ingredients[0].count <= 1) return;
+
 
         model.ingredients.Sort((s1, s2) => s1.item.id.CompareTo(s2.item.id));
         string key = RecipeDic.Instance.GetKey(model.ingredients.ToArray());
@@ -87,11 +87,6 @@ public abstract class CardCombine : MonoBehaviour
         {
             CraftingRecipe result = Dic.Recipe.GetValue(key);
             CreateResultCard(result);
-            return true;
-        }
-        else
-        {
-            return false;
         }
     }
     protected void CreateResultCard(CraftingRecipe result)
@@ -109,16 +104,18 @@ public abstract class CardCombine : MonoBehaviour
     {
         timerBar.gameObject.SetActive(true);
         timerBar.maxValue = result.craftingTime;
-        CraftingCurTime = result.craftingTime;    
-        while (true) 
+        CraftingCurTime = result.craftingTime;
+        while (true)
         {
             CraftingCurTime -= DelayTime;
-            if(CraftingCurTime < 0) break;
-            yield return delay;          
+            if (CraftingCurTime < 0) break;
+            yield return delay;
         }
-        timerBar.gameObject.SetActive(false);    
+        timerBar.gameObject.SetActive(false);
         Card instanceCard = Instantiate(result.resultItem.item.prefab, transform.position, transform.rotation);
         CardManager.Instance.MoveResultCard(instanceCard, SelectRandomPos());
+
+        if(model.data.isFactory) model.BottomCard = model.ChildCard;
         model.BottomCard.combine.CompleteCreateParent();
     }
     protected void StartCreate(CraftingRecipe result)
@@ -155,8 +152,9 @@ public abstract class CardCombine : MonoBehaviour
     };
     protected Vector3 SelectRandomPos()
     {
-        Vector3 dir = directions[Util.Random(0,directions.Length-1)];
-        return new Vector3(transform.position.x + dir.x, transform.position.y + dir.y, 0);
+        Vector2 dir = Random.insideUnitCircle * CreatePos;
+
+        return transform.position + (Vector3)dir;
     }
 
     protected abstract void CompleteCreate();
@@ -164,7 +162,7 @@ public abstract class CardCombine : MonoBehaviour
     protected void CompleteCreateParent()
     {
         CompleteCreate();
-        if(model.ParentCard != null)
+        if (model.ParentCard != null)
         {
             model.ParentCard.combine.CompleteCreateParent();
         }
