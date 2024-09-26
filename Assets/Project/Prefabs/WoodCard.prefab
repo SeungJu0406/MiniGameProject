@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 6197996326476540311}
   - component: {fileID: 6197996326476540309}
   - component: {fileID: 6197996326476540310}
+  - component: {fileID: 4597446524359002569}
   - component: {fileID: 6197996326476540308}
+  - component: {fileID: 6044579993296885918}
   m_Layer: 6
   m_Name: WoodCard
   m_TagString: Untagged
@@ -117,6 +119,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.99999994, y: 0.98999995, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4597446524359002569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6197996326476540304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32ff8d72382bfdc428e2a9649fd657c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 0f9c9c079dd8c2b4582c0d0a7eac72da, type: 2}
+  topCard: {fileID: 0}
+  parentCard: {fileID: 0}
+  childCard: {fileID: 0}
+  ingredients: []
 --- !u!114 &6197996326476540308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,12 +150,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boxCollider: {fileID: 0}
   rb: {fileID: 0}
-  data: {fileID: 11400000, guid: 0f9c9c079dd8c2b4582c0d0a7eac72da, type: 2}
-  topCard: {fileID: 0}
-  parentCard: {fileID: 0}
-  childCard: {fileID: 0}
-  ingredients: []
+  model: {fileID: 0}
+  combine: {fileID: 0}
   isChoice: 0
+--- !u!114 &6044579993296885918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6197996326476540304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 499b6faa96fb48a40b2406dbfeb753a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 0}
 --- !u!1 &6197996327663481871
 GameObject:
   m_ObjectHideFlags: 0

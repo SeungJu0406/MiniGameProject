@@ -96,7 +96,9 @@ GameObject:
   - component: {fileID: 1719549034884507591}
   - component: {fileID: 1719549034884507589}
   - component: {fileID: 1719549034884507590}
+  - component: {fileID: 3783399357752596021}
   - component: {fileID: 1719549034884507588}
+  - component: {fileID: 786327181950337642}
   m_Layer: 6
   m_Name: StoneCard
   m_TagString: Untagged
@@ -201,6 +203,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.99999994, y: 0.98999995, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3783399357752596021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1719549034884507584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32ff8d72382bfdc428e2a9649fd657c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: a6b3021066972864c9e0cb7b8d0f2cf3, type: 2}
+  topCard: {fileID: 0}
+  parentCard: {fileID: 0}
+  childCard: {fileID: 0}
+  ingredients: []
 --- !u!114 &1719549034884507588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,9 +234,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boxCollider: {fileID: 0}
   rb: {fileID: 0}
-  data: {fileID: 11400000, guid: a6b3021066972864c9e0cb7b8d0f2cf3, type: 2}
-  topCard: {fileID: 0}
-  parentCard: {fileID: 0}
-  childCard: {fileID: 0}
-  ingredients: []
+  model: {fileID: 0}
+  combine: {fileID: 0}
   isChoice: 0
+--- !u!114 &786327181950337642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1719549034884507584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 499b6faa96fb48a40b2406dbfeb753a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 0}
