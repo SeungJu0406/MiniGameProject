@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6197996326476540308}
   - component: {fileID: 6044579993296885918}
   m_Layer: 6
-  m_Name: WoodCard
+  m_Name: 2.WoodCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -133,6 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 0f9c9c079dd8c2b4582c0d0a7eac72da, type: 2}
+  card: {fileID: 0}
   topCard: {fileID: 0}
   parentCard: {fileID: 0}
   childCard: {fileID: 0}
@@ -163,7 +164,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6197996326476540304}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 499b6faa96fb48a40b2406dbfeb753a5, type: 3}
+  m_Script: {fileID: 11500000, guid: 2748760ed8d4d2343a934d6a785e9a1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 0}
@@ -195,7 +196,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6197996327663481871}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.01}
+  m_LocalPosition: {x: 0, y: -0.01, z: -0.01}
   m_LocalScale: {x: 0.6991427, y: 0.6991427, z: 0.6991427}
   m_ConstrainProportionsScale: 0
   m_Children: []

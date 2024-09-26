@@ -26,9 +26,10 @@ public class Card : MonoBehaviour
     {
         boxCollider = GetComponent<BoxCollider>();
         rb = GetComponent<Rigidbody>();
-        model = GetComponent<CardModel>();
+        model = GetComponent<CardModel>();       
         combine = GetComponent<CardCombine>();
 
+        model.card = this;
         model.OnChangeChild += InitChangeChild;
 
         rb.drag = 50;
@@ -41,6 +42,7 @@ public class Card : MonoBehaviour
     private void Start()
     {          
         model.TopCard = this;
+        model.BottomCard = this;
     }
     private void Update()
     {
@@ -72,9 +74,10 @@ public class Card : MonoBehaviour
             if (model.TopCard == parent.model.TopCard) return;
             if (parent.model.ChildCard != null) return;
             // 부모 자식 카드 지정
-            ChangeTopChild(parent.model.TopCard);
             model.parentCard = parent;
-            parent.model.ChildCard = this; 
+            parent.model.ChildCard = this;
+            ChangeTopChild(parent.model.TopCard); // 본인 + 자식에게 top 설정           
+            ChangeBottomParent(model.BottomCard); // 본인 + 부모에게 bottom 설정
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -88,9 +91,10 @@ public class Card : MonoBehaviour
             if (model.TopCard == parent.model.TopCard) return;
             if (parent.model.ChildCard != null) return;
             // 부모 자식 카드 지정
-            ChangeTopChild(parent.model.TopCard);
             model.parentCard = parent;
             parent.model.ChildCard = this;
+            ChangeTopChild(parent.model.TopCard); // 본인 + 자식에게 top 설정           
+            ChangeBottomParent(model.BottomCard); // 본인 + 부모에게 bottom 설정
         }
     }
 
@@ -111,11 +115,13 @@ public class Card : MonoBehaviour
     {
         if (model.parentCard != null)
         {
+            model.parentCard.ChangeBottomParent(model.parentCard); // 부모 카드들의 바텀을 맞부모카드로 설정
             model.parentCard.model.ChildCard = null;
             model.parentCard = null;           
         }
         isChoice = true;
         ChangeTopChild(this);
+        
         ClickChild();     
     }
     void ClickChild()
@@ -146,7 +152,7 @@ public class Card : MonoBehaviour
             model.ChildCard.UnClickChild();
         }
     }
-    void ChangeTopChild(Card top)
+    public void ChangeTopChild(Card top)
     {
         model.TopCard = top;
         if (model.ChildCard != null)
@@ -154,4 +160,13 @@ public class Card : MonoBehaviour
             model.ChildCard.ChangeTopChild(top);
         }
     }
+    public void ChangeBottomParent(Card bottom)
+    {
+        model.BottomCard = bottom;
+        if (model.parentCard != null)
+        {
+            model.parentCard.ChangeBottomParent(bottom);
+        }
+    }
+
 }

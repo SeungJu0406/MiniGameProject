@@ -1,21 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class CardCombine : MonoBehaviour
+public abstract class CardCombine : MonoBehaviour
 {
-    [SerializeField] CardModel model;
-    [SerializeField] Slider timerBar;
-    [SerializeField] float craftingCurTime;
-    [SerializeField] float completeResultMoveSpeed;
+    [SerializeField] protected CardModel model;
+    [SerializeField] protected Slider timerBar;
+    [SerializeField] protected float craftingCurTime;
+    
     public float CraftingCurTime { get { return craftingCurTime; } set { craftingCurTime = value; OnChangeTimerBar?.Invoke(); } }
     public event UnityAction OnChangeTimerBar;
    
 
-    private void Awake()
+    protected virtual void Awake()
     {
         model = GetComponent<CardModel>();
         timerBar = GetComponentInChildren<Slider>();
@@ -23,22 +24,23 @@ public class CardCombine : MonoBehaviour
         model.OnChangeTopAfter += AddCombineList;
         OnChangeTimerBar += UpdateTimerBar;
     }
-    private void Start()
+    protected virtual void Start()
     {
         timerBar.gameObject.SetActive(false);
     }
-    public void AddCombineList()
+
+    protected void AddCombineList()
     {
         if (model.TopCard == null) return;
         model.TopCard.combine.AddIngredient(model.data);
     }
 
-    public void RemoveCombineList()
+    protected void RemoveCombineList()
     {
         if (model.TopCard == null) return;
         model.TopCard.combine.RemoveIngredient(model.data);
     }
-    void AddIngredient(CardData data)
+    protected void AddIngredient(CardData data)
     {
         StopCreate();
 
@@ -55,7 +57,7 @@ public class CardCombine : MonoBehaviour
         }
         TryCombine();
     }
-    void RemoveIngredient(CardData data)
+    protected void RemoveIngredient(CardData data)
     {
         StopCreate();
 
@@ -72,7 +74,7 @@ public class CardCombine : MonoBehaviour
         }
         TryCombine();
     }
-    public bool TryCombine()
+    protected bool TryCombine()
     {
         if (model.ingredients.Count <= 0) return false;
         if (model.ingredients.Count == 1 && model.ingredients[0].count <= 1)
@@ -92,7 +94,7 @@ public class CardCombine : MonoBehaviour
             return false;
         }
     }
-    void CreateResultCard(CraftingRecipe result)
+    protected void CreateResultCard(CraftingRecipe result)
     {
         if (result.resultItem.item == null) return;
         for (int i = 0; i < result.resultItem.count; i++)
@@ -103,7 +105,7 @@ public class CardCombine : MonoBehaviour
     const float DelayTime = 0.1f;
     WaitForSeconds delay = new WaitForSeconds(DelayTime);
     Coroutine createRoutine;
-    IEnumerator CreateRoutine(CraftingRecipe result)
+    protected IEnumerator CreateRoutine(CraftingRecipe result)
     {
         timerBar.gameObject.SetActive(true);
         timerBar.maxValue = result.craftingTime;
@@ -116,29 +118,17 @@ public class CardCombine : MonoBehaviour
         }
         timerBar.gameObject.SetActive(false);    
         Card instanceCard = Instantiate(result.resultItem.item.prefab, transform.position, transform.rotation);
-        StartCoroutine(MoveCardRoutine(instanceCard, SelectRandomPos()));
+        CardManager.Instance.MoveResultCard(instanceCard, SelectRandomPos());
+        model.BottomCard.combine.CompleteCreateParent();
     }
-
-    IEnumerator MoveCardRoutine(Card instanceCard, Vector3 pos)
-    {
-        while (true)
-        {
-            instanceCard.transform.position = Vector3.Lerp(instanceCard.transform.position, pos, completeResultMoveSpeed * Time.deltaTime);
-            if(Vector3.Distance(instanceCard.transform.position, pos) < 0.01f)
-            {
-                yield break;
-            }
-            yield return null;
-        }
-    }
-    void StartCreate(CraftingRecipe result)
+    protected void StartCreate(CraftingRecipe result)
     {
         if (createRoutine == null)
         {
             createRoutine = StartCoroutine(CreateRoutine(result));
         }
     }
-    void StopCreate()
+    protected void StopCreate()
     {
         if (createRoutine != null)
         {
@@ -147,13 +137,13 @@ public class CardCombine : MonoBehaviour
             timerBar.gameObject.SetActive(false);
         }
     }
-    public void UpdateTimerBar()
+    protected void UpdateTimerBar()
     {
         timerBar.value = CraftingCurTime;
     }
 
-    const float CreatePos = 2;
-    Vector3[] directions =
+    protected const float CreatePos = 2;
+    protected Vector3[] directions =
     {
         new Vector3(-CreatePos,CreatePos,0),    // ÁÂ»ó
         new Vector3(0,CreatePos,0),     // »ó
@@ -163,9 +153,20 @@ public class CardCombine : MonoBehaviour
         new Vector3(-CreatePos,-CreatePos,0),   // ÁÂÇÏ
         new Vector3(CreatePos,-CreatePos,0),    // ¿ìÇÏ
     };
-    Vector3 SelectRandomPos()
+    protected Vector3 SelectRandomPos()
     {
         Vector3 dir = directions[Util.Random(0,directions.Length-1)];
         return new Vector3(transform.position.x + dir.x, transform.position.y + dir.y, 0);
+    }
+
+    protected abstract void CompleteCreate();
+
+    protected void CompleteCreateParent()
+    {
+        CompleteCreate();
+        if(model.parentCard != null)
+        {
+            model.parentCard.combine.CompleteCreateParent();
+        }
     }
 }

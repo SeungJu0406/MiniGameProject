@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class CardModel : MonoBehaviour
 {
     [SerializeField] public CardData data;
+    [SerializeField] public Card card;
     [SerializeField] Card topCard;
     public Card TopCard
     {
@@ -25,16 +26,13 @@ public class CardModel : MonoBehaviour
     public event UnityAction OnChangeTopBefore;
     public event UnityAction OnChangeTopAfter;
 
+    [SerializeField] Card bottomCard;
+    public Card BottomCard { get { return bottomCard;} set { bottomCard = value;} }
+
     [SerializeField] public Card parentCard;
     [SerializeField] Card childCard;
     public Card ChildCard { get { return childCard; } set { childCard = value; OnChangeChild?.Invoke(); } }
     public event UnityAction OnChangeChild;
 
     [SerializeField] public List<CraftingItemInfo> ingredients = new List<CraftingItemInfo>();
-
-
-    private void Awake()
-    {
-        
-    }
 }

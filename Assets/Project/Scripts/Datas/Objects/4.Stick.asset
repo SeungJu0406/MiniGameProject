@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
+  m_Name: 4.Stick
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 6197996326476540308, guid: 646db5fc1e1d31a42a07785b36ad2304, type: 3}
+  id: 4
+  cardName: "\uAC00\uC9C0"
