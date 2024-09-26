@@ -1,13 +1,14 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
-public enum CardType { Water, Stone, Wood, Gravel, Gress }
 public class CardModel : MonoBehaviour
 {
     [SerializeField] public CardData data;
+    [SerializeField] Card card;
+    public Card Card { get { return card; } set { card = value; } }
+    [Space(10)]
+    [Header("Stack")]
     [SerializeField] Card topCard;
     public Card TopCard
     {
@@ -15,27 +16,27 @@ public class CardModel : MonoBehaviour
         set
         {
             if (topCard != value)
-            {               
+            {
                 OnChangeTopBefore?.Invoke();
                 topCard = value;
                 OnChangeTopAfter?.Invoke();
             }
         }
     }
-        
+
     public event UnityAction OnChangeTopBefore;
     public event UnityAction OnChangeTopAfter;
 
-    [SerializeField] public Card parentCard;
+
+    [SerializeField] Card parentCard;
+    public Card ParentCard { get { return parentCard; } set { parentCard = value; OnChangeParent?.Invoke(); } }
+    public event UnityAction OnChangeParent;
     [SerializeField] Card childCard;
     public Card ChildCard { get { return childCard; } set { childCard = value; OnChangeChild?.Invoke(); } }
     public event UnityAction OnChangeChild;
+    [SerializeField] Card bottomCard;
+    public Card BottomCard { get { return bottomCard; } set { bottomCard = value; } }
 
     [SerializeField] public List<CraftingItemInfo> ingredients = new List<CraftingItemInfo>();
 
-
-    private void Awake()
-    {
-        
-    }
 }

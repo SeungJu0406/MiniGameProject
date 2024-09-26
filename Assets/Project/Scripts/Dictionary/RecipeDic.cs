@@ -24,7 +24,7 @@ public class RecipeDic : MonoBehaviour
     {
         foreach (CraftingRecipe recipe in recipes)
         {
-            Array.Sort(recipe.reqItems, (s1, s2) => s1.item.type.CompareTo(s2.item.type));
+            Array.Sort(recipe.reqItems, (s1, s2) => s1.item.id.CompareTo(s2.item.id));
             dic.Add(GetKey(recipe.reqItems), recipe);
         }
     }

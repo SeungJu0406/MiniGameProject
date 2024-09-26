@@ -45,7 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recipes:
-  - {fileID: 11400000, guid: 1c5e88336195d5442ac92f3cafcc126a, type: 2}
   - {fileID: 11400000, guid: 810c5423a6130654086ee7b2e39be86e, type: 2}
-  - {fileID: 11400000, guid: 6eebc5a00314119498dccd5e6fbe6410, type: 2}
-  - {fileID: 11400000, guid: b3a06d26667946748add3744efd4a8b0, type: 2}
+  - {fileID: 11400000, guid: f2a9f5ef60f8a804c97e257da83b3d94, type: 2}
+  - {fileID: 11400000, guid: 7db39bfb89dfb8e49a592d7dfaa39539, type: 2}
+  - {fileID: 11400000, guid: 55ff2752c5487db4c97d75f3152fb5dd, type: 2}
+  - {fileID: 11400000, guid: 624774e357a5d504291e45a16df45f41, type: 2}
+  - {fileID: 11400000, guid: ff62d0ed2e7c1364e8931ca04cf4882c, type: 2}
