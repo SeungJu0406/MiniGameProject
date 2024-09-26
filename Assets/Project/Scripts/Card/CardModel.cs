@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public enum CardType { Water, Stone, Wood, Gravel, Gress }
 public class CardModel : MonoBehaviour
 {
     [SerializeField] public CardData data;

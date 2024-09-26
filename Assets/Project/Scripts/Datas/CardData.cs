@@ -6,6 +6,6 @@ using UnityEngine;
 public class CardData : ScriptableObject
 {
     [SerializeField] public Card prefab;
-    [SerializeField] public CardType type;
+    [SerializeField] public int id;
     [SerializeField] public string cardName;
 }

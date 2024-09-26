@@ -78,7 +78,7 @@ public class CardCombine : MonoBehaviour
         if (model.ingredients.Count == 1 && model.ingredients[0].count <= 1)
             return false;
 
-        model.ingredients.Sort((s1, s2) => s1.item.type.CompareTo(s2.item.type));
+        model.ingredients.Sort((s1, s2) => s1.item.id.CompareTo(s2.item.id));
         string key = RecipeDic.Instance.GetKey(model.ingredients.ToArray());
 
         if (Dic.Recipe.dic.ContainsKey(key))
@@ -126,7 +126,6 @@ public class CardCombine : MonoBehaviour
             instanceCard.transform.position = Vector3.Lerp(instanceCard.transform.position, pos, completeResultMoveSpeed * Time.deltaTime);
             if(Vector3.Distance(instanceCard.transform.position, pos) < 0.01f)
             {
-                Debug.Log("³¡");
                 yield break;
             }
             yield return null;

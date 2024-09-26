@@ -8,7 +8,7 @@ public class CardDic : MonoBehaviour
 
     [SerializeField] CardData[] objects;
 
-    public Dictionary<CardType, CardData> dic = new Dictionary<CardType, CardData>();
+    public Dictionary<int, CardData> dic = new Dictionary<int, CardData>();
 
     private void Awake()
     {
@@ -22,11 +22,11 @@ public class CardDic : MonoBehaviour
         dic.Clear();
         foreach (CardData obj in objects)
         {
-            dic.Add(obj.type, obj);
+            dic.Add(obj.id, obj);
         }
     }
 
-    public CardData GetValue(CardType key)
+    public CardData GetValue(int key)
     {
         return dic[key];
     }
