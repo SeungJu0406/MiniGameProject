@@ -1293,7 +1293,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 9149793238177640320, guid: 5a88507dd2caa964992d956034f87b54, type: 3}
       propertyPath: recipes.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9149793238177640320, guid: 5a88507dd2caa964992d956034f87b54, type: 3}
       propertyPath: recipes.Array.data[0]
@@ -1306,7 +1306,7 @@ PrefabInstance:
     - target: {fileID: 9149793238177640320, guid: 5a88507dd2caa964992d956034f87b54, type: 3}
       propertyPath: recipes.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: b3a06d26667946748add3744efd4a8b0, type: 2}
+      objectReference: {fileID: 11400000, guid: a9b671572aa58614aaf69af1764337ad, type: 2}
     - target: {fileID: 9149793238177640321, guid: 5a88507dd2caa964992d956034f87b54, type: 3}
       propertyPath: m_Name
       value: RecipeDic

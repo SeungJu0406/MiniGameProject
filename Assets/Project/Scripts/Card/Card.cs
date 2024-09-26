@@ -46,7 +46,7 @@ public class Card : MonoBehaviour
     }
     private void Update()
     {
-        if (model.parentCard != null) 
+        if (model.ParentCard != null) 
         {
             TraceParent();
         }
@@ -59,7 +59,7 @@ public class Card : MonoBehaviour
     }
     void TraceParent()
     {
-        Vector3 parentPos = model.parentCard.transform.position;
+        Vector3 parentPos = model.ParentCard.transform.position;
         Vector3 pos = new Vector3(parentPos.x, parentPos.y - 0.4f, parentPos.z);
         transform.position = Vector3.Lerp(transform.position, pos, DragNDrop.Instance.dragSpeed * Time.deltaTime);
     }
@@ -67,14 +67,14 @@ public class Card : MonoBehaviour
     {
         if (DragNDrop.Instance.isClick) return;
         if (!isChoice) return;
-        if (model.parentCard != null) return;
+        if (model.ParentCard != null) return;
         if (collision.gameObject.layer == cardLayer)
         {
             Card parent = collision.gameObject.GetComponent<Card>();
             if (model.TopCard == parent.model.TopCard) return;
             if (parent.model.ChildCard != null) return;
             // 부모 자식 카드 지정
-            model.parentCard = parent;
+            model.ParentCard = parent;
             parent.model.ChildCard = this;
             ChangeTopChild(parent.model.TopCard); // 본인 + 자식에게 top 설정           
             ChangeBottomParent(model.BottomCard); // 본인 + 부모에게 bottom 설정
@@ -84,14 +84,14 @@ public class Card : MonoBehaviour
     {
         if (DragNDrop.Instance.isClick) return;
         if (!isChoice) return;
-        if(model.parentCard != null) return;
+        if(model.ParentCard != null) return;
         if (other.gameObject.layer == cardLayer)
         {
             Card parent = other.gameObject.GetComponent<Card>();
             if (model.TopCard == parent.model.TopCard) return;
             if (parent.model.ChildCard != null) return;
             // 부모 자식 카드 지정
-            model.parentCard = parent;
+            model.ParentCard = parent;
             parent.model.ChildCard = this;
             ChangeTopChild(parent.model.TopCard); // 본인 + 자식에게 top 설정           
             ChangeBottomParent(model.BottomCard); // 본인 + 부모에게 bottom 설정
@@ -113,11 +113,11 @@ public class Card : MonoBehaviour
     }
     public void Click()
     {
-        if (model.parentCard != null)
+        if (model.ParentCard != null)
         {
-            model.parentCard.ChangeBottomParent(model.parentCard); // 부모 카드들의 바텀을 맞부모카드로 설정
-            model.parentCard.model.ChildCard = null;
-            model.parentCard = null;           
+            model.ParentCard.ChangeBottomParent(model.ParentCard); // 부모 카드들의 바텀을 맞부모카드로 설정
+            model.ParentCard.model.ChildCard = null;
+            model.ParentCard = null;           
         }
         isChoice = true;
         ChangeTopChild(this);
@@ -163,9 +163,9 @@ public class Card : MonoBehaviour
     public void ChangeBottomParent(Card bottom)
     {
         model.BottomCard = bottom;
-        if (model.parentCard != null)
+        if (model.ParentCard != null)
         {
-            model.parentCard.ChangeBottomParent(bottom);
+            model.ParentCard.ChangeBottomParent(bottom);
         }
     }
 

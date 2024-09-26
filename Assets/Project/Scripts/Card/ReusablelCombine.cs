@@ -15,6 +15,9 @@ public class ReusablelCombine : CardCombine
 
     protected override void CompleteCreate()
     {
-        throw new System.NotImplementedException();
+        if (model.ParentCard != null) 
+        {
+            model.ParentCard.model.BottomCard = model.BottomCard;
+        }
     }
 }

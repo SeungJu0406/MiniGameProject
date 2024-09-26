@@ -164,9 +164,9 @@ public abstract class CardCombine : MonoBehaviour
     protected void CompleteCreateParent()
     {
         CompleteCreate();
-        if(model.parentCard != null)
+        if(model.ParentCard != null)
         {
-            model.parentCard.combine.CompleteCreateParent();
+            model.ParentCard.combine.CompleteCreateParent();
         }
     }
 }

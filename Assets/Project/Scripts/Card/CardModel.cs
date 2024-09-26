@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 public class CardModel : MonoBehaviour
 {
@@ -15,21 +13,22 @@ public class CardModel : MonoBehaviour
         set
         {
             if (topCard != value)
-            {               
+            {
                 OnChangeTopBefore?.Invoke();
                 topCard = value;
                 OnChangeTopAfter?.Invoke();
             }
         }
     }
-        
+
     public event UnityAction OnChangeTopBefore;
     public event UnityAction OnChangeTopAfter;
 
     [SerializeField] Card bottomCard;
-    public Card BottomCard { get { return bottomCard;} set { bottomCard = value;} }
+    public Card BottomCard { get { return bottomCard; } set { bottomCard = value; } }
 
-    [SerializeField] public Card parentCard;
+    [SerializeField] Card parentCard;
+    public Card ParentCard { get { return parentCard; } set { parentCard = value; } }
     [SerializeField] Card childCard;
     public Card ChildCard { get { return childCard; } set { childCard = value; OnChangeChild?.Invoke(); } }
     public event UnityAction OnChangeChild;
