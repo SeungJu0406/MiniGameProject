@@ -144,7 +144,7 @@ public abstract class CardCombine : MonoBehaviour
 
         // 생성 후 재료아이템 처리
         if (model.data.isFactory) model.BottomCard = model.FactoryBottom; // 팩토리에서는 팩토리바텀부터 없앤다
-        model.BottomCard.combine.CompleteCreateParent();
+        model.BottomCard.combine.CompleteCreateAllParent();
     }
     protected void StartCreate(CraftingRecipe result)
     {
@@ -176,12 +176,12 @@ public abstract class CardCombine : MonoBehaviour
 
     public abstract void CompleteCreate();
 
-    protected void CompleteCreateParent()
+    protected void CompleteCreateAllParent()
     {
         CompleteCreate();
         if (model.ParentCard != null)
         {
-            model.ParentCard.combine.CompleteCreateParent();
+            model.ParentCard.combine.CompleteCreateAllParent();
         }
     }
     protected void AddFactoryCombineListAllChild(Card reqCard)

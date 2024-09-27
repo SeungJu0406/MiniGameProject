@@ -50,7 +50,7 @@ public class DisposableCombine : CardCombine
                 }
 
                 model.ChildCard.model.TopCard = model.ChildCard;    //맞자식의 탑을 맞자식 본인으로 변경
-                model.ChildCard.ChangeTopChild(model.ChildCard);    //맞자식의 자식들의 탑을 변경
+                model.ChildCard.ChangeTopAllChild(model.ChildCard);    //맞자식의 자식들의 탑을 변경
             }
 
             Destroy(gameObject);

@@ -48,7 +48,7 @@ public class FactoryCombine : CardCombine
                 {
                     model.ChildCard.model.TopCard = model.ChildCard;    //맞자식의 탑을 맞자식 본인으로 변경
 
-                    model.ChildCard.ChangeTopChild(model.ChildCard);    //맞자식의 자식들의 탑을 변경
+                    model.ChildCard.ChangeTopAllChild(model.ChildCard);    //맞자식의 자식들의 탑을 변경
 
                     model.ChildCard.model.ingredients.Clear(); // 리스트 초기화
 
@@ -56,7 +56,6 @@ public class FactoryCombine : CardCombine
 
                     model.ChildCard.model.ParentCard = model.ParentCard; // 자식의 부모를 본인의 부모로 교체    
                 }
-
 
                 // 파괴 후 함수 강제 종료
                 Destroy(gameObject);
