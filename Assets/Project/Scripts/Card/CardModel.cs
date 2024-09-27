@@ -63,8 +63,11 @@ public class CardModel : MonoBehaviour
     }
     public event UnityAction OnChangeIsFactory;
 
-    [SerializeField] List<Card> factoryList;
-    public List<Card> FactoryList { get { return factoryList; } set { factoryList = value; } }
+    [SerializeField] bool canFactoryCombine;
+    public bool CanFactoryCombine { get { return canFactoryCombine; } set { canFactoryCombine = value; OnChangeCanFactoryCombine?.Invoke(); } }
+    public event UnityAction OnChangeCanFactoryCombine;
+    [SerializeField] Card factoryBottom;
+    public Card FactoryBottom { get { return factoryBottom; } set { factoryBottom = value; } }
 
     [Space(10)]
     [Header("ÁÖ¹Î ¸ðµ¨ Á¤º¸")]

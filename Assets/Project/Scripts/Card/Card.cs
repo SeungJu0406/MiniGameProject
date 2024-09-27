@@ -141,8 +141,8 @@ public class Card : MonoBehaviour
     {
         if (model.ParentCard != null)
         {
-            model.ParentCard.ChangeBottomParent(model.ParentCard); // 부모 카드들의 바텀을 맞부모카드로 설정
             model.ParentCard.model.ChildCard = null;
+            model.ParentCard.ChangeBottomParent(model.ParentCard); // 부모 카드들의 바텀을 맞부모카드로 설정           
             model.ParentCard = null;           
         }
         isChoice = true;

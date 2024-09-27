@@ -4,40 +4,46 @@ using UnityEngine;
 
 public class FactoryCombine : CardCombine
 {
-    int factoryListCount;
-
     protected override void Awake()
     {
         base.Awake();
         model.OnChangeBottom += AddFactoryList;
+        model.OnChangeCanFactoryCombine += CombineControll;
     }
     protected override void Start()
     {
         base.Start();
     }
-    public override void CompleteCreate()
-    {
-        
-    }
-
-
-    void AddFactoryList()
+    protected void AddFactoryList()
     {
         model.ingredients.Clear();
-        AddCombineChild(model.Card);
-        AddFactoryListChild(model.Card);
+        AddFactoryCombineChild(model.Card);
     }
 
-    void AddCombineChild(Card reqCard)
+    protected void CombineControll()
     {
-        model.TopCard.combine.AddIngredient(reqCard.model.data);
+        if (!model.CanFactoryCombine)
+        {
+            if (createRoutine != null)
+            {
+                StopCoroutine(createRoutine);
+                createRoutine = null;
+                timerBar.gameObject.SetActive(false);
+            }
+        }
     }
-    void AddFactoryListChild(Card reqCard)
+    public override void CompleteCreate()
     {
-
+        StartCoroutine(CompleteRoutine());
     }
-
-
+    WaitForSeconds restartDelay = new WaitForSeconds(0.1f);
+    IEnumerator CompleteRoutine()
+    {
+        yield return restartDelay;
+        model.IsFactory = false;
+        model.CanFactoryCombine = false;
+        AddFactoryList();
+    }
 
 
 
