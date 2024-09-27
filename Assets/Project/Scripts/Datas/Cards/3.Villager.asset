@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: 3.Villager
   m_EditorClassIdentifier: 
   prefab: {fileID: 4206404797622852137, guid: 88ffd31943429f440bf5bee08e15b514, type: 3}
+  cardIcon: {fileID: 21300000, guid: aa986578da3993a43bc7ce96c454134b, type: 3}
   id: 3
   cardName: "\uC8FC\uBBFC"
+  engName: Villager
   durability: 0
   isFactory: 0
   canGetParent: 1

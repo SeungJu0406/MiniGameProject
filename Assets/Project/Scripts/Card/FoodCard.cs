@@ -24,6 +24,10 @@ public class FoodCard : Card
                 {
                     model.CanCombine = false;
                     villager.model.Satiety -= model.data.foodAmount;
+                    if(villager.model.Satiety < 0)
+                    {
+                        villager.model.Satiety = 0;
+                    }
                     combine.CompleteCreate();
                     return;
                 }

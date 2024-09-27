@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
-  m_Name: 10.House
+  m_Name: 15.Campfire
   m_EditorClassIdentifier: 
-  prefab: {fileID: 5503795686175686984, guid: da909f690b24eca478cc76ad15ec78bc, type: 3}
-  cardIcon: {fileID: 21300000, guid: 6434f804e69ede6419434d377c55f6df, type: 3}
-  id: 10
-  cardName: "\uC9D1"
-  engName: House
+  prefab: {fileID: 941136354619642742, guid: 675b667035c9b6d4c8e7935ea863bb3d, type: 3}
+  cardIcon: {fileID: 21300000, guid: 12ca4714626e03b4f95f65cea0244a22, type: 3}
+  id: 15
+  cardName: "\uBAA8\uB2E5\uBD88"
+  engName: Campfire
   durability: 0
-  isFactory: 0
+  isFactory: 1
   canGetParent: 0
   canGetChild: 1
   isVillager: 0

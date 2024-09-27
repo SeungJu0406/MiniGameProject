@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
-  m_Name: 10.House
+  m_Name: 7.CoinChest
   m_EditorClassIdentifier: 
-  prefab: {fileID: 5503795686175686984, guid: da909f690b24eca478cc76ad15ec78bc, type: 3}
-  cardIcon: {fileID: 21300000, guid: 6434f804e69ede6419434d377c55f6df, type: 3}
-  id: 10
-  cardName: "\uC9D1"
-  engName: House
+  prefab: {fileID: 8321925675559887638, guid: 28f5f1b8485c71c498abdadcd9d47484, type: 3}
+  cardIcon: {fileID: 21300000, guid: 3c9c96082b50e9c449951618301af14e, type: 3}
+  id: 7
+  cardName: "\uCF54\uC778 \uC0C1\uC790"
+  engName: CoinChest
   durability: 0
   isFactory: 0
   canGetParent: 0
-  canGetChild: 1
+  canGetChild: 0
   isVillager: 0
   maxHp: 0
   damage: 0

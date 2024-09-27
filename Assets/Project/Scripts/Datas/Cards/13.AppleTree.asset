@@ -10,14 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
-  m_Name: 7.CoinBox
+  m_Name: 13.AppleTree
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3762961010425729992, guid: 5281732f47373694689d01e22e27fd53, type: 3}
-  id: 7
-  cardName: "\uCF54\uC778 \uC0C1\uC790"
-  isFactory: 0
+  prefab: {fileID: 5917835020197329331, guid: 3cfe83e82acc7ab48b31d4d3b50c58bb, type: 3}
+  cardIcon: {fileID: 21300000, guid: 64843ab4e0da54d45a3bdb1251e5686a, type: 3}
+  id: 13
+  cardName: "\uC0AC\uACFC\uB098\uBB34"
+  engName: AppleTree
+  durability: 2
+  isFactory: 1
   canGetParent: 0
-  canGetChild: 0
+  canGetChild: 1
   isVillager: 0
   maxHp: 0
   damage: 0

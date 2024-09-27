@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dfe36989e8975c4986aead792fce82e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objects:
+  cards:
   - {fileID: 11400000, guid: a6b3021066972864c9e0cb7b8d0f2cf3, type: 2}
   - {fileID: 11400000, guid: 0f9c9c079dd8c2b4582c0d0a7eac72da, type: 2}
   - {fileID: 11400000, guid: e8fa344028dfb814892591d5129c50c1, type: 2}
@@ -56,3 +56,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4fdb21f73caf6284dbe89a03886c1301, type: 2}
   - {fileID: 11400000, guid: 0d60825e67160ea4c8988c1c8c438c66, type: 2}
   - {fileID: 11400000, guid: df70f21f2ba62334694788fb74cc4a04, type: 2}
+  - {fileID: 11400000, guid: b4f390f0428fbad4a8908de8501cb177, type: 2}
+  - {fileID: 11400000, guid: 855d28b8f7e774c41bb27aeba00c0880, type: 2}
+  - {fileID: 11400000, guid: 21b658d22b17f6b4ba4cd72afcedc92e, type: 2}
+  - {fileID: 11400000, guid: 3bb6f51e946b4d9468602568b46b5b83, type: 2}
+  - {fileID: 11400000, guid: cd8f07261ba2acf49b32ed9a018c0c61, type: 2}

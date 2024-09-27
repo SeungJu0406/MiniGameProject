@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(CardDataInitialization))]
 [RequireComponent(typeof(CardSpriteController))]
 public class CardModel : MonoBehaviour
 {

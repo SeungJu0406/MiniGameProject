@@ -7,8 +7,10 @@ using UnityEngine;
 public class CardData : ScriptableObject
 {
     [SerializeField] public Card prefab;
+    [SerializeField] public Sprite cardIcon;
     [SerializeField] public int id;
     [SerializeField] public string cardName;
+    [SerializeField] public string engName;
     [SerializeField] public int durability;
     [Space(10)]
     [SerializeField] public bool isFactory;
@@ -30,6 +32,5 @@ public class CardData : ScriptableObject
     [SerializeField] public int additonDamage;
     [ShowIf("isConsumable")]
     [SerializeField] public int additionHp;
-    
 }
     
