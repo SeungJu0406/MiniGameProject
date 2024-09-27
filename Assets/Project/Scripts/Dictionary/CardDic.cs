@@ -6,7 +6,7 @@ public class CardDic : MonoBehaviour
 {
     public static CardDic Instance;
 
-    [SerializeField] CardData[] cards;
+    [SerializeField] public List<CardData> cards;
 
     public Dictionary<int, CardData> dic = new Dictionary<int, CardData>();
 

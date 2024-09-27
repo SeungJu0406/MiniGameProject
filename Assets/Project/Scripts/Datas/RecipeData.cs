@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "CraftingRecipe")]
-public class CraftingRecipe : ScriptableObject 
+[CreateAssetMenu(menuName = "RecipeData")]
+public class RecipeData : ScriptableObject 
 { 
     [Header("재료 아이템")]
     [SerializeField] public CraftingItemInfo[] reqItems;

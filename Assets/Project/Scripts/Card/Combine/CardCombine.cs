@@ -9,7 +9,7 @@ public abstract class CardCombine : MonoBehaviour
     [SerializeField] protected CardModel model;
     [SerializeField] protected Slider timerBar;
     [SerializeField] protected float craftingCurTime;
-    protected CraftingRecipe result;
+    protected RecipeData result;
 
     public float CraftingCurTime { get { return craftingCurTime; } set { craftingCurTime = value; OnChangeTimerBar?.Invoke(); } }
     public event UnityAction OnChangeTimerBar;
@@ -116,7 +116,7 @@ public abstract class CardCombine : MonoBehaviour
     const float DelayTime = 0.1f;
     WaitForSeconds delay = new WaitForSeconds(DelayTime);
     protected Coroutine createRoutine;
-    protected IEnumerator CreateRoutine(CraftingRecipe result)
+    protected IEnumerator CreateRoutine(RecipeData result)
     {
         // 조합 타이머
         timerBar.gameObject.SetActive(true);
@@ -143,7 +143,7 @@ public abstract class CardCombine : MonoBehaviour
         if (model.data.isFactory) model.BottomCard = model.FactoryBottom; // 팩토리에서는 팩토리바텀부터 없앤다
         model.BottomCard.combine.CompleteCreateAllParent();
     }
-    protected void StartCreate(CraftingRecipe result)
+    protected void StartCreate(RecipeData result)
     {
         if (createRoutine == null)
         {
