@@ -6,6 +6,9 @@ using UnityEngine.Events;
 public class CardModel : MonoBehaviour
 {
     [SerializeField] public CardData data;
+
+    [SerializeField] int durability;
+    public int Durability {  get { return durability; } set { durability = value; } }
     [SerializeField] int sortOrder;
     public int SortOrder {  get { return sortOrder; } set { sortOrder = value; OnChangeSortOrder?.Invoke(); } }
     public event UnityAction OnChangeSortOrder;
@@ -80,4 +83,8 @@ public class CardModel : MonoBehaviour
     [SerializeField] int satiety = 2 ;
     public int Satiety {  get { return satiety; } set { satiety = value; } }
 
+    private void Awake()
+    {
+        Durability = data.durability;
+    }
 }

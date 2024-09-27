@@ -15,6 +15,7 @@ MonoBehaviour:
   prefab: {fileID: 2730431220152686166, guid: fd8557efa09475a4bb96d649e80eced1, type: 3}
   id: 2
   cardName: "\uB098\uBB34"
+  durability: 0
   isFactory: 0
   canGetParent: 1
   canGetChild: 1

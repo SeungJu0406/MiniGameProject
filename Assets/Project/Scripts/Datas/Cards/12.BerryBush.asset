@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
-  m_Name: 1.Stone
+  m_Name: 12.BerryBush
   m_EditorClassIdentifier: 
-  prefab: {fileID: 68835362076304036, guid: 8f38bf698cbc25c41bbf80f30e8a6473, type: 3}
-  id: 1
-  cardName: "\uB3CC"
-  durability: 0
+  prefab: {fileID: 8053643252710795250, guid: 1f7ddb0498e691c419ab1c13a6689fc3, type: 3}
+  id: 12
+  cardName: "\uB538\uAE30\uB098\uBB34"
+  durability: 2
   isFactory: 0
   canGetParent: 1
-  canGetChild: 1
+  canGetChild: 0
   isVillager: 0
   maxHp: 0
   damage: 0

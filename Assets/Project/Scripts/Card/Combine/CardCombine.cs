@@ -143,7 +143,7 @@ public abstract class CardCombine : MonoBehaviour
         }
 
         // 생성 후 재료아이템 처리
-        if (model.data.isFactory) model.BottomCard = model.FactoryBottom;
+        if (model.data.isFactory) model.BottomCard = model.FactoryBottom; // 팩토리에서는 팩토리바텀부터 없앤다
         model.BottomCard.combine.CompleteCreateParent();
     }
     protected void StartCreate(CraftingRecipe result)
@@ -184,7 +184,7 @@ public abstract class CardCombine : MonoBehaviour
             model.ParentCard.combine.CompleteCreateParent();
         }
     }
-    protected void AddFactoryCombineChild(Card reqCard)
+    protected void AddFactoryCombineListAllChild(Card reqCard)
     {
         model.TopCard.combine.AddIngredient(reqCard.model.data);
         if (model.TopCard.model.IsFactory)
@@ -197,13 +197,20 @@ public abstract class CardCombine : MonoBehaviour
         {
             if (model.ChildCard != null)
             {
-                model.ChildCard.combine.AddFactoryCombineChild(model.ChildCard);
+                model.ChildCard.combine.AddFactoryCombineListAllChild(model.ChildCard);
             }
             else
             {
                 model.TopCard.model.CanFactoryCombine = false;
             }
         }
-
+    }
+    protected void AddCombineListAllChild(Card card)
+    {
+        card.combine.AddCombineList();
+        if(card.model.ChildCard != null)
+        {
+            card.model.ChildCard.combine.AddCombineListAllChild(card.model.ChildCard);
+        }
     }
 }
