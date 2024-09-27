@@ -29,6 +29,7 @@ public abstract class CardCombine : MonoBehaviour
 
     protected void AddCombineList()
     {
+        if (!model.CanCombine) return;
         if (model.TopCard == null) return;
         if (model.TopCard.model.data.isFactory) return;
         model.TopCard.combine.AddIngredient(model.data);
@@ -36,6 +37,7 @@ public abstract class CardCombine : MonoBehaviour
 
     protected void RemoveCombineList()
     {
+        if (!model.CanCombine) return;
         if (model.TopCard == null) return;
         if (model.TopCard.model.data.isFactory) return;
         model.TopCard.combine.RemoveIngredient(model.data);
@@ -149,7 +151,7 @@ public abstract class CardCombine : MonoBehaviour
         return transform.position + (Vector3)dir;
     }
 
-    protected abstract void CompleteCreate();
+    public abstract void CompleteCreate();
 
     protected void CompleteCreateParent()
     {

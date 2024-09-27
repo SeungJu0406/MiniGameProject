@@ -9,7 +9,7 @@ public class DisposableCombine : CardCombine
         base.Start();
     }
 
-    protected override void CompleteCreate()
+    public override void CompleteCreate()
     {
 
         if (model.ChildCard != null)
@@ -30,7 +30,9 @@ public class DisposableCombine : CardCombine
                 model.ParentCard.model.BottomCard = model.BottomCard; // 맞부터의 바텀을 본인의 바텀으로 교체
             }
         }
-        RemoveCombineList();    //본인을 조합리스트에서 제거
+
+        //본인을 조합리스트에서 제거
+        RemoveCombineList();
 
         // 본인이 탑일 경우, 또한 자식카드가 있는 경우
         if (model.TopCard.combine == this && model.ChildCard != null)

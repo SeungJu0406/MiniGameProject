@@ -14,7 +14,7 @@ public class FactoryCombine : CardCombine
     {
         base.Start();
     }
-    protected override void CompleteCreate()
+    public override void CompleteCreate()
     {
         
     }

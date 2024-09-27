@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 6197996326476540309}
   - component: {fileID: 6197996326476540310}
   - component: {fileID: 4597446524359002569}
-  - component: {fileID: 6197996326476540308}
-  - component: {fileID: 7950940761972694450}
+  - component: {fileID: 6044579993296885918}
+  - component: {fileID: 543576710}
   m_Layer: 6
-  m_Name: 3.Villager
+  m_Name: 11.Berry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -132,14 +132,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32ff8d72382bfdc428e2a9649fd657c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: e8fa344028dfb814892591d5129c50c1, type: 2}
+  data: {fileID: 11400000, guid: df70f21f2ba62334694788fb74cc4a04, type: 2}
   card: {fileID: 0}
   topCard: {fileID: 0}
   parentCard: {fileID: 0}
   childCard: {fileID: 0}
   bottomCard: {fileID: 0}
   ingredients: []
---- !u!114 &6197996326476540308
+--- !u!114 &6044579993296885918
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,7 +148,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 6197996326476540304}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 927a28cb1f712b549b148b54799111a7, type: 3}
+  m_Script: {fileID: 11500000, guid: 2748760ed8d4d2343a934d6a785e9a1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 0}
+  timerBar: {fileID: 0}
+  craftingCurTime: 0
+--- !u!114 &543576710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6197996326476540304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 440f049b7ae779a428df40a4bf46de36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boxCollider: {fileID: 0}
@@ -156,22 +171,6 @@ MonoBehaviour:
   model: {fileID: 0}
   combine: {fileID: 0}
   stackInterval: 0.4
-  isChoice: 0
---- !u!114 &7950940761972694450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6197996326476540304}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7e79239e95d0f14298299ace355caa8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  model: {fileID: 0}
-  timerBar: {fileID: 0}
-  craftingCurTime: 0
 --- !u!1 &6197996327663481871
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,7 +182,7 @@ GameObject:
   - component: {fileID: 6197996327663481858}
   - component: {fileID: 6197996327663481869}
   m_Layer: 6
-  m_Name: Villager
+  m_Name: Berry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -198,7 +197,7 @@ Transform:
   m_GameObject: {fileID: 6197996327663481871}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.01, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6197996326476540305}
@@ -245,7 +244,7 @@ SpriteRenderer:
   m_SortingLayerID: 1543442145
   m_SortingLayer: -1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: aa986578da3993a43bc7ce96c454134b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 49b05f0e70f379c419c7ae9056476739, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

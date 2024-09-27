@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ImpossibleCombine : CardCombine
 {
-    protected override void CompleteCreate()
+    public override void CompleteCreate()
     {
        
     }

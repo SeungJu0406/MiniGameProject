@@ -13,7 +13,7 @@ public class ReusablelCombine : CardCombine
         base.Start();
     }
 
-    protected override void CompleteCreate()
+    public override void CompleteCreate()
     {
         if (model.ParentCard != null) 
         {

@@ -17,14 +17,15 @@ public class CardManager : MonoBehaviour
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
 
-        hits = new Collider[30];
+        // 배열 초과시 배열 두배 만드는 로직 추가
+        hits = new Collider[50];
         cardLayer = LayerMask.GetMask("Card");
     }
 
     public void MoveResultCard(Card instanceCard, Vector3 pos)
     {
         int hitCount = Physics.OverlapSphereNonAlloc(instanceCard.transform.position, createPosDistance, hits, cardLayer);
-        for (int i = 0; i < hits.Length; i++)
+        for (int i = 0; i < hitCount; i++)
         {
             if (hits[i] == null) break;
             Card other = hits[i].GetComponent<Card>();

@@ -15,14 +15,15 @@ public class Card : MonoBehaviour
     [SerializeField] public Rigidbody rb;
     [SerializeField] public CardModel model;
     [SerializeField] public CardCombine combine;
-   
+
     [Space(30)]
+    [SerializeField] float stackInterval;
     int cardLayer;
     int ignoreLayer;
 
-    public bool isChoice;
+    bool isChoice;
     bool isInitInStack;
-    private void Awake()
+    protected virtual void Awake()
     {
         boxCollider = GetComponent<BoxCollider>();
         rb = GetComponent<Rigidbody>();
@@ -39,7 +40,7 @@ public class Card : MonoBehaviour
         StartCoroutine(InitIgnoreColliderRoutine());
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         if (!isInitInStack)
         {
@@ -48,7 +49,7 @@ public class Card : MonoBehaviour
         }
         isInitInStack = false;
     }
-    private void Update()
+    protected virtual void Update()
     {
         if (model.ParentCard != null) 
         {
@@ -64,7 +65,7 @@ public class Card : MonoBehaviour
     void TraceParent()
     {
         Vector3 parentPos = model.ParentCard.transform.position;
-        Vector3 pos = new Vector3(parentPos.x, parentPos.y - 0.4f, parentPos.z);
+        Vector3 pos = new Vector3(parentPos.x, parentPos.y - stackInterval, parentPos.z);
         transform.position = Vector3.Lerp(transform.position, pos, DragNDrop.Instance.dragSpeed * Time.deltaTime);
     }
     public void InitInStack(Card parent)
@@ -124,10 +125,12 @@ public class Card : MonoBehaviour
     {
         if (model.ChildCard != null)
         {
+            boxCollider.size = new Vector3(boxCollider.size.x, boxCollider.size.y, 0.1f);
             boxCollider.isTrigger = true;
         }
         else
         {
+            boxCollider.size = new Vector3(boxCollider.size.x, boxCollider.size.y, 1f);
             boxCollider.isTrigger = false;
         }
     }

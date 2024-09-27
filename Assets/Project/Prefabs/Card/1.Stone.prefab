@@ -239,6 +239,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   model: {fileID: 0}
   combine: {fileID: 0}
+  stackInterval: 0.4
   isChoice: 0
 --- !u!114 &786327181950337642
 MonoBehaviour:

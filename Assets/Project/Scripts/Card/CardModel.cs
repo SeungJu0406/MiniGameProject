@@ -39,4 +39,18 @@ public class CardModel : MonoBehaviour
 
     [SerializeField] public List<CraftingItemInfo> ingredients = new List<CraftingItemInfo>();
 
+    bool canCombine = true;
+    public bool CanCombine { get { return canCombine; } set { canCombine = value; } }
+
+    [Space(10)]
+    [Header("ÁÖ¹Î ¸ðµ¨ Á¤º¸")]
+    [SerializeField] int maxHp;
+    public int MaxHp { get { return maxHp; } set { maxHp = value; } }
+    [SerializeField] int curHp;
+    public int CurHp { get {return curHp; } set { curHp = value; } }
+    [SerializeField] int damage;
+    public int Damage { get { return damage; } set { damage = value; } }
+    [SerializeField] int satiety = 2 ;
+    public int Satiety {  get { return satiety; } set { satiety = value; } }
+
 }
