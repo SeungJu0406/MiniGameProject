@@ -2,9 +2,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(CardSpriteController))]
 public class CardModel : MonoBehaviour
 {
     [SerializeField] public CardData data;
+    [SerializeField] int sortOrder;
+    public int SortOrder {  get { return sortOrder; } set { sortOrder = value; OnChangeSortOrder?.Invoke(); } }
+    public event UnityAction OnChangeSortOrder;
+
     [SerializeField] Card card;
     public Card Card { get { return card; } set { card = value; } }
     [Space(10)]

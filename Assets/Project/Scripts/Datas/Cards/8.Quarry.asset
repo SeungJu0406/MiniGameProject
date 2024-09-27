@@ -18,3 +18,10 @@ MonoBehaviour:
   isFactory: 1
   canGetParent: 0
   canGetChild: 1
+  isVillager: 0
+  maxHp: 0
+  damage: 0
+  isConsumable: 0
+  foodAmount: 0
+  additonDamage: 0
+  additionHp: 0

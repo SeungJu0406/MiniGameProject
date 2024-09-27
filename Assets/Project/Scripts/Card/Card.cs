@@ -77,6 +77,7 @@ public class Card : MonoBehaviour
         model.BottomCard = this;
         model.ParentCard = parent;
         parent.model.ChildCard = this;
+        ChangeSortLayer();
         ChangeTopChild(parent.model.TopCard); // 본인 + 자식에게 top 설정
         ChangeBottomParent(model.BottomCard); // 본인 + 부모에게 bottom 설정
         parent.rb.velocity = Vector3.zero;
@@ -95,7 +96,8 @@ public class Card : MonoBehaviour
             if (parent.model.ChildCard != null) return;
             // 부모 자식 카드 지정
             model.ParentCard = parent;
-            parent.model.ChildCard = this;            
+            parent.model.ChildCard = this;
+            ChangeSortLayer();
             ChangeTopChild(parent.model.TopCard); // 본인 + 자식에게 top 설정           
             ChangeBottomParent(model.BottomCard); // 본인 + 부모에게 bottom 설정
             parent.rb.velocity = Vector3.zero;
@@ -116,6 +118,7 @@ public class Card : MonoBehaviour
             // 부모 자식 카드 지정
             model.ParentCard = parent;
             parent.model.ChildCard = this;
+            ChangeSortLayer();
             ChangeTopChild(parent.model.TopCard); // 본인 + 자식에게 top 설정           
             ChangeBottomParent(model.BottomCard); // 본인 + 부모에게 bottom 설정
         }
@@ -143,6 +146,7 @@ public class Card : MonoBehaviour
             model.ParentCard = null;           
         }
         isChoice = true;
+        InitSortLayer(1000);
         ChangeTopChild(this);
         
         ClickChild();     
@@ -158,6 +162,7 @@ public class Card : MonoBehaviour
     }
     public void UnClick()
     {
+        InitSortLayer(0);
         UnClickChild();
         StartCoroutine(UnClickDelayRoutine());
     }
@@ -189,6 +194,22 @@ public class Card : MonoBehaviour
         if (model.ParentCard != null)
         {
             model.ParentCard.ChangeBottomParent(bottom);
+        }
+    }
+    public void ChangeSortLayer()
+    {
+        model.SortOrder = model.ParentCard.model.SortOrder + 1;
+        if (model.ChildCard != null)
+        {
+            model.ChildCard.ChangeSortLayer();
+        }
+    }
+    public void InitSortLayer(int order)
+    {
+        model.SortOrder = order;
+        if (model.ChildCard != null)
+        {
+            model.ChildCard.ChangeSortLayer();
         }
     }
 
