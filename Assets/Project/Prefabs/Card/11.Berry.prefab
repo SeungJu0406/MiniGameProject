@@ -181,7 +181,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   model: {fileID: 0}
   combine: {fileID: 0}
-  stackInterval: 0
+  stackInterval: 0.4
 --- !u!114 &1485609541102283303
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -17,7 +17,7 @@ public class Card : MonoBehaviour
     [SerializeField] public CardCombine combine;
 
     [Space(30)]
-    [SerializeField] float stackInterval;
+    float stackInterval = 0.4f;
     int cardLayer;
     int ignoreLayer;
 
