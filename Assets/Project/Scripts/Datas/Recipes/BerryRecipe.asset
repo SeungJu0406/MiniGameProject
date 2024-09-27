@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35999a93e03f75d42980dca4291da188, type: 3}
   m_Name: BerryRecipe
   m_EditorClassIdentifier: 
-  reqItems: []
+  reqItems:
+  - item: {fileID: 11400000, guid: e8fa344028dfb814892591d5129c50c1, type: 2}
+    count: 1
+  - item: {fileID: 11400000, guid: b4f390f0428fbad4a8908de8501cb177, type: 2}
+    count: 1
   resultItem:
-    item: {fileID: 0}
-    count: 0
-  craftingTime: 0
+  - item: {fileID: 11400000, guid: df70f21f2ba62334694788fb74cc4a04, type: 2}
+    count: 1
+  craftingTime: 10

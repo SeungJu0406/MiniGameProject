@@ -10,7 +10,7 @@ public class CraftingRecipe : ScriptableObject
     [SerializeField] public CraftingItemInfo[] reqItems;
 
     [Header("결과 아이템")]
-    [SerializeField] public CraftingItemInfo resultItem;
+    [SerializeField] public CraftingItemInfo[] resultItem;
 
     [Space(30)]
     [Header("제작 시간")]

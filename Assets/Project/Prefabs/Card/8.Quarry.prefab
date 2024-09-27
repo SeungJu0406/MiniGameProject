@@ -136,6 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: ac5569ea144d64d47a9933a75ec82565, type: 2}
+  durability: 0
   sortOrder: 0
   card: {fileID: 0}
   topCard: {fileID: 0}
@@ -181,7 +182,6 @@ MonoBehaviour:
   rb: {fileID: 0}
   model: {fileID: 0}
   combine: {fileID: 0}
-  stackInterval: 0.4
 --- !u!114 &8043170627433279467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -528,7 +528,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5182945407363932439}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.01}
   m_LocalScale: {x: 0.57142854, y: 0.5, z: 0.57142854}
   m_ConstrainProportionsScale: 0
   m_Children:

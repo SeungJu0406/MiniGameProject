@@ -18,6 +18,6 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: e8fa344028dfb814892591d5129c50c1, type: 2}
     count: 1
   resultItem:
-    item: {fileID: 11400000, guid: e83dba01981f646419044760d469de5e, type: 2}
-    count: 2
+  - item: {fileID: 11400000, guid: e83dba01981f646419044760d469de5e, type: 2}
+    count: 1
   craftingTime: 10

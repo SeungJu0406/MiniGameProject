@@ -247,7 +247,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4200648401798588397}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.01}
   m_LocalScale: {x: 0.57142854, y: 0.5, z: 0.57142854}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -542,6 +542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 4fdb21f73caf6284dbe89a03886c1301, type: 2}
+  durability: 0
   sortOrder: 0
   card: {fileID: 0}
   topCard: {fileID: 0}
@@ -570,6 +571,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 0}
   renders: []
+  canvases: []
 --- !u!114 &8313945816113655415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -586,7 +588,6 @@ MonoBehaviour:
   rb: {fileID: 0}
   model: {fileID: 0}
   combine: {fileID: 0}
-  stackInterval: 0.4
 --- !u!114 &1313119275764623633
 MonoBehaviour:
   m_ObjectHideFlags: 0

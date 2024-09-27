@@ -103,7 +103,8 @@ public abstract class CardCombine : MonoBehaviour
             if (!model.TopCard.model.CanFactoryCombine)
             {
                 result = Dic.Recipe.GetValue(key);
-                CreateResultCard(result);
+                if (result.resultItem[0].count <= 0) return false;
+                StartCreate(result);
             }
             return true;
         }
@@ -112,19 +113,12 @@ public abstract class CardCombine : MonoBehaviour
             return false;
         }
     }
-    protected void CreateResultCard(CraftingRecipe result)
-    {
-        if (result.resultItem.item == null) return;
-        for (int i = 0; i < result.resultItem.count; i++)
-        {
-            StartCreate(result);
-        }
-    }
     const float DelayTime = 0.1f;
     WaitForSeconds delay = new WaitForSeconds(DelayTime);
     protected Coroutine createRoutine;
     protected IEnumerator CreateRoutine(CraftingRecipe result)
     {
+        // 조합 타이머
         timerBar.gameObject.SetActive(true);
         timerBar.maxValue = result.craftingTime;
         CraftingCurTime = result.craftingTime;
@@ -136,10 +130,13 @@ public abstract class CardCombine : MonoBehaviour
         }
         timerBar.gameObject.SetActive(false);
         // 생성
-        for (int i = 0; i < result.resultItem.count; i++)
+        for (int i = 0; i < result.resultItem.Length; i++) // 결과 카드 인덱스 선택
         {
-            Card instanceCard = Instantiate(result.resultItem.item.prefab, transform.position, transform.rotation);
-            CardManager.Instance.MoveResultCard(instanceCard, SelectRandomPos());
+            for (int j = 0; j < result.resultItem[i].count; j++) // 해당 인덱스의 카드 count만큼 생성
+            {
+                Card instanceCard = Instantiate(result.resultItem[i].item.prefab, transform.position, transform.rotation);
+                CardManager.Instance.MoveResultCard(instanceCard, SelectRandomPos());
+            }
         }
 
         // 생성 후 재료아이템 처리
@@ -208,7 +205,7 @@ public abstract class CardCombine : MonoBehaviour
     protected void AddCombineListAllChild(Card card)
     {
         card.combine.AddCombineList();
-        if(card.model.ChildCard != null)
+        if (card.model.ChildCard != null)
         {
             card.model.ChildCard.combine.AddCombineListAllChild(card.model.ChildCard);
         }
