@@ -2,9 +2,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(CardSpriteController))]
 public class CardModel : MonoBehaviour
 {
     [SerializeField] public CardData data;
+    [SerializeField] int sortOrder;
+    public int SortOrder {  get { return sortOrder; } set { sortOrder = value; OnChangeSortOrder?.Invoke(); } }
+    public event UnityAction OnChangeSortOrder;
+
     [SerializeField] Card card;
     public Card Card { get { return card; } set { card = value; } }
     [Space(10)]
@@ -35,8 +40,44 @@ public class CardModel : MonoBehaviour
     public Card ChildCard { get { return childCard; } set { childCard = value; OnChangeChild?.Invoke(); } }
     public event UnityAction OnChangeChild;
     [SerializeField] Card bottomCard;
-    public Card BottomCard { get { return bottomCard; } set { bottomCard = value; } }
+    public Card BottomCard { get { return bottomCard; } set { bottomCard = value; OnChangeBottom?.Invoke();  } }
+    public event UnityAction OnChangeBottom;
 
     [SerializeField] public List<CraftingItemInfo> ingredients = new List<CraftingItemInfo>();
+
+    bool canCombine = true;
+    public bool CanCombine { get { return canCombine; } set { canCombine = value; } }
+
+    [SerializeField ]bool isFactory;
+    public bool IsFactory
+    {
+        get { return isFactory; }
+        set
+        {
+            if (data.isFactory == true)
+            {
+                isFactory = value;
+                OnChangeIsFactory?.Invoke();
+            }
+        }
+    }
+    public event UnityAction OnChangeIsFactory;
+
+    [SerializeField] bool canFactoryCombine;
+    public bool CanFactoryCombine { get { return canFactoryCombine; } set { canFactoryCombine = value; OnChangeCanFactoryCombine?.Invoke(); } }
+    public event UnityAction OnChangeCanFactoryCombine;
+    [SerializeField] Card factoryBottom;
+    public Card FactoryBottom { get { return factoryBottom; } set { factoryBottom = value; } }
+
+    [Space(10)]
+    [Header("ÁÖ¹Î ¸ðµ¨ Á¤º¸")]
+    [SerializeField] int maxHp;
+    public int MaxHp { get { return maxHp; } set { maxHp = value; } }
+    [SerializeField] int curHp;
+    public int CurHp { get {return curHp; } set { curHp = value; } }
+    [SerializeField] int damage;
+    public int Damage { get { return damage; } set { damage = value; } }
+    [SerializeField] int satiety = 2 ;
+    public int Satiety {  get { return satiety; } set { satiety = value; } }
 
 }

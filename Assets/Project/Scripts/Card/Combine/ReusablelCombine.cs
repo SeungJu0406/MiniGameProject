@@ -13,12 +13,10 @@ public class ReusablelCombine : CardCombine
         base.Start();
     }
 
-    protected override void CompleteCreate()
+    public override void CompleteCreate()
     {
         if (model.ParentCard != null) 
         {
-            model.ParentCard.model.ChildCard = null;
-            model.ParentCard.model.ChildCard = model.Card;
             model.ParentCard.model.BottomCard = model.BottomCard;
         }
     }

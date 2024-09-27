@@ -12,9 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
   m_Name: 1.Stone
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1719549034884507588, guid: d7bbac6689a108149970192a545e2427, type: 3}
+  prefab: {fileID: 68835362076304036, guid: 8f38bf698cbc25c41bbf80f30e8a6473, type: 3}
   id: 1
   cardName: "\uB3CC"
   isFactory: 0
   canGetParent: 1
   canGetChild: 1
+  isVillager: 0
+  maxHp: 0
+  damage: 0
+  isConsumable: 0
+  foodAmount: 0
+  additonDamage: 0
+  additionHp: 0

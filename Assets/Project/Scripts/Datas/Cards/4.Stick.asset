@@ -12,9 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
   m_Name: 4.Stick
   m_EditorClassIdentifier: 
-  prefab: {fileID: 6197996326476540308, guid: 646db5fc1e1d31a42a07785b36ad2304, type: 3}
+  prefab: {fileID: 7128727918752737941, guid: 90203c89fa1911a43bd0def758b37ab2, type: 3}
   id: 4
   cardName: "\uAC00\uC9C0"
   isFactory: 0
   canGetParent: 1
   canGetChild: 1
+  isVillager: 0
+  maxHp: 0
+  damage: 0
+  isConsumable: 0
+  foodAmount: 0
+  additonDamage: 0
+  additionHp: 0
