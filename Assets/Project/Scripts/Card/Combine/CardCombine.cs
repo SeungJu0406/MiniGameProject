@@ -33,7 +33,7 @@ public abstract class CardCombine : MonoBehaviour
         if (!model.CanCombine) return;
         if (model.TopCard == null) return;
         if (model.TopCard.model.data.isFactory) return;
-        StopCreate();
+        model.TopCard.combine.StopCreate();
         model.TopCard.combine.AddIngredient(model.data);
     }
 
@@ -42,7 +42,7 @@ public abstract class CardCombine : MonoBehaviour
         if (!model.CanCombine) return;
         if (model.TopCard == null) return;
         if (model.TopCard.model.data.isFactory) return;
-        StopCreate();
+        model.TopCard.combine.StopCreate();
         model.TopCard.combine.RemoveIngredient(model.data);
     }
     public virtual void AddIngredient(CardData data)
