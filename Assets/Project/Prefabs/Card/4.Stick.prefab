@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4597446524359002569}
   - component: {fileID: 6197996326476540308}
   - component: {fileID: 6044579993296885918}
+  - component: {fileID: 1839837551889758446}
   m_Layer: 6
   m_Name: 4.Stick
   m_TagString: Untagged
@@ -78,7 +79,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1543442145
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8a813ab74ec830946ae0b30deac65602, type: 3}
   m_Color: {r: 1, g: 0.65038824, b: 0, a: 1}
@@ -133,12 +134,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: e83dba01981f646419044760d469de5e, type: 2}
+  sortOrder: 0
   card: {fileID: 0}
   topCard: {fileID: 0}
   parentCard: {fileID: 0}
   childCard: {fileID: 0}
   bottomCard: {fileID: 0}
   ingredients: []
+  maxHp: 0
+  curHp: 0
+  damage: 0
+  satiety: 2
 --- !u!114 &6197996326476540308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,7 +162,6 @@ MonoBehaviour:
   model: {fileID: 0}
   combine: {fileID: 0}
   stackInterval: 0.4
-  isChoice: 0
 --- !u!114 &6044579993296885918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,6 +177,20 @@ MonoBehaviour:
   model: {fileID: 0}
   timerBar: {fileID: 0}
   craftingCurTime: 0
+--- !u!114 &1839837551889758446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6197996326476540304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 362158e799718314fbe47db967651e23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 0}
+  renders: []
 --- !u!1 &6197996327663481871
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,7 +216,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6197996327663481871}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.01, z: 0}
+  m_LocalPosition: {x: 0, y: -0.01, z: -0.01}
   m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -243,7 +262,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1543442145
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 170cf803c7740de44ad79130acfb8c46, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

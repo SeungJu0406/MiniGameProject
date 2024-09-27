@@ -27,22 +27,21 @@ public abstract class CardCombine : MonoBehaviour
         timerBar.gameObject.SetActive(false);
     }
 
-    protected void AddCombineList()
+    protected virtual void AddCombineList()
     {
         if (!model.CanCombine) return;
         if (model.TopCard == null) return;
-        if (model.TopCard.model.data.isFactory) return;
+        if (model.TopCard.model.IsFactory) return;
         model.TopCard.combine.AddIngredient(model.data);
     }
 
-    protected void RemoveCombineList()
+    protected virtual void RemoveCombineList()
     {
         if (!model.CanCombine) return;
         if (model.TopCard == null) return;
-        if (model.TopCard.model.data.isFactory) return;
         model.TopCard.combine.RemoveIngredient(model.data);
     }
-    protected void AddIngredient(CardData data)
+    protected virtual void AddIngredient(CardData data)
     {
         StopCreate();
         if (model.ingredients.Any(ingredients => ingredients.item.Equals(data)))
@@ -56,9 +55,12 @@ public abstract class CardCombine : MonoBehaviour
         {
             model.ingredients.Add(new CraftingItemInfo(data, 1));
         }
-        TryCombine();
+        if (TryCombine())
+        {
+            model.IsFactory = true;
+        }
     }
-    protected void RemoveIngredient(CardData data)
+    protected virtual void RemoveIngredient(CardData data)
     {
         StopCreate();
         int index = model.ingredients.FindIndex(ingredients => ingredients.item.Equals(data));
@@ -72,12 +74,15 @@ public abstract class CardCombine : MonoBehaviour
             findCard.count--;
             model.ingredients[index] = findCard;
         }
-        TryCombine();
+        if (TryCombine())
+        {
+            model.IsFactory = true;
+        }
     }
-    protected void TryCombine()
+    protected bool TryCombine()
     {
-        if (model.ingredients.Count <= 0) return;
-        if (model.ingredients.Count == 1 && model.ingredients[0].count <= 1) return;
+        if (model.ingredients.Count <= 0) return false;
+        if (model.ingredients.Count == 1 && model.ingredients[0].count <= 1) return false;
 
 
         model.ingredients.Sort((s1, s2) => s1.item.id.CompareTo(s2.item.id));
@@ -87,6 +92,11 @@ public abstract class CardCombine : MonoBehaviour
         {
             CraftingRecipe result = Dic.Recipe.GetValue(key);
             CreateResultCard(result);
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
     protected void CreateResultCard(CraftingRecipe result)
@@ -120,7 +130,7 @@ public abstract class CardCombine : MonoBehaviour
         }
 
         // 생성 후 재료아이템 처리
-        if(model.data.isFactory) model.BottomCard = model.ChildCard;
+        if (model.data.isFactory) model.BottomCard = model.ChildCard;
         model.BottomCard.combine.CompleteCreateParent();
     }
     protected void StartCreate(CraftingRecipe result)

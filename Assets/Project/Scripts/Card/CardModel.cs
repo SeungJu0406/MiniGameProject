@@ -40,12 +40,31 @@ public class CardModel : MonoBehaviour
     public Card ChildCard { get { return childCard; } set { childCard = value; OnChangeChild?.Invoke(); } }
     public event UnityAction OnChangeChild;
     [SerializeField] Card bottomCard;
-    public Card BottomCard { get { return bottomCard; } set { bottomCard = value; } }
+    public Card BottomCard { get { return bottomCard; } set { bottomCard = value; OnChangeBottom?.Invoke();  } }
+    public event UnityAction OnChangeBottom;
 
     [SerializeField] public List<CraftingItemInfo> ingredients = new List<CraftingItemInfo>();
 
     bool canCombine = true;
     public bool CanCombine { get { return canCombine; } set { canCombine = value; } }
+
+    [SerializeField ]bool isFactory;
+    public bool IsFactory
+    {
+        get { return isFactory; }
+        set
+        {
+            if (data.isFactory == true)
+            {
+                isFactory = value;
+                OnChangeIsFactory?.Invoke();
+            }
+        }
+    }
+    public event UnityAction OnChangeIsFactory;
+
+    [SerializeField] List<Card> factoryList;
+    public List<Card> FactoryList { get { return factoryList; } set { factoryList = value; } }
 
     [Space(10)]
     [Header("ÁÖ¹Î ¸ðµ¨ Á¤º¸")]
