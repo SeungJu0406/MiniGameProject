@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
   m_Name: 11.Berry
   m_EditorClassIdentifier: 
-  prefab: {fileID: 6197996326476540308, guid: 31aef05d58c81204f8b3bb0cec047080, type: 3}
+  prefab: {fileID: 882130727091847081, guid: 31aef05d58c81204f8b3bb0cec047080, type: 3}
   id: 11
   cardName: "\uB538\uAE30"
   isFactory: 0

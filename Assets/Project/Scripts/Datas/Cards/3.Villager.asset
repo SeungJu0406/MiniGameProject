@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
   m_Name: 3.Villager
   m_EditorClassIdentifier: 
-  prefab: {fileID: 6197996326476540308, guid: 88ffd31943429f440bf5bee08e15b514, type: 3}
+  prefab: {fileID: 4206404797622852137, guid: 88ffd31943429f440bf5bee08e15b514, type: 3}
   id: 3
   cardName: "\uC8FC\uBBFC"
   isFactory: 0

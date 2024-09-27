@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
   m_Name: 8.Quarry
   m_EditorClassIdentifier: 
-  prefab: {fileID: 6197996326476540308, guid: ef4f7dbf8ac9ab640bf7b7123b5bc493, type: 3}
+  prefab: {fileID: 1064863541223467149, guid: 02e2042621a9a084caf96d76c108e149, type: 3}
   id: 8
   cardName: "\uCC44\uC11D\uC7A5"
   isFactory: 1

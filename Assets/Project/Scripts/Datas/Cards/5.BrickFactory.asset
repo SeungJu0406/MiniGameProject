@@ -12,9 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
   m_Name: 5.BrickFactory
   m_EditorClassIdentifier: 
-  prefab: {fileID: 6197996326476540308, guid: 47653d3b3da130f4491438d1b2ec2b70, type: 3}
+  prefab: {fileID: 5124178324563502934, guid: 47653d3b3da130f4491438d1b2ec2b70, type: 3}
   id: 5
   cardName: "\uBCBD\uB3CC \uACF5\uC7A5"
   isFactory: 1
   canGetParent: 0
   canGetChild: 1
+  isVillager: 0
+  maxHp: 0
+  damage: 0
+  isConsumable: 0
+  foodAmount: 0
+  additonDamage: 0
+  additionHp: 0
