@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class DicInitialization : MonoBehaviour
 {
+    [SerializeField] bool isInit;
     [SerializeField] CardDic cardDic;
     [SerializeField] RecipeDic recipeDic;
 
