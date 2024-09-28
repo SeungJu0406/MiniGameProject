@@ -10,16 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab29f3598e5e2144eaf3b797869fa11e, type: 3}
-  m_Name: FruitSaladRecipe
+  m_Name: TestRecipe
   m_EditorClassIdentifier: 
   reqItems:
-  - item: {fileID: 11400000, guid: df70f21f2ba62334694788fb74cc4a04, type: 2}
-    count: 1
-  - item: {fileID: 11400000, guid: 21b658d22b17f6b4ba4cd72afcedc92e, type: 2}
-    count: 1
-  - item: {fileID: 11400000, guid: 3bb6f51e946b4d9468602568b46b5b83, type: 2}
+  - item: {fileID: 11400000, guid: 9cea8b4f29111e14c8ece6d0da0adca0, type: 2}
+    count: 3
+  - item: {fileID: 11400000, guid: 59467d4f6d197874bbd873f83f62841a, type: 2}
     count: 1
   resultItem:
-  - item: {fileID: 11400000, guid: cd8f07261ba2acf49b32ed9a018c0c61, type: 2}
+  - item: {fileID: 11400000, guid: 81b3c3a404182614ab2c434e624033d0, type: 2}
     count: 1
-  craftingTime: 20
+  craftingTime: 0

@@ -81,7 +81,6 @@ public abstract class CardCombine : MonoBehaviour
 
         model.ingredients.Sort((s1, s2) => s1.item.id.CompareTo(s2.item.id));
         string key = Dic.Recipe.GetKey(model.ingredients.ToArray());
-
         if (Dic.Recipe.dic.ContainsKey(key))
         {
             result = Dic.Recipe.GetValue(key);

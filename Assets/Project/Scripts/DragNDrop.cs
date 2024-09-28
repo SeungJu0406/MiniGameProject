@@ -46,14 +46,16 @@ public class DragNDrop : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, 100f, cardLayer))
         {
-            cardPos = hit.transform;
             choiceCard = hit.collider.gameObject.GetComponent<Card>();
+            if (choiceCard.model.data.cantMove) return;
+            cardPos = hit.transform;        
             choiceCard.Click();
+            if (dragRoutine == null)
+            {
+                StartCoroutine(DragRoutine());
+            }
         }
-        if (dragRoutine == null)
-        {
-            StartCoroutine(DragRoutine());
-        }
+
     }
     private void Drag()
     {

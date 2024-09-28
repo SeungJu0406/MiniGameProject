@@ -27,7 +27,10 @@ public class CardData : ScriptableObject
     [SerializeField] public int damage;
     [Space(10)]
     [Header("소모 아이템 정보")]
+    
     [SerializeField] public bool isConsumable;
+    [ShowIf("isConsumable")]
+    [SerializeField] public bool isCoin;
     [ShowIf("isConsumable")]
     [SerializeField] public int foodAmount;
     [ShowIf("isConsumable")]

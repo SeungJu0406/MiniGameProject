@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class CardDataInitialization : MonoBehaviour
 {
+    [SerializeField] bool isInit;
     [SerializeField] CardData data;
     [SerializeField] GameObject nameTag;
     [SerializeField] SpriteRenderer cardIcon;

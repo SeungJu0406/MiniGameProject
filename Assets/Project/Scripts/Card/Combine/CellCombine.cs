@@ -101,26 +101,6 @@ public class CellCombine : CardCombine
         lists[0].Clear();
         lists[1].Clear();
     }
-    void CreateCoin()
-    {
-        // 코인 생성
-        Card instanceCard = Instantiate(coin, transform.position, transform.rotation);
-        // 코인의 위치가 맵 안으로 들어올 수 있게 끔, 아래쪽으로 강제 트랜스폼 이동
-
-        //float radius = CardManager.Instance.createPosDistance + moveCardPosY + 1;
-        //int hitCount = Physics.OverlapSphereNonAlloc(instanceCard.transform.position, radius, hits, CardManager.Instance.cardLayer);
-        //for (int i = 0; i < hitCount; i++)
-        //{
-
-        //    if (hits[i] == null) break;
-        //    Card other = hits[i].GetComponent<Card>();
-        //    if (other.model.BottomCard.model.data == instanceCard.model.data)
-        //    {
-        //        instanceCard.InitInStack(other.model.BottomCard);
-        //        return;
-        //    }
-        //}
-    }
     WaitForSeconds moveDelay = new WaitForSeconds(0.11f);
     IEnumerator MoveCardRoutine(Card instanceCard, float moveCardPosX)
     {
