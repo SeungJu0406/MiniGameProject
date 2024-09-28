@@ -55,8 +55,6 @@ public class DragNDrop : MonoBehaviour
             StartCoroutine(DragRoutine());
         }
     }
-
-    Coroutine dragRoutine;
     private void Drag()
     {
         if (cardPos != null)
@@ -64,6 +62,7 @@ public class DragNDrop : MonoBehaviour
             cardPos.position = Vector3.Lerp(cardPos.position, movePos, dragSpeed * Time.deltaTime);
         }
     }
+    Coroutine dragRoutine;
     WaitForSeconds delay = new WaitForSeconds(0.05f);
     IEnumerator DragRoutine()
     {

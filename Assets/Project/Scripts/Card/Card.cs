@@ -1,9 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
 
 
 
@@ -21,13 +17,13 @@ public class Card : MonoBehaviour
     int cardLayer;
     int ignoreLayer;
 
-    bool isChoice;
+    [HideInInspector] public bool isChoice;
     bool isInitInStack;
     protected virtual void Awake()
     {
         boxCollider = GetComponent<BoxCollider>();
         rb = GetComponent<Rigidbody>();
-        model = GetComponent<CardModel>();       
+        model = GetComponent<CardModel>();
         combine = GetComponent<CardCombine>();
 
         model.Card = this;
@@ -51,13 +47,13 @@ public class Card : MonoBehaviour
     }
     protected virtual void Update()
     {
-        if (model.ParentCard != null) 
+        if (model.ParentCard != null)
         {
             TraceParent();
         }
     }
-    IEnumerator InitIgnoreColliderRoutine() 
-    {       
+    IEnumerator InitIgnoreColliderRoutine()
+    {
         gameObject.layer = ignoreLayer;
         yield return new WaitForSeconds(1f);
         gameObject.layer = cardLayer;
@@ -108,7 +104,7 @@ public class Card : MonoBehaviour
         if (!model.data.canGetParent) return;
         if (DragNDrop.Instance.isClick) return;
         if (!isChoice) return;
-        if(model.ParentCard != null) return;
+        if (model.ParentCard != null) return;
         if (other.gameObject.layer == cardLayer)
         {
             Card parent = other.gameObject.GetComponent<Card>();
@@ -126,6 +122,7 @@ public class Card : MonoBehaviour
 
     public void InitChangeChild()
     {
+        if (model.data.cantMove) return;
         if (boxCollider != null)
         {
             if (model.ChildCard != null)
@@ -146,19 +143,19 @@ public class Card : MonoBehaviour
         {
             model.ParentCard.model.ChildCard = null;
             model.ParentCard.ChangeBottomAllParent(model.ParentCard); // 부모 카드들의 바텀을 맞부모카드로 설정           
-            model.ParentCard = null;           
-        }   
+            model.ParentCard = null;
+        }
         isChoice = true;
         InitSortLayerAllChild(10000);
         ChangeTopAllChild(this);
-        
-        ClickAllChild();     
+
+        ClickAllChild();
     }
     void ClickAllChild()
     {
         gameObject.layer = ignoreLayer;
-        rb.velocity = Vector3.zero;    
-        if (model.ChildCard != null) 
+        rb.velocity = Vector3.zero;
+        if (model.ChildCard != null)
         {
             model.ChildCard.ClickAllChild();
         }
@@ -173,7 +170,7 @@ public class Card : MonoBehaviour
     IEnumerator UnClickDelayRoutine()
     {
         yield return delay;
-        isChoice = false;       
+        isChoice = false;
     }
     void UnClickAllChild()
     {

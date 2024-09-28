@@ -23,7 +23,7 @@ public class FactoryCombine : CardCombine
     protected void StopFactoryCombine()
     {
         if (!model.CanFactoryCombine)
-        {
+        {          
             if (createRoutine != null)
             {
                 StopCoroutine(createRoutine);
@@ -73,7 +73,7 @@ public class FactoryCombine : CardCombine
             {
                 result = Dic.Recipe.GetValue(key);
                 StartCreate(result);
-            }
+            }         
             return true;
         }
         else

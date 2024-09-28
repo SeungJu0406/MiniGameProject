@@ -5,7 +5,7 @@ public class CardManager : MonoBehaviour
 {
     public static CardManager Instance;
 
-    [SerializeField] float completeResultMoveSpeed;
+    [SerializeField] public float completeResultMoveSpeed;
 
     [SerializeField] public float createPosDistance;
 

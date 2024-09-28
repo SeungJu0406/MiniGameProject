@@ -11,11 +11,13 @@ public class CardData : ScriptableObject
     [SerializeField] public int id;
     [SerializeField] public string cardName;
     [SerializeField] public string engName;
+    [SerializeField] public int price;
     [SerializeField] public int durability;
     [Space(10)]
     [SerializeField] public bool isFactory;
     [SerializeField] public bool canGetParent;
     [SerializeField] public bool canGetChild;
+    [SerializeField] public bool cantMove;
     [Space(10)]
     [Header("¡÷πŒ µ•¿Ã≈Õ")]
     [SerializeField] public bool isVillager;  

@@ -32,7 +32,6 @@ public abstract class CardCombine : MonoBehaviour
     {
         if (!model.CanCombine) return;
         if (model.TopCard == null) return;
-        model.TopCard.combine.StopCreate();
         model.TopCard.combine.AddIngredient(model.data);
     }
 
@@ -40,11 +39,12 @@ public abstract class CardCombine : MonoBehaviour
     {
         if (!model.CanCombine) return;
         if (model.TopCard == null) return;
-        model.TopCard.combine.StopCreate();
+        
         model.TopCard.combine.RemoveIngredient(model.data);
     }
     public virtual void AddIngredient(CardData data)
     {
+        StopCreate();
         if (model.ingredients.Any(ingredients => ingredients.item.Equals(data)))
         {
             int index = model.ingredients.FindIndex(ingredients => ingredients.item.Equals(data));
@@ -60,6 +60,7 @@ public abstract class CardCombine : MonoBehaviour
     }
     public virtual void RemoveIngredient(CardData data)
     {
+        StopCreate();
         int index = model.ingredients.FindIndex(ingredients => ingredients.item.Equals(data));
         if (model.ingredients[index].count <= 1)
         {
