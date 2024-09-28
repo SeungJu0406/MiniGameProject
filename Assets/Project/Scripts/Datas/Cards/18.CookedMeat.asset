@@ -17,10 +17,12 @@ MonoBehaviour:
   id: 18
   cardName: "\uC775\uD78C \uACE0\uAE30"
   engName: CookedMeat
+  price: 2
   durability: 0
   isFactory: 0
   canGetParent: 1
   canGetChild: 1
+  cantMove: 0
   isVillager: 0
   maxHp: 0
   damage: 0

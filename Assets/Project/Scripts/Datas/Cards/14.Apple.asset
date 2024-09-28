@@ -17,10 +17,12 @@ MonoBehaviour:
   id: 14
   cardName: "\uC0AC\uACFC"
   engName: Apple
+  price: 2
   durability: 0
   isFactory: 0
   canGetParent: 1
   canGetChild: 1
+  cantMove: 0
   isVillager: 0
   maxHp: 0
   damage: 0

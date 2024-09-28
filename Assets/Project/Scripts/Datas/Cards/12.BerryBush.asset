@@ -17,10 +17,12 @@ MonoBehaviour:
   id: 12
   cardName: "\uB538\uAE30\uB098\uBB34"
   engName: BerryBush
+  price: 0
   durability: 3
   isFactory: 1
   canGetParent: 0
   canGetChild: 1
+  cantMove: 0
   isVillager: 0
   maxHp: 0
   damage: 0

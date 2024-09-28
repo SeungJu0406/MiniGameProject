@@ -17,10 +17,12 @@ MonoBehaviour:
   id: 2
   cardName: "\uB098\uBB34"
   engName: Wood
+  price: 1
   durability: 0
   isFactory: 0
   canGetParent: 1
   canGetChild: 1
+  cantMove: 0
   isVillager: 0
   maxHp: 0
   damage: 0

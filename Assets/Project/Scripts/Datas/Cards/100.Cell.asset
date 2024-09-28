@@ -17,10 +17,12 @@ MonoBehaviour:
   id: 100
   cardName: "\uD310\uB9E4"
   engName: Cell
+  price: 0
   durability: 0
   isFactory: 1
   canGetParent: 0
   canGetChild: 1
+  cantMove: 1
   isVillager: 0
   maxHp: 0
   damage: 0
