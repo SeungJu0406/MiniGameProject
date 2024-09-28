@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
   m_Name: 8.Quarry
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1064863541223467149, guid: 02e2042621a9a084caf96d76c108e149, type: 3}
+  prefab: {fileID: 5059840849689137311, guid: 4fc21e923818db84b9f009694ce0d2c5, type: 3}
+  cardIcon: {fileID: 21300000, guid: 619e6eed71d38534793e22b90b4931ad, type: 3}
   id: 8
   cardName: "\uCC44\uC11D\uC7A5"
+  engName: Quarry
+  durability: 0
   isFactory: 1
   canGetParent: 0
   canGetChild: 1

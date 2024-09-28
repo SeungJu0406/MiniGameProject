@@ -7,12 +7,17 @@ using UnityEngine;
 public class CardData : ScriptableObject
 {
     [SerializeField] public Card prefab;
+    [SerializeField] public Sprite cardIcon;
     [SerializeField] public int id;
     [SerializeField] public string cardName;
+    [SerializeField] public string engName;
+    [SerializeField] public int price;
+    [SerializeField] public int durability;
     [Space(10)]
     [SerializeField] public bool isFactory;
     [SerializeField] public bool canGetParent;
     [SerializeField] public bool canGetChild;
+    [SerializeField] public bool cantMove;
     [Space(10)]
     [Header("주민 데이터")]
     [SerializeField] public bool isVillager;  
@@ -22,13 +27,15 @@ public class CardData : ScriptableObject
     [SerializeField] public int damage;
     [Space(10)]
     [Header("소모 아이템 정보")]
+    
     [SerializeField] public bool isConsumable;
+    [ShowIf("isConsumable")]
+    [SerializeField] public bool isCoin;
     [ShowIf("isConsumable")]
     [SerializeField] public int foodAmount;
     [ShowIf("isConsumable")]
     [SerializeField] public int additonDamage;
     [ShowIf("isConsumable")]
     [SerializeField] public int additionHp;
-    
 }
     

@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
   m_Name: 5.BrickFactory
   m_EditorClassIdentifier: 
-  prefab: {fileID: 5124178324563502934, guid: 47653d3b3da130f4491438d1b2ec2b70, type: 3}
+  prefab: {fileID: 5064574073757188334, guid: 5b1ba0fb317f7e24c9cae43c06c046be, type: 3}
+  cardIcon: {fileID: 21300000, guid: e3bc514db830d6b4295f1ede29ddfe59, type: 3}
   id: 5
   cardName: "\uBCBD\uB3CC \uACF5\uC7A5"
+  engName: BrickFactory
+  durability: 0
   isFactory: 1
   canGetParent: 0
   canGetChild: 1

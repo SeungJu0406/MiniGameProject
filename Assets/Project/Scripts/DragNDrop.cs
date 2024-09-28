@@ -46,17 +46,17 @@ public class DragNDrop : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, 100f, cardLayer))
         {
-            cardPos = hit.transform;
             choiceCard = hit.collider.gameObject.GetComponent<Card>();
+            if (choiceCard.model.data.cantMove) return;
+            cardPos = hit.transform;        
             choiceCard.Click();
+            if (dragRoutine == null)
+            {
+                StartCoroutine(DragRoutine());
+            }
         }
-        if (dragRoutine == null)
-        {
-            StartCoroutine(DragRoutine());
-        }
-    }
 
-    Coroutine dragRoutine;
+    }
     private void Drag()
     {
         if (cardPos != null)
@@ -64,6 +64,7 @@ public class DragNDrop : MonoBehaviour
             cardPos.position = Vector3.Lerp(cardPos.position, movePos, dragSpeed * Time.deltaTime);
         }
     }
+    Coroutine dragRoutine;
     WaitForSeconds delay = new WaitForSeconds(0.05f);
     IEnumerator DragRoutine()
     {

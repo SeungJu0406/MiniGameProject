@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35999a93e03f75d42980dca4291da188, type: 3}
+  m_Script: {fileID: 11500000, guid: ab29f3598e5e2144eaf3b797869fa11e, type: 3}
   m_Name: Wood2Recipe
   m_EditorClassIdentifier: 
   reqItems:
@@ -18,6 +18,6 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: 4fdb21f73caf6284dbe89a03886c1301, type: 2}
     count: 1
   resultItem:
-    item: {fileID: 11400000, guid: 0f9c9c079dd8c2b4582c0d0a7eac72da, type: 2}
+  - item: {fileID: 11400000, guid: 0f9c9c079dd8c2b4582c0d0a7eac72da, type: 2}
     count: 1
   craftingTime: 7

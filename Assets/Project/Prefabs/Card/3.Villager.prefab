@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 159024897309158926}
   - component: {fileID: 4206404797622852137}
   - component: {fileID: 159024897309158927}
+  - component: {fileID: 3308010445065801546}
   m_Layer: 6
   m_Name: 3.Villager
   m_TagString: Untagged
@@ -220,6 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: e8fa344028dfb814892591d5129c50c1, type: 2}
+  durability: 0
   sortOrder: 0
   card: {fileID: 0}
   topCard: {fileID: 0}
@@ -265,7 +267,6 @@ MonoBehaviour:
   rb: {fileID: 0}
   model: {fileID: 0}
   combine: {fileID: 0}
-  stackInterval: 0.4
 --- !u!114 &159024897309158927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,6 +282,23 @@ MonoBehaviour:
   model: {fileID: 0}
   timerBar: {fileID: 0}
   craftingCurTime: 0
+--- !u!114 &3308010445065801546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4206404797622852141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dd620e9db5fc214ba223224854a8a71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: e8fa344028dfb814892591d5129c50c1, type: 2}
+  nameTag: {fileID: 4206404797622852141}
+  cardIcon: {fileID: 4206404796091910064}
+  cardName: {fileID: 8307597859499996845}
+  model: {fileID: 6030033422960147060}
 --- !u!1 &8307597858938843845
 GameObject:
   m_ObjectHideFlags: 0
@@ -694,6 +712,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4206404797622852140}
     m_Modifications:
+    - target: {fileID: 4113261970804821392, guid: d3b8ac0ab81c24541b3f06cc8f98d618, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4113261971137961775, guid: d3b8ac0ab81c24541b3f06cc8f98d618, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4113261971175521232, guid: d3b8ac0ab81c24541b3f06cc8f98d618, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -782,6 +808,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TimerBar
       objectReference: {fileID: 0}
+    - target: {fileID: 4113261971175521244, guid: d3b8ac0ab81c24541b3f06cc8f98d618, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4113261971653563176, guid: d3b8ac0ab81c24541b3f06cc8f98d618, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4113261971653563183, guid: d3b8ac0ab81c24541b3f06cc8f98d618, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -789,6 +823,10 @@ PrefabInstance:
     - target: {fileID: 4113261971653563183, guid: d3b8ac0ab81c24541b3f06cc8f98d618, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4113261972122506283, guid: d3b8ac0ab81c24541b3f06cc8f98d618, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3b8ac0ab81c24541b3f06cc8f98d618, type: 3}

@@ -6,7 +6,7 @@ public class CardDic : MonoBehaviour
 {
     public static CardDic Instance;
 
-    [SerializeField] CardData[] objects;
+    [SerializeField] public List<CardData> cards;
 
     public Dictionary<int, CardData> dic = new Dictionary<int, CardData>();
 
@@ -20,9 +20,9 @@ public class CardDic : MonoBehaviour
     public void Init()
     {     
         dic.Clear();
-        foreach (CardData obj in objects)
+        foreach (CardData card in cards)
         {
-            dic.Add(obj.id, obj);
+            dic.Add(card.id, card);
         }
     }
 
