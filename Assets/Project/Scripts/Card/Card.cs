@@ -147,7 +147,7 @@ public class Card : MonoBehaviour
             model.ParentCard.model.ChildCard = null;
             model.ParentCard.ChangeBottomAllParent(model.ParentCard); // 부모 카드들의 바텀을 맞부모카드로 설정           
             model.ParentCard = null;           
-        }
+        }   
         isChoice = true;
         InitSortLayerAllChild(10000);
         ChangeTopAllChild(this);

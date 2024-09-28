@@ -32,7 +32,6 @@ public abstract class CardCombine : MonoBehaviour
     {
         if (!model.CanCombine) return;
         if (model.TopCard == null) return;
-        if (model.TopCard.model.data.isFactory) return;
         model.TopCard.combine.StopCreate();
         model.TopCard.combine.AddIngredient(model.data);
     }
@@ -41,7 +40,6 @@ public abstract class CardCombine : MonoBehaviour
     {
         if (!model.CanCombine) return;
         if (model.TopCard == null) return;
-        if (model.TopCard.model.data.isFactory) return;
         model.TopCard.combine.StopCreate();
         model.TopCard.combine.RemoveIngredient(model.data);
     }
@@ -58,14 +56,7 @@ public abstract class CardCombine : MonoBehaviour
         {
             model.ingredients.Add(new CraftingItemInfo(data, 1));
         }
-        if (TryCombine())
-        {
-            model.IsFactory = true;
-        }
-        else
-        {
-            model.IsFactory = false;
-        }
+        bool success = TryCombine();
     }
     public virtual void RemoveIngredient(CardData data)
     {
@@ -80,16 +71,9 @@ public abstract class CardCombine : MonoBehaviour
             findCard.count--;
             model.ingredients[index] = findCard;
         }
-        if (TryCombine())
-        {
-            model.IsFactory = true;
-        }
-        else
-        {
-            model.IsFactory = false;
-        }
+        bool success = TryCombine();
     }
-    protected bool TryCombine()
+    protected virtual bool TryCombine()
     {
         if (model.ingredients.Count <= 0) return false;
         if (model.ingredients.Count == 1 && model.ingredients[0].count <= 1) return false;
@@ -99,11 +83,8 @@ public abstract class CardCombine : MonoBehaviour
 
         if (Dic.Recipe.dic.ContainsKey(key))
         {
-            if (!model.TopCard.model.CanFactoryCombine)
-            {
-                result = Dic.Recipe.GetValue(key);
-                StartCreate(result);
-            }
+            result = Dic.Recipe.GetValue(key);
+            StartCreate(result);
             return true;
         }
         else
@@ -111,10 +92,10 @@ public abstract class CardCombine : MonoBehaviour
             return false;
         }
     }
-    const float DelayTime = 0.1f;
-    WaitForSeconds delay = new WaitForSeconds(DelayTime);
+    protected const float DelayTime = 0.1f;
+    protected WaitForSeconds delay = new WaitForSeconds(DelayTime);
     protected Coroutine createRoutine;
-    protected IEnumerator CreateRoutine(RecipeData result)
+    protected virtual IEnumerator CreateRoutine(RecipeData result)
     {
         // 조합 타이머
         timerBar.gameObject.SetActive(true);
@@ -136,9 +117,7 @@ public abstract class CardCombine : MonoBehaviour
                 CardManager.Instance.MoveResultCard(instanceCard, SelectRandomPos());
             }
         }
-
         // 생성 후 재료아이템 처리
-        if (model.data.isFactory) model.BottomCard = model.FactoryBottom; // 팩토리에서는 팩토리바텀부터 없앤다
         model.BottomCard.combine.CompleteCreateAllParent();
     }
     protected void StartCreate(RecipeData result)
@@ -171,7 +150,7 @@ public abstract class CardCombine : MonoBehaviour
 
     public abstract void CompleteCreate();
 
-    protected void CompleteCreateAllParent()
+    public void CompleteCreateAllParent()
     {
         CompleteCreate();
         if (model.ParentCard != null)

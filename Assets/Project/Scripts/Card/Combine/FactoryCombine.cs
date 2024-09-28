@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class FactoryCombine : CardCombine
@@ -7,7 +8,7 @@ public class FactoryCombine : CardCombine
     {
         base.Awake();
         model.OnChangeBottom += AddFactoryList;
-        model.OnChangeCanFactoryCombine += CombineControll;
+        model.OnChangeCanFactoryCombine += StopFactoryCombine;
     }
     protected override void Start()
     {
@@ -19,7 +20,7 @@ public class FactoryCombine : CardCombine
         AddFactoryCombineListAllChild(model.Card);
     }
 
-    protected void CombineControll()
+    protected void StopFactoryCombine()
     {
         if (!model.CanFactoryCombine)
         {
@@ -32,6 +33,82 @@ public class FactoryCombine : CardCombine
         }
     }
 
+    protected override void AddCombineList() { }
+    protected override void RemoveCombineList() { }
+
+    public override void AddIngredient(CardData data)
+    {
+        if (model.ingredients.Any(ingredients => ingredients.item.Equals(data)))
+        {
+            int index = model.ingredients.FindIndex(ingredients => ingredients.item.Equals(data));
+            CraftingItemInfo findCard = model.ingredients[index];
+            findCard.count++;
+            model.ingredients[index] = findCard;
+        }
+        else
+        {
+            model.ingredients.Add(new CraftingItemInfo(data, 1));
+        }
+        if (TryCombine())
+        {
+            model.IsFactory = true;
+        }
+        else
+        {
+            model.IsFactory = false;
+        }
+    }
+    public override void RemoveIngredient(CardData data) { }
+    protected override bool TryCombine()
+    {
+        if (model.ingredients.Count <= 0) return false;
+        if (model.ingredients.Count == 1 && model.ingredients[0].count <= 1) return false;
+
+        model.ingredients.Sort((s1, s2) => s1.item.id.CompareTo(s2.item.id));
+        string key = Dic.Recipe.GetKey(model.ingredients.ToArray());
+
+        if (Dic.Recipe.dic.ContainsKey(key))
+        {
+            if (!model.TopCard.model.CanFactoryCombine)
+            {
+                result = Dic.Recipe.GetValue(key);
+                StartCreate(result);
+            }
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    protected override IEnumerator CreateRoutine(RecipeData result)
+    {
+        // 조합 타이머
+        timerBar.gameObject.SetActive(true);
+        timerBar.maxValue = result.craftingTime;
+        CraftingCurTime = result.craftingTime;
+        while (true)
+        {
+            CraftingCurTime -= DelayTime;
+            if (CraftingCurTime < 0) break;
+            yield return delay;
+        }
+        timerBar.gameObject.SetActive(false);
+        // 생성
+        for (int i = 0; i < result.resultItem.Length; i++) // 결과 카드 인덱스 선택
+        {
+            for (int j = 0; j < result.resultItem[i].count; j++) // 해당 인덱스의 카드 count만큼 생성
+            {
+                Card instanceCard = Instantiate(result.resultItem[i].item.prefab, transform.position, transform.rotation);
+                CardManager.Instance.MoveResultCard(instanceCard, SelectRandomPos());
+            }
+        }
+
+        // 생성 후 재료아이템 처리
+        model.BottomCard = model.FactoryBottom; // 팩토리에서는 팩토리바텀부터 없앤다
+        model.BottomCard.combine.CompleteCreateAllParent();
+    }
 
     public override void CompleteCreate()
     {
