@@ -80,7 +80,7 @@ public class Card : MonoBehaviour
         ChangeSortLayerAllChild();
         ChangeTopAllChild(parent.model.TopCard); // 본인 + 자식에게 top 설정
         ChangeBottomAllParent(model.BottomCard); // 본인 + 부모에게 bottom 설정
-        parent.rb.velocity = Vector3.zero;
+        if (parent.rb != null) parent.rb.velocity = Vector3.zero;
     }
     private void OnCollisionEnter(Collision other)
     {
@@ -126,15 +126,18 @@ public class Card : MonoBehaviour
 
     public void InitChangeChild()
     {
-        if (model.ChildCard != null)
+        if (boxCollider != null)
         {
-            boxCollider.size = new Vector3(boxCollider.size.x, boxCollider.size.y, 0.1f);
-            boxCollider.isTrigger = true;
-        }
-        else
-        {
-            boxCollider.size = new Vector3(boxCollider.size.x, boxCollider.size.y, 1f);
-            boxCollider.isTrigger = false;
+            if (model.ChildCard != null)
+            {
+                boxCollider.size = new Vector3(boxCollider.size.x, boxCollider.size.y, 0.1f);
+                boxCollider.isTrigger = true;
+            }
+            else
+            {
+                boxCollider.size = new Vector3(boxCollider.size.x, boxCollider.size.y, 1f);
+                boxCollider.isTrigger = false;
+            }
         }
     }
     public void Click()
@@ -146,7 +149,7 @@ public class Card : MonoBehaviour
             model.ParentCard = null;           
         }
         isChoice = true;
-        InitSortLayerAllChild(1000);
+        InitSortLayerAllChild(10000);
         ChangeTopAllChild(this);
         
         ClickAllChild();     

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7260166625025192747}
   - component: {fileID: 3844746054181218129}
   - component: {fileID: 941136354619642742}
-  - component: {fileID: 8778813694798351917}
+  - component: {fileID: 7355734299272761053}
   - component: {fileID: 5727724487772527109}
   m_Layer: 6
   m_Name: 15. Campfire
@@ -183,7 +183,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   model: {fileID: 0}
   combine: {fileID: 0}
---- !u!114 &8778813694798351917
+--- !u!114 &7355734299272761053
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -192,7 +192,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 941136354619642738}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7e79239e95d0f14298299ace355caa8, type: 3}
+  m_Script: {fileID: 11500000, guid: 5a62062a7c3ac9c43b88528da547cf14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 0}
@@ -215,7 +215,6 @@ MonoBehaviour:
   cardIcon: {fileID: 941136355538145007}
   cardName: {fileID: 4910388536610045938}
   model: {fileID: 7260166625025192747}
-  card: {fileID: 941136354619642742}
 --- !u!1 &941136355538145005
 GameObject:
   m_ObjectHideFlags: 0

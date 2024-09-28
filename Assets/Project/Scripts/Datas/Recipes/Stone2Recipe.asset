@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35999a93e03f75d42980dca4291da188, type: 3}
+  m_Script: {fileID: 11500000, guid: ab29f3598e5e2144eaf3b797869fa11e, type: 3}
   m_Name: Stone2Recipe
   m_EditorClassIdentifier: 
   reqItems:
@@ -19,5 +19,5 @@ MonoBehaviour:
     count: 1
   resultItem:
   - item: {fileID: 11400000, guid: a6b3021066972864c9e0cb7b8d0f2cf3, type: 2}
-    count: 0
+    count: 1
   craftingTime: 7

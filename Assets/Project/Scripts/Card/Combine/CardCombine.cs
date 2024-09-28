@@ -94,16 +94,14 @@ public abstract class CardCombine : MonoBehaviour
         if (model.ingredients.Count <= 0) return false;
         if (model.ingredients.Count == 1 && model.ingredients[0].count <= 1) return false;
 
-
         model.ingredients.Sort((s1, s2) => s1.item.id.CompareTo(s2.item.id));
-        string key = RecipeDic.Instance.GetKey(model.ingredients.ToArray());
+        string key = Dic.Recipe.GetKey(model.ingredients.ToArray());
 
         if (Dic.Recipe.dic.ContainsKey(key))
         {
             if (!model.TopCard.model.CanFactoryCombine)
             {
                 result = Dic.Recipe.GetValue(key);
-                if (result.resultItem[0].count <= 0) return false;
                 StartCreate(result);
             }
             return true;
