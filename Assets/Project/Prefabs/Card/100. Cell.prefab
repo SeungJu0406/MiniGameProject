@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 3270522870515973553}
   - component: {fileID: 4948865185087462894}
   - component: {fileID: 1528943023602534804}
-  - component: {fileID: 4462473082116275032}
   - component: {fileID: 3111620952490096759}
   - component: {fileID: -3772028132236894349}
+  - component: {fileID: 8494770917693975609}
   m_Layer: 6
   m_Name: 100. Cell
   m_TagString: Untagged
@@ -167,23 +167,6 @@ MonoBehaviour:
   model: {fileID: 0}
   renders: []
   canvases: []
---- !u!114 &4462473082116275032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3270522870515973559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 440f049b7ae779a428df40a4bf46de36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boxCollider: {fileID: 0}
-  rb: {fileID: 0}
-  model: {fileID: 0}
-  combine: {fileID: 0}
-  isChoice: 0
 --- !u!114 &3111620952490096759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,9 +199,26 @@ MonoBehaviour:
   model: {fileID: 0}
   timerBar: {fileID: 0}
   craftingCurTime: 0
-  coin: {fileID: 6237318792610011629, guid: d504855fb8dda7447a5c7d8c07c9f11c, type: 3}
-  unsellables: []
-  moveCardPos: 3
+  coin: {fileID: 3500160817629506781, guid: d504855fb8dda7447a5c7d8c07c9f11c, type: 3}
+  moveCardPosY: 1
+  moveCardPosX: 2
+--- !u!114 &8494770917693975609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3270522870515973559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 927a28cb1f712b549b148b54799111a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boxCollider: {fileID: 0}
+  rb: {fileID: 0}
+  model: {fileID: 0}
+  combine: {fileID: 0}
+  isChoice: 0
 --- !u!1 &3270522871971373096
 GameObject:
   m_ObjectHideFlags: 0
