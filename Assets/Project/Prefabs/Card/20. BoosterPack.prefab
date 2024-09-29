@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 180060908264893226}
   - component: {fileID: 7760100053588020085}
   - component: {fileID: 4191561373040320271}
-  - component: {fileID: 6557226129630100130}
+  - component: {fileID: 8971731636539443335}
   - component: {fileID: 5732636137325440739}
   - component: {fileID: 302371800805846764}
   m_Layer: 6
@@ -167,7 +167,7 @@ MonoBehaviour:
   model: {fileID: 0}
   renders: []
   canvases: []
---- !u!114 &6557226129630100130
+--- !u!114 &8971731636539443335
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -176,7 +176,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 180060908264893228}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 927a28cb1f712b549b148b54799111a7, type: 3}
+  m_Script: {fileID: 11500000, guid: d5f3f5cf511e8b8488b6d0c3e3f7b063, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boxCollider: {fileID: 0}

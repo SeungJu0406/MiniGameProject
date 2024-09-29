@@ -21,8 +21,8 @@ MonoBehaviour:
   durability: 0
   isFactory: 0
   canGetParent: 0
-  canGetChild: 0
-  cantMove: 0
+  canGetChild: 1
+  cantMove: 1
   isVillager: 0
   maxHp: 0
   damage: 0
@@ -31,3 +31,4 @@ MonoBehaviour:
   foodAmount: 0
   additonDamage: 0
   additionHp: 0
+  randomCards: []

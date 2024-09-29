@@ -22,7 +22,7 @@ public class CardManager : MonoBehaviour
         cardLayer = LayerMask.GetMask("Card");
     }
 
-    public void MoveResultCard(Card instanceCard, Vector3 pos)
+    public void MoveResultCard(Vector3 origin,Card instanceCard)
     {
         int hitCount = Physics.OverlapSphereNonAlloc(instanceCard.transform.position, createPosDistance, hits, cardLayer);
         for (int i = 0; i < hitCount; i++)
@@ -35,6 +35,7 @@ public class CardManager : MonoBehaviour
                 return;
             }
         }
+        Vector3 pos = SelectRandomPos(origin);
         StartCoroutine(MoveCardRoutine(instanceCard, pos));
     }
 
@@ -49,5 +50,12 @@ public class CardManager : MonoBehaviour
             }
             yield return null;
         }
+    }
+
+    protected Vector3 SelectRandomPos(Vector3 originPos)
+    {
+        Vector2 dir = Random.insideUnitCircle * createPosDistance;
+
+        return originPos + (Vector3)dir;
     }
 }

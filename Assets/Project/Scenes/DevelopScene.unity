@@ -1097,6 +1097,10 @@ PrefabInstance:
       propertyPath: cards.Array.data[22]
       value: 
       objectReference: {fileID: 11400000, guid: 59467d4f6d197874bbd873f83f62841a, type: 2}
+    - target: {fileID: 4592213627749009932, guid: 8ec36da51f13866469a76cea914e3cb2, type: 3}
+      propertyPath: isInit
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ec36da51f13866469a76cea914e3cb2, type: 3}
 --- !u!1001 &2043683761
