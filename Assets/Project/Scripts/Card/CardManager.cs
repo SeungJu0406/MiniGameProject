@@ -5,7 +5,7 @@ public class CardManager : MonoBehaviour
 {
     public static CardManager Instance;
 
-    [SerializeField] public float completeResultMoveSpeed;
+    [SerializeField] public float moveSpeed;
 
     [SerializeField] public float createPosDistance;
 
@@ -43,7 +43,7 @@ public class CardManager : MonoBehaviour
     {
         while (true)
         {
-            instanceCard.transform.position = Vector3.Lerp(instanceCard.transform.position, pos, completeResultMoveSpeed * Time.deltaTime);
+            instanceCard.transform.position = Vector3.Lerp(instanceCard.transform.position, pos, moveSpeed * Time.deltaTime);
             if (Vector3.Distance(instanceCard.transform.position, pos) < 0.01f)
             {
                 yield break;

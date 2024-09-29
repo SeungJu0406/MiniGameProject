@@ -111,7 +111,7 @@ public class CellCombine : CardCombine
             transform.position.z);
         while (true)
         {
-            instanceCard.transform.position = Vector3.Lerp(instanceCard.transform.position, pos, CardManager.Instance.completeResultMoveSpeed * Time.deltaTime);
+            instanceCard.transform.position = Vector3.Lerp(instanceCard.transform.position, pos, CardManager.Instance.moveSpeed * Time.deltaTime);
             if (instanceCard.isChoice)
             {
                 yield break;

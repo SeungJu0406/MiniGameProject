@@ -1,5 +1,8 @@
 using System.Collections;
+using System.Text;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 
@@ -7,18 +10,22 @@ using UnityEngine;
 public class Card : MonoBehaviour
 {
     [Header("GetComponent")]
-    [SerializeField] BoxCollider boxCollider;
+    [SerializeField] public BoxCollider boxCollider;
     [SerializeField] public Rigidbody rb;
     [SerializeField] public CardModel model;
     [SerializeField] public CardCombine combine;
-
-    [Space(30)]
+    [Space(10)]
+    [SerializeField] public TextMeshProUGUI hpUI;
     float stackInterval = 0.4f;
     int cardLayer;
     int ignoreLayer;
 
     [HideInInspector] public bool isChoice;
+
+    public event UnityAction<Card> OnClick;
+    public event UnityAction<Card> OnDie;
     bool isInitInStack;
+    StringBuilder sb = new StringBuilder();
     protected virtual void Awake()
     {
         boxCollider = GetComponent<BoxCollider>();
@@ -28,6 +35,7 @@ public class Card : MonoBehaviour
 
         model.Card = this;
         model.OnChangeChild += InitChangeChild;
+        model.OnChangeCurHp += UpdateCurHp;
 
         rb.drag = 5;
         cardLayer = LayerMask.NameToLayer("Card");
@@ -52,6 +60,10 @@ public class Card : MonoBehaviour
             TraceParent();
         }
     }
+    protected virtual void OnDestroy() 
+    {
+        OnDie?.Invoke(this);
+    }
     IEnumerator InitIgnoreColliderRoutine()
     {
         gameObject.layer = ignoreLayer;
@@ -66,8 +78,8 @@ public class Card : MonoBehaviour
     }
     public void InitInStack(Card parent)
     {
-        if (!model.data.canGetParent) return;
-        if (!parent.model.data.canGetChild) return;
+        if (!model.CanGetParent) return;
+        if (!parent.model.CanGetChild) return;
         isInitInStack = true;
         model.TopCard = this;
         model.BottomCard = this;
@@ -80,14 +92,14 @@ public class Card : MonoBehaviour
     }
     private void OnCollisionEnter(Collision other)
     {
-        if (!model.data.canGetParent) return;
+        if (!model.CanGetParent) return;
         if (DragNDrop.Instance.isClick) return;
         if (!isChoice) return;
         if (model.ParentCard != null) return;
         if (other.gameObject.layer == cardLayer)
         {
             Card parent = other.gameObject.GetComponent<Card>();
-            if (!parent.model.data.canGetChild) return;
+            if (!parent.model.CanGetChild) return;
             if (model.TopCard == parent.model.TopCard) return;
             if (parent.model.ChildCard != null) return;
             // 부모 자식 카드 지정
@@ -101,14 +113,14 @@ public class Card : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (!model.data.canGetParent) return;
+        if (!model.CanGetParent) return;
         if (DragNDrop.Instance.isClick) return;
         if (!isChoice) return;
         if (model.ParentCard != null) return;
         if (other.gameObject.layer == cardLayer)
         {
             Card parent = other.gameObject.GetComponent<Card>();
-            if (!parent.model.data.canGetChild) return;
+            if (!parent.model.CanGetChild) return;
             if (model.TopCard == parent.model.TopCard) return;
             if (parent.model.ChildCard != null) return;
             // 부모 자식 카드 지정
@@ -137,7 +149,7 @@ public class Card : MonoBehaviour
             }
         }
     }
-    public void Click()
+    public virtual void Click()
     {
         if (model.ParentCard != null)
         {
@@ -146,6 +158,7 @@ public class Card : MonoBehaviour
             model.ParentCard = null;
         }
         isChoice = true;
+        OnClick?.Invoke(this);
         InitOrderLayerAllChild(10000);
         ChangeTopAllChild(this);
 
@@ -213,4 +226,10 @@ public class Card : MonoBehaviour
         }
     }
 
+    void UpdateCurHp()
+    {
+        sb.Clear();
+        sb.Append(model.CurHp);
+        hpUI.SetText(sb);
+    }
 }

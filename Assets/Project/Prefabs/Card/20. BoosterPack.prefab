@@ -184,6 +184,8 @@ MonoBehaviour:
   model: {fileID: 0}
   combine: {fileID: 0}
   isChoice: 0
+  clickTime: 0
+  dragTransTime: 0.25
 --- !u!114 &5732636137325440739
 MonoBehaviour:
   m_ObjectHideFlags: 0

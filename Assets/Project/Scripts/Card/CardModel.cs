@@ -74,18 +74,47 @@ public class CardModel : MonoBehaviour
     public Card FactoryBottom { get { return factoryBottom; } set { factoryBottom = value; } }
 
     [Space(10)]
-    [Header("주민 모델 정보")]
+    [Header("체력, 데미지 등 정보")]
     [SerializeField] int maxHp;
-    public int MaxHp { get { return maxHp; } set { maxHp = value; } }
+    public int MaxHp { get { return maxHp; } 
+        set 
+        {
+            if (data.maxHp > 0)
+            {
+                maxHp = value;
+            }
+        } 
+    }
     [SerializeField] int curHp;
-    public int CurHp { get {return curHp; } set { curHp = value; } }
+    public int CurHp { get {return curHp; } 
+        set
+        {
+            if (data.maxHp > 0)
+            {
+                curHp = value;
+                OnChangeCurHp?.Invoke();
+            }
+        } 
+    }
+    public event UnityAction OnChangeCurHp;
     [SerializeField] int damage;
     public int Damage { get { return damage; } set { damage = value; } }
     [SerializeField] int satiety = 2 ;
     public int Satiety {  get { return satiety; } set { satiety = value; } }
 
+    [HideInInspector] bool canGetParent;
+    public bool CanGetParent { get { return canGetParent; } set { canGetParent = value; } }
+    [HideInInspector] bool canGetChild;
+    public bool CanGetChild { get { return canGetChild; } set {canGetChild = value; } }
+    [SerializeField] bool isAttack;
+    public bool IsAttack { get { return isAttack; } set { isAttack = value; } }
     private void Awake()
     {
         Durability = data.durability;
+        CanGetParent = data.canGetParent;
+        CanGetChild = data.canGetChild;
+        MaxHp = data.maxHp;
+        CurHp = MaxHp;
+        Damage = data.damage;
     }
 }
