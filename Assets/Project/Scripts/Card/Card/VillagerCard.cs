@@ -5,10 +5,11 @@ using UnityEngine.Events;
 
 public class VillagerCard : Card
 {
-    protected override void OnDestroy()
+    public override void Die()
     {
-        base.OnDestroy();
+        base.Die();
     }
+
     public override void Click()
     {
         base.Click();

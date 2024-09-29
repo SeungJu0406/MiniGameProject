@@ -76,29 +76,14 @@ public class CardModel : MonoBehaviour
     [Space(10)]
     [Header("체력, 데미지 등 정보")]
     [SerializeField] int maxHp;
-    public int MaxHp { get { return maxHp; } 
-        set 
-        {
-            if (data.maxHp > 0)
-            {
-                maxHp = value;
-            }
-        } 
-    }
+    public int MaxHp { get { return maxHp; } set { maxHp = value; } }
     [SerializeField] int curHp;
-    public int CurHp { get {return curHp; } 
-        set
-        {
-            if (data.maxHp > 0)
-            {
-                curHp = value;
-                OnChangeCurHp?.Invoke();
-            }
-        } 
-    }
+    public int CurHp { get { return curHp; } set { curHp = value; OnChangeCurHp?.Invoke(); } }
+
     public event UnityAction OnChangeCurHp;
     [SerializeField] int damage;
-    public int Damage { get { return damage; } set { damage = value; } }
+    public int Damage { get { return damage; } set { damage = value; OnChangeDamage?.Invoke(); } }
+    public event UnityAction OnChangeDamage;
     [SerializeField] int satiety = 2 ;
     public int Satiety {  get { return satiety; } set { satiety = value; } }
 
@@ -113,8 +98,8 @@ public class CardModel : MonoBehaviour
         Durability = data.durability;
         CanGetParent = data.canGetParent;
         CanGetChild = data.canGetChild;
-        MaxHp = data.maxHp;
-        CurHp = MaxHp;
-        Damage = data.damage;
+        if (data.maxHp > 0) MaxHp = data.maxHp;
+        if (data.maxHp > 0) CurHp = MaxHp;
+        if (data.damage > 0) Damage = data.damage;
     }
 }

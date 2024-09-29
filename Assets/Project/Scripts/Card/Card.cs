@@ -16,6 +16,8 @@ public class Card : MonoBehaviour
     [SerializeField] public CardCombine combine;
     [Space(10)]
     [SerializeField] public TextMeshProUGUI hpUI;
+    [SerializeField] public Canvas hitUI;
+    [SerializeField] public TextMeshProUGUI hitDamageUI;
     float stackInterval = 0.4f;
     int cardLayer;
     int ignoreLayer;
@@ -36,15 +38,21 @@ public class Card : MonoBehaviour
         model.Card = this;
         model.OnChangeChild += InitChangeChild;
         model.OnChangeCurHp += UpdateCurHp;
+        model.OnChangeDamage += UpdateDamage;
 
         rb.drag = 5;
         cardLayer = LayerMask.NameToLayer("Card");
         ignoreLayer = LayerMask.NameToLayer("IgnoreCollider");
 
+        if (hitUI != null) 
+        {
+            hitUI.gameObject.SetActive(false); 
+        }
+
         StartCoroutine(InitIgnoreColliderRoutine());
     }
 
-    protected virtual void Start()
+    protected virtual void Start()  
     {
         if (!isInitInStack)
         {
@@ -59,10 +67,6 @@ public class Card : MonoBehaviour
         {
             TraceParent();
         }
-    }
-    protected virtual void OnDestroy() 
-    {
-        OnDie?.Invoke(this);
     }
     IEnumerator InitIgnoreColliderRoutine()
     {
@@ -226,10 +230,36 @@ public class Card : MonoBehaviour
         }
     }
 
+    public virtual void Die() 
+    {    
+        OnDie?.Invoke(this);
+        DropRewardCard();
+        Destroy(gameObject);
+    }
+
+     void DropRewardCard()
+    {
+        CraftingItemInfo rewardCardInfo = model.data.rewardCards[Util.Random(0, model.data.rewardCards.Count - 1)];
+        for (int i = 0; i < rewardCardInfo.count; i++)
+        {
+            Card rewardCard = Instantiate(rewardCardInfo.item.prefab, transform.position, transform.rotation);
+            CardManager.Instance.MoveResultCard(transform.position, rewardCard);
+        }
+    }
+
     void UpdateCurHp()
     {
         sb.Clear();
         sb.Append(model.CurHp);
         hpUI.SetText(sb);
+    }
+    void UpdateDamage()
+    {
+        if (hitDamageUI != null)
+        {
+            sb.Clear();
+            sb.Append(model.Damage);
+            hitDamageUI.SetText(sb);
+        }
     }
 }

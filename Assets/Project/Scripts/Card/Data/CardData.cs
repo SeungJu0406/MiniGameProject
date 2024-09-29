@@ -36,7 +36,7 @@ public class CardData : ScriptableObject
     [ShowIf("isConsumable")]
     [SerializeField] public int additionHp;
     [Space(10)]
-    [Header("몬스터 드랍 카드")]
+    [Header("드랍 카드")]
     [SerializeField] public List<CraftingItemInfo> rewardCards;
     [Space(10)]
     [Header("상점 카드")]

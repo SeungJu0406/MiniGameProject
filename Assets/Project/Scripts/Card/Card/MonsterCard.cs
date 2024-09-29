@@ -14,15 +14,18 @@ public class MonsterCard : Card
     [Space(10)]
     [SerializeField] float attackInterval = 2;
     [SerializeField] float attackRange = 2.5f;
+    [SerializeField] float hitUIDuration = 1;
     List<Card> notBattles = new List<Card>();
     Vector3 battlePos;
     WaitForSeconds battleDelay;
+    WaitForSeconds hitUIDelay;
     protected override void Awake()
     {
         base.Awake();
         monsters.Add(this);
         model.OnChangeBottom += AddBattleList;
         battleDelay = new WaitForSeconds(attackInterval);
+        hitUIDelay = new WaitForSeconds(hitUIDuration);
     }
 
     protected override void Update()
@@ -45,13 +48,11 @@ public class MonsterCard : Card
             }
         }
     }
-    protected override void OnDestroy()
-    {
-        base.OnDestroy();
-
-        // 드랍 아이템 생성
-        DropRewardCard();
+    public override void Die()
+    {     
+        base.Die();
     }
+
     bool CheckIsFight()
     {
         // 싸울 적이 있을 떄 전투
@@ -61,19 +62,13 @@ public class MonsterCard : Card
     {
         for (int i = 0; i < monsters.Count; i++)
         {
-            if (monsters[i].model.IsAttack)
-            {
-                Vector3 pos = new Vector3(battlePos.x + i, battlePos.y, battlePos.z);
-                monsters[i].transform.position = Vector3.Lerp(monsters[i].transform.position, pos, CardManager.Instance.moveSpeed * Time.deltaTime);
-            }
+            Vector3 pos = new Vector3(battlePos.x + i, battlePos.y, battlePos.z);
+            monsters[i].transform.position = Vector3.Lerp(monsters[i].transform.position, pos, CardManager.Instance.moveSpeed * Time.deltaTime);
         }
         for (int i = 0; i < villagers.Count; i++)
         {
-            if (villagers[i].model.IsAttack)
-            {
-                Vector3 pos = new Vector3(battlePos.x + i + (1 * i), battlePos.y - 3, battlePos.z);
-                villagers[i].transform.position = Vector3.Lerp(villagers[i].transform.position, pos, CardManager.Instance.moveSpeed * Time.deltaTime);
-            }
+            Vector3 pos = new Vector3(battlePos.x + i + (1 * i), battlePos.y - 3, battlePos.z);
+            villagers[i].transform.position = Vector3.Lerp(villagers[i].transform.position, pos, CardManager.Instance.moveSpeed * Time.deltaTime);
         }
     }
     Coroutine battleRoutine;
@@ -86,13 +81,13 @@ public class MonsterCard : Card
                 yield return battleDelay;
                 int targetIndex = Util.Random(0, monsters.Count - 1);
                 StartCoroutine(AttackRoutine(villagers[i], monsters[targetIndex]));
-                
+
             }
             for (int i = 0; i < monsters.Count; i++)
             {
                 yield return battleDelay;
                 int targetIndex = Util.Random(0, villagers.Count - 1);
-                StartCoroutine(AttackRoutine(monsters[i], villagers[targetIndex]));              
+                StartCoroutine(AttackRoutine(monsters[i], villagers[targetIndex]));
             }
         }
     }
@@ -107,16 +102,38 @@ public class MonsterCard : Card
             yield return null;
         }
         hitCard.model.CurHp -= attacker.model.Damage;
+        StartCoroutine(HitUIRoutine(attacker));
         if (hitCard.model.CurHp <= 0)
         {
-            Destroy(hitCard.gameObject);
+            UnPrintHitUI(attacker);
+            hitCard.Die();
         }
         while (Vector3.Distance(attacker.transform.position, originPos) > 0.01f)
         {
             attacker.transform.position = Vector3.Lerp(attacker.transform.position, originPos, CardManager.Instance.moveSpeed * Time.deltaTime);
             yield return null;
         }
-        attacker.model.IsAttack = true;
+        attacker.model.IsAttack = false;
+    }
+    IEnumerator HitUIRoutine(Card attacker)
+    {
+        PrintHitUI(attacker);
+        yield return hitUIDelay;
+        UnPrintHitUI(attacker);
+    }
+
+    void PrintHitUI(Card attacker)
+    {
+        Vector3 pos = attacker.transform.position;
+        attacker.hitUI.transform.SetParent(null);
+        attacker.hitUI.transform.position = pos;
+        attacker.hitUI.gameObject.SetActive(true);
+    }
+    void UnPrintHitUI(Card attacker)
+    {
+        attacker.hitUI.gameObject.SetActive(false);
+        attacker.hitUI.transform.position = attacker.transform.position;
+        attacker.hitUI.transform.SetParent(attacker.transform);
     }
 
     void AddBattleList()
@@ -233,13 +250,5 @@ public class MonsterCard : Card
         }
     }
 
-    void DropRewardCard()
-    {
-        CraftingItemInfo rewardCardInfo = model.data.rewardCards[Util.Random(0, model.data.rewardCards.Count - 1)];
-        for (int i = 0; i < rewardCardInfo.count; i++)
-        {
-            Card rewardCard = Instantiate(rewardCardInfo.item.prefab, transform.position, transform.rotation);
-            CardManager.Instance.MoveResultCard(transform.position, rewardCard);
-        }
-    }
+
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 381622724185927119}
   - component: {fileID: 381622724185927117}
   - component: {fileID: 381622724185927116}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -207,7 +207,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1543442145
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b6da860826f5222409cbf940ca81ab86, type: 3}
   m_Color: {r: 0.9568628, g: 0.6117647, b: 0.5294118, a: 1}
@@ -232,7 +232,7 @@ GameObject:
   - component: {fileID: 381622724870310110}
   - component: {fileID: 381622724870310097}
   - component: {fileID: 381622724870310096}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: PlayerUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -393,7 +393,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1543442145
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8a813ab74ec830946ae0b30deac65602, type: 3}
   m_Color: {r: 0.94117653, g: 0.6, b: 0.52156866, a: 1}
@@ -488,7 +488,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1543442145
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8a813ab74ec830946ae0b30deac65602, type: 3}
   m_Color: {r: 0.9450981, g: 0.7176471, b: 0.65882355, a: 1}
@@ -558,6 +558,7 @@ MonoBehaviour:
   curHp: 0
   damage: 0
   satiety: 2
+  isAttack: 0
 --- !u!114 &8373801020447618415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -589,6 +590,8 @@ MonoBehaviour:
   rb: {fileID: 0}
   model: {fileID: 0}
   combine: {fileID: 0}
+  hpUI: {fileID: 0}
+  isChoice: 0
 --- !u!114 &4087688497858698259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -616,12 +619,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dd620e9db5fc214ba223224854a8a71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInit: 0
   data: {fileID: 11400000, guid: 0d60825e67160ea4c8988c1c8c438c66, type: 2}
   nameTag: {fileID: 5503795686175686988}
   cardIcon: {fileID: 5503795687631199441}
   cardName: {fileID: 381622724185927116}
+  price: {fileID: 0}
+  hp: {fileID: 0}
   model: {fileID: 2715587662141382933}
-  card: {fileID: 5503795686175686984}
 --- !u!1 &5503795687631199443
 GameObject:
   m_ObjectHideFlags: 0
@@ -693,7 +698,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1543442145
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6434f804e69ede6419434d377c55f6df, type: 3}
   m_Color: {r: 0.9607844, g: 0.9607844, b: 0.9607844, a: 1}

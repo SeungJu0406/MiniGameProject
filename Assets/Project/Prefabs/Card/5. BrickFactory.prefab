@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1543442145
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8a813ab74ec830946ae0b30deac65602, type: 3}
   m_Color: {r: 0.94117653, g: 0.6, b: 0.52156866, a: 1}
@@ -156,7 +156,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1543442145
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b6da860826f5222409cbf940ca81ab86, type: 3}
   m_Color: {r: 0.9568628, g: 0.6117647, b: 0.5294118, a: 1}
@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 1108546958185114729}
   - component: {fileID: 1108546958185114731}
   - component: {fileID: 1108546958185114730}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -316,7 +316,7 @@ GameObject:
   - component: {fileID: 1108546958533560696}
   - component: {fileID: 1108546958533560695}
   - component: {fileID: 1108546958533560694}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: PlayerUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -477,7 +477,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1543442145
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e3bc514db830d6b4295f1ede29ddfe59, type: 3}
   m_Color: {r: 0.9607844, g: 0.9607844, b: 0.9607844, a: 1}
@@ -572,7 +572,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1543442145
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8a813ab74ec830946ae0b30deac65602, type: 3}
   m_Color: {r: 0.9450981, g: 0.7176471, b: 0.65882355, a: 1}
@@ -642,6 +642,7 @@ MonoBehaviour:
   curHp: 0
   damage: 0
   satiety: 2
+  isAttack: 0
 --- !u!114 &9087179809874932937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -673,6 +674,8 @@ MonoBehaviour:
   rb: {fileID: 0}
   model: {fileID: 0}
   combine: {fileID: 0}
+  hpUI: {fileID: 0}
+  isChoice: 0
 --- !u!114 &6263273014565158469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -700,10 +703,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dd620e9db5fc214ba223224854a8a71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInit: 0
   data: {fileID: 11400000, guid: 9f6bb5a18a8c65e4fae0ac8b22607340, type: 2}
   nameTag: {fileID: 5064574073757188330}
   cardIcon: {fileID: 5064574072863759735}
   cardName: {fileID: 1108546958185114730}
+  price: {fileID: 0}
+  hp: {fileID: 0}
   model: {fileID: 3424467284615880883}
 --- !u!1001 &7776907022064197345
 PrefabInstance:

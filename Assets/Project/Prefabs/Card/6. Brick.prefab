@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1543442145
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1f3310b4ab5f57c41af73807d0eb92e3, type: 3}
   m_Color: {r: 0.9607844, g: 0.9607844, b: 0.9607844, a: 1}
@@ -166,7 +166,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1543442145
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8a813ab74ec830946ae0b30deac65602, type: 3}
   m_Color: {r: 0.3921569, g: 0.43529415, b: 0.5019608, a: 1}
@@ -236,6 +236,7 @@ MonoBehaviour:
   curHp: 0
   damage: 0
   satiety: 2
+  isAttack: 0
 --- !u!114 &4479485336677307958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,6 +268,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   model: {fileID: 0}
   combine: {fileID: 0}
+  hpUI: {fileID: 0}
   isChoice: 0
 --- !u!114 &5006983681834032090
 MonoBehaviour:
@@ -301,6 +303,7 @@ MonoBehaviour:
   cardIcon: {fileID: 467963707532001160}
   cardName: {fileID: 5716238218882190997}
   price: {fileID: 4392609682824658415}
+  hp: {fileID: 0}
   model: {fileID: 8048028260358111820}
 --- !u!1 &2817913970154827583
 GameObject:
@@ -313,7 +316,7 @@ GameObject:
   - component: {fileID: 8796885170726720807}
   - component: {fileID: 980108186348311592}
   - component: {fileID: 4392609682824658415}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Price
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -508,7 +511,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1543442145
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8a813ab74ec830946ae0b30deac65602, type: 3}
   m_Color: {r: 0.5803922, g: 0.60784316, b: 0.6509804, a: 1}
@@ -593,7 +596,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1543442145
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b6da860826f5222409cbf940ca81ab86, type: 3}
   m_Color: {r: 0.59607846, g: 0.627451, b: 0.67058825, a: 1}
@@ -617,7 +620,7 @@ GameObject:
   - component: {fileID: 5716238218882190998}
   - component: {fileID: 5716238218882190996}
   - component: {fileID: 5716238218882190997}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -753,7 +756,7 @@ GameObject:
   - component: {fileID: 5716238219498040199}
   - component: {fileID: 5716238219498040200}
   - component: {fileID: 5716238219498040201}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: PlayerUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -855,7 +858,7 @@ GameObject:
   - component: {fileID: 5356304424279584193}
   - component: {fileID: 4069845373236247595}
   - component: {fileID: 3703360357783846551}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: PriceFilled
   m_TagString: Untagged
   m_Icon: {fileID: 0}

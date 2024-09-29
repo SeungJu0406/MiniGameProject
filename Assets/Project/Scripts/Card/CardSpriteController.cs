@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CardSpriteController : MonoBehaviour
@@ -9,6 +7,7 @@ public class CardSpriteController : MonoBehaviour
     [SerializeField] Canvas[] canvases;
 
     int timerBarLayer;
+    int uiLayer;
     private void Awake()
     {
         model = GetComponent<CardModel>();
@@ -16,31 +15,32 @@ public class CardSpriteController : MonoBehaviour
         canvases = GetComponentsInChildren<Canvas>();
 
         timerBarLayer = LayerMask.NameToLayer("TimerBar");
-        string timerBarObjectName = "TimerBar";
+        uiLayer = LayerMask.NameToLayer("UI");
+
         foreach (Canvas canvas in canvases)
         {
-            if(canvas.name == timerBarObjectName)
+            if (canvas.gameObject.layer == timerBarLayer)
             {
                 canvas.gameObject.layer = timerBarLayer;
                 canvas.sortingOrder = 5000;
-            }               
+            }
         }
-
         model.OnChangeSortOrder += SetOrderInLayer;
     }
 
     public void SetOrderInLayer()
     {
-        foreach(SpriteRenderer render in renders)
+        foreach (SpriteRenderer render in renders)
         {
             render.sortingOrder = model.SortOrder;
         }
-        foreach(Canvas canvas in canvases)
+        foreach (Canvas canvas in canvases)
         {
-            if(canvas.gameObject.layer != timerBarLayer)
-            {
-                canvas.sortingOrder = model.SortOrder;
-            }           
+            if (canvas.gameObject.layer == timerBarLayer) continue;
+            if (canvas.gameObject.layer == uiLayer) continue;
+
+            canvas.sortingOrder = model.SortOrder;
+
         }
     }
 }
