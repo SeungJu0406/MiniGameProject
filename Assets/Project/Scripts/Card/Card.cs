@@ -73,7 +73,7 @@ public class Card : MonoBehaviour
         model.BottomCard = this;
         model.ParentCard = parent;
         parent.model.ChildCard = this;
-        ChangeSortLayerAllChild();
+        ChangeOrderLayerAllChild();
         ChangeTopAllChild(parent.model.TopCard); // 본인 + 자식에게 top 설정
         ChangeBottomAllParent(model.BottomCard); // 본인 + 부모에게 bottom 설정
         if (parent.rb != null) parent.rb.velocity = Vector3.zero;
@@ -93,7 +93,7 @@ public class Card : MonoBehaviour
             // 부모 자식 카드 지정
             model.ParentCard = parent;
             parent.model.ChildCard = this;
-            ChangeSortLayerAllChild();
+            ChangeOrderLayerAllChild();
             ChangeTopAllChild(parent.model.TopCard); // 본인 + 자식에게 top 설정           
             ChangeBottomAllParent(model.BottomCard); // 본인 + 부모에게 bottom 설정
             parent.rb.velocity = Vector3.zero;
@@ -114,7 +114,7 @@ public class Card : MonoBehaviour
             // 부모 자식 카드 지정
             model.ParentCard = parent;
             parent.model.ChildCard = this;
-            ChangeSortLayerAllChild();
+            ChangeOrderLayerAllChild();
             ChangeTopAllChild(parent.model.TopCard); // 본인 + 자식에게 top 설정           
             ChangeBottomAllParent(model.BottomCard); // 본인 + 부모에게 bottom 설정
         }
@@ -146,7 +146,7 @@ public class Card : MonoBehaviour
             model.ParentCard = null;
         }
         isChoice = true;
-        InitSortLayerAllChild(10000);
+        InitOrderLayerAllChild(10000);
         ChangeTopAllChild(this);
 
         ClickAllChild();
@@ -160,9 +160,9 @@ public class Card : MonoBehaviour
             model.ChildCard.ClickAllChild();
         }
     }
-    public void UnClick()
+    public virtual void UnClick()
     {
-        InitSortLayerAllChild(0);
+        InitOrderLayerAllChild(0);
         UnClickAllChild();
         StartCoroutine(UnClickDelayRoutine());
     }
@@ -196,20 +196,20 @@ public class Card : MonoBehaviour
             model.ParentCard.ChangeBottomAllParent(bottom);
         }
     }
-    public void ChangeSortLayerAllChild()
+    public void ChangeOrderLayerAllChild()
     {
         model.SortOrder = model.ParentCard.model.SortOrder + 1;
         if (model.ChildCard != null)
         {
-            model.ChildCard.ChangeSortLayerAllChild();
+            model.ChildCard.ChangeOrderLayerAllChild();
         }
     }
-    public void InitSortLayerAllChild(int order)
+    public void InitOrderLayerAllChild(int order)
     {
         model.SortOrder = order;
         if (model.ChildCard != null)
         {
-            model.ChildCard.ChangeSortLayerAllChild();
+            model.ChildCard.ChangeOrderLayerAllChild();
         }
     }
 

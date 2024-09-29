@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class ImpossibleCombine : CardCombine
 {
-    public override void CompleteCreate()
-    {
-       
-    }
+    public override void CompleteCreate() { }
+    protected override void AddCombineList() { }
+    protected override void RemoveCombineList() { }
 }

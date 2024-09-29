@@ -92,7 +92,7 @@ public class CellCombine : CardCombine
                 model.ChildCard.ChangeTopAllChild(model.ChildCard);
                 // 마지막 인덱스의 카드로 부모들 바텀 교체
                 cards[cards.Count - 1].ChangeBottomAllParent(cards[cards.Count - 1]);
-                model.ChildCard.InitSortLayerAllChild(0);
+                model.ChildCard.InitOrderLayerAllChild(0);
             }
         }
         // 본인의 자식을 null 바텀을 본인으로 교체한 후 리스트 인덱스 비운 뒤 마무리

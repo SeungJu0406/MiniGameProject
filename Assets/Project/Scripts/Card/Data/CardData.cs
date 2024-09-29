@@ -37,5 +37,9 @@ public class CardData : ScriptableObject
     [SerializeField] public int additonDamage;
     [ShowIf("isConsumable")]
     [SerializeField] public int additionHp;
+
+    [Space(10)]
+    [Header("상점 아이템")]
+    [SerializeField] public List<CardData> randomCards;
 }
     

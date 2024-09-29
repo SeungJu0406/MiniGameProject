@@ -10,21 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
-  m_Name: 20.StarterPack
+  m_Name: 101.BasicShop
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
-  cardIcon: {fileID: 21300000, guid: 2ac0ab887295cc04fb88c0681fcc5f58, type: 3}
-  id: 20
-  cardName: "\uC18C\uBC15\uD55C \uCD9C\uBC1C"
-  engName: StarterPack
+  prefab: {fileID: 8517382939151431679, guid: 55a62ec33118f8749b2f63deebc6ff1a, type: 3}
+  cardIcon: {fileID: 21300000, guid: 56b0a231567ee16429c6d86baa8e1cfe, type: 3}
+  id: 101
+  cardName: "\uC18C\uBC15\uD55C \uC2DC\uC791"
+  engName: BasicShop
+  price: 3
   durability: 0
   isFactory: 0
   canGetParent: 0
   canGetChild: 0
+  cantMove: 0
   isVillager: 0
   maxHp: 0
   damage: 0
   isConsumable: 0
+  isCoin: 0
   foodAmount: 0
   additonDamage: 0
   additionHp: 0
