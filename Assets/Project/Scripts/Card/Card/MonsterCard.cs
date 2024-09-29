@@ -74,20 +74,20 @@ public class MonsterCard : Card
     Coroutine battleRoutine;
     IEnumerator BattleRoutine()
     {
+        yield return battleDelay;
         while (true)
         {
             for (int i = 0; i < villagers.Count; i++)
-            {
-                yield return battleDelay;
-                int targetIndex = Util.Random(0, monsters.Count - 1);
+            {          
+                int targetIndex = Util.Random(0, monstersIndex - 1);
                 StartCoroutine(AttackRoutine(villagers[i], monsters[targetIndex]));
-
+                yield return battleDelay;
             }
             for (int i = 0; i < monsters.Count; i++)
-            {
-                yield return battleDelay;
-                int targetIndex = Util.Random(0, villagers.Count - 1);
+            {              
+                int targetIndex = Util.Random(0, villagersIndex - 1);
                 StartCoroutine(AttackRoutine(monsters[i], villagers[targetIndex]));
+                yield return battleDelay;
             }
         }
     }
@@ -98,9 +98,13 @@ public class MonsterCard : Card
 
         attacker.model.IsAttack = true;
         Vector3 originPos = attacker.transform.position;
+        float timer = 0;
         while (Vector3.Distance(attacker.transform.position, hitCard.transform.position) > attackRange)
         {
             attacker.transform.position = Vector3.Lerp(attacker.transform.position, hitCard.transform.position, CardManager.Instance.moveSpeed * Time.deltaTime);
+            timer += Time.deltaTime;
+            if (timer > 0.1f) 
+                break;
             yield return null;
         }
         hitCard.model.CurHp -= attacker.model.Damage;
@@ -216,12 +220,21 @@ public class MonsterCard : Card
 
     void RemoveVillagerList(Card remover)
     {
+        
         remover.OnDie -= RemoveVillagerList;
         remover.OnClick -= RemoveVillagerList;
 
         remover.boxCollider.isTrigger = false;
-        villagers.Remove(remover);
-        villagersIndex--;
+        if (remover.model.data.isVillager)
+        {
+            villagersIndex--;
+            villagers.Remove(remover);
+        }
+        else
+        {
+            monstersIndex--;
+            monsters.Remove(remover);
+        }
     }
 
     WaitForSeconds moveDelay = new WaitForSeconds(0.11f);
