@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class MonsterCard : Card
 {
-    [SerializeField] float moveCardPosY = 1;
-
     [Space(10)]
     [SerializeField] List<Card> monsters = new List<Card>();
     [SerializeField] int monstersIndex;
@@ -13,7 +11,7 @@ public class MonsterCard : Card
     [SerializeField] int villagersIndex;
     [Space(10)]
     [SerializeField] float attackInterval = 2;
-    [SerializeField] float attackRange = 2.5f;
+   // [SerializeField] float attackRange = 2.5f;
     [SerializeField] float hitUIDuration = 1;
     List<Card> notBattles = new List<Card>();
     Vector3 battlePos;
@@ -76,17 +74,17 @@ public class MonsterCard : Card
     {
         yield return battleDelay;
         while (true)
-        {
-            for (int i = 0; i < villagers.Count; i++)
+        {          
+            for (int i = 0; i < Util.Random(0,villagers.Count); i++)
             {          
                 int targetIndex = Util.Random(0, monstersIndex - 1);
-                StartCoroutine(AttackRoutine(villagers[i], monsters[targetIndex]));
+                StartCoroutine(AttackRoutine(villagers[Util.Random(0, villagers.Count- 1 )], monsters[targetIndex]));
                 yield return battleDelay;
             }
-            for (int i = 0; i < monsters.Count; i++)
+            for (int i = 0; i < Util.Random(0, monsters.Count); i++)
             {              
                 int targetIndex = Util.Random(0, villagersIndex - 1);
-                StartCoroutine(AttackRoutine(monsters[i], villagers[targetIndex]));
+                StartCoroutine(AttackRoutine(monsters[Util.Random(0, monsters.Count - 1 )], villagers[targetIndex]));
                 yield return battleDelay;
             }
         }
@@ -99,10 +97,12 @@ public class MonsterCard : Card
         attacker.model.IsAttack = true;
         Vector3 originPos = attacker.transform.position;
         float timer = 0;
-        while (Vector3.Distance(attacker.transform.position, hitCard.transform.position) > attackRange)
+        //while (Vector3.Distance(attacker.transform.position, hitCard.transform.position) > attackRange)
+        while (true) 
         {
             attacker.transform.position = Vector3.Lerp(attacker.transform.position, hitCard.transform.position, CardManager.Instance.moveSpeed * Time.deltaTime);
             timer += Time.deltaTime;
+            if (attacker.isChoice) break;
             if (timer > 0.1f) 
                 break;
             yield return null;
@@ -117,6 +117,7 @@ public class MonsterCard : Card
         while (Vector3.Distance(attacker.transform.position, originPos) > 0.01f)
         {
             attacker.transform.position = Vector3.Lerp(attacker.transform.position, originPos, CardManager.Instance.moveSpeed * Time.deltaTime);
+            if (attacker.isChoice) break;
             yield return null;
         }
         attacker.model.IsAttack = false;
@@ -191,6 +192,8 @@ public class MonsterCard : Card
             model.ChildCard.InitOrderLayerAllChild(0);
         }
         //해당 리스트 비우고 마무리
+        model.ChildCard = null;
+        model.BottomCard = this;
         notBattles.Clear();
         // 추가된 모든 인덱스에 대해 탑카드와 바텀카드 본인 지정 후 부모 자식 null 교체
         for (int i = monstersIndex; i < monsters.Count; i++)
@@ -200,6 +203,7 @@ public class MonsterCard : Card
             monsters[i].model.TopCard = this;
             monsters[i].model.BottomCard = this;
             monsters[i].boxCollider.isTrigger = true;
+            monsters[i].InitOrderLayerAllChild(0);
             monsters[i].OnDie += RemoveVillagerList;
             monstersIndex++;
         }
@@ -210,9 +214,10 @@ public class MonsterCard : Card
             villagers[i].model.TopCard = this;
             villagers[i].model.BottomCard = this;
             villagers[i].boxCollider.isTrigger = true;
-            // 주민카드는 자식을 가질수 없도록 세팅
+            villagers[i].InitOrderLayerAllChild(0);
             villagers[i].OnClick += RemoveVillagerList;
             villagers[i].OnDie += RemoveVillagerList;
+            // 주민카드는 자식을 가질수 없도록 세팅
             villagers[i].model.CanGetChild = false;
             villagersIndex++;
         }
@@ -242,8 +247,8 @@ public class MonsterCard : Card
     {
         yield return moveDelay;
         Vector3 pos = new Vector3(
-            transform.position.x,
-            transform.position.y - (CardManager.Instance.createPosDistance + moveCardPosY),
+            transform.position.x - (CardManager.Instance.createPosDistance),
+            transform.position.y ,
             transform.position.z);
         while (true)
         {

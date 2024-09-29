@@ -47,7 +47,9 @@ MonoBehaviour:
   recipes:
   - {fileID: 11400000, guid: 51bde4fef1b6fb544a291961123f6481, type: 2}
   - {fileID: 11400000, guid: 86d96a08994b00e448e2da00867ec5fd, type: 2}
+  - {fileID: 11400000, guid: 9882b5d6c21559c40a325a8a3ff106e7, type: 2}
   - {fileID: 11400000, guid: f2a9f5ef60f8a804c97e257da83b3d94, type: 2}
+  - {fileID: 11400000, guid: b61a2fa7c6d045a4786feb9e2d5de46f, type: 2}
   - {fileID: 11400000, guid: 7971d970b34b4b74ba4cd7c31a3d43b0, type: 2}
   - {fileID: 11400000, guid: 624774e357a5d504291e45a16df45f41, type: 2}
   - {fileID: 11400000, guid: a9b671572aa58614aaf69af1764337ad, type: 2}
@@ -98,7 +100,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dfe36989e8975c4986aead792fce82e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cards: []
+  cards:
+  - {fileID: 11400000, guid: a6b3021066972864c9e0cb7b8d0f2cf3, type: 2}
+  - {fileID: 11400000, guid: 0f9c9c079dd8c2b4582c0d0a7eac72da, type: 2}
+  - {fileID: 11400000, guid: e8fa344028dfb814892591d5129c50c1, type: 2}
+  - {fileID: 11400000, guid: e83dba01981f646419044760d469de5e, type: 2}
+  - {fileID: 11400000, guid: 9f6bb5a18a8c65e4fae0ac8b22607340, type: 2}
+  - {fileID: 11400000, guid: 9845ef43cf5ad52449e11a7233401e2b, type: 2}
+  - {fileID: 11400000, guid: 1c95162ceaf953f4aa4233f620ef893e, type: 2}
+  - {fileID: 11400000, guid: ac5569ea144d64d47a9933a75ec82565, type: 2}
+  - {fileID: 11400000, guid: 4fdb21f73caf6284dbe89a03886c1301, type: 2}
+  - {fileID: 11400000, guid: 0d60825e67160ea4c8988c1c8c438c66, type: 2}
+  - {fileID: 11400000, guid: df70f21f2ba62334694788fb74cc4a04, type: 2}
+  - {fileID: 11400000, guid: b4f390f0428fbad4a8908de8501cb177, type: 2}
+  - {fileID: 11400000, guid: 855d28b8f7e774c41bb27aeba00c0880, type: 2}
+  - {fileID: 11400000, guid: 21b658d22b17f6b4ba4cd72afcedc92e, type: 2}
+  - {fileID: 11400000, guid: 3bb6f51e946b4d9468602568b46b5b83, type: 2}
+  - {fileID: 11400000, guid: cd8f07261ba2acf49b32ed9a018c0c61, type: 2}
+  - {fileID: 11400000, guid: d0261b4eb78f1704da854efac6a6f6b3, type: 2}
+  - {fileID: 11400000, guid: 81b3c3a404182614ab2c434e624033d0, type: 2}
+  - {fileID: 11400000, guid: 9cea8b4f29111e14c8ece6d0da0adca0, type: 2}
+  - {fileID: 11400000, guid: 6779148e033501e4e83e82e6db55110f, type: 2}
+  - {fileID: 11400000, guid: d678d8c195b701e4bbb1510f41dde31a, type: 2}
+  - {fileID: 11400000, guid: d3822ea8944ecc34ca46ac70e9ecfbd0, type: 2}
+  - {fileID: 11400000, guid: 144aceecd9945794cb67d5a2d6ac4d40, type: 2}
+  - {fileID: 11400000, guid: 59467d4f6d197874bbd873f83f62841a, type: 2}
 --- !u!1 &3754102806954034038
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,5 +171,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e1314308c65a8449a0a9fd7428e6113, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInit: 0
   cardDic: {fileID: 3862681875494400817}
   recipeDic: {fileID: 3754102806500653739}
