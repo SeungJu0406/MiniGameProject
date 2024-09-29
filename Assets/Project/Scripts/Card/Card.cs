@@ -258,7 +258,7 @@ public class Card : MonoBehaviour
         if (hitDamageUI != null)
         {
             sb.Clear();
-            sb.Append(model.Damage);
+            sb.Append($"-{model.Damage}");
             hitDamageUI.SetText(sb);
         }
     }

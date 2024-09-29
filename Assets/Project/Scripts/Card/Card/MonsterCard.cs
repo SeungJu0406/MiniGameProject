@@ -11,12 +11,18 @@ public class MonsterCard : Card
     [SerializeField] int villagersIndex;
     [Space(10)]
     [SerializeField] float attackInterval = 2;
-   // [SerializeField] float attackRange = 2.5f;
+    // [SerializeField] float attackRange = 2.5f;
     [SerializeField] float hitUIDuration = 1;
+    [SerializeField] float moveDistance;
+    [SerializeField] float jumpInterval;
     List<Card> notBattles = new List<Card>();
     Vector3 battlePos;
     WaitForSeconds battleDelay;
     WaitForSeconds hitUIDelay;
+    WaitForSeconds jumpDelay;
+
+    Coroutine battleRoutine;
+    Coroutine idleRoutine;
     protected override void Awake()
     {
         base.Awake();
@@ -24,21 +30,31 @@ public class MonsterCard : Card
         model.OnChangeBottom += AddBattleList;
         battleDelay = new WaitForSeconds(attackInterval);
         hitUIDelay = new WaitForSeconds(hitUIDuration);
+        jumpDelay = new WaitForSeconds(jumpInterval);
     }
 
     protected override void Update()
     {
         if (CheckIsFight())
         {
+            if (idleRoutine != null) 
+            {
+                StopCoroutine(idleRoutine);
+                idleRoutine = null;
+            }
             if (battleRoutine == null)
             {
                 battlePos = transform.position;
                 battleRoutine = StartCoroutine(BattleRoutine());
             }
-            MoveCardBattleField();
+            MoveBattle();
         }
         else
         {
+            if (idleRoutine == null) 
+            {
+                idleRoutine = StartCoroutine(MoveIdleRoutine());
+            }
             if (battleRoutine != null)
             {
                 StopCoroutine(battleRoutine);
@@ -56,7 +72,21 @@ public class MonsterCard : Card
         // 싸울 적이 있을 떄 전투
         return villagers.Count > 0 ? true : false;
     }
-    void MoveCardBattleField()
+    IEnumerator MoveIdleRoutine()
+    {
+        while (true)
+        {
+            yield return jumpDelay;
+            Vector3 dir = Random.insideUnitCircle * moveDistance;
+            Vector3 pos = transform.position + dir;
+            while (Vector3.Distance(transform.position, pos) > 0.01f)
+            {
+                transform.position = Vector3.Lerp(transform.position, pos, CardManager.Instance.moveSpeed * Time.deltaTime);
+                yield return null;
+            }          
+        }
+    }
+    void MoveBattle()
     {
         for (int i = 0; i < monsters.Count; i++)
         {
@@ -69,22 +99,22 @@ public class MonsterCard : Card
             villagers[i].transform.position = Vector3.Lerp(villagers[i].transform.position, pos, CardManager.Instance.moveSpeed * Time.deltaTime);
         }
     }
-    Coroutine battleRoutine;
+   
     IEnumerator BattleRoutine()
     {
         yield return battleDelay;
         while (true)
-        {          
-            for (int i = 0; i < Util.Random(0,villagers.Count); i++)
-            {          
+        {
+            for (int i = 0; i < Util.Random(0, villagers.Count); i++)
+            {
                 int targetIndex = Util.Random(0, monstersIndex - 1);
-                StartCoroutine(AttackRoutine(villagers[Util.Random(0, villagers.Count- 1 )], monsters[targetIndex]));
+                StartCoroutine(AttackRoutine(villagers[Util.Random(0, villagers.Count - 1)], monsters[targetIndex]));
                 yield return battleDelay;
             }
             for (int i = 0; i < Util.Random(0, monsters.Count); i++)
-            {              
+            {
                 int targetIndex = Util.Random(0, villagersIndex - 1);
-                StartCoroutine(AttackRoutine(monsters[Util.Random(0, monsters.Count - 1 )], villagers[targetIndex]));
+                StartCoroutine(AttackRoutine(monsters[Util.Random(0, monsters.Count - 1)], villagers[targetIndex]));
                 yield return battleDelay;
             }
         }
@@ -98,12 +128,12 @@ public class MonsterCard : Card
         Vector3 originPos = attacker.transform.position;
         float timer = 0;
         //while (Vector3.Distance(attacker.transform.position, hitCard.transform.position) > attackRange)
-        while (true) 
+        while (true)
         {
             attacker.transform.position = Vector3.Lerp(attacker.transform.position, hitCard.transform.position, CardManager.Instance.moveSpeed * Time.deltaTime);
             timer += Time.deltaTime;
             if (attacker.isChoice) break;
-            if (timer > 0.1f) 
+            if (timer > 0.1f)
                 break;
             yield return null;
         }
@@ -225,7 +255,7 @@ public class MonsterCard : Card
 
     void RemoveVillagerList(Card remover)
     {
-        
+
         remover.OnDie -= RemoveVillagerList;
         remover.OnClick -= RemoveVillagerList;
 
@@ -248,7 +278,7 @@ public class MonsterCard : Card
         yield return moveDelay;
         Vector3 pos = new Vector3(
             transform.position.x - (CardManager.Instance.createPosDistance),
-            transform.position.y ,
+            transform.position.y,
             transform.position.z);
         while (true)
         {

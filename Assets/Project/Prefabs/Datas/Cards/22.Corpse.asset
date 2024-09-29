@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
   m_Name: 22.Corpse
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
-  cardIcon: {fileID: 0}
-  id: 0
-  cardName: 
-  engName: 
+  prefab: {fileID: 3478680498352140351, guid: d22d91e959bdbfa4984ad713a779ac43, type: 3}
+  cardIcon: {fileID: 21300000, guid: 116986ba363aced4080b6a12d0eac21d, type: 3}
+  id: 22
+  cardName: "\uC2DC\uCCB4"
+  engName: Corpse
   price: 0
   durability: 0
   isFactory: 0

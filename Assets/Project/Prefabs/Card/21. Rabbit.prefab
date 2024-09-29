@@ -324,14 +324,14 @@ MonoBehaviour:
   hitUI: {fileID: 3308499305506575610}
   hitDamageUI: {fileID: 1503737635690129730}
   isChoice: 0
-  moveCardPosY: 1
   monsters: []
   monstersIndex: 0
   villagers: []
   villagersIndex: 0
   attackInterval: 2
-  attackRange: 2.5
   hitUIDuration: 1
+  moveDistance: 2
+  jumpInterval: 10
 --- !u!114 &5706787464086421774
 MonoBehaviour:
   m_ObjectHideFlags: 0
