@@ -59,6 +59,7 @@ public class MonsterCard : Card
             {
                 StopCoroutine(battleRoutine);
                 battleRoutine = null;
+                boxCollider.isTrigger = false;
             }
         }
     }
@@ -79,9 +80,13 @@ public class MonsterCard : Card
             yield return jumpDelay;
             Vector3 dir = Random.insideUnitCircle * moveDistance;
             Vector3 pos = transform.position + dir;
+            float timer = 0;
             while (Vector3.Distance(transform.position, pos) > 0.01f)
             {
                 transform.position = Vector3.Lerp(transform.position, pos, CardManager.Instance.moveSpeed * Time.deltaTime);
+                timer += Time.deltaTime;
+                if (timer > 1f)
+                    break;
                 yield return null;
             }          
         }
