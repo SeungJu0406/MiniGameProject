@@ -156,7 +156,7 @@ public class ShopCombine : CardCombine
         {
             if (instanceCard == null) break;
             instanceCard.transform.position = Vector3.Lerp(instanceCard.transform.position, pos, CardManager.Instance.moveSpeed * Time.deltaTime);
-            if (instanceCard.isChoice)
+            if (instanceCard.IsChoice)
             {
                 yield break;
             }

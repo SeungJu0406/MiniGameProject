@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public class MonsterCard : Card
@@ -23,6 +24,8 @@ public class MonsterCard : Card
 
     Coroutine battleRoutine;
     Coroutine idleRoutine;
+
+    HitUI hitUI;
     protected override void Awake()
     {
         base.Awake();
@@ -137,7 +140,7 @@ public class MonsterCard : Card
         {
             attacker.transform.position = Vector3.Lerp(attacker.transform.position, hitCard.transform.position, CardManager.Instance.moveSpeed * Time.deltaTime);
             timer += Time.deltaTime;
-            if (attacker.isChoice) break;
+            if (attacker.IsChoice) break;
             if (timer > 0.1f)
                 break;
             yield return null;
@@ -146,36 +149,24 @@ public class MonsterCard : Card
         StartCoroutine(HitUIRoutine(attacker, hitCard));
         if (hitCard.model.CurHp <= 0)
         {
-            UnPrintHitUI(attacker);
+            HitUIPool.Instance.ReturnPool(hitUI);
             hitCard.Die();
         }
         while (Vector3.Distance(attacker.transform.position, originPos) > 0.01f)
         {
             attacker.transform.position = Vector3.Lerp(attacker.transform.position, originPos, CardManager.Instance.moveSpeed * Time.deltaTime);
-            if (attacker.isChoice) break;
+            if (attacker.IsChoice) break;
             yield return null;
         }
         attacker.model.IsAttack = false;
     }
     IEnumerator HitUIRoutine(Card attacker, Card hitCard)
     {
-        PrintHitUI(attacker, hitCard);
+        hitUI = HitUIPool.Instance.GetPool(hitCard.transform.position, attacker.model.Damage);
         yield return hitUIDelay;
-        UnPrintHitUI(attacker);
+        HitUIPool.Instance.ReturnPool(hitUI);
     }
 
-    void PrintHitUI(Card attacker, Card hitCard)
-    {
-        attacker.hitUI.transform.SetParent(null);
-        attacker.hitUI.transform.position = hitCard.transform.position;
-        attacker.hitUI.gameObject.SetActive(true);
-    }
-    void UnPrintHitUI(Card attacker)
-    {
-        attacker.hitUI.gameObject.SetActive(false);
-        attacker.hitUI.transform.position = attacker.transform.position;
-        attacker.hitUI.transform.SetParent(attacker.transform);
-    }
 
     void AddBattleList()
     {
@@ -289,7 +280,7 @@ public class MonsterCard : Card
         {
             if (instanceCard == null) break;
             instanceCard.transform.position = Vector3.Lerp(instanceCard.transform.position, pos, CardManager.Instance.moveSpeed * Time.deltaTime);
-            if (instanceCard.isChoice)
+            if (instanceCard.IsChoice)
             {
                 yield break;
             }

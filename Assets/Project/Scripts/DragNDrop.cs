@@ -9,7 +9,7 @@ public class DragNDrop : MonoBehaviour
     [SerializeField] Transform cardPos;
     [SerializeField] Card choiceCard;
     [SerializeField] public float dragSpeed;
-    [SerializeField] float dragHeight;
+    [SerializeField] public float dragHeight;
     Vector3 movePos;
     int cardLayer;
     int backGroundLayer;

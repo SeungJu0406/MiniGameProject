@@ -180,12 +180,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 927a28cb1f712b549b148b54799111a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shadow: {fileID: 0}
   boxCollider: {fileID: 0}
   rb: {fileID: 0}
   model: {fileID: 0}
   combine: {fileID: 0}
   hpUI: {fileID: 0}
-  isChoice: 0
+  hitUI: {fileID: 0}
+  hitDamageUI: {fileID: 0}
 --- !u!114 &4897214652634094447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,6 +222,7 @@ MonoBehaviour:
   cardName: {fileID: 5322744281466588704}
   price: {fileID: 3089613278620919603}
   hp: {fileID: 0}
+  hitDamage: {fileID: 0}
   model: {fileID: 0}
 --- !u!1 &68835363338780479
 GameObject:

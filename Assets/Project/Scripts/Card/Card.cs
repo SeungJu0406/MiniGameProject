@@ -9,6 +9,8 @@ using UnityEngine.Events;
 [RequireComponent(typeof(CardModel))]
 public class Card : MonoBehaviour
 {
+    [Header("참조가 필요함!")]
+    [Space(10)]
     [Header("GetComponent")]
     [SerializeField] public BoxCollider boxCollider;
     [SerializeField] public Rigidbody rb;
@@ -16,13 +18,13 @@ public class Card : MonoBehaviour
     [SerializeField] public CardCombine combine;
     [Space(10)]
     [SerializeField] public TextMeshProUGUI hpUI;
-    [SerializeField] public Canvas hitUI;
-    [SerializeField] public TextMeshProUGUI hitDamageUI;
     float stackInterval = 0.4f;
     int cardLayer;
     int ignoreLayer;
 
-    [HideInInspector] public bool isChoice;
+    [HideInInspector] bool isChoice;
+    public bool IsChoice { get { return isChoice; } set { isChoice = value; OnChangeIsChoice?.Invoke(); } }
+    public event UnityAction OnChangeIsChoice;
 
     public event UnityAction<Card> OnClick;
     public event UnityAction<Card> OnDie;
@@ -30,6 +32,8 @@ public class Card : MonoBehaviour
     StringBuilder sb = new StringBuilder();
     protected virtual void Awake()
     {
+        
+
         boxCollider = GetComponent<BoxCollider>();
         rb = GetComponent<Rigidbody>();
         model = GetComponent<CardModel>();
@@ -38,16 +42,11 @@ public class Card : MonoBehaviour
         model.Card = this;
         model.OnChangeChild += InitChangeChild;
         model.OnChangeCurHp += UpdateCurHp;
-        model.OnChangeDamage += UpdateDamage;
 
         rb.drag = 5;
         cardLayer = LayerMask.NameToLayer("Card");
         ignoreLayer = LayerMask.NameToLayer("IgnoreCollider");
 
-        if (hitUI != null) 
-        {
-            hitUI.gameObject.SetActive(false); 
-        }
 
         StartCoroutine(InitIgnoreColliderRoutine());
     }
@@ -98,7 +97,7 @@ public class Card : MonoBehaviour
     {
         if (!model.CanGetParent) return;
         if (DragNDrop.Instance.isClick) return;
-        if (!isChoice) return;
+        if (!IsChoice) return;
         if (model.ParentCard != null) return;
         if (other.gameObject.layer == cardLayer)
         {
@@ -119,7 +118,7 @@ public class Card : MonoBehaviour
     {
         if (!model.CanGetParent) return;
         if (DragNDrop.Instance.isClick) return;
-        if (!isChoice) return;
+        if (!IsChoice) return;
         if (model.ParentCard != null) return;
         if (other.gameObject.layer == cardLayer)
         {
@@ -161,7 +160,7 @@ public class Card : MonoBehaviour
             model.ParentCard.ChangeBottomAllParent(model.ParentCard); // 부모 카드들의 바텀을 맞부모카드로 설정           
             model.ParentCard = null;
         }
-        isChoice = true;
+        IsChoice = true;
         OnClick?.Invoke(this);
         InitOrderLayerAllChild(10000);
         ChangeTopAllChild(this);
@@ -187,7 +186,7 @@ public class Card : MonoBehaviour
     IEnumerator UnClickDelayRoutine()
     {
         yield return delay;
-        isChoice = false;
+        IsChoice = false;
     }
     void UnClickAllChild()
     {
@@ -252,14 +251,5 @@ public class Card : MonoBehaviour
         sb.Clear();
         sb.Append(model.CurHp);
         hpUI.SetText(sb);
-    }
-    void UpdateDamage()
-    {
-        if (hitDamageUI != null)
-        {
-            sb.Clear();
-            sb.Append($"-{model.Damage}");
-            hitDamageUI.SetText(sb);
-        }
     }
 }
