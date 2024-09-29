@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab29f3598e5e2144eaf3b797869fa11e, type: 3}
-  m_Name: TestRecipe
+  m_Name: BoosterPackRecipe
   m_EditorClassIdentifier: 
   reqItems:
   - item: {fileID: 11400000, guid: 9cea8b4f29111e14c8ece6d0da0adca0, type: 2}
@@ -18,6 +18,6 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: 59467d4f6d197874bbd873f83f62841a, type: 2}
     count: 1
   resultItem:
-  - item: {fileID: 11400000, guid: 81b3c3a404182614ab2c434e624033d0, type: 2}
+  - item: {fileID: 11400000, guid: 6779148e033501e4e83e82e6db55110f, type: 2}
     count: 1
   craftingTime: 0

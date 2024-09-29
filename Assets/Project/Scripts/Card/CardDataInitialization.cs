@@ -11,12 +11,20 @@ public class CardDataInitialization : MonoBehaviour
     [SerializeField] SpriteRenderer cardIcon;
     [SerializeField] TextMeshProUGUI cardName;
     [SerializeField] TextMeshProUGUI price;
+    [SerializeField] TextMeshProUGUI hp;
+    [SerializeField] TextMeshProUGUI hitDamage;
     [SerializeField] CardModel model;
  
     [ContextMenu("Init")]
     void Init()
     {
         float fontSize = 0.2f;
+        if (model != null)
+        {
+            model = GetComponent<CardModel>();
+            model.data = data;
+        }
+        
         if (nameTag != null) nameTag.name = $"{data.id}. {data.engName}";
         if (cardIcon != null) cardIcon.sprite = data.cardIcon;
         if (cardName != null) 
@@ -31,10 +39,17 @@ public class CardDataInitialization : MonoBehaviour
             price.fontSize = fontSize;
             price.text = $"{data.price}";
         }
-        if (model != null)
+        if(hp != null)
         {
-            model = GetComponent<CardModel>();
-            model.data = data;
+            hp.fontStyle = FontStyles.Bold;
+            hp.fontSize = fontSize - 0.05f;
+            hp.text = $"{data.maxHp}";
+        }
+        if (hitDamage != null) 
+        {
+            hitDamage.fontStyle = FontStyles.Bold;
+            hitDamage.fontSize = fontSize + 0.2f;
+            hitDamage.text = $"-{data.damage}";
         }
     }
 }

@@ -5,7 +5,7 @@ public class CardManager : MonoBehaviour
 {
     public static CardManager Instance;
 
-    [SerializeField] public float completeResultMoveSpeed;
+    [SerializeField] public float moveSpeed;
 
     [SerializeField] public float createPosDistance;
 
@@ -22,7 +22,7 @@ public class CardManager : MonoBehaviour
         cardLayer = LayerMask.GetMask("Card");
     }
 
-    public void MoveResultCard(Card instanceCard, Vector3 pos)
+    public void MoveResultCard(Vector3 origin,Card instanceCard)
     {
         int hitCount = Physics.OverlapSphereNonAlloc(instanceCard.transform.position, createPosDistance, hits, cardLayer);
         for (int i = 0; i < hitCount; i++)
@@ -35,6 +35,7 @@ public class CardManager : MonoBehaviour
                 return;
             }
         }
+        Vector3 pos = SelectRandomPos(origin);
         StartCoroutine(MoveCardRoutine(instanceCard, pos));
     }
 
@@ -42,12 +43,19 @@ public class CardManager : MonoBehaviour
     {
         while (true)
         {
-            instanceCard.transform.position = Vector3.Lerp(instanceCard.transform.position, pos, completeResultMoveSpeed * Time.deltaTime);
+            instanceCard.transform.position = Vector3.Lerp(instanceCard.transform.position, pos, moveSpeed * Time.deltaTime);
             if (Vector3.Distance(instanceCard.transform.position, pos) < 0.01f)
             {
                 yield break;
             }
             yield return null;
         }
+    }
+
+    protected Vector3 SelectRandomPos(Vector3 originPos)
+    {
+        Vector2 dir = Random.insideUnitCircle * createPosDistance;
+
+        return originPos + (Vector3)dir;
     }
 }

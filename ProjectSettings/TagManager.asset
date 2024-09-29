@@ -44,6 +44,9 @@ TagManager:
   - name: Card
     uniqueID: 1543442145
     locked: 0
+  - name: CardUI
+    uniqueID: 598927247
+    locked: 0
   - name: ChoiceCard
     uniqueID: 542276563
     locked: 0

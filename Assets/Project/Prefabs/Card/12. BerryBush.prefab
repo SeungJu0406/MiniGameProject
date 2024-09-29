@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1543442145
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b6da860826f5222409cbf940ca81ab86, type: 3}
   m_Color: {r: 0.37254903, g: 0.36862746, b: 0.34509805, a: 1}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 1128060367994499439}
   - component: {fileID: 1128060367994499437}
   - component: {fileID: 1128060367994499436}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -232,7 +232,7 @@ GameObject:
   - component: {fileID: 1128060368351859838}
   - component: {fileID: 1128060368351859825}
   - component: {fileID: 1128060368351859824}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: PlayerUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -393,7 +393,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1543442145
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8a813ab74ec830946ae0b30deac65602, type: 3}
   m_Color: {r: 0.3647059, g: 0.36078432, b: 0.3372549, a: 1}
@@ -488,7 +488,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1543442145
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8a813ab74ec830946ae0b30deac65602, type: 3}
   m_Color: {r: 0.25490198, g: 0.2509804, b: 0.23137257, a: 1}
@@ -558,6 +558,7 @@ MonoBehaviour:
   curHp: 0
   damage: 0
   satiety: 2
+  isAttack: 0
 --- !u!114 &9140566288857754063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -589,6 +590,8 @@ MonoBehaviour:
   rb: {fileID: 0}
   model: {fileID: 0}
   combine: {fileID: 0}
+  hpUI: {fileID: 0}
+  isChoice: 0
 --- !u!114 &3662722256512680831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -616,10 +619,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dd620e9db5fc214ba223224854a8a71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInit: 0
   data: {fileID: 11400000, guid: b4f390f0428fbad4a8908de8501cb177, type: 2}
   nameTag: {fileID: 5083735158658948588}
   cardIcon: {fileID: 5083735159921311857}
   cardName: {fileID: 1128060367994499436}
+  price: {fileID: 0}
+  hp: {fileID: 0}
   model: {fileID: 3405798437177621941}
 --- !u!1 &5083735159921311859
 GameObject:
@@ -692,7 +698,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1543442145
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 72d6b06d90cbb6745a012c72ec4e9062, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
