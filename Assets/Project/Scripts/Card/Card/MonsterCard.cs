@@ -49,7 +49,7 @@ public class MonsterCard : Card
         }
     }
     public override void Die()
-    {     
+    {
         base.Die();
     }
 
@@ -94,6 +94,8 @@ public class MonsterCard : Card
 
     IEnumerator AttackRoutine(Card attacker, Card hitCard)
     {
+        if (attacker == null || hitCard == null) yield break;
+
         attacker.model.IsAttack = true;
         Vector3 originPos = attacker.transform.position;
         while (Vector3.Distance(attacker.transform.position, hitCard.transform.position) > attackRange)
@@ -102,7 +104,7 @@ public class MonsterCard : Card
             yield return null;
         }
         hitCard.model.CurHp -= attacker.model.Damage;
-        StartCoroutine(HitUIRoutine(attacker));
+        StartCoroutine(HitUIRoutine(attacker, hitCard));
         if (hitCard.model.CurHp <= 0)
         {
             UnPrintHitUI(attacker);
@@ -115,18 +117,17 @@ public class MonsterCard : Card
         }
         attacker.model.IsAttack = false;
     }
-    IEnumerator HitUIRoutine(Card attacker)
+    IEnumerator HitUIRoutine(Card attacker, Card hitCard)
     {
-        PrintHitUI(attacker);
+        PrintHitUI(attacker, hitCard);
         yield return hitUIDelay;
         UnPrintHitUI(attacker);
     }
 
-    void PrintHitUI(Card attacker)
+    void PrintHitUI(Card attacker, Card hitCard)
     {
-        Vector3 pos = attacker.transform.position;
         attacker.hitUI.transform.SetParent(null);
-        attacker.hitUI.transform.position = pos;
+        attacker.hitUI.transform.position = hitCard.transform.position;
         attacker.hitUI.gameObject.SetActive(true);
     }
     void UnPrintHitUI(Card attacker)
@@ -215,10 +216,7 @@ public class MonsterCard : Card
 
     void RemoveVillagerList(Card remover)
     {
-        if (remover.model.data.isVillager)
-        {
-            remover.OnDie -= RemoveVillagerList;
-        }
+        remover.OnDie -= RemoveVillagerList;
         remover.OnClick -= RemoveVillagerList;
 
         remover.boxCollider.isTrigger = false;
