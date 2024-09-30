@@ -246,7 +246,7 @@ public class Card : MonoBehaviour
     {
         CraftingItemInfo rewardCardInfo = model.data.rewardCards[Util.Random(0, model.data.rewardCards.Count - 1)];
         for (int i = 0; i < rewardCardInfo.count; i++)
-        {
+        {          
             Card rewardCard = Instantiate(rewardCardInfo.item.prefab, transform.position, transform.rotation);
             Manager.Card.MoveResultCard(transform.position, rewardCard);
         }
