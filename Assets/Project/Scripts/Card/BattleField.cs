@@ -21,6 +21,7 @@ public class BattleField : Card
     Coroutine battleRoutine;
 
     HitUI hitUI;
+    bool canAddList;
     protected override void Awake()
     {
         base.Awake();
@@ -50,27 +51,8 @@ public class BattleField : Card
                 StopCoroutine(battleRoutine);
                 battleRoutine = null;
             }
-            Pool.BattleField.ReturnPool(this);
+            EndBattle();
         }
-    }
-    protected override void OnDisable()
-    {
-        if (hitUI.canvas != null)
-        {
-            Pool.HitUI.ReturnPool(hitUI);
-        }
-
-        for (int i = 0; i < monsters.Count; i++)
-        {
-            RemoveVillagerList(monsters[i]);
-        }
-        for (int i = 0; i < villagers.Count; i++)
-        {
-            RemoveVillagerList(villagers[i]);
-        }
-        monsters.Clear();
-        villagers.Clear();
-        notBattles.Clear();
     }
 
     bool CheckIsFight()
@@ -99,7 +81,7 @@ public class BattleField : Card
 
         for (int i = 0; i < villagers.Count; i++)
         {
-            Vector3 pos = new Vector3(transform.position.x - (villagersIndex -1) + (interval * i) , transform.position.y - 1.5f, transform.position.z);
+            Vector3 pos = new Vector3(transform.position.x - (villagersIndex - 1) + (interval * i), transform.position.y - 1.5f, transform.position.z);
             villagers[i].transform.position = Vector3.Lerp(villagers[i].transform.position, pos, Manager.Card.moveSpeed * Time.deltaTime);
         }
     }
@@ -164,7 +146,7 @@ public class BattleField : Card
 
     void AddBattleListAllChild()
     {
-        if (model.ChildCard != null)
+        if (model.BottomCard != this)
         {
             AddBattleList(model.ChildCard);
         }
@@ -172,22 +154,26 @@ public class BattleField : Card
 
     public void AddBattleList(Card top)
     {
+
         if (top.model.data.isVillager)
         {
             villagers.Add(top);
         }
         else if (top.model.data.isMonster)
         {
+
             monsters.Add(top);
         }
         else
         {
             notBattles.Add(top);
         }
+
         // 주민이 아닌 카드는 빠져나와야 함
         // 모든 아래 스택카드를 notBattles 스택에 추가
         while (top.model.ChildCard != null)
         {
+
             // 주민은 주민 리스트에 추가
             if (top.model.ChildCard.model.data.isVillager)
             {
@@ -203,6 +189,7 @@ public class BattleField : Card
             {
                 notBattles.Add(top.model.ChildCard);
             }
+
             top.model.ChildCard = top.model.ChildCard.model.ChildCard;
         }
 
@@ -241,10 +228,12 @@ public class BattleField : Card
             monsters[i].InitOrderLayerAllChild(0);
             monsters[i].OnDie += RemoveVillagerList;
             monsters[i].model.CanGetChild = false;
+            monsters[i].model.IsFight = true;
             monstersIndex++;
         }
         for (int i = villagersIndex; i < villagers.Count; i++)
         {
+
             villagers[i].model.ParentCard = null;
             villagers[i].model.ChildCard = null;
             villagers[i].model.TopCard = villagers[i];
@@ -254,6 +243,7 @@ public class BattleField : Card
             villagers[i].OnClick += RemoveVillagerList;
             villagers[i].OnDie += RemoveVillagerList;
             villagers[i].model.CanGetChild = false;
+            villagers[i].model.IsFight = true;
             villagersIndex++;
         }
         model.ChildCard = null;
@@ -268,6 +258,7 @@ public class BattleField : Card
         remover.OnDie -= RemoveVillagerList;
         remover.OnClick -= RemoveVillagerList;
         remover.model.CanGetChild = true;
+        remover.model.IsFight = false;
         if (remover.boxCollider != null)
         {
             remover.boxCollider.isTrigger = false;
@@ -286,4 +277,24 @@ public class BattleField : Card
         transform.localScale = new Vector3(maxCount * 2 + 1, 6, 1);
     }
 
+    void EndBattle()
+    {
+        if (hitUI.canvas != null)
+        {
+            Pool.HitUI.ReturnPool(hitUI);
+        }
+
+        for (int i = 0; i < monsters.Count; i++)
+        {
+            RemoveVillagerList(monsters[i]);
+        }
+        for (int i = 0; i < villagers.Count; i++)
+        {
+            RemoveVillagerList(villagers[i]);
+        }
+        monsters.Clear();
+        villagers.Clear();
+        notBattles.Clear();
+        Pool.BattleField.ReturnPool(this);
+    }
 }

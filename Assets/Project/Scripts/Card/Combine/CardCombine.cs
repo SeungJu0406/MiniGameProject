@@ -25,7 +25,10 @@ public abstract class CardCombine : MonoBehaviour
     }
     protected virtual void Start()
     {
-        timerBar.gameObject.SetActive(false);
+        if (timerBar != null)
+        {
+            timerBar.gameObject.SetActive(false);
+        }
     }
 
     public virtual void Delete()

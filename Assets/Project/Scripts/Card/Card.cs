@@ -81,9 +81,12 @@ public class Card : MonoBehaviour
                 waitMealTIme = StartCoroutine(WaitMealTime());
             }
         }
-        if (model.ParentCard != null)
+        else
         {
-            TraceParent();
+            if (model.ParentCard != null)
+            {
+                TraceParent();
+            }
         }
     }
     Coroutine waitMealTIme;
@@ -126,12 +129,13 @@ public class Card : MonoBehaviour
         ChangeBottomAllParent(model.BottomCard); // 본인 + 부모에게 bottom 설정
         if (parent.rb != null) parent.rb.velocity = Vector3.zero;
     }
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (!model.CanGetParent) return;
         if (DragNDrop.Instance.isClick) return;
         if (!IsChoice) return;
         if (model.ParentCard != null) return;
+        if (model.IsFight) return;
         if (other.gameObject.layer == cardLayer)
         {
             Card parent = other.gameObject.GetComponent<Card>();

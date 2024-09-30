@@ -99,8 +99,12 @@ public class CardModel : MonoBehaviour
     public bool CanGetParent { get { return canGetParent; } set { canGetParent = value; } }
     [HideInInspector] bool canGetChild;
     public bool CanGetChild { get { return canGetChild; } set {canGetChild = value; } }
+    [SerializeField] bool isFight;
+    public bool IsFight { get { return isFight; } set { isFight = value; } }
+
     [SerializeField] bool isAttack;
     public bool IsAttack { get { return isAttack; } set { isAttack = value; } }
+    
     private void Awake()
     {
         Durability = data.durability;

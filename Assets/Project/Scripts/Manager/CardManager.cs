@@ -89,10 +89,9 @@ public class CardManager : MonoBehaviour
         StartCoroutine(StartMealTime());    
     }
 
-
-
     IEnumerator StartMealTime()
     {
+        Manager.UI.HideTopUI();
         isMeatTime = true;
         // 주민들에게 반복
         foreach (VillagerCard villager in villagers)
@@ -117,6 +116,7 @@ public class CardManager : MonoBehaviour
                 }
                 // 먹임
                 food.Use(villager);
+                yield return milliSecond;
             }
         }
         // 주민중 포만도를 못채운 주민 캐싱
@@ -156,13 +156,14 @@ public class CardManager : MonoBehaviour
             // 카드를 버리라는 UI 출력        
             while (CardCount > CardCap)
             {
-                Manager.UI.PrintCardOver();
+                Manager.UI.ShowCardOver();
                 yield return null;
             }
         }
         // UI 지우기
-        Manager.UI.UnPrintCardOver();
-
+        Manager.UI.HideCardOver();
+        // 상단 UI 띄우기
+        Manager.UI.ShowTopUI();
         // 날짜 올리고루프
         Day++;
         StartCoroutine(DayRoutine());
@@ -238,17 +239,17 @@ public class CardManager : MonoBehaviour
 
     IEnumerator MoveCardRoutine(Card instanceCard, Vector3 pos)
     {
+        float timer = 0;
         while (true)
         {
             instanceCard.transform.position = Vector3.Lerp(instanceCard.transform.position, pos, moveSpeed * Time.deltaTime);
+            timer += Time.deltaTime;
             if (instanceCard.IsChoice)
-            {
                 yield break;
-            }
+            if(timer > 0.3f)
+                yield break;
             if (Vector3.Distance(instanceCard.transform.position, pos) < 0.01f)
-            {
                 yield break;
-            }
             yield return null;
         }
     }

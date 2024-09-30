@@ -61,6 +61,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8957e200cdd018245a1fcc48e610006f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dayTimer:
+    timerBar: {fileID: 0}
+    dayText: {fileID: 0}
+  cardCount:
+    cardIcon: {fileID: 0}
+    cardCountText: {fileID: 0}
+  coinCountText: {fileID: 0}
+  cardOver:
+    cardOverUI: {fileID: 0}
+    cardOverText: {fileID: 0}
 --- !u!1 &7685053575801989367
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,10 +115,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 934cd7c724362d543a7023ea01a0e2b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cards: []
-  villagers: []
+  deadVillagers: []
   moveSpeed: 10
   createPosDistance: 2
+  day: 0
+  maxDayTime: 60
+  curDayTime: 0
+  cardCap: 10
+  cardCount: 0
+  coinCount: 0
+  villagerCount: 0
+  isMeatTime: 0
   cardLayer: 0
 --- !u!1 &7685053576012820783
 GameObject:

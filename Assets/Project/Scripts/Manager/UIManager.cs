@@ -7,15 +7,17 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
+
+    [Header("상단 UI")]
+    public Animator topUI;
     [System.Serializable]
     public struct DayTimer
     {
         public Slider timerBar;
         public TextMeshProUGUI dayText;
     }
-    [Header("날짜, 시간 UI")]
+    [Header("상단 타이머 UI")]
     public DayTimer dayTimer;
-
     [System.Serializable]
     public struct CardCount
     {
@@ -55,6 +57,15 @@ public class UIManager : MonoBehaviour
 
 
         InitUI();
+    }
+
+    public void ShowTopUI()
+    {
+        topUI.SetBool("Show", true);
+    }
+    public void HideTopUI()
+    {
+        topUI.SetBool("Show", false);
     }
 
     public void UpdateDayTimer()
@@ -114,7 +125,7 @@ public class UIManager : MonoBehaviour
         coinCountText.SetText(sb);
     }
 
-    public void PrintCardOver()
+    public void ShowCardOver()
     {
         cardOver.cardOverUI.SetBool("Show", true);
         int overCount = Manager.Card.CardCount - Manager.Card.CardCap;
@@ -122,7 +133,7 @@ public class UIManager : MonoBehaviour
         sb.Append($"{overCount}장의 카드가 초과되었습니다");
         cardOver.cardOverText.SetText(sb);
     }
-    public void UnPrintCardOver()
+    public void HideCardOver()
     {
         cardOver.cardOverUI.SetBool("Show", false);
     }
