@@ -1,23 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build;
 using UnityEngine;
 
-public class VillagerCombine : FactoryCombine
+public class VillagerCombine : CardCombine
 {
     protected override void Awake()
     {
         base.Awake();
-        model.OnChangeParent += ChangeFactoryMode;
-        ChangeFactoryMode();
     }
     protected override void Start()
     {
         base.Start();
     }
-
-    void ChangeFactoryMode()
+    public override void PostProcessing()
     {
-
-    }
-
+        if (model.ParentCard != null)
+        {
+            model.ParentCard.model.BottomCard = model.BottomCard;
+        }
+    }  
 }

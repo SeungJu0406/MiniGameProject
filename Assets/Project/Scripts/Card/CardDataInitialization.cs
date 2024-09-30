@@ -12,9 +12,8 @@ public class CardDataInitialization : MonoBehaviour
     [SerializeField] TextMeshProUGUI cardName;
     [SerializeField] TextMeshProUGUI price;
     [SerializeField] TextMeshProUGUI hp;
-    [SerializeField] TextMeshProUGUI hitDamage;
     [SerializeField] CardModel model;
- 
+
     [ContextMenu("Init")]
     void Init()
     {
@@ -44,12 +43,6 @@ public class CardDataInitialization : MonoBehaviour
             hp.fontStyle = FontStyles.Bold;
             hp.fontSize = fontSize - 0.05f;
             hp.text = $"{data.maxHp}";
-        }
-        if (hitDamage != null) 
-        {
-            hitDamage.fontStyle = FontStyles.Bold;
-            hitDamage.fontSize = fontSize + 0.2f;
-            hitDamage.text = $"-{data.damage}";
         }
     }
 }

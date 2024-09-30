@@ -9,7 +9,7 @@ public class DisposableCombine : CardCombine
         base.Start();
     }
 
-    public override void CompleteCreate()
+    public override void PostProcessing()
     {
 
         model.Durability--;
@@ -64,4 +64,5 @@ public class DisposableCombine : CardCombine
             }
         }
     }
+
 }

@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class CellCombine : CardCombine
 {
+    [Space(10)]
+    [Header("무 조 건 참 조")]
     [SerializeField] Card coin;
-    
+
+    [Space(10)]
     [SerializeField] float moveCardPosY;
     [SerializeField] float moveCardPosX;
 
@@ -22,7 +25,7 @@ public class CellCombine : CardCombine
         lists.Add(coins);
         lists.Add(unsellables);
     }
-    public override void CompleteCreate() { }
+    public override void PostProcessing() { }
 
     protected override void AddCombineList() { }
     protected override void RemoveCombineList() { }
@@ -107,12 +110,12 @@ public class CellCombine : CardCombine
         yield return moveDelay;
         Vector3 pos = new Vector3(
             transform.position.x + moveCardPosX, 
-            transform.position.y - (CardManager.Instance.createPosDistance + moveCardPosY),
+            transform.position.y - (Manager.Card.createPosDistance + moveCardPosY),
             transform.position.z);
         while (true)
         {
-            instanceCard.transform.position = Vector3.Lerp(instanceCard.transform.position, pos, CardManager.Instance.moveSpeed * Time.deltaTime);
-            if (instanceCard.isChoice)
+            instanceCard.transform.position = Vector3.Lerp(instanceCard.transform.position, pos, Manager.Card.moveSpeed * Time.deltaTime);
+            if (instanceCard.IsChoice)
             {
                 yield break;
             }

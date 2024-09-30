@@ -101,16 +101,16 @@ public class FactoryCombine : CardCombine
             for (int j = 0; j < result.resultItem[i].count; j++) // 해당 인덱스의 카드 count만큼 생성
             {
                 Card instanceCard = Instantiate(result.resultItem[i].item.prefab, transform.position, transform.rotation);
-                CardManager.Instance.MoveResultCard(transform.position, instanceCard);
+                Manager.Card.MoveResultCard(transform.position, instanceCard);
             }
         }
 
         // 생성 후 재료아이템 처리
         model.BottomCard = model.FactoryBottom; // 팩토리에서는 팩토리바텀부터 없앤다
-        model.BottomCard.combine.CompleteCreateAllParent();
+        model.BottomCard.combine.PostProcessingAllParent();
     }
 
-    public override void CompleteCreate()
+    public override void PostProcessing()
     {
         // 최초 내구도가 0이 아닌 경우에만 파괴 작업, 0은 내구도 무한
         if (model.data.durability != 0)

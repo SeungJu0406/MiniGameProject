@@ -52,7 +52,7 @@ public class ShopItemCard : Card
 
         // 2. 해당 카드 생성
         Card instanceCard = Instantiate(randomCard.prefab, transform.position, transform.rotation);
-        CardManager.Instance.MoveResultCard(transform.position, instanceCard);
+        Manager.Card.MoveResultCard(transform.position, instanceCard);
 
         // 3. 카드 내구도 1감소
         model.Durability--;

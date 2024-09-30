@@ -14,7 +14,7 @@ public class ShopCombine : CardCombine
         model.OnChangeBottom += BuyCard;
     }
 
-    public override void CompleteCreate() { }
+    public override void PostProcessing() { }
     protected override void AddCombineList() { }
     protected override void RemoveCombineList() { }
     public override void AddIngredient(CardData data) { }
@@ -150,13 +150,13 @@ public class ShopCombine : CardCombine
         yield return moveDelay;
         Vector3 pos = new Vector3(
             transform.position.x + moveCardPosX,
-            transform.position.y - (CardManager.Instance.createPosDistance + moveCardPosY),
+            transform.position.y - (Manager.Card.createPosDistance + moveCardPosY),
             transform.position.z);
         while (true)
         {
             if (instanceCard == null) break;
             instanceCard.transform.position = Vector3.Lerp(instanceCard.transform.position, pos, CardManager.Instance.moveSpeed * Time.deltaTime);
-            if (instanceCard.isChoice)
+            if (instanceCard.IsChoice)
             {
                 yield break;
             }
