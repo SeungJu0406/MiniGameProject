@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
   m_Name: 5.IronBar
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 6095157898102404053, guid: 80f8f54ca00dbb942bf6fec6e0c11e4a, type: 3}
   cardIcon: {fileID: 21300000, guid: 8f0d7ca186bc9664eb07d2ee516807d9, type: 3}
   id: 5
   cardName: "\uCCA0\uAD34"

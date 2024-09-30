@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
   m_Name: 41.Tree
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 5329778463415724878, guid: c9a57b68e50c8994aaeb35bac23492d3, type: 3}
   cardIcon: {fileID: 21300000, guid: e6cd613181f8be0488495e261ec83866, type: 3}
   id: 41
   cardName: "\uB098\uBB34"

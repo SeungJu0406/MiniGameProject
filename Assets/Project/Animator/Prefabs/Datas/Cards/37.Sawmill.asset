@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
   m_Name: 37.Sawmill
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 6652059906083866791, guid: 0b70ca3e2b1c65a4a9765732d5071af9, type: 3}
   cardIcon: {fileID: 21300000, guid: 42ec8983da5ee2647b460fb2d85600e6, type: 3}
   id: 37
   cardName: "\uC81C\uC7AC\uC18C"

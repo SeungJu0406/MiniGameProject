@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
   m_Name: 31.House
   m_EditorClassIdentifier: 
-  prefab: {fileID: 5503795686175686984, guid: da909f690b24eca478cc76ad15ec78bc, type: 3}
+  prefab: {fileID: 4705621224044022164, guid: da909f690b24eca478cc76ad15ec78bc, type: 3}
   cardIcon: {fileID: 21300000, guid: 6434f804e69ede6419434d377c55f6df, type: 3}
   id: 31
   cardName: "\uC9D1"
   engName: House
-  price: 0
+  price: 3
   durability: 0
   isFactory: 0
   canGetParent: 0

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
   m_Name: 42.Warehouse
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 7814517214218950579, guid: ee90b031b79d7c145a9e30b811a7a18b, type: 3}
   cardIcon: {fileID: 21300000, guid: 9f562840d2a055442b9478110fe2ddf7, type: 3}
   id: 42
   cardName: "\uCC3D\uACE0"

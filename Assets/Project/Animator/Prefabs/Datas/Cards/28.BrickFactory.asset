@@ -17,7 +17,7 @@ MonoBehaviour:
   id: 28
   cardName: "\uBCBD\uB3CC \uACF5\uC7A5"
   engName: BrickFactory
-  price: 0
+  price: 5
   durability: 0
   isFactory: 1
   canGetParent: 0

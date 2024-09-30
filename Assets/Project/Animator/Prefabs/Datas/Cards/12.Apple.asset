@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
   m_Name: 12.Apple
   m_EditorClassIdentifier: 
-  prefab: {fileID: 555559030056046537, guid: 8132db54792f7b74b869f2e5ecc39321, type: 3}
+  prefab: {fileID: 4041321474259424287, guid: 8132db54792f7b74b869f2e5ecc39321, type: 3}
   cardIcon: {fileID: 21300000, guid: 992a0cefc11a7df448f93f60b7b3d174, type: 3}
   id: 12
   cardName: "\uC0AC\uACFC"

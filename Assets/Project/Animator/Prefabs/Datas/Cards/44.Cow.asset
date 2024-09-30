@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
   m_Name: 44.Cow
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 5361314563423181561, guid: 11adbbe9a19822d4a9a27762e32ef372, type: 3}
   cardIcon: {fileID: 21300000, guid: f15fe6047f9d9f94f8a2c3d3581102a5, type: 3}
   id: 44
   cardName: "\uC18C"

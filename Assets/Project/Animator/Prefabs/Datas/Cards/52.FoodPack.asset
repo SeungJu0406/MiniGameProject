@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
   m_Name: 52.FoodPack
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 1611628974497674602, guid: 564c829e6e0b5924e96817858250585a, type: 3}
   cardIcon: {fileID: 21300000, guid: 227de96676e85e1428006ab194032d69, type: 3}
   id: 52
   cardName: "\uC74C\uC2DD\uC774 \uD544\uC694\uD574"

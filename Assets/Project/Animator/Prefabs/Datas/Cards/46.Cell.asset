@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 46.Cell
   m_EditorClassIdentifier: 
   prefab: {fileID: 5932476537280439304, guid: 2ffca647b1a920a458484c0881f79882, type: 3}
-  cardIcon: {fileID: 21300000, guid: d7f70e3953f3dba4a99e1296ff765233, type: 3}
+  cardIcon: {fileID: 21300000, guid: 56b0a231567ee16429c6d86baa8e1cfe, type: 3}
   id: 46
   cardName: "\uD310\uB9E4"
   engName: Cell

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
   m_Name: 23.Potato
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 6500375486041026488, guid: 24e89bd97d6a6e445bdea95684aa5c39, type: 3}
   cardIcon: {fileID: 21300000, guid: 5083ea7c5189e1f45a392698a60ea719, type: 3}
   id: 23
   cardName: "\uAC10\uC790"

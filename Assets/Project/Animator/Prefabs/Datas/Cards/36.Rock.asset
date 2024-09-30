@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
   m_Name: 36.Rock
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 8618913408041141121, guid: 948dbcccfff9fc044979bc5914302d5b, type: 3}
   cardIcon: {fileID: 21300000, guid: b43ef1871299fe348bc1cb203deb7038, type: 3}
   id: 36
   cardName: "\uBC14\uC704"

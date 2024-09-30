@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
   m_Name: 15.CookedMeat
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1268263065271397996, guid: 42af1625e2edc1c4598223b06c948058, type: 3}
+  prefab: {fileID: 1123097630079996534, guid: 42af1625e2edc1c4598223b06c948058, type: 3}
   cardIcon: {fileID: 21300000, guid: a9ef475eabab5ac4ab55b292d413e7b0, type: 3}
   id: 15
   cardName: "\uC775\uD78C \uACE0\uAE30"

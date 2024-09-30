@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
   m_Name: 51.FoodShop
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 8240790864141839188, guid: 02fbe6a8bf12c6b4dbaac6be7ac56a6f, type: 3}
   cardIcon: {fileID: 21300000, guid: 56b0a231567ee16429c6d86baa8e1cfe, type: 3}
   id: 51
   cardName: "\uC74C\uC2DD\uC774 \uD544\uC694\uD574"
   engName: FoodShop
-  price: 4
+  price: 3
   durability: 0
   isFactory: 0
   canGetParent: 0

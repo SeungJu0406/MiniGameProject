@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
   m_Name: 13.Berry
   m_EditorClassIdentifier: 
-  prefab: {fileID: 996587333344638620, guid: d2bbbee95cc39e94cb74a643062d6ed5, type: 3}
+  prefab: {fileID: 351111279525461304, guid: d2bbbee95cc39e94cb74a643062d6ed5, type: 3}
   cardIcon: {fileID: 21300000, guid: 49b05f0e70f379c419c7ae9056476739, type: 3}
   id: 13
   cardName: "\uB538\uAE30"
