@@ -58,8 +58,8 @@ GameObject:
   - component: {fileID: 3270522870515973554}
   - component: {fileID: 3270522870515973553}
   - component: {fileID: 4948865185087462894}
-  - component: {fileID: 5932476537280439304}
-  - component: {fileID: -3772028132236894349}
+  - component: {fileID: 7514846805437359788}
+  - component: {fileID: 7170951780657914553}
   - component: {fileID: 1528943023602534804}
   - component: {fileID: 3111620952490096759}
   m_Layer: 6
@@ -200,7 +200,7 @@ MonoBehaviour:
   satiety: 2
   isFight: 0
   isAttack: 0
---- !u!114 &5932476537280439304
+--- !u!114 &7514846805437359788
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -209,7 +209,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3270522870515973559}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e1a6cf408c7d274c8862071cd958ae6, type: 3}
+  m_Script: {fileID: 11500000, guid: 970d6710864f23945a7b1916d2c6d7df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boxCollider: {fileID: 0}
@@ -217,8 +217,11 @@ MonoBehaviour:
   model: {fileID: 0}
   combine: {fileID: 0}
   hpUI: {fileID: 0}
+  cardLayer: 0
   ignoreLayer: 0
---- !u!114 &-3772028132236894349
+  moveCardPosY: 0
+  moveCardPosX: 0
+--- !u!114 &7170951780657914553
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -227,15 +230,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3270522870515973559}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f22758d4fb8c7e14aa93fdcc68c5d153, type: 3}
+  m_Script: {fileID: 11500000, guid: 0931627a6d3cf124cb3503d568cc03d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 0}
   timerBar: {fileID: 0}
   craftingCurTime: 0
-  coin: {fileID: 4012411825827344112, guid: d504855fb8dda7447a5c7d8c07c9f11c, type: 3}
-  moveCardPosY: 1
-  moveCardPosX: 2
 --- !u!114 &1528943023602534804
 MonoBehaviour:
   m_ObjectHideFlags: 0

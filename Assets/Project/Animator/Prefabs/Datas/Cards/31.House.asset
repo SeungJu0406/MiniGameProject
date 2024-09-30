@@ -19,7 +19,7 @@ MonoBehaviour:
   engName: House
   price: 3
   durability: 0
-  isFactory: 0
+  isFactory: 1
   canGetParent: 0
   canGetChild: 1
   cantMove: 0

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 
-
+ public enum CardKey { Coin = 2 } 
 [RequireComponent(typeof(CardModel))]
 public class Card : MonoBehaviour
 {
@@ -125,15 +125,21 @@ public class Card : MonoBehaviour
         if (parent.rb != null) parent.rb.velocity = Vector3.zero;
     }
     protected virtual void OnTriggerEnter(Collider other)
-    {
-        if (!model.CanGetParent) return;
+    {     
         if (DragNDrop.Instance.isClick) return;
         if (!IsChoice) return;
         if (model.ParentCard != null) return;
         if (model.IsFight) return;
+        if(model.IsAccessIgnoreStack) return;
         if (other.gameObject.layer == cardLayer)
         {
             Card parent = other.gameObject.GetComponent<Card>();
+            if (parent.model.data.isIgnoreStack)
+            {
+                parent.IgnoreStack(this);
+                return;
+            }
+            if (!model.CanGetParent) return;
             if (!parent.model.CanGetChild) return;
             if (model.TopCard == parent.model.TopCard) return;
             if (parent.model.ChildCard != null) return;
@@ -146,7 +152,7 @@ public class Card : MonoBehaviour
             parent.rb.velocity = Vector3.zero;
         }
     }
-
+    public virtual void IgnoreStack(Card card) { }
     public void InitCollider()
     {
         if (model.data.cantMove) return;
@@ -271,7 +277,6 @@ public class Card : MonoBehaviour
             Manager.Card.MoveResultCard(transform.position, rewardCard);
         }
     }
-
     void UpdateCurHp()
     {
         sb.Clear();

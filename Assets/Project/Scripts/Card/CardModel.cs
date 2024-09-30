@@ -104,7 +104,10 @@ public class CardModel : MonoBehaviour
 
     [SerializeField] bool isAttack;
     public bool IsAttack { get { return isAttack; } set { isAttack = value; } }
-    
+
+    [SerializeField] bool isAccessIgnoreStack;
+    public bool IsAccessIgnoreStack { get { return isAccessIgnoreStack; } set {isAccessIgnoreStack = value; } }
+
     private void Awake()
     {
         Durability = data.durability;

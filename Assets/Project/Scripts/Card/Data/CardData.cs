@@ -45,5 +45,9 @@ public class CardData : ScriptableObject
     [Header("창고 카드")]
     [SerializeField] public int cardCap;
 
+    [Header("스택 무시 특수 카드")]
+    [SerializeField] public bool isIgnoreStack;
+
+
 }
     

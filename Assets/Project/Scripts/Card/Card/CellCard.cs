@@ -2,12 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CellCombine : CardCombine
+public class CellCard : Card
 {
-    [Space(10)]
-    [Header("무 조 건 참 조")]
-    [SerializeField] Card coin;
-
     [Space(10)]
     [SerializeField] float moveCardPosY;
     [SerializeField] float moveCardPosX;
@@ -18,51 +14,83 @@ public class CellCombine : CardCombine
 
     Collider[] hits;
 
-    protected override void Awake()
+
+    protected override void Start()
     {
-        base.Awake();
-        model.OnChangeBottom += CellCards;
+        if (!isInitInStack)
+        {
+            model.TopCard = this;
+            model.BottomCard = this;
+        }
+        isInitInStack = false;
         lists.Add(coins);
         lists.Add(unsellables);
     }
-    public override void PostProcessing() { }
+    protected override void OnDisable() { }
 
-    protected override void AddCombineList() { }
-    protected override void RemoveCombineList() { }
-    public override void AddIngredient(CardData data) { }
-    public override void RemoveIngredient(CardData data) { }
+    protected override void OnTriggerEnter(Collider other) { }
 
-    void CellCards()
+    public override void IgnoreStack(Card card)
     {
-        // 바텀 카드가 본인인 경우는 제외
-        if (model.BottomCard == model.Card) return;
+        StartCoroutine(ChangeISAccessIgnoreStack(card));
+        CellCards(card);
+    }
 
-        // 마지막 자식까지 반복
-        while (model.ChildCard != null)
+    void CellCards(Card card)
+    {
+        // 본인이 코인 팔 수 있는지 없는지 체크하는 bool 변수
+        bool isSellableTop;
+        // 카드 본인에 대해 먼저 수행
+        if(card.model.data.price > 0)
         {
-            // 자식의 가격이 0이 아닌경우
-            if (model.ChildCard.model.data.price > 0)
+            //Debug.Log(name);
+            for(int i = 0; i< card.model.data.price; i++)
+            {
+                CardData coin = Dic.Card.GetValue((int)CardKey.Coin);
+                Card instance = Instantiate(coin.prefab, transform.position, transform.rotation);
+                coins.Add(instance);
+            }
+            isSellableTop = true;
+        }
+        else
+        {
+            // 리스트에 본인 추가
+            unsellables.Add(card);
+            isSellableTop = false;
+        }
+
+        // 카드의 마지막 자식까지 반복
+        while (card.model.ChildCard != null)
+        {
+            // 카드의 자식의 가격이 0이 아닌경우
+            if (card.model.ChildCard.model.data.price > 0)
             {
                 // 가격만큼 코인 생성
-                for (int i = 0; i < model.ChildCard.model.data.price; i++)
+                for (int i = 0; i < card.model.ChildCard.model.data.price; i++)
                 {
-                    Card instanceCard = Instantiate(coin, transform.position, transform.rotation);
+                    CardData coin = Dic.Card.GetValue((int)CardKey.Coin);
+                    Card instanceCard = Instantiate(coin.prefab, transform.position, transform.rotation);
                     coins.Add(instanceCard);
                 }
                 // 자식의 자식 캐싱
-                Card child = model.ChildCard.model.ChildCard;
+                Card child = card.model.ChildCard.model.ChildCard;
                 // 현재 자식 삭제
-                Destroy(model.ChildCard.gameObject);
+                Destroy(card.model.ChildCard.gameObject);
                 // 자식 교체
-                model.ChildCard = child;
+                card.model.ChildCard = child;
             }
             else
             {
                 // 리스트에 자식 추가
-                unsellables.Add(model.ChildCard);
+                unsellables.Add(card.model.ChildCard);
                 // 자식의 자식으로 본인 자식 교체
-                model.ChildCard = model.ChildCard.model.ChildCard;
+                card.model.ChildCard = card.model.ChildCard.model.ChildCard;
             }
+        }
+        // 매개변수가 코인 이었으면 본인도 삭제
+        if (isSellableTop)
+        {
+            Destroy(card.gameObject);
         }
         //코인 리스트 설정과 , 못파는 리스트 설정
         foreach (List<Card> cards in lists)
@@ -75,7 +103,7 @@ public class CellCombine : CardCombine
                 cards[0].model.TopCard = cards[0];
                 // 탑카드의 위치가 맵 안으로 들어올 수 있게 끔, 아래쪽으로 강제 트랜스폼 이동
                 // 살짝 오른쪽이면 좋을듯
-                if(cards == coins)
+                if (cards == coins)
                 {
                     StartCoroutine(MoveCardRoutine(model.ChildCard, 0)); // 코인리스트는 바로 아래
                 }
@@ -83,7 +111,7 @@ public class CellCombine : CardCombine
                 {
                     StartCoroutine(MoveCardRoutine(model.ChildCard, moveCardPosX)); // 못파는 리스트는 살짝 오른쪽으로
                 }
-                
+
                 // 리스트 인덱스 0번째의 부모를 null로 설정 후 다음 인덱스의 카드를 자식으로 지정 (없으면 null)
                 // 다음 인덱스는 교체 및 전 인덱스를 부모로 지정 다음 인덱스를 자식으로 지정(없으면 null)
                 for (int i = 0; i < cards.Count; i++)
@@ -109,7 +137,7 @@ public class CellCombine : CardCombine
     {
         yield return moveDelay;
         Vector3 pos = new Vector3(
-            transform.position.x + moveCardPosX, 
+            transform.position.x + moveCardPosX,
             transform.position.y - (Manager.Card.createPosDistance + moveCardPosY),
             transform.position.z);
         while (true)
@@ -124,6 +152,19 @@ public class CellCombine : CardCombine
                 yield break;
             }
             yield return null;
+        }
+    }
+    WaitForSeconds shortDelay = new WaitForSeconds(0.05f);
+    IEnumerator ChangeISAccessIgnoreStack(Card card)
+    {
+        if (card.model.Card != null) 
+        {
+            card.model.IsAccessIgnoreStack = true;
+        }   
+        yield return shortDelay;
+        if (card.model.Card != null) 
+        {
+            card.model.IsAccessIgnoreStack = false;
         }
     }
 }

@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: 37.Sawmill Recipe
   m_EditorClassIdentifier: 
   reqItems:
+  - item: {fileID: 11400000, guid: 27cbe3dc08f42784ebc77de26daf3d62, type: 2}
+    count: 1
   - item: {fileID: 11400000, guid: f0f7931accf691844992ccc8c9a255aa, type: 2}
     count: 1
   - item: {fileID: 11400000, guid: a6b3021066972864c9e0cb7b8d0f2cf3, type: 2}
     count: 1
-  - item: {fileID: 11400000, guid: 27cbe3dc08f42784ebc77de26daf3d62, type: 2}
-    count: 0
   - item: {fileID: 11400000, guid: e8fa344028dfb814892591d5129c50c1, type: 2}
     count: 1
   resultItem:

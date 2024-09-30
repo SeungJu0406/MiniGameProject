@@ -6,6 +6,17 @@ public class ShopItemCard : Card
     [SerializeField] float clickTime;
     [SerializeField] float dragTransTime;
 
+    protected override void Start()
+    {
+        if (!isInitInStack)
+        {
+            model.TopCard = this;
+            model.BottomCard = this;
+        }
+        isInitInStack = false;
+    }
+    protected override void OnDisable() { }
+
     public override void Click()
     {
         base.Click();

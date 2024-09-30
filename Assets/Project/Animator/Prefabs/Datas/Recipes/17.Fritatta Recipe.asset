@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: 17.Fritatta Recipe
   m_EditorClassIdentifier: 
   reqItems:
-  - item: {fileID: 11400000, guid: 3bb6f51e946b4d9468602568b46b5b83, type: 2}
-    count: 1
   - item: {fileID: 11400000, guid: 1eb48363b3e39c748bd3c8109c6cd9e4, type: 2}
     count: 1
   - item: {fileID: 11400000, guid: 1e708e28f3f0a134fa008c15c8b13f06, type: 2}
     count: 1
+  - item: {fileID: 11400000, guid: 3bb6f51e946b4d9468602568b46b5b83, type: 2}
+    count: 1
   resultItem:
   - item: {fileID: 11400000, guid: 6dec6c7782c34a245b5cd4f6fc2c96c4, type: 2}
     count: 1
-  craftingTime: 0
+  craftingTime: 15

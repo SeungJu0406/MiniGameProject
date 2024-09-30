@@ -23,9 +23,15 @@ public class FoodCard : Card
         if (!IsChoice) return;
         if (model.ParentCard != null) return;
         if (model.IsFight) return;
+        if (model.IsAccessIgnoreStack) return;
         if (other.gameObject.layer == cardLayer)
         {
             Card parent = other.gameObject.GetComponent<Card>();
+            if (parent.model.data.isIgnoreStack)
+            {
+                parent.IgnoreStack(this);
+                return;
+            }
             if (!parent.model.CanGetChild) return;
             if (model.TopCard == parent.model.TopCard) return;
             if (parent.model.ChildCard != null) return;

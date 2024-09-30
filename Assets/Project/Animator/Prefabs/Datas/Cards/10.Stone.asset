@@ -15,7 +15,7 @@ MonoBehaviour:
   prefab: {fileID: 68835362076304036, guid: 8f38bf698cbc25c41bbf80f30e8a6473, type: 3}
   cardIcon: {fileID: 21300000, guid: fcb1f0b06bcc2194789398496ec6932d, type: 3}
   id: 10
-  cardName: "\uB3CC"
+  cardName: "\uC11D\uC7AC"
   engName: Stone
   price: 1
   durability: 0
