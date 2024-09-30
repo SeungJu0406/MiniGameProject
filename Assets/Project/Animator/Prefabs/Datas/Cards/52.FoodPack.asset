@@ -18,7 +18,7 @@ MonoBehaviour:
   cardName: "\uC74C\uC2DD\uC774 \uD544\uC694\uD574"
   engName: FoodPack
   price: 0
-  durability: 0
+  durability: 5
   isFactory: 0
   canGetParent: 0
   canGetChild: 0

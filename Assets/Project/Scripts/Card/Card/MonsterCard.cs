@@ -18,7 +18,16 @@ public class MonsterCard : Card
         model.OnChangeBottom += StartBattle;
         jumpDelay = new WaitForSeconds(jumpInterval);
     }
-    protected override void Start() { }
+    protected override void Start() 
+    {
+        if (!isInitInStack)
+        {
+            model.TopCard = this;
+            model.BottomCard = this;
+        }
+        isInitInStack = false;
+
+    }
     protected override void OnDisable() { }
     protected override void Update()
     {

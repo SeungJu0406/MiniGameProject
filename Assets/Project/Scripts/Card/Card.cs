@@ -20,7 +20,7 @@ public class Card : MonoBehaviour
     [SerializeField] public TextMeshProUGUI hpUI;
 
     float stackInterval = 0.4f;
-    [HideInInspector] int cardLayer;
+    [HideInInspector] public int cardLayer;
     [HideInInspector] public int ignoreLayer;
 
     [HideInInspector] bool isChoice;
@@ -61,11 +61,6 @@ public class Card : MonoBehaviour
         isInitInStack = false;
 
         Manager.Card.AddCardList(this);
-    }
-
-    private void Card_OnStopMealTime()
-    {
-        throw new System.NotImplementedException();
     }
 
     protected virtual void OnDisable()
@@ -169,11 +164,18 @@ public class Card : MonoBehaviour
     }
     public void IgnoreCollider()
     {
-        boxCollider.gameObject.SetActive(false);
+        if (model.Card != null)
+        {
+            boxCollider.gameObject.SetActive(false);
+        }
+
     }
     public void NotIgnoreCollider()
     {
-        boxCollider.gameObject.SetActive(true);
+        if (model.Card != null)
+        {
+            boxCollider.gameObject.SetActive(true);
+        }
     }
     public virtual void Click()
     {

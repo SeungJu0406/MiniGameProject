@@ -17,7 +17,7 @@ MonoBehaviour:
   id: 6
   cardName: "\uCCA0\uAD11\uC11D"
   engName: IronOre
-  price: 5
+  price: 3
   durability: 0
   isFactory: 0
   canGetParent: 1

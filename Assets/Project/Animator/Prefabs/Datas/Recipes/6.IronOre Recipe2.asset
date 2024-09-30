@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab29f3598e5e2144eaf3b797869fa11e, type: 3}
-  m_Name: 22.Onion Recipe1 1
+  m_Name: 6.IronOre Recipe2
   m_EditorClassIdentifier: 
   reqItems:
-  - item: {fileID: 11400000, guid: b6946a87ee059ff49b052dd50aa37ae5, type: 2}
+  - item: {fileID: 11400000, guid: e8fa344028dfb814892591d5129c50c1, type: 2}
     count: 1
-  - item: {fileID: 11400000, guid: 0c83dc9615a1cac49b383a1ca683daca, type: 2}
+  - item: {fileID: 11400000, guid: d83750b264979024d91fde0ab0705773, type: 2}
     count: 1
   resultItem:
-  - item: {fileID: 11400000, guid: b6946a87ee059ff49b052dd50aa37ae5, type: 2}
-    count: 2
-  craftingTime: 17
+  - item: {fileID: 11400000, guid: 20ef34e4ebbc5d34fac59379a101e56d, type: 2}
+    count: 1
+  craftingTime: 15
