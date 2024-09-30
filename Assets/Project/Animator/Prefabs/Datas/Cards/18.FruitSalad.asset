@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
+  m_Name: 18.FruitSalad
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 4946152500316195340, guid: c5ce7a54c2acbfa4e9b2705c480365c5, type: 3}
+  cardIcon: {fileID: 21300000, guid: 11bc41a20798a3d4e9678c0f04190c6a, type: 3}
+  id: 18
+  cardName: "\uACFC\uC77C \uC0D0\uB7EC\uB4DC"
+  engName: FruitSalad
+  price: 5
+  durability: 0
+  isFactory: 0
+  canGetParent: 1
+  canGetChild: 1
+  cantMove: 0
+  isVillager: 0
+  isMonster: 0
+  maxHp: 0
+  damage: 0
+  isConsumable: 1
+  isCoin: 0
+  foodAmount: 3
+  additonDamage: 0
+  additionHp: 0
+  rewardCards: []
+  randomCards: []
+  cardCap: 0

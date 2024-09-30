@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
+  m_Name: 54.BattleField
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 3468999014028132052, guid: 422b4b9752d243e4e83b843d57074127, type: 3}
+  cardIcon: {fileID: 0}
+  id: 54
+  cardName: "\uBC30\uD2C0 \uD544\uB4DC"
+  engName: Battlefield
+  price: 0
+  durability: 0
+  isFactory: 0
+  canGetParent: 0
+  canGetChild: 1
+  cantMove: 1
+  isVillager: 0
+  isMonster: 0
+  maxHp: 0
+  damage: 0
+  isConsumable: 0
+  isCoin: 0
+  foodAmount: 0
+  additonDamage: 0
+  additionHp: 0
+  rewardCards: []
+  randomCards: []
+  cardCap: 0
