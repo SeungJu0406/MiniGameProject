@@ -20,8 +20,8 @@ public class Card : MonoBehaviour
     [SerializeField] public TextMeshProUGUI hpUI;
     
     float stackInterval = 0.4f;
-    int cardLayer;
-    int ignoreLayer;
+    [HideInInspector] int cardLayer;
+    [HideInInspector] public int ignoreLayer;
 
     [HideInInspector] bool isChoice;
     public bool IsChoice { get { return isChoice; } set { isChoice = value; OnChangeIsChoice?.Invoke(); } }
@@ -67,6 +67,11 @@ public class Card : MonoBehaviour
         {
             TraceParent();
         }
+    }
+
+    protected virtual void OnDisable()
+    {
+        Manager.Card.RemoveCardList(this);
     }
     IEnumerator InitIgnoreColliderRoutine()
     {

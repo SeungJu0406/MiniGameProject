@@ -40,7 +40,7 @@ public class DragNDrop : MonoBehaviour
             UnClick();
         }
     }
-    void Click()
+    public void Click()
     {
         isClick = true;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -57,7 +57,7 @@ public class DragNDrop : MonoBehaviour
         }
 
     }
-    private void Drag()
+    public void Drag()
     {
         if (cardPos != null)
         {
@@ -79,7 +79,7 @@ public class DragNDrop : MonoBehaviour
         }
     }
 
-    void UnClick()
+    public void UnClick()
     {
         isClick = false;
         if (dragRoutine != null)

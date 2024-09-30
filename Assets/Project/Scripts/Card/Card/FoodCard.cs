@@ -10,6 +10,12 @@ public class FoodCard : Card
     protected override void Start()
     {
         base.Start();
+        Manager.Card.AddFoodList(this);
+    }
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        Manager.Card.RemoveFoodList(this);
     }
 
     void Use()

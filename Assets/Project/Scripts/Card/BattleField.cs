@@ -53,7 +53,7 @@ public class BattleField : Card
             Pool.BattleField.ReturnPool(this);
         }
     }
-    private void OnDisable()
+    protected override void OnDisable()
     {
         if (hitUI.canvas != null)
         {
