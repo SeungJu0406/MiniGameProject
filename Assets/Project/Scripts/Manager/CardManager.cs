@@ -16,20 +16,29 @@ public class CardManager : MonoBehaviour
 
     [SerializeField] public float moveSpeed = 10;
     [SerializeField] public float createPosDistance = 2;
+    [Header("일차 타이머")]
     [SerializeField] int day;
     public int Day { get { return day; } set { day = value; OnChangeDay?.Invoke(); } }
     public event UnityAction OnChangeDay;
+
     [SerializeField] float maxDayTime;
     public float MaxDayTime { get { return maxDayTime; } set { maxDayTime = value; } }
+
     [SerializeField] float curDayTime;
     public float CurDayTime { get { return curDayTime; } set { curDayTime = value; OnChangeCurDayTime?.Invoke(); } }
     public event UnityAction OnChangeCurDayTime;
+    [Header("최대 카드")]
     [SerializeField] int cardCap;
     public int CardCap { get { return cardCap; } set { cardCap = value; OnChangeCardCap?.Invoke(); } }
     public event UnityAction OnChangeCardCap;
     [SerializeField] int cardCount;
     public int CardCount { get { return cardCount; } set { cardCount = value; OnChangeCardCount?.Invoke(); } }
     public event UnityAction OnChangeCardCount;
+    [Header("코인 개수")]
+    [SerializeField] int coinCount;
+    public int CoinCount { get {return coinCount; } set { coinCount = value; OnChangeCoinCount?.Invoke(); } }
+    public event UnityAction OnChangeCoinCount;
+    [Space(10)]
     [SerializeField] int villagerCount;
     public int VillagerCount { get { return villagerCount; }
         set 
@@ -76,8 +85,25 @@ public class CardManager : MonoBehaviour
             }
             yield return milliSecond;
         }
+        StartCoroutine(CheckCardCount());
+    }
+    IEnumerator CheckCardCount()
+    {
+        if (CardCount > CardCap)
+        {
+            // 카드를 버리라는 UI 출력        
+            while (CardCount > CardCap)
+            {
+                Manager.UI.PrintCardOver();
+                yield return null;
+            }
+        }
+        // UI 지우기
+        Manager.UI.UnPrintCardOver();
+        // 식사시간 시작
         StartCoroutine(StartMealTime());
     }
+
 
     IEnumerator StartMealTime()
     {
@@ -180,6 +206,14 @@ public class CardManager : MonoBehaviour
     public void RemoveStorage(int cardcap) 
     {
         CardCap -= cardcap;
+    }
+    public void AddCoin()
+    {
+        CoinCount++;
+    }
+    public void RemoveCoin()
+    {
+        CoinCount--;
     }
     public void MoveResultCard(Vector3 origin, Card instanceCard)
     {

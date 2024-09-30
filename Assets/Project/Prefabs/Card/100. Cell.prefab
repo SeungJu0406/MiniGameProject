@@ -249,7 +249,7 @@ MonoBehaviour:
   model: {fileID: 0}
   timerBar: {fileID: 0}
   craftingCurTime: 0
-  coin: {fileID: 3500160817629506781, guid: d504855fb8dda7447a5c7d8c07c9f11c, type: 3}
+  coin: {fileID: 4012411825827344112, guid: d504855fb8dda7447a5c7d8c07c9f11c, type: 3}
   moveCardPosY: 1
   moveCardPosX: 2
 --- !u!114 &5932476537280439304

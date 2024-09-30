@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
   m_Name: 19.Coin
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3500160817629506781, guid: d504855fb8dda7447a5c7d8c07c9f11c, type: 3}
+  prefab: {fileID: 4012411825827344112, guid: d504855fb8dda7447a5c7d8c07c9f11c, type: 3}
   cardIcon: {fileID: 21300000, guid: 71a38d88a6435b440810a7c12751ebde, type: 3}
   id: 19
   cardName: "\uCF54\uC778"
@@ -34,3 +34,4 @@ MonoBehaviour:
   additionHp: 0
   rewardCards: []
   randomCards: []
+  cardCap: 0

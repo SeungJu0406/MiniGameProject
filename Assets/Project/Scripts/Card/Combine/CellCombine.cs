@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class CellCombine : CardCombine
 {
+    [Space(10)]
+    [Header("무 조 건 참 조")]
     [SerializeField] Card coin;
-    
+
+    [Space(10)]
     [SerializeField] float moveCardPosY;
     [SerializeField] float moveCardPosX;
 

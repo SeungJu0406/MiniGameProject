@@ -503,8 +503,8 @@ GameObject:
   - component: {fileID: 5044507412716723975}
   - component: {fileID: 5044507412716723972}
   - component: {fileID: 3445092433300602715}
+  - component: {fileID: 4012411825827344112}
   - component: {fileID: 9103303643151412001}
-  - component: {fileID: 3500160817629506781}
   - component: {fileID: 5633844101904485475}
   - component: {fileID: 4633141063630887618}
   m_Layer: 6
@@ -644,6 +644,24 @@ MonoBehaviour:
   damage: 0
   satiety: 2
   isAttack: 0
+--- !u!114 &4012411825827344112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5044507412716723970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2547661541881b845b0095cf7bcec393, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boxCollider: {fileID: 0}
+  rb: {fileID: 0}
+  model: {fileID: 0}
+  combine: {fileID: 0}
+  hpUI: {fileID: 0}
+  ignoreLayer: 0
 --- !u!114 &9103303643151412001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -659,24 +677,6 @@ MonoBehaviour:
   model: {fileID: 0}
   renders: []
   canvases: []
---- !u!114 &3500160817629506781
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5044507412716723970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 927a28cb1f712b549b148b54799111a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boxCollider: {fileID: 0}
-  rb: {fileID: 0}
-  model: {fileID: 0}
-  combine: {fileID: 0}
-  hpUI: {fileID: 0}
-  ignoreLayer: 0
 --- !u!114 &5633844101904485475
 MonoBehaviour:
   m_ObjectHideFlags: 0
