@@ -43,7 +43,7 @@ public class FoodCard : Card
         {
             villager.model.Satiety = 0;
         }
-        Destroy(gameObject);
+        combine.Delete();
     }
 
 }

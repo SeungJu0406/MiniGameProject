@@ -94,7 +94,7 @@ public class Card : MonoBehaviour
             IgnoreCollider();
             yield return null;
         }
-        NotIgnoreCollider();
+        InitCollider();
         waitMealTIme = null;
     }
 
@@ -253,7 +253,7 @@ public class Card : MonoBehaviour
     {
         OnDie?.Invoke(this);
         DropRewardCard();
-        Destroy(gameObject);
+        combine.Delete();
     }
 
     void DropRewardCard()
