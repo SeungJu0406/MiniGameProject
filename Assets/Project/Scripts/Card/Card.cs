@@ -18,7 +18,7 @@ public class Card : MonoBehaviour
     [SerializeField] public CardCombine combine;
     [Space(10)]
     [SerializeField] public TextMeshProUGUI hpUI;
-    
+
     float stackInterval = 0.4f;
     [HideInInspector] int cardLayer;
     [HideInInspector] public int ignoreLayer;
@@ -32,17 +32,18 @@ public class Card : MonoBehaviour
     protected bool isInitInStack;
     StringBuilder sb = new StringBuilder();
     protected virtual void Awake()
-    {      
-        boxCollider = GetComponent<BoxCollider>();
+    {
+        BoxCollider[] colliders = GetComponentsInChildren<BoxCollider>();
+        boxCollider = colliders[1];
         rb = GetComponent<Rigidbody>();
         model = GetComponent<CardModel>();
         combine = GetComponent<CardCombine>();
 
         model.Card = this;
-        model.OnChangeChild += InitChangeChild;
+        model.OnChangeChild += InitCollider;
         model.OnChangeCurHp += UpdateCurHp;
 
-        rb.drag = 5;
+        rb.drag = 50;
         cardLayer = LayerMask.NameToLayer("Card");
         ignoreLayer = LayerMask.NameToLayer("IgnoreCollider");
 
@@ -50,7 +51,7 @@ public class Card : MonoBehaviour
         StartCoroutine(InitIgnoreColliderRoutine());
     }
 
-    protected virtual void Start()  
+    protected virtual void Start()
     {
         if (!isInitInStack)
         {
@@ -61,24 +62,49 @@ public class Card : MonoBehaviour
 
         Manager.Card.AddCardList(this);
     }
-    protected virtual void Update()
+
+    private void Card_OnStopMealTime()
     {
-        if (Manager.Card.isMeatTime) return;
-        if (model.ParentCard != null)
-        {
-            TraceParent();
-        }
+        throw new System.NotImplementedException();
     }
 
     protected virtual void OnDisable()
     {
         Manager.Card.RemoveCardList(this);
     }
+    protected virtual void Update()
+    {
+        if (Manager.Card.isMeatTime)
+        {
+            if (waitMealTIme == null)
+            {
+                waitMealTIme = StartCoroutine(WaitMealTime());
+            }
+        }
+        if (model.ParentCard != null)
+        {
+            TraceParent();
+        }
+    }
+    Coroutine waitMealTIme;
+    IEnumerator WaitMealTime()
+    {
+        while (Manager.Card.isMeatTime)
+        {
+            IgnoreCollider();
+            yield return null;
+        }
+        NotIgnoreCollider();
+        waitMealTIme = null;
+    }
+
     public IEnumerator InitIgnoreColliderRoutine()
     {
         gameObject.layer = ignoreLayer;
-        yield return new WaitForSeconds(0.5f);
+        boxCollider.gameObject.layer = ignoreLayer;
+        yield return new WaitForSeconds(1f);
         gameObject.layer = cardLayer;
+        boxCollider.gameObject.layer = default;
     }
     void TraceParent()
     {
@@ -100,7 +126,7 @@ public class Card : MonoBehaviour
         ChangeBottomAllParent(model.BottomCard); // 본인 + 부모에게 bottom 설정
         if (parent.rb != null) parent.rb.velocity = Vector3.zero;
     }
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         if (!model.CanGetParent) return;
         if (DragNDrop.Instance.isClick) return;
@@ -121,43 +147,29 @@ public class Card : MonoBehaviour
             parent.rb.velocity = Vector3.zero;
         }
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!model.CanGetParent) return;
-        if (DragNDrop.Instance.isClick) return;
-        if (!IsChoice) return;
-        if (model.ParentCard != null) return;
-        if (other.gameObject.layer == cardLayer)
-        {
-            Card parent = other.gameObject.GetComponent<Card>();
-            if (!parent.model.CanGetChild) return;
-            if (model.TopCard == parent.model.TopCard) return;
-            if (parent.model.ChildCard != null) return;
-            // 부모 자식 카드 지정
-            model.ParentCard = parent;
-            parent.model.ChildCard = this;
-            ChangeOrderLayerAllChild();
-            ChangeTopAllChild(parent.model.TopCard); // 본인 + 자식에게 top 설정           
-            ChangeBottomAllParent(model.BottomCard); // 본인 + 부모에게 bottom 설정
-        }
-    }
 
-    public void InitChangeChild()
+    public void InitCollider()
     {
         if (model.data.cantMove) return;
         if (boxCollider != null)
         {
             if (model.ChildCard != null)
             {
-                boxCollider.size = new Vector3(boxCollider.size.x, boxCollider.size.y, 0.1f);
-                boxCollider.isTrigger = true;
+                IgnoreCollider();
             }
             else
             {
-                boxCollider.size = new Vector3(boxCollider.size.x, boxCollider.size.y, 1f);
-                boxCollider.isTrigger = false;
+                NotIgnoreCollider();
             }
         }
+    }
+    public void IgnoreCollider()
+    {
+        boxCollider.gameObject.SetActive(false);
+    }
+    public void NotIgnoreCollider()
+    {
+        boxCollider.gameObject.SetActive(true);
     }
     public virtual void Click()
     {
@@ -171,8 +183,8 @@ public class Card : MonoBehaviour
         OnClick?.Invoke(this);
         InitOrderLayerAllChild(10000);
         ChangeTopAllChild(this);
-
         ClickAllChild();
+        model.BottomCard.IgnoreCollider();
     }
     void ClickAllChild()
     {
@@ -188,6 +200,7 @@ public class Card : MonoBehaviour
         InitOrderLayerAllChild(0);
         UnClickAllChild();
         StartCoroutine(UnClickDelayRoutine());
+        model.BottomCard.NotIgnoreCollider();
     }
     WaitForSeconds delay = new WaitForSeconds(0.1f);
     IEnumerator UnClickDelayRoutine()
@@ -236,18 +249,18 @@ public class Card : MonoBehaviour
         }
     }
 
-    public virtual void Die() 
-    {    
+    public virtual void Die()
+    {
         OnDie?.Invoke(this);
         DropRewardCard();
         Destroy(gameObject);
     }
 
-     void DropRewardCard()
+    void DropRewardCard()
     {
         CraftingItemInfo rewardCardInfo = model.data.rewardCards[Util.Random(0, model.data.rewardCards.Count - 1)];
         for (int i = 0; i < rewardCardInfo.count; i++)
-        {          
+        {
             Card rewardCard = Instantiate(rewardCardInfo.item.prefab, transform.position, transform.rotation);
             Manager.Card.MoveResultCard(transform.position, rewardCard);
         }

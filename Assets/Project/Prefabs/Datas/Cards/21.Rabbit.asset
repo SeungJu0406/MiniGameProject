@@ -25,7 +25,7 @@ MonoBehaviour:
   cantMove: 1
   isVillager: 0
   isMonster: 1
-  maxHp: 5
+  maxHp: 100
   damage: 2
   isConsumable: 0
   isCoin: 0
@@ -38,3 +38,4 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: df70f21f2ba62334694788fb74cc4a04, type: 2}
     count: 1
   randomCards: []
+  cardCap: 0

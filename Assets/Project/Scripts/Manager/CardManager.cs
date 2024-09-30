@@ -13,6 +13,7 @@ public class CardManager : MonoBehaviour
     [SerializeField] public LinkedList<VillagerCard> villagers = new LinkedList<VillagerCard>();
     [SerializeField] public LinkedList<FoodCard> foods = new LinkedList<FoodCard>();
     [SerializeField] public List<VillagerCard> deadVillagers = new List<VillagerCard>();
+
     [SerializeField] public float moveSpeed = 10;
     [SerializeField] public float createPosDistance = 2;
     [SerializeField] int day;
@@ -23,6 +24,12 @@ public class CardManager : MonoBehaviour
     [SerializeField] float curDayTime;
     public float CurDayTime { get { return curDayTime; } set { curDayTime = value; OnChangeCurDayTime?.Invoke(); } }
     public event UnityAction OnChangeCurDayTime;
+    [SerializeField] int cardCap;
+    public int CardCap { get { return cardCap; } set { cardCap = value; OnChangeCardCap?.Invoke(); } }
+    public event UnityAction OnChangeCardCap;
+    [SerializeField] int cardCount;
+    public int CardCount { get { return cardCount; } set { cardCount = value; OnChangeCardCount?.Invoke(); } }
+    public event UnityAction OnChangeCardCount;
     [SerializeField] int villagerCount;
     public int VillagerCount { get { return villagerCount; }
         set 
@@ -141,10 +148,12 @@ public class CardManager : MonoBehaviour
     public void AddCardList(Card card)
     {
         cards.AddLast(card);
+        CardCount++;
     }
     public void RemoveCardList(Card card)
     {
         cards.Remove(card);
+        CardCount--;
     }
     public void AddVillagerList(VillagerCard villager)
     {
@@ -163,6 +172,14 @@ public class CardManager : MonoBehaviour
     public void RemoveFoodList(FoodCard food)
     {
         foods.Remove(food);
+    }
+    public void AddStorage(int cardcap)
+    {
+        CardCap += cardcap;
+    }
+    public void RemoveStorage(int cardcap) 
+    {
+        CardCap -= cardcap;
     }
     public void MoveResultCard(Vector3 origin, Card instanceCard)
     {
@@ -186,6 +203,10 @@ public class CardManager : MonoBehaviour
         while (true)
         {
             instanceCard.transform.position = Vector3.Lerp(instanceCard.transform.position, pos, moveSpeed * Time.deltaTime);
+            if (instanceCard.IsChoice)
+            {
+                yield break;
+            }
             if (Vector3.Distance(instanceCard.transform.position, pos) < 0.01f)
             {
                 yield break;

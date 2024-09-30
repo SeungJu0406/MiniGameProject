@@ -13,4 +13,5 @@ public class ShopCard : Card
         }
         isInitInStack = false;
     }
+    protected override void OnDisable() { }
 }

@@ -13,8 +13,7 @@ public class CardDataInitialization : MonoBehaviour
     [SerializeField] TextMeshProUGUI price;
     [SerializeField] TextMeshProUGUI hp;
     [SerializeField] CardModel model;
-    [SerializeField] Card card;
- 
+
     [ContextMenu("Init")]
     void Init()
     {
@@ -45,7 +44,5 @@ public class CardDataInitialization : MonoBehaviour
             hp.fontSize = fontSize - 0.05f;
             hp.text = $"{data.maxHp}";
         }
-        card =GetComponent<Card>();
-        data.prefab = card;
     }
 }

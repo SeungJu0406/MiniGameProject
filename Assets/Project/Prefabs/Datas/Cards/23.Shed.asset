@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
-  m_Name: 100.Cell
+  m_Name: 23.Shed
   m_EditorClassIdentifier: 
-  prefab: {fileID: 8494770917693975609, guid: 2ffca647b1a920a458484c0881f79882, type: 3}
+  prefab: {fileID: 4419075104409664246, guid: c6e4256e8cabbe54993e1db699adb589, type: 3}
   cardIcon: {fileID: 21300000, guid: d7f70e3953f3dba4a99e1296ff765233, type: 3}
-  id: 100
-  cardName: "\uD310\uB9E4"
-  engName: Cell
-  price: 0
+  id: 23
+  cardName: "\uCC3D\uACE0"
+  engName: Shed
+  price: 3
   durability: 0
   isFactory: 0
   canGetParent: 0
   canGetChild: 1
-  cantMove: 1
+  cantMove: 0
   isVillager: 0
   isMonster: 0
   maxHp: 0
@@ -34,4 +34,4 @@ MonoBehaviour:
   additionHp: 0
   rewardCards: []
   randomCards: []
-  cardCap: 0
+  cardCap: 4

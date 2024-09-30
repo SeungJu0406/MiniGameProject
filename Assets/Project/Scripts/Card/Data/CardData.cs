@@ -41,5 +41,9 @@ public class CardData : ScriptableObject
     [Space(10)]
     [Header("상점 카드")]
     [SerializeField] public List<CardData> randomCards;
+    [Space(10)]
+    [Header("창고 카드")]
+    [SerializeField] public int cardCap;
+
 }
     
