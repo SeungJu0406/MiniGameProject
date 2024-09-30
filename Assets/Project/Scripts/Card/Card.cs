@@ -30,7 +30,7 @@ public class Card : MonoBehaviour
     public event UnityAction<Card> OnClick;
     public event UnityAction<Card> OnDie;
     protected bool isInitInStack;
-    StringBuilder sb = new StringBuilder();
+    protected StringBuilder sb = new StringBuilder();
     protected virtual void Awake()
     {
         BoxCollider[] colliders = GetComponentsInChildren<BoxCollider>();

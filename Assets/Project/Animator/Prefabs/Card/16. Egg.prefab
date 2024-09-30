@@ -1071,6 +1071,7 @@ MonoBehaviour:
   satiety: 2
   isFight: 0
   isAttack: 0
+  isAccessIgnoreStack: 0
 --- !u!114 &6935057227631010751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1103,7 +1104,9 @@ MonoBehaviour:
   model: {fileID: 0}
   combine: {fileID: 0}
   hpUI: {fileID: 0}
+  cardLayer: 0
   ignoreLayer: 0
+  foodDurationText: {fileID: 2835250954237954218}
 --- !u!114 &5783823674676004093
 MonoBehaviour:
   m_ObjectHideFlags: 0

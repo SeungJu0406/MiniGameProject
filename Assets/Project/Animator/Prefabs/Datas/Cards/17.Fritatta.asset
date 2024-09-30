@@ -18,7 +18,7 @@ MonoBehaviour:
   cardName: "\uD504\uB9AC\uD0C0\uD0C0"
   engName: Fritatta
   price: 3
-  durability: 0
+  durability: 3
   isFactory: 0
   canGetParent: 1
   canGetChild: 1
@@ -29,9 +29,7 @@ MonoBehaviour:
   damage: 0
   isConsumable: 1
   isCoin: 0
-  foodAmount: 3
-  additonDamage: 0
-  additionHp: 0
   rewardCards: []
   randomCards: []
   cardCap: 0
+  isIgnoreStack: 0

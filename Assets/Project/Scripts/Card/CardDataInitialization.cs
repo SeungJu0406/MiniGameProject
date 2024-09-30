@@ -49,7 +49,7 @@ public class CardDataInitialization : MonoBehaviour
         {
             food.fontStyle = FontStyles.Bold;
             food.fontSize = fontSize;
-            food.text = $"{data.foodAmount}";
+            food.text = $"{data.durability}";
         }
     }
 }

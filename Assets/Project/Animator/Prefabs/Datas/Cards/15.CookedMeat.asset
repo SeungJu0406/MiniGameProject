@@ -18,7 +18,7 @@ MonoBehaviour:
   cardName: "\uC775\uD78C \uACE0\uAE30"
   engName: CookedMeat
   price: 3
-  durability: 0
+  durability: 2
   isFactory: 0
   canGetParent: 1
   canGetChild: 1
@@ -29,9 +29,7 @@ MonoBehaviour:
   damage: 0
   isConsumable: 1
   isCoin: 0
-  foodAmount: 2
-  additonDamage: 0
-  additionHp: 0
   rewardCards: []
   randomCards: []
   cardCap: 0
+  isIgnoreStack: 0

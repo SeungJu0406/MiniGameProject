@@ -9,7 +9,8 @@ public class CardModel : MonoBehaviour
     [SerializeField] public CardData data;
 
     [SerializeField] int durability;
-    public int Durability {  get { return durability; } set { durability = value; } }
+    public int Durability {  get { return durability; } set { durability = value; OnChangeDuration?.Invoke(); } }
+    public event UnityAction OnChangeDuration;
     [SerializeField] int sortOrder;
     public int SortOrder {  get { return sortOrder; } set { sortOrder = value; OnChangeSortOrder?.Invoke(); } }
     public event UnityAction OnChangeSortOrder;

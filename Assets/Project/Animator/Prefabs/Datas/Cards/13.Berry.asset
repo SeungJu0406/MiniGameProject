@@ -18,7 +18,7 @@ MonoBehaviour:
   cardName: "\uB538\uAE30"
   engName: Berry
   price: 1
-  durability: 0
+  durability: 1
   isFactory: 0
   canGetParent: 1
   canGetChild: 1
@@ -29,9 +29,7 @@ MonoBehaviour:
   damage: 0
   isConsumable: 1
   isCoin: 0
-  foodAmount: 1
-  additonDamage: 0
-  additionHp: 0
   rewardCards: []
   randomCards: []
   cardCap: 0
+  isIgnoreStack: 0

@@ -29,12 +29,6 @@ public class CardData : ScriptableObject
     [SerializeField] public bool isConsumable;
     [ShowIf("isConsumable")]
     [SerializeField] public bool isCoin;
-    [ShowIf("isConsumable")]
-    [SerializeField] public int foodAmount;
-    [ShowIf("isConsumable")]
-    [SerializeField] public int additonDamage;
-    [ShowIf("isConsumable")]
-    [SerializeField] public int additionHp;
     [Space(10)]
     [Header("드랍 카드")]
     [SerializeField] public List<CraftingItemInfo> rewardCards;

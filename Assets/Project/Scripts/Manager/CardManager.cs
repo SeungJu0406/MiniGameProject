@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.Tracing;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UIElements.Experimental;
 
 public class CardManager : MonoBehaviour
 {
@@ -36,19 +36,24 @@ public class CardManager : MonoBehaviour
     public event UnityAction OnChangeCardCount;
     [Header("코인 개수")]
     [SerializeField] int coinCount;
-    public int CoinCount { get {return coinCount; } set { coinCount = value; OnChangeCoinCount?.Invoke(); } }
+    public int CoinCount { get { return coinCount; } set { coinCount = value; OnChangeCoinCount?.Invoke(); } }
     public event UnityAction OnChangeCoinCount;
+    [SerializeField] int foodCount;
+    public int FoodCount { get { return foodCount / 2; } set { foodCount = value; OnChangeFoodCount?.Invoke(); } }
+    public event UnityAction OnChangeFoodCount;
     [Space(10)]
     [SerializeField] int villagerCount;
-    public int VillagerCount { get { return villagerCount; }
-        set 
+    public int VillagerCount
+    {
+        get { return villagerCount; }
+        set
         {
-            villagerCount = value; 
-            if(villagerCount <= 0)
+            villagerCount = value;
+            if (villagerCount <= 0)
             {
                 Defeat();
             }
-        } 
+        }
     }
     public event UnityAction OnDefeat;
 
@@ -86,24 +91,27 @@ public class CardManager : MonoBehaviour
             yield return milliSecond;
         }
         // 식사시간 시작
-        StartCoroutine(StartMealTime());    
+        StartCoroutine(StartMealTime());
     }
 
     IEnumerator StartMealTime()
     {
         Manager.UI.HideTopUI();
         isMeatTime = true;
+        FoodCard food = null;
         // 주민들에게 반복
         foreach (VillagerCard villager in villagers)
         {
-            // 주민이 배고프고 음식이 남아있을때
+            // 주민이 배고플 때
             while (villager.model.Satiety > 0 && foods.Count > 0)
             {
-                // 첫번째 음식 꺼냄
-                FoodCard food = foods.First();
-                foods.Remove(food);
-                food.gameObject.layer = food.ignoreLayer;
-                food.InitOrderLayerAllChild(10000);
+
+                if (food == null)
+                {
+                    food = foods.First();
+                    food.gameObject.layer = food.ignoreLayer;
+                    food.InitOrderLayerAllChild(10000);
+                }
                 float timer = 0;
                 while (true)
                 {
@@ -114,10 +122,19 @@ public class CardManager : MonoBehaviour
                         break;
                     yield return null;
                 }
-                // 먹임
                 food.Use(villager);
-                yield return milliSecond;
+                // 음식의 내구도가 모두 닳았다면
+                if (food.model.Durability <= 0)
+                {
+                    Destroy(food.gameObject);
+                    food = null;
+                }
             }
+        }
+        if (food != null)
+        {
+            food.gameObject.layer = food.ignoreLayer;
+            food.InitOrderLayerAllChild(0);
         }
         // 주민중 포만도를 못채운 주민 캐싱
         // 포만도를 채운 주민은 다시 포만도 채우기
@@ -140,14 +157,14 @@ public class CardManager : MonoBehaviour
         }
         // 캐싱값 삭제
         deadVillagers.Clear();
-        
+
         // 주민이 살아있다면 카드 갯수체크
         if (villagerCount > 0)
-        {          
-            StartCoroutine(CheckCardCount());         
+        {
+            StartCoroutine(CheckCardCount());
         }
         isMeatTime = false;
-        
+
     }
     IEnumerator CheckCardCount()
     {
@@ -162,7 +179,7 @@ public class CardManager : MonoBehaviour
         }
         // UI 지우기
         Manager.UI.HideCardOver();
-        // 상단 UI 띄우기
+        // 상단 UI 나타내기
         Manager.UI.ShowTopUI();
         // 날짜 올리고루프
         Day++;
@@ -173,6 +190,7 @@ public class CardManager : MonoBehaviour
     void Defeat()
     {
         Debug.Log("게임 패배");
+        StopAllCoroutines();
         OnDefeat?.Invoke();
     }
 
@@ -208,7 +226,7 @@ public class CardManager : MonoBehaviour
     {
         CardCap += cardcap;
     }
-    public void RemoveStorage(int cardcap) 
+    public void RemoveStorage(int cardcap)
     {
         CardCap -= cardcap;
     }
@@ -246,7 +264,7 @@ public class CardManager : MonoBehaviour
             timer += Time.deltaTime;
             if (instanceCard.IsChoice)
                 yield break;
-            if(timer > 0.3f)
+            if (timer > 0.3f)
                 yield break;
             if (Vector3.Distance(instanceCard.transform.position, pos) < 0.01f)
                 yield break;
@@ -260,3 +278,32 @@ public class CardManager : MonoBehaviour
         return originPos + (Vector3)dir;
     }
 }
+
+
+//// 주민이 배고프고 음식이 남아있을때
+//while (villager.model.Satiety > 0 && foods.Count > 0)
+//{
+//    // 첫번째 음식 꺼냄
+//    FoodCard food = foods.First();
+//    // 음식의 내구도가 다 닳거나 
+//    while (food.model.Durability > 0)
+//    {
+
+//        food.gameObject.layer = food.ignoreLayer;
+//        food.InitOrderLayerAllChild(10000);
+//        float timer = 0;
+//        while (true)
+//        {
+//            // 해당 주민에게 이동
+//            food.transform.position = Vector3.Lerp(food.transform.position, villager.transform.position, moveSpeed * Time.deltaTime);
+//            timer += Time.deltaTime;
+//            if (timer > 0.5f)
+//                break;
+//            yield return null;
+//        }
+//        // 먹임
+//        food.Use(villager);
+//        yield return milliSecond;
+//    }
+//    foods.Remove(food);
+//}
