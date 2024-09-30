@@ -36,6 +36,7 @@ public class CardManager : MonoBehaviour
     }
     public event UnityAction OnDefeat;
 
+    public bool isMeatTime;
     [HideInInspector] public int cardLayer;
     WaitForSeconds milliSecond = new WaitForSeconds(0.1f);
     WaitForSeconds milliSecond5 = new WaitForSeconds(0.5f);
@@ -46,7 +47,6 @@ public class CardManager : MonoBehaviour
         else Destroy(gameObject);
 
         Day = 1;
-        curDayTime = 0;
 
         // 배열 초과시 배열 두배 만드는 로직 추가
         hits = new Collider[50];
@@ -59,12 +59,12 @@ public class CardManager : MonoBehaviour
     }
     IEnumerator DayRoutine()
     {
+        CurDayTime = 0;
         while (true)
         {
             CurDayTime += 0.1f;
             if (CurDayTime > MaxDayTime)
             {
-                CurDayTime = 0;
                 break;
             }
             yield return milliSecond;
@@ -74,6 +74,7 @@ public class CardManager : MonoBehaviour
 
     IEnumerator StartMealTime()
     {
+        isMeatTime = true;
         // 주민들에게 반복
         foreach (VillagerCard villager in villagers)
         {
@@ -96,7 +97,7 @@ public class CardManager : MonoBehaviour
                     yield return null;
                 }
                 // 먹임
-                food.model.ParentCard = villager;
+                food.Use(villager);
             }
         }
         // 주민중 포만도를 못채운 주민 캐싱
@@ -110,6 +111,7 @@ public class CardManager : MonoBehaviour
             else
             {
                 villager.model.Satiety = 2;
+                villager.model.CurHp += 5;
             }
         }
         // 캐싱한 주민 사망 처리
@@ -119,12 +121,14 @@ public class CardManager : MonoBehaviour
         }
         // 캐싱값 삭제
         deadVillagers.Clear();
-        Day++;
+        
         // 주민이 살아있다면 루프
         if (villagerCount > 0)
         {
             StartCoroutine(DayRoutine());
+            Day++;
         }
+        isMeatTime = false;
     }
 
 

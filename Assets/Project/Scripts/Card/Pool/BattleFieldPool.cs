@@ -20,7 +20,7 @@ public class BattleFieldPool : MonoBehaviour
         for(int i  = 0; i < size; i++)
         {
             BattleField instance = Instantiate(battleField);
-            instance.gameObject.SetActive(false);
+            instance.gameObject.SetActive(false);           
             instance.transform.SetParent(transform);
             pool.Enqueue(instance);
         }
@@ -32,6 +32,7 @@ public class BattleFieldPool : MonoBehaviour
         {
             BattleField instance = pool.Dequeue();
             instance.transform.position = pos;
+            StartCoroutine(instance.InitIgnoreColliderRoutine());
             instance.gameObject.SetActive(true);
             return instance;
         }
@@ -39,6 +40,7 @@ public class BattleFieldPool : MonoBehaviour
         {
             BattleField instance = Instantiate(battleField);
             instance.transform.SetParent(transform);
+            StartCoroutine(instance.InitIgnoreColliderRoutine());
             return instance;
         }
     }

@@ -5,7 +5,7 @@ public class FoodCard : Card
     protected override void Awake()
     {
         base.Awake();
-        model.OnChangeParent += Use;
+        model.OnChangeParent += UseInStack;
     }
     protected override void Start()
     {
@@ -18,7 +18,7 @@ public class FoodCard : Card
         Manager.Card.RemoveFoodList(this);
     }
 
-    void Use()
+    void UseInStack()
     {
         Card villager = model.ParentCard;
         if (villager != null)
@@ -29,18 +29,21 @@ public class FoodCard : Card
                 if (villager.model.Satiety > 0)
                 {
                     model.CanCombine = false;
-                    villager.model.Satiety -= model.data.foodAmount;
-                    if(villager.model.Satiety < 0)
-                    {
-                        villager.model.Satiety = 0;
-                    }
-                    combine.CompleteCreate();
+                    Use(villager);
                     return;
                 }
             }
         }
         model.CanCombine = true;
-
+    }
+    public void Use(Card villager)
+    {
+        villager.model.Satiety -= model.data.foodAmount;
+        if (villager.model.Satiety < 0)
+        {
+            villager.model.Satiety = 0;
+        }
+        Destroy(gameObject);
     }
 
 }

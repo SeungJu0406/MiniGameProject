@@ -14,7 +14,7 @@ public class ShopCombine : CardCombine
         model.OnChangeBottom += BuyCard;
     }
 
-    public override void CompleteCreate() { }
+    public override void PostProcessing() { }
     protected override void AddCombineList() { }
     protected override void RemoveCombineList() { }
     public override void AddIngredient(CardData data) { }

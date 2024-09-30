@@ -12,8 +12,11 @@ public class ReusablelCombine : CardCombine
     {
         base.Start();
     }
-
-    public override void CompleteCreate()
+    protected void OnDisable()
+    {
+        
+    }
+    public override void PostProcessing()
     {
         if (model.ParentCard != null) 
         {

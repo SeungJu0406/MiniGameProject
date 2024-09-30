@@ -22,7 +22,7 @@ public class CellCombine : CardCombine
         lists.Add(coins);
         lists.Add(unsellables);
     }
-    public override void CompleteCreate() { }
+    public override void PostProcessing() { }
 
     protected override void AddCombineList() { }
     protected override void RemoveCombineList() { }

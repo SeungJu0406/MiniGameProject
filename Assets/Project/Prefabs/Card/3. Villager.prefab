@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 6030033422960147060}
   - component: {fileID: 159024897309158926}
   - component: {fileID: 6267615919532630245}
-  - component: {fileID: 159024897309158927}
+  - component: {fileID: 6668904388899508577}
   - component: {fileID: 3308010445065801546}
   m_Layer: 6
   m_Name: 3. Villager
@@ -346,9 +346,8 @@ MonoBehaviour:
   model: {fileID: 0}
   combine: {fileID: 0}
   hpUI: {fileID: 7607811347965061692}
-  hitUI: {fileID: 0}
-  hitDamageUI: {fileID: 0}
---- !u!114 &159024897309158927
+  ignoreLayer: 0
+--- !u!114 &6668904388899508577
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -357,7 +356,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4206404797622852141}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7e79239e95d0f14298299ace355caa8, type: 3}
+  m_Script: {fileID: 11500000, guid: 90047990b0f17b14b8807f85be7c953d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 0}
@@ -382,8 +381,8 @@ MonoBehaviour:
   cardName: {fileID: 8307597859499996845}
   price: {fileID: 0}
   hp: {fileID: 7607811347965061692}
-  hitDamage: {fileID: 0}
   model: {fileID: 6030033422960147060}
+  card: {fileID: 0}
 --- !u!1 &4648979156042011886
 GameObject:
   m_ObjectHideFlags: 0

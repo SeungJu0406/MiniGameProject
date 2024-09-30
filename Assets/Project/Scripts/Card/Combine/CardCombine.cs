@@ -118,7 +118,7 @@ public abstract class CardCombine : MonoBehaviour
             }
         }
         // 생성 후 재료아이템 처리
-        model.BottomCard.combine.CompleteCreateAllParent();
+        model.BottomCard.combine.PostProcessingAllParent();
     }
     protected void StartCreate(RecipeData result)
     {
@@ -148,14 +148,14 @@ public abstract class CardCombine : MonoBehaviour
         return transform.position + (Vector3)dir;
     }
 
-    public abstract void CompleteCreate();
+    public abstract void PostProcessing();
 
-    public void CompleteCreateAllParent()
+    public void PostProcessingAllParent()
     {
-        CompleteCreate();
+        PostProcessing();
         if (model.ParentCard != null)
         {
-            model.ParentCard.combine.CompleteCreateAllParent();
+            model.ParentCard.combine.PostProcessingAllParent();
         }
     }
     protected void AddFactoryCombineListAllChild(Card reqCard)

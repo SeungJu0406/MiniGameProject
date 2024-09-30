@@ -170,6 +170,7 @@ MonoBehaviour:
   model: {fileID: 0}
   combine: {fileID: 0}
   hpUI: {fileID: 0}
+  ignoreLayer: 0
   monsters: []
   monstersIndex: 0
   villagers: []

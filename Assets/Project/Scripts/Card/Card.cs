@@ -63,6 +63,7 @@ public class Card : MonoBehaviour
     }
     protected virtual void Update()
     {
+        if (Manager.Card.isMeatTime) return;
         if (model.ParentCard != null)
         {
             TraceParent();
@@ -73,10 +74,10 @@ public class Card : MonoBehaviour
     {
         Manager.Card.RemoveCardList(this);
     }
-    IEnumerator InitIgnoreColliderRoutine()
+    public IEnumerator InitIgnoreColliderRoutine()
     {
         gameObject.layer = ignoreLayer;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         gameObject.layer = cardLayer;
     }
     void TraceParent()
