@@ -149,9 +149,9 @@ GameObject:
   - component: {fileID: 3365196875501479543}
   - component: {fileID: 5151353993167865384}
   - component: {fileID: 1650369254434017874}
-  - component: {fileID: 8517382939151431679}
   - component: {fileID: 2953830594799575985}
   - component: {fileID: 5577339748823101465}
+  - component: {fileID: -7295286676171308872}
   m_Layer: 6
   m_Name: 101. BasicShop
   m_TagString: Untagged
@@ -303,24 +303,6 @@ MonoBehaviour:
   model: {fileID: 0}
   renders: []
   canvases: []
---- !u!114 &8517382939151431679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3365196875501479537}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 927a28cb1f712b549b148b54799111a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boxCollider: {fileID: 0}
-  rb: {fileID: 0}
-  model: {fileID: 0}
-  combine: {fileID: 0}
-  hpUI: {fileID: 0}
-  isChoice: 0
 --- !u!114 &2953830594799575985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,6 +323,7 @@ MonoBehaviour:
   price: {fileID: 3603464862347610222}
   hp: {fileID: 0}
   model: {fileID: 5151353993167865384}
+  card: {fileID: 0}
 --- !u!114 &5577339748823101465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,6 +342,23 @@ MonoBehaviour:
   cards: []
   moveCardPosY: 1
   moveCardPosX: 2
+--- !u!114 &-7295286676171308872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3365196875501479537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e1a6cf408c7d274c8862071cd958ae6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boxCollider: {fileID: 0}
+  rb: {fileID: 0}
+  model: {fileID: 0}
+  combine: {fileID: 0}
+  hpUI: {fileID: 0}
 --- !u!1 &3365196876663290862
 GameObject:
   m_ObjectHideFlags: 0

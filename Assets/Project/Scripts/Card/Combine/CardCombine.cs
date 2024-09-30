@@ -114,7 +114,7 @@ public abstract class CardCombine : MonoBehaviour
             for (int j = 0; j < result.resultItem[i].count; j++) // 해당 인덱스의 카드 count만큼 생성
             {
                 Card instanceCard = Instantiate(result.resultItem[i].item.prefab, transform.position, transform.rotation);
-                CardManager.Instance.MoveResultCard(transform.position ,instanceCard);
+                Manager.Card.MoveResultCard(transform.position ,instanceCard);
             }
         }
         // 생성 후 재료아이템 처리
@@ -143,7 +143,7 @@ public abstract class CardCombine : MonoBehaviour
 
     protected Vector3 SelectRandomPos()
     {
-        Vector2 dir = Random.insideUnitCircle * CardManager.Instance.createPosDistance;
+        Vector2 dir = Random.insideUnitCircle * Manager.Card.createPosDistance;
 
         return transform.position + (Vector3)dir;
     }

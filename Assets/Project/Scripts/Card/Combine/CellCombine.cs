@@ -107,11 +107,11 @@ public class CellCombine : CardCombine
         yield return moveDelay;
         Vector3 pos = new Vector3(
             transform.position.x + moveCardPosX, 
-            transform.position.y - (CardManager.Instance.createPosDistance + moveCardPosY),
+            transform.position.y - (Manager.Card.createPosDistance + moveCardPosY),
             transform.position.z);
         while (true)
         {
-            instanceCard.transform.position = Vector3.Lerp(instanceCard.transform.position, pos, CardManager.Instance.moveSpeed * Time.deltaTime);
+            instanceCard.transform.position = Vector3.Lerp(instanceCard.transform.position, pos, Manager.Card.moveSpeed * Time.deltaTime);
             if (instanceCard.IsChoice)
             {
                 yield break;

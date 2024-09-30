@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1528943023602534804}
   - component: {fileID: 3111620952490096759}
   - component: {fileID: -3772028132236894349}
-  - component: {fileID: 8494770917693975609}
+  - component: {fileID: 5932476537280439304}
   m_Layer: 6
   m_Name: 100. Cell
   m_TagString: Untagged
@@ -188,6 +188,7 @@ MonoBehaviour:
   price: {fileID: 0}
   hp: {fileID: 0}
   model: {fileID: 4948865185087462894}
+  card: {fileID: 0}
 --- !u!114 &-3772028132236894349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,7 +207,7 @@ MonoBehaviour:
   coin: {fileID: 3500160817629506781, guid: d504855fb8dda7447a5c7d8c07c9f11c, type: 3}
   moveCardPosY: 1
   moveCardPosX: 2
---- !u!114 &8494770917693975609
+--- !u!114 &5932476537280439304
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -215,7 +216,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3270522870515973559}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 927a28cb1f712b549b148b54799111a7, type: 3}
+  m_Script: {fileID: 11500000, guid: 8e1a6cf408c7d274c8862071cd958ae6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boxCollider: {fileID: 0}
@@ -223,7 +224,6 @@ MonoBehaviour:
   model: {fileID: 0}
   combine: {fileID: 0}
   hpUI: {fileID: 0}
-  isChoice: 0
 --- !u!1 &3270522871971373096
 GameObject:
   m_ObjectHideFlags: 0

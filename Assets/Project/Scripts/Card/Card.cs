@@ -18,6 +18,7 @@ public class Card : MonoBehaviour
     [SerializeField] public CardCombine combine;
     [Space(10)]
     [SerializeField] public TextMeshProUGUI hpUI;
+    
     float stackInterval = 0.4f;
     int cardLayer;
     int ignoreLayer;
@@ -28,12 +29,10 @@ public class Card : MonoBehaviour
 
     public event UnityAction<Card> OnClick;
     public event UnityAction<Card> OnDie;
-    bool isInitInStack;
+    protected bool isInitInStack;
     StringBuilder sb = new StringBuilder();
     protected virtual void Awake()
-    {
-        
-
+    {      
         boxCollider = GetComponent<BoxCollider>();
         rb = GetComponent<Rigidbody>();
         model = GetComponent<CardModel>();
@@ -59,6 +58,8 @@ public class Card : MonoBehaviour
             model.BottomCard = this;
         }
         isInitInStack = false;
+
+        Manager.Card.AddCardList(this);
     }
     protected virtual void Update()
     {
@@ -242,7 +243,7 @@ public class Card : MonoBehaviour
         for (int i = 0; i < rewardCardInfo.count; i++)
         {
             Card rewardCard = Instantiate(rewardCardInfo.item.prefab, transform.position, transform.rotation);
-            CardManager.Instance.MoveResultCard(transform.position, rewardCard);
+            Manager.Card.MoveResultCard(transform.position, rewardCard);
         }
     }
 

@@ -150,7 +150,7 @@ public class ShopCombine : CardCombine
         yield return moveDelay;
         Vector3 pos = new Vector3(
             transform.position.x + moveCardPosX,
-            transform.position.y - (CardManager.Instance.createPosDistance + moveCardPosY),
+            transform.position.y - (Manager.Card.createPosDistance + moveCardPosY),
             transform.position.z);
         while (true)
         {

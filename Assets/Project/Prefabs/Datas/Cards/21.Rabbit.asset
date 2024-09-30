@@ -25,7 +25,7 @@ MonoBehaviour:
   cantMove: 1
   isVillager: 0
   isMonster: 1
-  maxHp: 100
+  maxHp: 5
   damage: 2
   isConsumable: 0
   isCoin: 0

@@ -102,7 +102,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 1, y: 0.99}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -226,6 +226,7 @@ MonoBehaviour:
   price: {fileID: 0}
   hp: {fileID: 0}
   model: {fileID: 4948865185087462894}
+  card: {fileID: 0}
 --- !u!1 &3270522871971373096
 GameObject:
   m_ObjectHideFlags: 0

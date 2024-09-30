@@ -64,7 +64,8 @@ public class MonsterCard : Card
     void StartBattle()
     {
         if (model.BottomCard == model.Card) return;
-        BattleField battleFields = Instantiate(battleField,transform.position, transform.rotation);
+        BattleField battleFields = Pool.BattleField.GetPool(transform.position);
         battleFields.AddBattleList(this);
+
     }
 }

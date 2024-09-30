@@ -50,12 +50,15 @@ public class BattleField : Card
                 StopCoroutine(battleRoutine);
                 battleRoutine = null;
             }
-            Destroy(gameObject);
+            Pool.BattleField.ReturnPool(this);
         }
     }
     private void OnDisable()
     {
-        Pool.HitUI.ReturnPool(hitUI);
+        if (hitUI.canvas != null)
+        {
+            Pool.HitUI.ReturnPool(hitUI);
+        }
 
         for (int i = 0; i < monsters.Count; i++)
         {
@@ -89,7 +92,7 @@ public class BattleField : Card
         for (int i = 0; i < monsters.Count; i++)
         {
             Vector3 pos = new Vector3(transform.position.x - (monstersIndex - 1) + (interval * i), transform.position.y + 1.5f, transform.position.z);
-            monsters[i].transform.position = Vector3.Lerp(monsters[i].transform.position, pos, CardManager.Instance.moveSpeed * Time.deltaTime);
+            monsters[i].transform.position = Vector3.Lerp(monsters[i].transform.position, pos, Manager.Card.moveSpeed * Time.deltaTime);
         }
         sizeX = villagersIndex * 2;
         interval = sizeX / villagers.Count;
@@ -97,7 +100,7 @@ public class BattleField : Card
         for (int i = 0; i < villagers.Count; i++)
         {
             Vector3 pos = new Vector3(transform.position.x - (villagersIndex -1) + (interval * i) , transform.position.y - 1.5f, transform.position.z);
-            villagers[i].transform.position = Vector3.Lerp(villagers[i].transform.position, pos, CardManager.Instance.moveSpeed * Time.deltaTime);
+            villagers[i].transform.position = Vector3.Lerp(villagers[i].transform.position, pos, Manager.Card.moveSpeed * Time.deltaTime);
         }
     }
 
@@ -131,7 +134,7 @@ public class BattleField : Card
         float timer = 0;
         while (true)
         {
-            attacker.transform.position = Vector3.Lerp(attacker.transform.position, hitCard.transform.position, CardManager.Instance.moveSpeed * Time.deltaTime);
+            attacker.transform.position = Vector3.Lerp(attacker.transform.position, hitCard.transform.position, Manager.Card.moveSpeed * Time.deltaTime);
             timer += Time.deltaTime;
             if (attacker.IsChoice) break;
             if (timer > 0.1f)
@@ -146,7 +149,7 @@ public class BattleField : Card
         }
         while (Vector3.Distance(attacker.transform.position, originPos) > 0.01f)
         {
-            attacker.transform.position = Vector3.Lerp(attacker.transform.position, originPos, CardManager.Instance.moveSpeed * Time.deltaTime);
+            attacker.transform.position = Vector3.Lerp(attacker.transform.position, originPos, Manager.Card.moveSpeed * Time.deltaTime);
             if (attacker.IsChoice) break;
             yield return null;
         }

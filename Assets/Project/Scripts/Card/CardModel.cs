@@ -78,7 +78,15 @@ public class CardModel : MonoBehaviour
     [SerializeField] int maxHp;
     public int MaxHp { get { return maxHp; } set { maxHp = value; } }
     [SerializeField] int curHp;
-    public int CurHp { get { return curHp; } set { curHp = value; OnChangeCurHp?.Invoke(); } }
+    public int CurHp { get { return curHp; } 
+        set 
+        { 
+            curHp = value; 
+            if(curHp > maxHp)          
+                curHp = maxHp;
+            OnChangeCurHp?.Invoke(); 
+        } 
+    }
 
     public event UnityAction OnChangeCurHp;
     [SerializeField] int damage;

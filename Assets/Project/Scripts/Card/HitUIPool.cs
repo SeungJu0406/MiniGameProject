@@ -15,7 +15,7 @@ public class HitUIPool : MonoBehaviour
 
 
     [SerializeField] GameObject hitCanvas;
-    [SerializeField] Queue<HitUI> hitUIPool;
+    [SerializeField] Queue<HitUI> pool;
     [SerializeField] int size = 2;
 
     StringBuilder sb = new StringBuilder();
@@ -24,7 +24,7 @@ public class HitUIPool : MonoBehaviour
         if(Instance == null) Instance = this;
         else Destroy(gameObject);
         
-        hitUIPool = new Queue<HitUI>(size);
+        pool = new Queue<HitUI>(size);
         for(int i = 0; i< size; i++)
         {
             GameObject instanceUI = Instantiate(hitCanvas);
@@ -34,7 +34,7 @@ public class HitUIPool : MonoBehaviour
             HitUI instanceHitUI = new HitUI();
             instanceHitUI.canvas = instanceUI;
             instanceHitUI.damageText = instanceText;
-            hitUIPool.Enqueue(instanceHitUI);
+            pool.Enqueue(instanceHitUI);
         }
     }
 
@@ -42,9 +42,9 @@ public class HitUIPool : MonoBehaviour
     {
         sb.Clear();
         sb.Append($"-{damage}");
-        if (hitUIPool.Count > 0)
+        if (pool.Count > 0)
         {
-            HitUI instance = hitUIPool.Dequeue();
+            HitUI instance = pool.Dequeue();
             instance.canvas.transform.position = pos;
             instance.damageText.SetText(sb);
             instance.canvas.gameObject.SetActive(true);
@@ -69,7 +69,7 @@ public class HitUIPool : MonoBehaviour
         if (instance.canvas != null)
         {
             instance.canvas.gameObject.SetActive(false);
-            hitUIPool.Enqueue(instance);
+            pool.Enqueue(instance);
         }
     }
 }
