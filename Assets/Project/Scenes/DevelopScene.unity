@@ -718,6 +718,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5762336990854661758, guid: 702087e4c425af34fbfc8ff73d87567f, type: 3}
+      propertyPath: battleField
+      value: 
+      objectReference: {fileID: 3468999014028132052, guid: 422b4b9752d243e4e83b843d57074127, type: 3}
+    - target: {fileID: 5762336990854661758, guid: 702087e4c425af34fbfc8ff73d87567f, type: 3}
       propertyPath: jumpInterval
       value: 5
       objectReference: {fileID: 0}
@@ -1050,6 +1054,10 @@ PrefabInstance:
       propertyPath: attackRange
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5762336990854661758, guid: 702087e4c425af34fbfc8ff73d87567f, type: 3}
+      propertyPath: battleField
+      value: 
+      objectReference: {fileID: 3468999014028132052, guid: 422b4b9752d243e4e83b843d57074127, type: 3}
     - target: {fileID: 5762336990854661758, guid: 702087e4c425af34fbfc8ff73d87567f, type: 3}
       propertyPath: jumpInterval
       value: 5

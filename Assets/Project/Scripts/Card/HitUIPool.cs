@@ -66,7 +66,10 @@ public class HitUIPool : MonoBehaviour
 
     public void ReturnPool(HitUI instance)
     {
-        instance.canvas.gameObject.SetActive(false);
-        hitUIPool.Enqueue(instance);
+        if (instance.canvas != null)
+        {
+            instance.canvas.gameObject.SetActive(false);
+            hitUIPool.Enqueue(instance);
+        }
     }
 }
