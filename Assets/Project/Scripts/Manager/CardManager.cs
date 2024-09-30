@@ -85,24 +85,10 @@ public class CardManager : MonoBehaviour
             }
             yield return milliSecond;
         }
-        StartCoroutine(CheckCardCount());
-    }
-    IEnumerator CheckCardCount()
-    {
-        if (CardCount > CardCap)
-        {
-            // 카드를 버리라는 UI 출력        
-            while (CardCount > CardCap)
-            {
-                Manager.UI.PrintCardOver();
-                yield return null;
-            }
-        }
-        // UI 지우기
-        Manager.UI.UnPrintCardOver();
         // 식사시간 시작
-        StartCoroutine(StartMealTime());
+        StartCoroutine(StartMealTime());    
     }
+
 
 
     IEnumerator StartMealTime()
@@ -155,13 +141,31 @@ public class CardManager : MonoBehaviour
         // 캐싱값 삭제
         deadVillagers.Clear();
         
-        // 주민이 살아있다면 루프
+        // 주민이 살아있다면 카드 갯수체크
         if (villagerCount > 0)
-        {
-            StartCoroutine(DayRoutine());
-            Day++;
+        {          
+            StartCoroutine(CheckCardCount());         
         }
         isMeatTime = false;
+        
+    }
+    IEnumerator CheckCardCount()
+    {
+        if (CardCount > CardCap)
+        {
+            // 카드를 버리라는 UI 출력        
+            while (CardCount > CardCap)
+            {
+                Manager.UI.PrintCardOver();
+                yield return null;
+            }
+        }
+        // UI 지우기
+        Manager.UI.UnPrintCardOver();
+
+        // 날짜 올리고루프
+        Day++;
+        StartCoroutine(DayRoutine());
     }
 
 

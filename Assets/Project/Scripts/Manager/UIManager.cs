@@ -31,7 +31,7 @@ public class UIManager : MonoBehaviour
     [System.Serializable]
     public struct CardOver
     {
-        public GameObject cardOverUI;
+        public Animator cardOverUI;
         public TextMeshProUGUI cardOverText;
     }
     [Header("카드 초과 UI")]
@@ -53,8 +53,6 @@ public class UIManager : MonoBehaviour
         Manager.Card.OnChangeCoinCount += UpdateCoinCount;
         dayTimer.timerBar.maxValue = Manager.Card.MaxDayTime;
 
-
-        cardOver.cardOverUI.gameObject.SetActive(false);
 
         InitUI();
     }
@@ -118,15 +116,15 @@ public class UIManager : MonoBehaviour
 
     public void PrintCardOver()
     {
-        cardOver.cardOverUI.gameObject.SetActive(true);
+        cardOver.cardOverUI.SetBool("Show", true);
         int overCount = Manager.Card.CardCount - Manager.Card.CardCap;
-        sb.Clear();
+        sb.Clear(); 
         sb.Append($"{overCount}장의 카드가 초과되었습니다");
         cardOver.cardOverText.SetText(sb);
     }
     public void UnPrintCardOver()
     {
-        cardOver.cardOverUI.gameObject.SetActive(false);
+        cardOver.cardOverUI.SetBool("Show", false);
     }
 
     void InitUI()
