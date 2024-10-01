@@ -25,8 +25,8 @@ public class MonsterCard : Card
             model.TopCard = this;
             model.BottomCard = this;
         }
+        Manager.Sound.PlaySFX(Manager.Sound.sfx.combine);
         isInitInStack = false;
-
     }
     protected override void OnDisable() { }
     protected override void Update()

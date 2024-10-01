@@ -64,6 +64,7 @@ public class DayManager : MonoBehaviour
 
     void StartSettleUp()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.sfx.settle);
         DragNDrop.Instance.CanClick = false;
         Manager.UI.HideTopUI();
         Manager.UI.HideLeftUI();

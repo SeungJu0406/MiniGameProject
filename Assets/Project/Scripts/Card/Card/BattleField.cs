@@ -131,9 +131,8 @@ public class BattleField : Card
             if (timer > 0.1f)
                 break;
             yield return null;
-        }
-        hitCard.model.CurHp -= attacker.model.Damage;
-        StartCoroutine(HitUIRoutine(attacker, hitCard));
+        }       
+        StartCoroutine(HitRoutine(attacker, hitCard));
         if (hitCard.model.CurHp <= 0)
         {
             hitCard.Die();
@@ -146,8 +145,10 @@ public class BattleField : Card
         }
         attacker.model.IsAttack = false;
     }
-    IEnumerator HitUIRoutine(Card attacker, Card hitCard)
+    IEnumerator HitRoutine(Card attacker, Card hitCard)
     {
+        Manager.Sound.PlaySFX(Manager.Sound.sfx.attack);
+        hitCard.model.CurHp -= attacker.model.Damage;
         hitUI = HitUIPool.Instance.GetPool(hitCard.transform.position, attacker.model.Damage);
         yield return hitUIDelay;
         HitUIPool.Instance.ReturnPool(hitUI);

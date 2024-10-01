@@ -133,6 +133,7 @@ public class CellCard : Card
         model.BottomCard = model.Card;
         coins.Clear();
         unsellables.Clear();
+        Manager.Sound.PlaySFX(Manager.Sound.sfx.cell);
     }
     WaitForSeconds moveDelay = new WaitForSeconds(0.11f);
     IEnumerator MoveCardRoutine(Card instanceCard, float moveCardPosX)

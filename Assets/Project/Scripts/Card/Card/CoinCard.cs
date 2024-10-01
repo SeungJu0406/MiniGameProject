@@ -6,6 +6,11 @@ public class CoinCard :Card
 {
     protected override void Start()
     {
+        if (!isInitInStack)
+        {
+            model.TopCard = this;
+            model.BottomCard = this;
+        }
         Manager.Card.AddCoin();
     }
 

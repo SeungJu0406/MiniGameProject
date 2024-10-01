@@ -19,6 +19,9 @@ public class CardData : ScriptableObject
     [SerializeField] public bool canGetChild;
     [SerializeField] public bool cantMove;
     [Space(10)]
+    [Header("사운드")]
+    [SerializeField] public AudioClip clip;
+    [Space(10)]
     [Header("주민, 몬스터 데이터")]
     [SerializeField] public bool isVillager;
     [SerializeField] public bool isMonster; 

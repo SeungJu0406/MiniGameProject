@@ -12,12 +12,32 @@ public class GameManager : MonoBehaviour
     public State curState;
     public event UnityAction OnDefeat;
     StringBuilder sb = new StringBuilder();
-    public void Awake()
+    private void Awake()
     {
         if(Instance == null) Instance = this;
         else Destroy(gameObject);
         OnDefeat += GameOver;
         curState = State.Null;
+    }
+    private void Start()
+    {
+        StartCoroutine(BGMRoutine());
+    }
+
+    WaitForSeconds bgmDelay = new WaitForSeconds(20f);
+    IEnumerator BGMRoutine()
+    {
+        int index = 0;
+        while (true)
+        {
+            if (!Manager.Sound.bgmPlayer.isPlaying)
+            {
+                yield return bgmDelay;
+                Manager.Sound.PlayBGM(Manager.Sound.bgm.game[index]);
+                index = index >= Manager.Sound.bgm.game.Length ? 0 : index + 1;
+            }
+            yield return null;
+        }
     }
 
     public void CheckDefeat()
@@ -48,5 +68,6 @@ public class GameManager : MonoBehaviour
     void GameOver()
     {
         Debug.Log("게임 오버");
+
     }
 }

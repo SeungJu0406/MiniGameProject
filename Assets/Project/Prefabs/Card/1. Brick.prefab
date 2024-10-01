@@ -239,6 +239,7 @@ MonoBehaviour:
   satiety: 2
   isFight: 0
   isAttack: 0
+  isAccessIgnoreStack: 0
 --- !u!114 &4479485336677307958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,11 +267,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 927a28cb1f712b549b148b54799111a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hpUI: {fileID: 0}
   boxCollider: {fileID: 0}
   rb: {fileID: 0}
   model: {fileID: 0}
   combine: {fileID: 0}
-  hpUI: {fileID: 0}
+  cardLayer: 0
   ignoreLayer: 0
 --- !u!114 &5006983681834032090
 MonoBehaviour:
@@ -306,6 +308,7 @@ MonoBehaviour:
   cardName: {fileID: 5716238218882190997}
   price: {fileID: 4392609682824658415}
   hp: {fileID: 0}
+  food: {fileID: 0}
   model: {fileID: 8048028260358111820}
 --- !u!1 &2817913970154827583
 GameObject:

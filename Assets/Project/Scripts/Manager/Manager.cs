@@ -5,4 +5,5 @@ public static class Manager
     public static UIManager UI { get { return UIManager.Instance; } }
     public static DayManager Day { get { return DayManager.Instance; } }
     public static CameraManager Camera { get { return CameraManager.Instance; }}
+    public static SoundManager Sound { get { return SoundManager.Instance; } }
 }

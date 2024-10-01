@@ -25,6 +25,7 @@ public class FoodCard : Card
         villager.model.Satiety--;
         model.Durability--;
         Manager.Card.FoodCount--;
+        Manager.Sound.PlaySFX(Manager.Sound.sfx.eat);
     }
 
     void UpdateFoodDuration()

@@ -829,7 +829,7 @@ SpriteRenderer:
   m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: c961c04ecb5fda84d983449a656ab4fb, type: 3}
-  m_Color: {r: 0.9607844, g: 0.9607844, b: 0.9607844, a: 1}
+  m_Color: {r: 0.8941177, g: 0.5803922, b: 0.30980393, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1022,11 +1022,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 440f049b7ae779a428df40a4bf46de36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hpUI: {fileID: 0}
   boxCollider: {fileID: 0}
   rb: {fileID: 0}
   model: {fileID: 0}
   combine: {fileID: 0}
-  hpUI: {fileID: 0}
   cardLayer: 0
   ignoreLayer: 0
   foodDurationText: {fileID: 3828227386820406768}

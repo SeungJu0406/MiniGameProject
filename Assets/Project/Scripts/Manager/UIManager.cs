@@ -225,6 +225,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowOrHideLeftUI()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.sfx.recipeUI);
         if (leftUI.isShow)
         {
             leftUI.UI.SetBool("Show", false);
@@ -243,6 +244,7 @@ public class UIManager : MonoBehaviour
     }
     public void UpdateRecipeUI(RecipeData data)
     {
+        Manager.Sound.PlaySFX(Manager.Sound.sfx.UIButton);
         sb.Clear();
         sb.Append(data.resultItem[0].item.cardName);
         recipeUI.nameText.SetText(sb);

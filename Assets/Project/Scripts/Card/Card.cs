@@ -59,7 +59,7 @@ public class Card : MonoBehaviour
             model.BottomCard = this;
         }
         isInitInStack = false;
-
+        Manager.Sound.PlaySFX(Manager.Sound.sfx.combine);
         Manager.Card.AddCardList(this);
     }
 
@@ -199,6 +199,7 @@ public class Card : MonoBehaviour
         ChangeTopAllChild(this);
         ClickAllChild();
         model.BottomCard.IgnoreCollider();
+        Manager.Sound.PlaySFX(model.data.clip);
     }
     void ClickAllChild()
     {
@@ -215,6 +216,7 @@ public class Card : MonoBehaviour
         UnClickAllChild();
         StartCoroutine(UnClickDelayRoutine());
         model.BottomCard.NotIgnoreCollider();
+        Manager.Sound.PlaySFX(Manager.Sound.sfx.unclick);
     }
     WaitForSeconds delay = new WaitForSeconds(0.1f);
     IEnumerator UnClickDelayRoutine()
@@ -251,7 +253,7 @@ public class Card : MonoBehaviour
         model.SortOrder = model.ParentCard.model.SortOrder + 1;
         if (model.ChildCard != null)
         {
-            model.ChildCard.ChangeOrderLayerAllChild();
+            model.ChildCard.ChangeOrderLayerAllChild(); 
         }
     }
     public void InitOrderLayerAllChild(int order)
