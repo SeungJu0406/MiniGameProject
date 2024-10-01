@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements.Experimental;
+using static UnityEngine.UI.Image;
 
 public class CardManager : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class CardManager : MonoBehaviour
     [SerializeField] public LinkedList<FoodCard> foods = new LinkedList<FoodCard>();
 
     [SerializeField] public float moveSpeed = 10;
+    [SerializeField] public float detectingDistance = 3;
     [SerializeField] public float createPosDistance = 2;
 
     [Header("최대 카드")]
@@ -113,9 +115,9 @@ public class CardManager : MonoBehaviour
     {
         CoinCount--;
     }
-    public void MoveResultCard(Vector3 origin, Card instanceCard)
+    public bool MoveResultCard(Card instanceCard)
     {
-        int hitCount = Physics.OverlapSphereNonAlloc(instanceCard.transform.position, createPosDistance, hits, cardLayer);
+        int hitCount = Physics.OverlapSphereNonAlloc(instanceCard.transform.position, detectingDistance, hits, cardLayer);
         for (int i = 0; i < hitCount; i++)
         {
             if (hits[i] == null) break;
@@ -123,9 +125,13 @@ public class CardManager : MonoBehaviour
             if (other.model.BottomCard.model.data == instanceCard.model.data)
             {
                 instanceCard.InitInStack(other.model.BottomCard);
-                return;
+                return true;
             }
         }
+        return false;
+    }
+    public void RandomSpawnCard(Vector3 origin, Card instanceCard)
+    {
         Vector3 pos = SelectRandomPos(origin);
         StartCoroutine(MoveCardRoutine(instanceCard, pos));
     }

@@ -101,16 +101,6 @@ public class CellCard : Card
                 model.ChildCard = cards[0];
                 // 리스트 인덱스 0번째의 탑을 본인으로 지정
                 cards[0].model.TopCard = cards[0];
-                // 탑카드의 위치가 맵 안으로 들어올 수 있게 끔, 아래쪽으로 강제 트랜스폼 이동
-                // 살짝 오른쪽이면 좋을듯
-                if (cards == coins)
-                {
-                    StartCoroutine(MoveCardRoutine(model.ChildCard, 0)); // 코인리스트는 바로 아래
-                }
-                else
-                {
-                    StartCoroutine(MoveCardRoutine(model.ChildCard, moveCardPosX)); // 못파는 리스트는 살짝 오른쪽으로
-                }
 
                 // 리스트 인덱스 0번째의 부모를 null로 설정 후 다음 인덱스의 카드를 자식으로 지정 (없으면 null)
                 // 다음 인덱스는 교체 및 전 인덱스를 부모로 지정 다음 인덱스를 자식으로 지정(없으면 null)
@@ -126,11 +116,23 @@ public class CellCard : Card
                 model.ChildCard.InitOrderLayerAllChild(0);
             }
         }
+        if (coins.Count > 0)
+        {
+            bool canStack = Manager.Card.MoveResultCard(coins[0].model.TopCard); // 주변에 코인있으면 코인쪽으로
+            if (!canStack)
+            {
+                StartCoroutine(MoveCardRoutine(coins[0].model.TopCard, 0)); // 코인리스트는 살짝 아래
+            }
+        }
+        if(unsellables.Count > 0) 
+        {
+            StartCoroutine(MoveCardRoutine(unsellables[0].model.TopCard, moveCardPosX)); // 못파는 리스트는 살짝 오른쪽으로
+        }
         // 본인의 자식을 null 바텀을 본인으로 교체한 후 리스트 인덱스 비운 뒤 마무리
         model.ChildCard = null;
         model.BottomCard = model.Card;
-        lists[0].Clear();
-        lists[1].Clear();
+        coins.Clear();
+        unsellables.Clear();
     }
     WaitForSeconds moveDelay = new WaitForSeconds(0.11f);
     IEnumerator MoveCardRoutine(Card instanceCard, float moveCardPosX)

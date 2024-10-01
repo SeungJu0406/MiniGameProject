@@ -115,8 +115,8 @@ public class Card : MonoBehaviour
         if (!model.CanGetParent) return;
         if (!parent.model.CanGetChild) return;
         isInitInStack = true;
-        model.TopCard = this;
-        model.BottomCard = this;
+        model.TopCard = model.TopCard == null ? this : model.TopCard;      
+        model.BottomCard = model.BottomCard == null? this : model.BottomCard;
         model.ParentCard = parent;
         parent.model.ChildCard = this;
         ChangeOrderLayerAllChild();
@@ -274,7 +274,11 @@ public class Card : MonoBehaviour
         for (int i = 0; i < rewardCardInfo.count; i++)
         {
             Card rewardCard = Instantiate(rewardCardInfo.item.prefab, transform.position, transform.rotation);
-            Manager.Card.MoveResultCard(transform.position, rewardCard);
+            bool canStack = Manager.Card.MoveResultCard(rewardCard);
+            if (!canStack)
+            {
+                Manager.Card.RandomSpawnCard(transform.position, rewardCard);
+            }
         }
     }
     void UpdateCurHp()
