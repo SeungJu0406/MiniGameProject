@@ -20,8 +20,8 @@ public class DayManager : MonoBehaviour
     public event UnityAction OnChangeCurDayTime;
 
     public bool isMeatTime;
-    public enum PopUpButtonState { Null,MeatTime, Defeat, CardCounting}
-    public PopUpButtonState curButtonState;
+    public enum PopUpState { Null,MeatTime, Fail ,Defeat, CardCounting}
+    public PopUpState curPopUpState;
 
     [HideInInspector] public int cardLayer;
     WaitForSeconds milliSecond = new WaitForSeconds(0.1f);
@@ -44,6 +44,7 @@ public class DayManager : MonoBehaviour
         Manager.UI.ShowTopUI();
         Manager.UI.HideLeftDownPopUpUI();
         CurDayTime = 0;
+        curPopUpState = PopUpState.Null;
         while (true)
         {
             CurDayTime += 0.1f;
@@ -69,22 +70,29 @@ public class DayManager : MonoBehaviour
         sb.Clear();
         sb.Append($"주민에게 음식 제공");
         Manager.UI.UpdatePopUpUIButtonText(sb);
-        curButtonState = PopUpButtonState.MeatTime;
-    }
-
-    public void StartMeatTime()
-    {
-        if (curButtonState == PopUpButtonState.MeatTime)
+        if (Manager.Card.FoodCount/2 < Manager.Card.VillagerCount)
         {
-            StartCoroutine(StartMealTimeRoutine());
-            curButtonState = PopUpButtonState.Null;
+            curPopUpState = PopUpState.Fail;          
+        }
+        else
+        {
+            curPopUpState = PopUpState.MeatTime;
         }
     }
+
     IEnumerator StartMealTimeRoutine()
     {
-        Manager.UI.HideLeftDownPopUpUI();
+        sb.Clear();
+        Manager.UI.UpdatePopUpUIButtonText(sb);
+        sb.Append("식사 중. . .");
+        Manager.UI.UpdatePopUpUIMainText(sb);
         isMeatTime = true;
         FoodCard food = null;
+        int deadCount = Manager.Card.VillagerCount - Manager.Card.FoodCount / 2;
+        for (int i = 0; i < deadCount; i++) 
+        {
+            Manager.Card.villagers.Last().Die();
+        }
         // 주민들에게 반복
         foreach (VillagerCard villager in Manager.Card.villagers)
         {
@@ -119,42 +127,24 @@ public class DayManager : MonoBehaviour
         }
         if (food != null)
         {
-            food.gameObject.layer = food.ignoreLayer;
+            food.gameObject.layer = food.cardLayer;
             food.InitOrderLayerAllChild(0);
         }
-        // 주민중 포만도를 못채운 주민 캐싱
-        // 포만도를 채운 주민은 다시 포만도 채우기
-        foreach (VillagerCard villager in Manager.Card.villagers)
-        {
-            if (villager.model.Satiety > 0)
-            {
-                Manager.Card.deadVillagers.Add(villager);
-            }
-            else
-            {
-                villager.model.Satiety = 2;
-                villager.model.CurHp += 5;
-            }
-        }
-        // 캐싱한 주민 사망 처리
-        foreach (VillagerCard dead in Manager.Card.deadVillagers)
-        {
-            dead.Die();
-        }
-        // 캐싱값 삭제
-        Manager.Card.deadVillagers.Clear();
 
         // 주민이 살아있다면 카드 갯수체크
         if (Manager.Card.VillagerCount > 0)
         {
             StartCoroutine(CheckCardCount());
         }
+        else
+        {
+            Defeat();
+        }
         isMeatTime = false;
 
     }
     IEnumerator CheckCardCount()
     {
-        Manager.UI.ShowLeftDownPopUpUI();
         if (Manager.Card.CardCount > Manager.Card.CardCap)
         {
             // 카드를 버리라는 UI 출력        
@@ -172,5 +162,32 @@ public class DayManager : MonoBehaviour
         // 날짜 올리고루프
         Day++;
         StartCoroutine(DayRoutine());
+    }
+
+    public void StartMeatTime()
+    {
+        if (curPopUpState == PopUpState.MeatTime)
+        {
+            StartCoroutine(StartMealTimeRoutine());
+            curPopUpState = PopUpState.Null;
+        }
+        else if (curPopUpState == PopUpState.Fail)
+        {
+            FailSettleUp();
+        }
+    }
+    void FailSettleUp()
+    {
+        sb.Clear();
+        sb.Append($"식량이 부족합니다");
+        Manager.UI.UpdatePopUpUIMainText(sb);
+        sb.Clear();
+        sb.Append($"{Manager.Card.VillagerCount - Manager.Card.FoodCount/2}명이 굶어 죽습니다");
+        Manager.UI.UpdatePopUpUIButtonText(sb);
+        curPopUpState = PopUpState.MeatTime;
+    }
+    void Defeat()
+    {
+        curPopUpState = PopUpState.Defeat;
     }
 }

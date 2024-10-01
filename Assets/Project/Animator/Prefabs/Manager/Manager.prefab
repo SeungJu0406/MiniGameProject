@@ -45,9 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   day: 0
-  maxDayTime: 5
+  maxDayTime: 10000
   curDayTime: 0
   isMeatTime: 0
+  curButtonState: 0
   cardLayer: 0
 --- !u!1 &3479882056479147432
 GameObject:
@@ -172,15 +173,11 @@ MonoBehaviour:
   deadVillagers: []
   moveSpeed: 10
   createPosDistance: 2
-  day: 0
-  maxDayTime: 5
-  curDayTime: 0
   cardCap: 10
   cardCount: 0
   coinCount: 0
   foodCount: 0
   villagerCount: 0
-  isMeatTime: 0
   cardLayer: 0
 --- !u!1 &7685053576012820783
 GameObject:

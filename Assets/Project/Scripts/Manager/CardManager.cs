@@ -14,7 +14,6 @@ public class CardManager : MonoBehaviour
     [SerializeField] public LinkedList<Card> cards = new LinkedList<Card>();
     [SerializeField] public LinkedList<VillagerCard> villagers = new LinkedList<VillagerCard>();
     [SerializeField] public LinkedList<FoodCard> foods = new LinkedList<FoodCard>();
-    [SerializeField] public List<VillagerCard> deadVillagers = new List<VillagerCard>();
 
     [SerializeField] public float moveSpeed = 10;
     [SerializeField] public float createPosDistance = 2;
@@ -45,7 +44,7 @@ public class CardManager : MonoBehaviour
             OnChangeVillagerCount?.Invoke();
             if (villagerCount <= 0)
             {
-                Manager.Game.Defeat();
+                Manager.Game.CheckDefeat();
             }
         }
     }

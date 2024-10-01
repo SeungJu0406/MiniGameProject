@@ -15,6 +15,7 @@ public class DragNDrop : MonoBehaviour
     int backGroundLayer;
 
     public bool isClick {  get; private set; }
+    bool canClick = true;
 
     private void Awake()
     {
@@ -24,9 +25,13 @@ public class DragNDrop : MonoBehaviour
         cardLayer = LayerMask.GetMask("Card");
         backGroundLayer = LayerMask.GetMask("BackGround");
     }
-
+    private void Start()
+    {
+        Manager.Game.OnDefeat += StopClick;
+    }
     private void Update()
     {
+        if (!canClick) return;
         if (Input.GetMouseButtonDown(0))
         {
             Click();
@@ -94,6 +99,15 @@ public class DragNDrop : MonoBehaviour
             cardPos = null;
             choiceCard = null;
         }
+    }
+
+    void StartClick()
+    {
+        canClick = true;
+    }
+    void StopClick()
+    {
+        canClick = false;
     }
 
 }

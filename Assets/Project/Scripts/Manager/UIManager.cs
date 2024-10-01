@@ -46,6 +46,7 @@ public class UIManager : MonoBehaviour
         public Animator canvas;
         public TextMeshProUGUI MainText;
         public TextMeshProUGUI ButtonText;
+        public bool isShowUp;
     }
     [Header("ÁÂÇÏ´Ü ÆË¾÷ UI")]
     public LeftDownPopUp PopUpUI;
@@ -177,10 +178,12 @@ public class UIManager : MonoBehaviour
     public void ShowLeftDownPopUpUI()
     {
         PopUpUI.canvas.SetBool("Show", true);
+        PopUpUI.isShowUp = true;
     }
     public void HideLeftDownPopUpUI()
     {
         PopUpUI.canvas.SetBool("Show", false);
+        PopUpUI.isShowUp = false;
     }
     public void UpdatePopUpUIMainText(StringBuilder sb)
     {
