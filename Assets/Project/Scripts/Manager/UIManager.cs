@@ -15,7 +15,7 @@ public class UIManager : MonoBehaviour
         public bool isShow;
     }
     [Header("상단 UI")]
-    public TopUI topUI;
+    [SerializeField] public TopUI topUI;
 
     [System.Serializable]
     public struct LeftUI
@@ -25,7 +25,7 @@ public class UIManager : MonoBehaviour
         public bool isShow;
     }
     [Header("좌측 UI")]
-    public LeftUI leftUI;
+    [SerializeField] public LeftUI leftUI;
     [System.Serializable]
     public struct DayTimer
     {
@@ -33,7 +33,7 @@ public class UIManager : MonoBehaviour
         public TextMeshProUGUI dayText;
     }
     [Header("상단 타이머 UI")]
-    public DayTimer dayTimer;
+    [SerializeField] public DayTimer dayTimer;
     [System.Serializable]
     public struct CardCount
     {
@@ -41,10 +41,10 @@ public class UIManager : MonoBehaviour
         public TextMeshProUGUI cardCountText;
     }
     [Header("카드 갯수 UI")]
-    public CardCount cardCount;
+    [SerializeField] public CardCount cardCount;
 
     [Header("코인 갯수 UI")]
-    public TextMeshProUGUI coinCountText;
+    [SerializeField] public TextMeshProUGUI coinCountText;
 
     [System.Serializable]
     public struct FoodCount
@@ -53,7 +53,7 @@ public class UIManager : MonoBehaviour
         public TextMeshProUGUI foodCountText;
     }
     [Header("음식 갯수 UI")]
-    public FoodCount foodCount;
+    [SerializeField] public FoodCount foodCount;
 
 
     [System.Serializable]
@@ -65,7 +65,7 @@ public class UIManager : MonoBehaviour
         public bool isShow;
     }
     [Header("좌하단 팝업 UI")]
-    public PopUpUI popUpUI;
+    [SerializeField] public PopUpUI popUpUI;
 
     [System.Serializable]
     public struct RecipeUI
@@ -74,7 +74,7 @@ public class UIManager : MonoBehaviour
         public TextMeshProUGUI recipeText;
     }
     [Header("조합법 UI")]
-    public RecipeUI recipeUI;
+    [SerializeField] public RecipeUI recipeUI;
 
     [System.Serializable]
     public struct MenuUI
@@ -83,7 +83,14 @@ public class UIManager : MonoBehaviour
         public bool isMenuUi;
     }
     [Header("메뉴 UI")]
-    public MenuUI menuUI;
+    [SerializeField] public MenuUI menuUI;
+    [System.Serializable]
+    public struct OptineUI
+    {
+        public GameObject UI;
+        public bool isOptineUi;
+    }
+    [SerializeField] public OptineUI optionUI;
 
 
     StringBuilder sb = new StringBuilder();
@@ -186,7 +193,7 @@ public class UIManager : MonoBehaviour
         {
             if (blinkFoodCount != null)
             {
-                StopCoroutine(blinkFoodCount);
+                StopCoroutine(blinkFoodCount);  
                 blinkFoodCount = null;
                 foodCount.foodIcon.color = Color.black;
                 foodCount.foodCountText.color = Color.black;
@@ -282,6 +289,16 @@ public class UIManager : MonoBehaviour
         menuUI.UI.gameObject.SetActive(false);
         menuUI.isMenuUi = false;
     }
+    public void ShowOptionUI()
+    {
+        optionUI.UI.gameObject.SetActive(true);
+        optionUI.isOptineUi = true;
+    }
+    public void HideOptionUI()
+    {
+        optionUI.UI.gameObject.SetActive(false);
+        optionUI.isOptineUi = false;
+    }
 
 
     void InitUI()
@@ -296,5 +313,6 @@ public class UIManager : MonoBehaviour
         HideLeftUI();
         HidePopUpUI();
         HideMenuUI();
+        HideOptionUI();
     }
 }

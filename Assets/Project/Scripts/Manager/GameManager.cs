@@ -38,6 +38,10 @@ public class GameManager : MonoBehaviour
         {
             Manager.UI.HideMenuUI();
         }
+        else if(Manager.UI.optionUI.isOptineUi)
+        {
+            Manager.UI.HideOptionUI();
+        }
         else
         {
             Manager.UI.ShowMenuUI();

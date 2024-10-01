@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class DragNDrop : MonoBehaviour
@@ -14,9 +13,10 @@ public class DragNDrop : MonoBehaviour
     int cardLayer;
     int backGroundLayer;
 
-    public bool isClick {  get; private set; }
+    public bool isClick { get; private set; }
     bool canClick = true;
-    public bool CanClick {  get { return canClick; } set { canClick = value; } }
+    bool canCamareMove;
+    public bool CanClick { get { return canClick; } set { canClick = value; } }
 
     private void Awake()
     {
@@ -49,25 +49,27 @@ public class DragNDrop : MonoBehaviour
     public void Click()
     {
         isClick = true;
+        canCamareMove = true;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, 100f, cardLayer))
         {
             choiceCard = hit.collider.gameObject.GetComponent<Card>();
             if (choiceCard.model.data.cantMove) return;
-            cardPos = hit.transform;        
-            choiceCard.Click();
-            if (dragRoutine == null)
-            {
-                StartCoroutine(DragRoutine());
-            }
+            cardPos = hit.transform;
+            choiceCard.Click();           
         }
 
+        dragRoutine = dragRoutine == null ? StartCoroutine(DragRoutine()) : dragRoutine;
     }
     public void Drag()
     {
         if (cardPos != null)
         {
             cardPos.position = Vector3.Lerp(cardPos.position, movePos, dragSpeed * Time.deltaTime);
+        }
+        else
+        {
+            // 레이를 찍은 곳에 반대 방향 으로 러프?
         }
     }
     Coroutine dragRoutine;
@@ -88,6 +90,7 @@ public class DragNDrop : MonoBehaviour
     public void UnClick()
     {
         isClick = false;
+        canCamareMove = true;
         if (dragRoutine != null)
         {
             StopCoroutine(dragRoutine);
