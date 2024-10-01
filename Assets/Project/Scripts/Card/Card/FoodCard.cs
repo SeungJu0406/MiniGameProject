@@ -11,7 +11,7 @@ public class FoodCard : Card
     }
     protected override void Start()
     {
-        base.Start();
+        base.Start();     
         Manager.Card.AddFoodList(this);
     }
     protected override void OnDisable()
@@ -24,6 +24,7 @@ public class FoodCard : Card
     {
         villager.model.Satiety--;
         model.Durability--;
+        Manager.Card.FoodCount--;
     }
 
     void UpdateFoodDuration()

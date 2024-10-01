@@ -69,7 +69,7 @@ public class Card : MonoBehaviour
     }
     protected virtual void Update()
     {
-        if (Manager.Card.isMeatTime)
+        if (Manager.Day.isMeatTime)
         {
             if (waitMealTIme == null)
             {
@@ -87,7 +87,7 @@ public class Card : MonoBehaviour
     Coroutine waitMealTIme;
     IEnumerator WaitMealTime()
     {
-        while (Manager.Card.isMeatTime)
+        while (Manager.Day.isMeatTime)
         {
             IgnoreCollider();
             yield return null;

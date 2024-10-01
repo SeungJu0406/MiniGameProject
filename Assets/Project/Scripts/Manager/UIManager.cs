@@ -31,13 +31,24 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI coinCountText;
 
     [System.Serializable]
-    public struct CardOver
+    public struct FoodCount
     {
-        public Animator cardOverUI;
-        public TextMeshProUGUI cardOverText;
+        public Image foodIcon;
+        public TextMeshProUGUI foodCountText;
     }
-    [Header("카드 초과 UI")]
-    public CardOver cardOver;
+    [Header("음식 갯수 UI")]
+    public FoodCount foodCount;
+
+
+    [System.Serializable]
+    public struct LeftDownPopUp
+    {
+        public Animator canvas;
+        public TextMeshProUGUI MainText;
+        public TextMeshProUGUI ButtonText;
+    }
+    [Header("좌하단 팝업 UI")]
+    public LeftDownPopUp PopUpUI;
 
 
     StringBuilder sb = new StringBuilder();
@@ -48,12 +59,14 @@ public class UIManager : MonoBehaviour
     }
     private void Start()
     {
-        Manager.Card.OnChangeCurDayTime += UpdateDayTimer;
-        Manager.Card.OnChangeDay += UpdateDay;
+        Manager.Day.OnChangeCurDayTime += UpdateDayTimer;
+        Manager.Day.OnChangeDay += UpdateDay;
         Manager.Card.OnChangeCardCap += UpdateCardCount;
         Manager.Card.OnChangeCardCount += UpdateCardCount;
         Manager.Card.OnChangeCoinCount += UpdateCoinCount;
-        dayTimer.timerBar.maxValue = Manager.Card.MaxDayTime;
+        Manager.Card.OnChangeFoodCount += UpdateFoodCount;
+        Manager.Card.OnChangeVillagerCount += UpdateFoodCount;
+        dayTimer.timerBar.maxValue = Manager.Day.MaxDayTime;
 
 
         InitUI();
@@ -70,13 +83,13 @@ public class UIManager : MonoBehaviour
 
     public void UpdateDayTimer()
     {
-        dayTimer.timerBar.value = Manager.Card.CurDayTime;
+        dayTimer.timerBar.value = Manager.Day.CurDayTime;
     }
 
     public void UpdateDay()
     {
         sb.Clear();
-        sb.Append($"{Manager.Card.Day}번째 달");
+        sb.Append($"{Manager.Day.Day}번째 달");
         dayTimer.dayText.SetText(sb);
     }
 
@@ -117,6 +130,42 @@ public class UIManager : MonoBehaviour
             yield return second;
         }
     }
+    public void UpdateFoodCount()
+    {
+        sb.Clear();
+        sb.Append($"{Manager.Card.FoodCount / 2}/{Manager.Card.VillagerCount}");
+        foodCount.foodCountText.SetText(sb);
+        if (Manager.Card.FoodCount / 2 < Manager.Card.VillagerCount)
+        {
+            if(blinkFoodCount == null)
+            {
+                blinkFoodCount = StartCoroutine(BlickFoodCount());
+            }
+        }
+        else
+        {
+            if(blinkFoodCount != null)
+            {
+                StopCoroutine(blinkFoodCount );
+                blinkFoodCount = null;
+                foodCount.foodIcon.color = Color.black;
+                foodCount.foodCountText.color = Color.black;
+            }
+        }
+    }
+    Coroutine blinkFoodCount;
+    IEnumerator BlickFoodCount()
+    {
+        while (true)
+        {
+            foodCount.foodIcon.color = Color.red;
+            foodCount.foodCountText.color = Color.red;
+            yield return second;
+            foodCount.foodIcon.color = Color.black;
+            foodCount.foodCountText.color = Color.black;
+            yield return second;
+        }
+    }
 
     public void UpdateCoinCount()
     {
@@ -125,17 +174,21 @@ public class UIManager : MonoBehaviour
         coinCountText.SetText(sb);
     }
 
-    public void ShowCardOver()
+    public void ShowLeftDownPopUpUI()
     {
-        cardOver.cardOverUI.SetBool("Show", true);
-        int overCount = Manager.Card.CardCount - Manager.Card.CardCap;
-        sb.Clear(); 
-        sb.Append($"{overCount}장의 카드가 초과되었습니다");
-        cardOver.cardOverText.SetText(sb);
+        PopUpUI.canvas.SetBool("Show", true);
     }
-    public void HideCardOver()
+    public void HideLeftDownPopUpUI()
     {
-        cardOver.cardOverUI.SetBool("Show", false);
+        PopUpUI.canvas.SetBool("Show", false);
+    }
+    public void UpdatePopUpUIMainText(StringBuilder sb)
+    {
+        PopUpUI.MainText.SetText(sb);
+    }
+    public void UpdatePopUpUIButtonText(StringBuilder sb)
+    {
+        PopUpUI.ButtonText.SetText(sb);
     }
 
     void InitUI()
@@ -144,5 +197,6 @@ public class UIManager : MonoBehaviour
         UpdateDay();
         UpdateCardCount();
         UpdateCoinCount();
+        UpdateFoodCount();
     }
 }
