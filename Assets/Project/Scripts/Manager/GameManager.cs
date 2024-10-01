@@ -24,6 +24,27 @@ public class GameManager : MonoBehaviour
         StartCoroutine(BGMRoutine());
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape)) 
+        {
+           OpenOrCloseMenu();
+        }
+    }
+
+    void OpenOrCloseMenu()
+    {
+        if (Manager.UI.menuUI.isMenuUi) // 메뉴 열렸을때
+        {
+            Manager.UI.HideMenuUI();
+        }
+        else
+        {
+            Manager.UI.ShowMenuUI();
+        }
+    }
+
+
     WaitForSeconds bgmDelay = new WaitForSeconds(20f);
     IEnumerator BGMRoutine()
     {

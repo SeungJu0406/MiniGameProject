@@ -23,6 +23,7 @@ MonoBehaviour:
   canGetParent: 1
   canGetChild: 1
   cantMove: 0
+  clip: {fileID: 8300000, guid: 84c3fbbd52d2fef48bc4a4a00a9b5f26, type: 3}
   isVillager: 0
   isMonster: 0
   maxHp: 0
@@ -30,6 +31,9 @@ MonoBehaviour:
   isConsumable: 1
   isCoin: 0
   rewardCards: []
+  produceCard:
+    card: {fileID: 0}
+    time: 0
   randomCards: []
   cardCap: 0
   isIgnoreStack: 0

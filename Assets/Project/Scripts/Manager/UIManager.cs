@@ -76,6 +76,15 @@ public class UIManager : MonoBehaviour
     [Header("조합법 UI")]
     public RecipeUI recipeUI;
 
+    [System.Serializable]
+    public struct MenuUI
+    {
+        public GameObject UI;
+        public bool isMenuUi;
+    }
+    [Header("메뉴 UI")]
+    public MenuUI menuUI;
+
 
     StringBuilder sb = new StringBuilder();
     private void Awake()
@@ -249,9 +258,9 @@ public class UIManager : MonoBehaviour
         sb.Append(data.resultItem[0].item.cardName);
         recipeUI.nameText.SetText(sb);
         sb.Clear();
-        for(int i = 0; i < data.reqItems.Length; i++)
+        for (int i = 0; i < data.reqItems.Length; i++)
         {
-            if(i == data.reqItems.Length - 1)
+            if (i == data.reqItems.Length - 1)
             {
                 sb.Append($"{data.reqItems[i].item.cardName}X{data.reqItems[i].count}");
             }
@@ -263,6 +272,17 @@ public class UIManager : MonoBehaviour
         recipeUI.recipeText.SetText(sb);
     }
 
+    public void ShowMenuUI()
+    {
+        menuUI.UI.gameObject.SetActive(true);
+        menuUI.isMenuUi = true;
+    }
+    public void HideMenuUI()
+    {
+        menuUI.UI.gameObject.SetActive(false);
+        menuUI.isMenuUi = false;
+    }
+
 
     void InitUI()
     {
@@ -272,5 +292,9 @@ public class UIManager : MonoBehaviour
         UpdateCardCount();
         UpdateCoinCount();
         UpdateFoodCount();
+        ShowTopUI();
+        HideLeftUI();
+        HidePopUpUI();
+        HideMenuUI();
     }
 }

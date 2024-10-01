@@ -23,16 +23,17 @@ MonoBehaviour:
   canGetParent: 0
   canGetChild: 0
   cantMove: 0
+  clip: {fileID: 8300000, guid: 84c3fbbd52d2fef48bc4a4a00a9b5f26, type: 3}
   isVillager: 0
   isMonster: 0
   maxHp: 0
   damage: 0
   isConsumable: 0
   isCoin: 0
-  foodAmount: 0
-  additonDamage: 0
-  additionHp: 0
   rewardCards: []
+  produceCard:
+    card: {fileID: 0}
+    time: 0
   randomCards:
   - {fileID: 11400000, guid: 7495ce7b73dda7642a0c4a9265fd25cf, type: 2}
   - {fileID: 11400000, guid: 0f9c9c079dd8c2b4582c0d0a7eac72da, type: 2}
@@ -40,3 +41,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a6b3021066972864c9e0cb7b8d0f2cf3, type: 2}
   - {fileID: 11400000, guid: b4f390f0428fbad4a8908de8501cb177, type: 2}
   cardCap: 0
+  isIgnoreStack: 0

@@ -22,10 +22,11 @@ MonoBehaviour:
   isFactory: 0
   canGetParent: 0
   canGetChild: 1
-  cantMove: 1
+  cantMove: 0
+  clip: {fileID: 8300000, guid: 84c3fbbd52d2fef48bc4a4a00a9b5f26, type: 3}
   isVillager: 0
   isMonster: 1
-  maxHp: 100
+  maxHp: 5
   damage: 2
   isConsumable: 0
   isCoin: 0
