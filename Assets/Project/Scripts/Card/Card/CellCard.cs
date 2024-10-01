@@ -5,8 +5,8 @@ using UnityEngine;
 public class CellCard : Card
 {
     [Space(10)]
-    [SerializeField] float moveCardPosY;
-    [SerializeField] float moveCardPosX;
+    [SerializeField] float moveCardPosY = 1;
+    [SerializeField] float moveCardPosX = 2;
 
     List<List<Card>> lists = new List<List<Card>>();
     List<Card> coins = new List<Card>();

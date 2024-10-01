@@ -134,15 +134,17 @@ public class Card : MonoBehaviour
         if (other.gameObject.layer == cardLayer)
         {
             Card parent = other.gameObject.GetComponent<Card>();
+
             if (parent.model.data.isIgnoreStack)
             {
                 parent.IgnoreStack(this);
                 return;
             }
+            if (model.TopCard == parent.model.TopCard) return;
             if (!model.CanGetParent) return;
             if (!parent.model.CanGetChild) return;
-            if (model.TopCard == parent.model.TopCard) return;
             if (parent.model.ChildCard != null) return;
+            
             // 부모 자식 카드 지정
             model.ParentCard = parent;
             parent.model.ChildCard = this;

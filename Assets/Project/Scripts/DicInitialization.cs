@@ -13,7 +13,7 @@ public class DicInitialization : MonoBehaviour
     void Init()
     {
         cardDic.cards.Clear();
-        string folderPath = "Assets/Project/Animator/Prefabs/Datas/Cards";
+        string folderPath = "Assets/Project/Prefabs/Datas/Cards";
         string[] guids = AssetDatabase.FindAssets("", new[] { folderPath });
         foreach (string guid in guids) 
         {
@@ -23,7 +23,7 @@ public class DicInitialization : MonoBehaviour
         }
 
         recipeDic.recipes.Clear();
-        folderPath = "Assets/Project/Animator/Prefabs/Datas/Recipes";
+        folderPath = "Assets/Project/Prefabs/Datas/Recipes";
         guids = AssetDatabase.FindAssets("", new[] { folderPath });
         foreach (string guid in guids)
         {

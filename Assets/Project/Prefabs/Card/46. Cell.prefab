@@ -200,6 +200,7 @@ MonoBehaviour:
   satiety: 2
   isFight: 0
   isAttack: 0
+  isAccessIgnoreStack: 0
 --- !u!114 &7514846805437359788
 MonoBehaviour:
   m_ObjectHideFlags: 0

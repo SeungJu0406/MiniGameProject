@@ -24,9 +24,9 @@ public class GameManager : MonoBehaviour
     {
         curState = State.Defeat;
 
-        if (!Manager.UI.PopUpUI.isShowUp)
+        if (!Manager.UI.popUpUI.isShow)
         {
-            Manager.UI.ShowLeftDownPopUpUI();
+            Manager.UI.ShowPopUpUI();
         }
         sb.Clear();
         sb.Append("모두 죽었습니다!");
@@ -39,7 +39,8 @@ public class GameManager : MonoBehaviour
     {
         if (curState == State.Defeat)
         {
-            Manager.UI.HideLeftDownPopUpUI();
+            if(Manager.UI.popUpUI.isShow) 
+                Manager.UI.ShowPopUpUI();
             OnDefeat?.Invoke();
             curState = State.GameOver;
         }

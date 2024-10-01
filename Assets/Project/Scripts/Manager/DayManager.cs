@@ -14,7 +14,8 @@ public class DayManager : MonoBehaviour
     public event UnityAction OnChangeDay;
 
     [SerializeField] float maxDayTime;
-    public float MaxDayTime { get { return maxDayTime; } set { maxDayTime = value; } }
+    public float MaxDayTime { get { return maxDayTime; } set { maxDayTime = value; OnChangeMaxDayTime?.Invoke(); } }
+    public event UnityAction OnChangeMaxDayTime;
 
     [SerializeField] float curDayTime;
     public float CurDayTime { get { return curDayTime; } set { curDayTime = value; OnChangeCurDayTime?.Invoke(); } }
@@ -43,7 +44,7 @@ public class DayManager : MonoBehaviour
     IEnumerator DayRoutine()
     {
         Manager.UI.ShowTopUI();
-        Manager.UI.HideLeftDownPopUpUI();
+        Manager.UI.HidePopUpUI();
         CurDayTime = 0;
         curPopUpState = PopUpState.Null;
         while (true)
@@ -63,7 +64,7 @@ public class DayManager : MonoBehaviour
     void StartSettleUp()
     {
         Manager.UI.HideTopUI();
-        Manager.UI.ShowLeftDownPopUpUI();
+        Manager.UI.ShowPopUpUI();
 
         sb.Clear();
         sb.Append($"{Day}번째 달 끝");

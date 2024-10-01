@@ -8,8 +8,24 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
+    [System.Serializable]
+    public struct TopUI
+    {
+        public Animator UI;
+        public bool isShow;
+    }
     [Header("»ó´Ü UI")]
-    public Animator topUI;
+    public TopUI topUI;
+
+    [System.Serializable]
+    public struct LeftUI
+    {
+        public Animator UI;
+        public Button button;
+        public bool isShow;
+    }
+    [Header("ÁÂÃø UI")]
+    public LeftUI leftUI;
     [System.Serializable]
     public struct DayTimer
     {
@@ -41,15 +57,24 @@ public class UIManager : MonoBehaviour
 
 
     [System.Serializable]
-    public struct LeftDownPopUp
+    public struct PopUpUI
     {
         public Animator canvas;
         public TextMeshProUGUI MainText;
         public TextMeshProUGUI ButtonText;
-        public bool isShowUp;
+        public bool isShow;
     }
     [Header("ÁÂÇÏ´Ü ÆË¾÷ UI")]
-    public LeftDownPopUp PopUpUI;
+    public PopUpUI popUpUI;
+
+    [System.Serializable]
+    public struct RecipeUI
+    {
+        public TextMeshProUGUI nameText;
+        public TextMeshProUGUI recipeText;
+    }
+    [Header("Á¶ÇÕ¹ý UI")]
+    public RecipeUI recipeUI;
 
 
     StringBuilder sb = new StringBuilder();
@@ -60,6 +85,7 @@ public class UIManager : MonoBehaviour
     }
     private void Start()
     {
+        Manager.Day.OnChangeMaxDayTime += UpdateMaxDayTime;
         Manager.Day.OnChangeCurDayTime += UpdateDayTimer;
         Manager.Day.OnChangeDay += UpdateDay;
         Manager.Card.OnChangeCardCap += UpdateCardCount;
@@ -67,7 +93,6 @@ public class UIManager : MonoBehaviour
         Manager.Card.OnChangeCoinCount += UpdateCoinCount;
         Manager.Card.OnChangeFoodCount += UpdateFoodCount;
         Manager.Card.OnChangeVillagerCount += UpdateFoodCount;
-        dayTimer.timerBar.maxValue = Manager.Day.MaxDayTime;
 
 
         InitUI();
@@ -75,13 +100,18 @@ public class UIManager : MonoBehaviour
 
     public void ShowTopUI()
     {
-        topUI.SetBool("Show", true);
+        topUI.UI.SetBool("Show", true);
+        topUI.isShow = true;
     }
     public void HideTopUI()
     {
-        topUI.SetBool("Show", false);
+        topUI.UI.SetBool("Show", false);
+        topUI.isShow = false;
     }
-
+    public void UpdateMaxDayTime()
+    {
+        dayTimer.timerBar.maxValue = Manager.Day.MaxDayTime;
+    }
     public void UpdateDayTimer()
     {
         dayTimer.timerBar.value = Manager.Day.CurDayTime;
@@ -138,16 +168,16 @@ public class UIManager : MonoBehaviour
         foodCount.foodCountText.SetText(sb);
         if (Manager.Card.FoodCount / 2 < Manager.Card.VillagerCount)
         {
-            if(blinkFoodCount == null)
+            if (blinkFoodCount == null)
             {
                 blinkFoodCount = StartCoroutine(BlickFoodCount());
             }
         }
         else
         {
-            if(blinkFoodCount != null)
+            if (blinkFoodCount != null)
             {
-                StopCoroutine(blinkFoodCount );
+                StopCoroutine(blinkFoodCount);
                 blinkFoodCount = null;
                 foodCount.foodIcon.color = Color.black;
                 foodCount.foodCountText.color = Color.black;
@@ -174,28 +204,63 @@ public class UIManager : MonoBehaviour
         sb.Append(Manager.Card.CoinCount);
         coinCountText.SetText(sb);
     }
-
-    public void ShowLeftDownPopUpUI()
+    public void ShowPopUpUI()
     {
-        PopUpUI.canvas.SetBool("Show", true);
-        PopUpUI.isShowUp = true;
+        popUpUI.canvas.SetBool("Show", true);
+        popUpUI.isShow = true;
     }
-    public void HideLeftDownPopUpUI()
+    public void HidePopUpUI()
     {
-        PopUpUI.canvas.SetBool("Show", false);
-        PopUpUI.isShowUp = false;
+        popUpUI.canvas.SetBool("Show", false);
+        popUpUI.isShow = false;
     }
     public void UpdatePopUpUIMainText(StringBuilder sb)
     {
-        PopUpUI.MainText.SetText(sb);
+        popUpUI.MainText.SetText(sb);
     }
     public void UpdatePopUpUIButtonText(StringBuilder sb)
     {
-        PopUpUI.ButtonText.SetText(sb);
+        popUpUI.ButtonText.SetText(sb);
     }
+
+    public void ShowOrHideLeftUI()
+    {
+        if (leftUI.isShow)
+        {
+            leftUI.UI.SetBool("Show", false);
+            leftUI.isShow = false;
+        }
+        else
+        {
+            leftUI.UI.SetBool("Show", true);
+            leftUI.isShow = true;
+        }
+    }
+
+    public void UpdateRecipeUI(RecipeData data)
+    {
+        sb.Clear();
+        sb.Append(data.resultItem[0].item.cardName);
+        recipeUI.nameText.SetText(sb);
+        sb.Clear();
+        for(int i = 0; i < data.reqItems.Length; i++)
+        {
+            if(i == data.reqItems.Length - 1)
+            {
+                sb.Append($"{data.reqItems[i].item.cardName}X{data.reqItems[i].count}");
+            }
+            else
+            {
+                sb.Append($"{data.reqItems[i].item.cardName}X{data.reqItems[i].count}\n");
+            }
+        }
+        recipeUI.recipeText.SetText(sb);
+    }
+
 
     void InitUI()
     {
+        UpdateMaxDayTime();
         UpdateDayTimer();
         UpdateDay();
         UpdateCardCount();
