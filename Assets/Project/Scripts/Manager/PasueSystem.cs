@@ -24,7 +24,7 @@ public class PasueSystem : MonoBehaviour
         Manager.UI.ShowTopPasueButton();
         Manager.UI.HideTopNormalButton();
         Manager.UI.HideTopFastButton();
-        InputManager.Instance.CanClick = false;
+        Manager.Input.CanClick = false;
         Time.timeScale = 0f;
     }
 
@@ -33,7 +33,7 @@ public class PasueSystem : MonoBehaviour
         Manager.UI.HideTopPasueButton();
         Manager.UI.ShowTopNormalButton();
         Manager.UI.HideTopFastButton();
-        InputManager.Instance.CanClick = true;
+        Manager.Input.CanClick = true;
         Time.timeScale = 1f;
     }
 

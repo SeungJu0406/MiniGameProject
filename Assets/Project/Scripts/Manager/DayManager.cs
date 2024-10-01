@@ -65,7 +65,7 @@ public class DayManager : MonoBehaviour
     void StartSettleUp()
     {
         Manager.Sound.PlaySFX(Manager.Sound.sfx.settle);
-        InputManager.Instance.CanClick = false;
+        Manager.Input.CanClick = false;
         Manager.UI.HideTopUI();
         Manager.UI.HideLeftUI();
         Manager.UI.ShowPopUpUI();
@@ -161,7 +161,7 @@ public class DayManager : MonoBehaviour
     }
     IEnumerator CheckCardCount()
     {
-        InputManager.Instance.CanClick = true;
+        Manager.Input.CanClick = true;
         if (Manager.Card.CardCount > Manager.Card.CardCap)
         {
             // 카드를 버리라는 UI 출력        

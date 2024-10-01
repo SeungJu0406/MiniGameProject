@@ -24,31 +24,6 @@ public class GameManager : MonoBehaviour
         StartCoroutine(BGMRoutine());
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape)) 
-        {
-           OpenOrCloseMenu();
-        }
-    }
-
-    void OpenOrCloseMenu()
-    {
-        if (Manager.UI.menuUI.isMenuUi) // 메뉴 열렸을때
-        {
-            Manager.UI.HideMenuUI();
-        }
-        else if(Manager.UI.optionUI.isOptineUi)
-        {
-            Manager.UI.HideOptionUI();
-        }
-        else
-        {
-            Manager.UI.ShowMenuUI();
-        }
-    }
-
-
     WaitForSeconds bgmDelay = new WaitForSeconds(20f);
     IEnumerator BGMRoutine()
     {
@@ -68,7 +43,8 @@ public class GameManager : MonoBehaviour
     public void CheckDefeat()
     {
         curState = State.Defeat;
-
+        if(Manager.UI.topUI.isShow) Manager.UI.HideTopUI();         
+        if(Manager.UI.leftUI.isShow) Manager.UI.HideLeftUI();
         if (!Manager.UI.popUpUI.isShow)
         {
             Manager.UI.ShowPopUpUI();
@@ -78,7 +54,15 @@ public class GameManager : MonoBehaviour
         Manager.UI.UpdatePopUpUIMainText(sb);
         sb.Clear();
         sb.Append("게임 종료");
-        Manager.UI.UpdatePopUpUIButtonText(sb);                 
+        Manager.UI.UpdatePopUpUIButtonText(sb);
+
+        StartCoroutine(DefeatDelayRoutine());
+    }
+    IEnumerator DefeatDelayRoutine()
+    {
+        yield return new WaitForSeconds(1f);
+        Time.timeScale = 0f;
+        Manager.Input.CanClick = false;
     }
     public void Defeat()
     {

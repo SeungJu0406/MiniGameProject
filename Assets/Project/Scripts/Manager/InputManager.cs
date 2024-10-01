@@ -44,6 +44,11 @@ public class InputManager : MonoBehaviour
         {
             UnClick();
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            OpenOrCloseMenu();
+        }
     }
     public void Click()
     {
@@ -103,7 +108,6 @@ public class InputManager : MonoBehaviour
             choiceCard = null;
         }
     }
-
     void StartClick()
     {
         canClick = true;
@@ -111,6 +115,22 @@ public class InputManager : MonoBehaviour
     void StopClick()
     {
         canClick = false;
+    }
+
+    void OpenOrCloseMenu()
+    {
+        if (Manager.UI.menuUI.isMenuUi) // 메뉴 열렸을때
+        {
+            Manager.UI.HideMenuUI();
+        }
+        else if (Manager.UI.optionUI.isOptineUi)
+        {
+            Manager.UI.HideOptionUI();
+        }
+        else
+        {
+            Manager.UI.ShowMenuUI();
+        }
     }
 
 }
