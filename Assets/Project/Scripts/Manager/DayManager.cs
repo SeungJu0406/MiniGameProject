@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Linq;
 using System.Text;
@@ -88,12 +89,13 @@ public class DayManager : MonoBehaviour
         Manager.UI.UpdatePopUpUIMainText(sb);
         isMeatTime = true;
         FoodCard food = null;
+        CinemachineVirtualCamera focusCam = null;
         int deadCount = Manager.Card.VillagerCount - Manager.Card.FoodCount / 2;
         for (int i = 0; i < deadCount; i++) 
         {
             Manager.Card.villagers.Last().Die();
         }
-        // 주민들에게 반복
+        // 주민들에게 반복       
         foreach (VillagerCard villager in Manager.Card.villagers)
         {
             // 주민이 배고플 때
@@ -105,6 +107,9 @@ public class DayManager : MonoBehaviour
                     food = Manager.Card.foods.First();
                     food.gameObject.layer = food.ignoreLayer;
                     food.InitOrderLayerAllChild(10000);
+                    focusCam = Manager.Camera.GetCamera(CameraType.Focus);
+                    focusCam.Follow = food.transform;
+                    focusCam.LookAt = food.transform;
                 }
                 float timer = 0;
                 while (true)
@@ -125,12 +130,14 @@ public class DayManager : MonoBehaviour
                 }
             }
         }
+        focusCam = Manager.Camera.GetCamera(CameraType.Main);
+
         if (food != null)
         {
             food.gameObject.layer = food.cardLayer;
             food.InitOrderLayerAllChild(0);
         }
-
+        
         // 주민이 살아있다면 카드 갯수체크
         if (Manager.Card.VillagerCount > 0)
         {
@@ -189,5 +196,6 @@ public class DayManager : MonoBehaviour
     void Defeat()
     {
         curPopUpState = PopUpState.Defeat;
+        StartCoroutine(StartMealTimeRoutine());
     }
 }

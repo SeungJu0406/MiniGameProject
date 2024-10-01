@@ -4,4 +4,5 @@ public static class Manager
     public static CardManager Card { get { return CardManager.Instance; } }
     public static UIManager UI { get { return UIManager.Instance; } }
     public static DayManager Day { get { return DayManager.Instance; } }
+    public static CameraManager Camera { get { return CameraManager.Instance; }}
 }
