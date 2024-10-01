@@ -108,7 +108,7 @@ public class Card : MonoBehaviour
     {
         Vector3 parentPos = model.ParentCard.transform.position;
         Vector3 pos = new Vector3(parentPos.x, parentPos.y - stackInterval, parentPos.z);
-        transform.position = Vector3.Lerp(transform.position, pos, DragNDrop.Instance.dragSpeed * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, pos, InputManager.Instance.dragSpeed * Time.deltaTime);
     }
     public void InitInStack(Card parent)
     {
@@ -126,7 +126,7 @@ public class Card : MonoBehaviour
     }
     protected virtual void OnTriggerEnter(Collider other)
     {     
-        if (DragNDrop.Instance.isClick) return;
+        if (InputManager.Instance.isClick) return;
         if (!IsChoice) return;
         if (model.ParentCard != null) return;
         if (model.IsFight) return;

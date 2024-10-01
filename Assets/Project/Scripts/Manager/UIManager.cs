@@ -12,6 +12,9 @@ public class UIManager : MonoBehaviour
     public struct TopUI
     {
         public Animator UI;
+        public Button pasue;
+        public Button normal;
+        public Button fast;
         public bool isShow;
     }
     [Header("상단 UI")]
@@ -278,6 +281,32 @@ public class UIManager : MonoBehaviour
         }
         recipeUI.recipeText.SetText(sb);
     }
+    #region 버튼 UI On/Off
+    public void ShowTopPasueButton()
+    {
+        topUI.pasue.gameObject.SetActive(true);
+    }
+    public void HideTopPasueButton() 
+    {
+        topUI.pasue.gameObject.SetActive(false);
+    }
+    public void ShowTopNormalButton()
+    {
+        topUI.normal.gameObject.SetActive(true);
+    }
+    public void HideTopNormalButton()
+    {
+        topUI.normal.gameObject.SetActive(false);
+    }
+    public void ShowTopFastButton()
+    {
+        topUI.fast.gameObject.SetActive(true);
+    }
+    public void HideTopFastButton()
+    {
+        topUI.fast.gameObject.SetActive(false);
+    }
+    #endregion
 
     public void ShowMenuUI()
     {
@@ -310,6 +339,7 @@ public class UIManager : MonoBehaviour
         UpdateCoinCount();
         UpdateFoodCount();
         ShowTopUI();
+        HideTopPasueButton(); ShowTopNormalButton(); HideTopFastButton();
         HideLeftUI();
         HidePopUpUI();
         HideMenuUI();

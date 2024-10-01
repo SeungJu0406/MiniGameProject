@@ -1,9 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-public class DragNDrop : MonoBehaviour
+public class InputManager : MonoBehaviour
 {
-    public static DragNDrop Instance;
+    public static InputManager Instance;
 
     [SerializeField] Transform cardPos;
     [SerializeField] Card choiceCard;
@@ -14,10 +14,9 @@ public class DragNDrop : MonoBehaviour
     int backGroundLayer;
 
     public bool isClick { get; private set; }
-    bool canClick = true;
-    bool canCamareMove;
+    bool canClick = true;  
     public bool CanClick { get { return canClick; } set { canClick = value; } }
-
+    bool canCamareMove;
     private void Awake()
     {
         if (Instance == null) Instance = this;
