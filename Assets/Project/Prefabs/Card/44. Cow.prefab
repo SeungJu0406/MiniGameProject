@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 772138232149814160}
   - component: {fileID: 772138232149814163}
   - component: {fileID: 7168026582597176268}
+  - component: {fileID: 7904388506721588637}
   - component: {fileID: 3667039559101226934}
-  - component: {fileID: 5361314563423181561}
   - component: {fileID: 5377945774989368713}
   - component: {fileID: 2107509497385418482}
   m_Layer: 6
@@ -155,6 +155,29 @@ MonoBehaviour:
   satiety: 2
   isFight: 0
   isAttack: 0
+  isAccessIgnoreStack: 0
+--- !u!114 &7904388506721588637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772138232149814165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b26fd56a0fe2a7d4bae79a6dff60c13a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpUI: {fileID: 6432100541414906756}
+  boxCollider: {fileID: 0}
+  rb: {fileID: 0}
+  model: {fileID: 0}
+  combine: {fileID: 0}
+  cardLayer: 0
+  ignoreLayer: 0
+  battleField: {fileID: 0}
+  moveDistance: 2
+  jumpInterval: 5
 --- !u!114 &3667039559101226934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,27 +193,6 @@ MonoBehaviour:
   model: {fileID: 0}
   renders: []
   canvases: []
---- !u!114 &5361314563423181561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 772138232149814165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93829dd85e3b17d43adf45b278e92ea2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boxCollider: {fileID: 0}
-  rb: {fileID: 0}
-  model: {fileID: 0}
-  combine: {fileID: 0}
-  hpUI: {fileID: 6432100541414906756}
-  ignoreLayer: 0
-  battleField: {fileID: 0}
-  moveDistance: 2
-  jumpInterval: 10
 --- !u!114 &5377945774989368713
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -101,7 +101,7 @@ public class FactoryCombine : CardCombine
             for (int j = 0; j < result.resultItem[i].count; j++) // 해당 인덱스의 카드 count만큼 생성
             {
                 Card instanceCard = Instantiate(result.resultItem[i].item.prefab, transform.position, transform.rotation);
-                bool canStack = Manager.Card.MoveResultCard(instanceCard);
+                bool canStack = Manager.Card.InsertStackResultCard(instanceCard);
                 if (!canStack)
                 {
                     Manager.Card.RandomSpawnCard(transform.position, instanceCard);

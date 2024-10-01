@@ -10,6 +10,7 @@ using UnityEngine.Events;
 public class Card : MonoBehaviour
 {
     [Header("참조가 필요함!")]
+    [SerializeField] public TextMeshProUGUI hpUI;
     [Space(10)]
     [Header("GetComponent")]
     [SerializeField] public BoxCollider boxCollider;
@@ -17,7 +18,6 @@ public class Card : MonoBehaviour
     [SerializeField] public CardModel model;
     [SerializeField] public CardCombine combine;
     [Space(10)]
-    [SerializeField] public TextMeshProUGUI hpUI;
 
     float stackInterval = 0.4f;
     [HideInInspector] public int cardLayer;
@@ -276,7 +276,7 @@ public class Card : MonoBehaviour
         for (int i = 0; i < rewardCardInfo.count; i++)
         {
             Card rewardCard = Instantiate(rewardCardInfo.item.prefab, transform.position, transform.rotation);
-            bool canStack = Manager.Card.MoveResultCard(rewardCard);
+            bool canStack = Manager.Card.InsertStackResultCard(rewardCard);
             if (!canStack)
             {
                 Manager.Card.RandomSpawnCard(transform.position, rewardCard);

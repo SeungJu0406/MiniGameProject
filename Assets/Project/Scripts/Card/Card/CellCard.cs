@@ -118,7 +118,7 @@ public class CellCard : Card
         }
         if (coins.Count > 0)
         {
-            bool canStack = Manager.Card.MoveResultCard(coins[0].model.TopCard); // 주변에 코인있으면 코인쪽으로
+            bool canStack = Manager.Card.InsertStackResultCard(coins[0].model.TopCard); // 주변에 코인있으면 코인쪽으로
             if (!canStack)
             {
                 StartCoroutine(MoveCardRoutine(coins[0].model.TopCard, 0)); // 코인리스트는 살짝 아래

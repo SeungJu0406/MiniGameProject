@@ -29,11 +29,20 @@ public class BattleField : Card
         battleDelay = new WaitForSeconds(attackInterval);
         hitUIDelay = new WaitForSeconds(hitUIDuration);
     }
+    protected override void Start()
+    {
+        if (!isInitInStack)
+        {
+            model.TopCard = this;
+            model.BottomCard = this;
+        }
+    }
     private void OnEnable()
     {
         monstersIndex = 0;
         villagersIndex = 0;
     }
+    protected override void OnDisable() { }
     protected override void Update()
     {
         if (CheckIsFight())

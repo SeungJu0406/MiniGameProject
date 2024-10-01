@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
   m_Name: 44.Cow
   m_EditorClassIdentifier: 
-  prefab: {fileID: 5361314563423181561, guid: 11adbbe9a19822d4a9a27762e32ef372, type: 3}
+  prefab: {fileID: 7904388506721588637, guid: 11adbbe9a19822d4a9a27762e32ef372, type: 3}
   cardIcon: {fileID: 21300000, guid: f15fe6047f9d9f94f8a2c3d3581102a5, type: 3}
   id: 44
   cardName: "\uC18C"
@@ -29,11 +29,12 @@ MonoBehaviour:
   damage: 2
   isConsumable: 0
   isCoin: 0
-  foodAmount: 0
-  additonDamage: 0
-  additionHp: 0
   rewardCards:
   - item: {fileID: 11400000, guid: d0261b4eb78f1704da854efac6a6f6b3, type: 2}
     count: 1
+  produceCard:
+    card: {fileID: 11400000, guid: fb14e570e2f2b1f4b8d2b5c08bccc5cd, type: 2}
+    time: 30
   randomCards: []
   cardCap: 0
+  isIgnoreStack: 0

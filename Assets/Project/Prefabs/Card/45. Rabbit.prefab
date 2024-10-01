@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 1092112359901787927}
   - component: {fileID: 1092112359901787924}
   - component: {fileID: 7415506591942235979}
+  - component: {fileID: -7256741642335560458}
   - component: {fileID: 3995582146743059249}
-  - component: {fileID: 5762336990854661758}
   - component: {fileID: 5706787464086421774}
   - component: {fileID: 1778844332650963573}
   m_Layer: 6
@@ -155,6 +155,29 @@ MonoBehaviour:
   satiety: 2
   isFight: 0
   isAttack: 0
+  isAccessIgnoreStack: 0
+--- !u!114 &-7256741642335560458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092112359901787922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b26fd56a0fe2a7d4bae79a6dff60c13a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpUI: {fileID: 6688884052359497475}
+  boxCollider: {fileID: 0}
+  rb: {fileID: 0}
+  model: {fileID: 0}
+  combine: {fileID: 0}
+  cardLayer: 0
+  ignoreLayer: 0
+  battleField: {fileID: 0}
+  moveDistance: 2
+  jumpInterval: 5
 --- !u!114 &3995582146743059249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,27 +193,6 @@ MonoBehaviour:
   model: {fileID: 0}
   renders: []
   canvases: []
---- !u!114 &5762336990854661758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1092112359901787922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93829dd85e3b17d43adf45b278e92ea2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boxCollider: {fileID: 0}
-  rb: {fileID: 0}
-  model: {fileID: 0}
-  combine: {fileID: 0}
-  hpUI: {fileID: 6688884052359497475}
-  ignoreLayer: 0
-  battleField: {fileID: 0}
-  moveDistance: 2
-  jumpInterval: 10
 --- !u!114 &5706787464086421774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,6 +227,7 @@ MonoBehaviour:
   cardName: {fileID: 5047783919844826002}
   price: {fileID: 0}
   hp: {fileID: 6688884052359497475}
+  food: {fileID: 0}
   model: {fileID: 7415506591942235979}
 --- !u!1 &1092112360820419213
 GameObject:

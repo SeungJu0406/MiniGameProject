@@ -63,7 +63,7 @@ public class ShopItemCard : Card
 
         // 2. 해당 카드 생성
         Card instanceCard = Instantiate(randomCard.prefab, transform.position, transform.rotation);
-        bool canStack = Manager.Card.MoveResultCard(instanceCard);
+        bool canStack = Manager.Card.InsertStackResultCard(instanceCard);
         if (!canStack)
         {
             Manager.Card.RandomSpawnCard(transform.position, instanceCard);

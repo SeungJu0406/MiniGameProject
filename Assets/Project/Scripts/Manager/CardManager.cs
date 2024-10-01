@@ -115,7 +115,7 @@ public class CardManager : MonoBehaviour
     {
         CoinCount--;
     }
-    public bool MoveResultCard(Card instanceCard)
+    public bool InsertStackResultCard(Card instanceCard)
     {
         int hitCount = Physics.OverlapSphereNonAlloc(instanceCard.transform.position, detectingDistance, hits, cardLayer);
         for (int i = 0; i < hitCount; i++)

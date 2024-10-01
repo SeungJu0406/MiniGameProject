@@ -32,12 +32,22 @@ public class CardData : ScriptableObject
     [Space(10)]
     [Header("드랍 카드")]
     [SerializeField] public List<CraftingItemInfo> rewardCards;
+    
+    [System.Serializable]
+    public struct ProduceCard
+    {
+        public CardData card;
+        public float time;
+    }
+    [Header("동물 생성 카드")]
+    [SerializeField] public ProduceCard produceCard;
     [Space(10)]
     [Header("상점 카드")]
     [SerializeField] public List<CardData> randomCards;
     [Space(10)]
     [Header("창고 카드")]
     [SerializeField] public int cardCap;
+
 
     [Header("스택 무시 특수 카드")]
     [SerializeField] public bool isIgnoreStack;
