@@ -236,7 +236,11 @@ public class UIManager : MonoBehaviour
             leftUI.isShow = true;
         }
     }
-
+    public void HideLeftUI()
+    {
+        leftUI.UI.SetBool("Show", false);
+        leftUI.isShow = false;
+    }
     public void UpdateRecipeUI(RecipeData data)
     {
         sb.Clear();

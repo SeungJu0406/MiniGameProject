@@ -28,6 +28,7 @@ public class DayManager : MonoBehaviour
     [HideInInspector] public int cardLayer;
     WaitForSeconds milliSecond = new WaitForSeconds(0.1f);
     WaitForSeconds milliSecond5 = new WaitForSeconds(0.5f);
+
     StringBuilder sb = new StringBuilder();
     private void Awake()
     {
@@ -42,7 +43,7 @@ public class DayManager : MonoBehaviour
         StartCoroutine(DayRoutine());
     }
     IEnumerator DayRoutine()
-    {
+    {       
         Manager.UI.ShowTopUI();
         Manager.UI.HidePopUpUI();
         CurDayTime = 0;
@@ -63,9 +64,10 @@ public class DayManager : MonoBehaviour
 
     void StartSettleUp()
     {
+        DragNDrop.Instance.CanClick = false;
         Manager.UI.HideTopUI();
+        Manager.UI.HideLeftUI();
         Manager.UI.ShowPopUpUI();
-
         sb.Clear();
         sb.Append($"{Day}번째 달 끝");
         Manager.UI.UpdatePopUpUIMainText(sb);
@@ -158,6 +160,7 @@ public class DayManager : MonoBehaviour
     }
     IEnumerator CheckCardCount()
     {
+        DragNDrop.Instance.CanClick = true;
         if (Manager.Card.CardCount > Manager.Card.CardCap)
         {
             // 카드를 버리라는 UI 출력        

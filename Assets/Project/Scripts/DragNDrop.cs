@@ -16,6 +16,7 @@ public class DragNDrop : MonoBehaviour
 
     public bool isClick {  get; private set; }
     bool canClick = true;
+    public bool CanClick {  get { return canClick; } set { canClick = value; } }
 
     private void Awake()
     {
@@ -31,7 +32,7 @@ public class DragNDrop : MonoBehaviour
     }
     private void Update()
     {
-        if (!canClick) return;
+        if (!CanClick) return;
         if (Input.GetMouseButtonDown(0))
         {
             Click();
