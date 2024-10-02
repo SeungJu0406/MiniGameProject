@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67d1d8dfe36b07f44a2d179fc0e12327, type: 3}
+  m_Name: 51.FoodShop
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 8240790864141839188, guid: 02fbe6a8bf12c6b4dbaac6be7ac56a6f, type: 3}
+  cardIcon: {fileID: 21300000, guid: 56b0a231567ee16429c6d86baa8e1cfe, type: 3}
+  id: 51
+  cardName: "\uC74C\uC2DD\uC774 \uD544\uC694\uD574"
+  engName: FoodShop
+  price: 3
+  durability: 0
+  isFactory: 0
+  canGetParent: 0
+  canGetChild: 1
+  cantMove: 1
+  clip: {fileID: 8300000, guid: 84c3fbbd52d2fef48bc4a4a00a9b5f26, type: 3}
+  isVillager: 0
+  isMonster: 0
+  maxHp: 0
+  damage: 0
+  isConsumable: 0
+  isCoin: 0
+  rewardCards: []
+  produceCard:
+    card: {fileID: 0}
+    time: 0
+  randomCards: []
+  cardCap: 0
+  isIgnoreStack: 0

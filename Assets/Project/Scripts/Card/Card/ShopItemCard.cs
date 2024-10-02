@@ -6,6 +6,18 @@ public class ShopItemCard : Card
     [SerializeField] float clickTime;
     [SerializeField] float dragTransTime;
 
+    protected override void Start()
+    {
+        if (!isInitInStack)
+        {
+            model.TopCard = this;
+            model.BottomCard = this;
+        }
+        Manager.Sound.PlaySFX(Manager.Sound.sfx.combine);
+        isInitInStack = false;
+    }
+    protected override void OnDisable() { }
+
     public override void Click()
     {
         base.Click();
@@ -52,7 +64,11 @@ public class ShopItemCard : Card
 
         // 2. 해당 카드 생성
         Card instanceCard = Instantiate(randomCard.prefab, transform.position, transform.rotation);
-        Manager.Card.MoveResultCard(transform.position, instanceCard);
+        bool canStack = Manager.Card.InsertStackResultCard(instanceCard);
+        if (!canStack)
+        {
+            Manager.Card.RandomSpawnCard(transform.position, instanceCard);
+        }
 
         // 3. 카드 내구도 1감소
         model.Durability--;

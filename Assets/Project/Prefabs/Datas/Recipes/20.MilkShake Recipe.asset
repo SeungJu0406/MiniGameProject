@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab29f3598e5e2144eaf3b797869fa11e, type: 3}
+  m_Name: 20.MilkShake Recipe
+  m_EditorClassIdentifier: 
+  reqItems:
+  - item: {fileID: 11400000, guid: fb14e570e2f2b1f4b8d2b5c08bccc5cd, type: 2}
+    count: 1
+  - item: {fileID: 11400000, guid: df70f21f2ba62334694788fb74cc4a04, type: 2}
+    count: 1
+  resultItem:
+  - item: {fileID: 11400000, guid: 4b0843d78a922784c953294e683fcc7a, type: 2}
+    count: 1
+  craftingTime: 20

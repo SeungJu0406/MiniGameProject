@@ -38,6 +38,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: WallPaper
+    uniqueID: 4137788225
+    locked: 0
   - name: BackGround
     uniqueID: 3384214209
     locked: 0

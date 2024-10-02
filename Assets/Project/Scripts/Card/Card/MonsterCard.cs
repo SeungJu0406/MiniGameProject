@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 
 public class MonsterCard : Card
@@ -19,7 +18,17 @@ public class MonsterCard : Card
         model.OnChangeBottom += StartBattle;
         jumpDelay = new WaitForSeconds(jumpInterval);
     }
-
+    protected override void Start() 
+    {
+        if (!isInitInStack)
+        {
+            model.TopCard = this;
+            model.BottomCard = this;
+        }
+        Manager.Sound.PlaySFX(Manager.Sound.sfx.combine);
+        isInitInStack = false;
+    }
+    protected override void OnDisable() { }
     protected override void Update()
     {
         if (model.CanGetChild)
@@ -38,6 +47,7 @@ public class MonsterCard : Card
             }
         }
     }
+
     public override void Die()
     {
         base.Die();
@@ -57,7 +67,7 @@ public class MonsterCard : Card
                 if (timer > 1f)
                     break;
                 yield return null;
-            }          
+            }
         }
     }
 
@@ -66,6 +76,5 @@ public class MonsterCard : Card
         if (model.BottomCard == model.Card) return;
         BattleField battleFields = Pool.BattleField.GetPool(transform.position);
         battleFields.AddBattleList(this);
-
     }
 }

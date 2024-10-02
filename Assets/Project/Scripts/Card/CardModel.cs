@@ -9,7 +9,8 @@ public class CardModel : MonoBehaviour
     [SerializeField] public CardData data;
 
     [SerializeField] int durability;
-    public int Durability {  get { return durability; } set { durability = value; } }
+    public int Durability {  get { return durability; } set { durability = value; OnChangeDuration?.Invoke(); } }
+    public event UnityAction OnChangeDuration;
     [SerializeField] int sortOrder;
     public int SortOrder {  get { return sortOrder; } set { sortOrder = value; OnChangeSortOrder?.Invoke(); } }
     public event UnityAction OnChangeSortOrder;
@@ -99,8 +100,15 @@ public class CardModel : MonoBehaviour
     public bool CanGetParent { get { return canGetParent; } set { canGetParent = value; } }
     [HideInInspector] bool canGetChild;
     public bool CanGetChild { get { return canGetChild; } set {canGetChild = value; } }
+    [SerializeField] bool isFight;
+    public bool IsFight { get { return isFight; } set { isFight = value; } }
+
     [SerializeField] bool isAttack;
     public bool IsAttack { get { return isAttack; } set { isAttack = value; } }
+
+    [SerializeField] bool isAccessIgnoreStack;
+    public bool IsAccessIgnoreStack { get { return isAccessIgnoreStack; } set {isAccessIgnoreStack = value; } }
+
     private void Awake()
     {
         Durability = data.durability;

@@ -5,11 +5,12 @@ using UnityEngine;
 using UnityEngine.Events;
 
 
-
+ public enum CardKey { Coin = 2 } 
 [RequireComponent(typeof(CardModel))]
 public class Card : MonoBehaviour
 {
     [Header("참조가 필요함!")]
+    [SerializeField] public TextMeshProUGUI hpUI;
     [Space(10)]
     [Header("GetComponent")]
     [SerializeField] public BoxCollider boxCollider;
@@ -17,10 +18,9 @@ public class Card : MonoBehaviour
     [SerializeField] public CardModel model;
     [SerializeField] public CardCombine combine;
     [Space(10)]
-    [SerializeField] public TextMeshProUGUI hpUI;
 
     float stackInterval = 0.4f;
-    [HideInInspector] int cardLayer;
+    [HideInInspector] public int cardLayer;
     [HideInInspector] public int ignoreLayer;
 
     [HideInInspector] bool isChoice;
@@ -30,7 +30,7 @@ public class Card : MonoBehaviour
     public event UnityAction<Card> OnClick;
     public event UnityAction<Card> OnDie;
     protected bool isInitInStack;
-    StringBuilder sb = new StringBuilder();
+    protected StringBuilder sb = new StringBuilder();
     protected virtual void Awake()
     {
         BoxCollider[] colliders = GetComponentsInChildren<BoxCollider>();
@@ -59,13 +59,8 @@ public class Card : MonoBehaviour
             model.BottomCard = this;
         }
         isInitInStack = false;
-
+        Manager.Sound.PlaySFX(Manager.Sound.sfx.combine);
         Manager.Card.AddCardList(this);
-    }
-
-    private void Card_OnStopMealTime()
-    {
-        throw new System.NotImplementedException();
     }
 
     protected virtual void OnDisable()
@@ -74,22 +69,25 @@ public class Card : MonoBehaviour
     }
     protected virtual void Update()
     {
-        if (Manager.Card.isMeatTime)
+        if (Manager.Day.isMeatTime)
         {
             if (waitMealTIme == null)
             {
                 waitMealTIme = StartCoroutine(WaitMealTime());
             }
         }
-        if (model.ParentCard != null)
+        else
         {
-            TraceParent();
+            if (model.ParentCard != null)
+            {
+                TraceParent();
+            }
         }
     }
     Coroutine waitMealTIme;
     IEnumerator WaitMealTime()
     {
-        while (Manager.Card.isMeatTime)
+        while (Manager.Day.isMeatTime)
         {
             IgnoreCollider();
             yield return null;
@@ -110,15 +108,15 @@ public class Card : MonoBehaviour
     {
         Vector3 parentPos = model.ParentCard.transform.position;
         Vector3 pos = new Vector3(parentPos.x, parentPos.y - stackInterval, parentPos.z);
-        transform.position = Vector3.Lerp(transform.position, pos, DragNDrop.Instance.dragSpeed * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, pos, Manager.Input.dragSpeed * Time.deltaTime);
     }
     public void InitInStack(Card parent)
     {
         if (!model.CanGetParent) return;
         if (!parent.model.CanGetChild) return;
         isInitInStack = true;
-        model.TopCard = this;
-        model.BottomCard = this;
+        model.TopCard = model.TopCard == null ? this : model.TopCard;      
+        model.BottomCard = model.BottomCard == null? this : model.BottomCard;
         model.ParentCard = parent;
         parent.model.ChildCard = this;
         ChangeOrderLayerAllChild();
@@ -126,18 +124,27 @@ public class Card : MonoBehaviour
         ChangeBottomAllParent(model.BottomCard); // 본인 + 부모에게 bottom 설정
         if (parent.rb != null) parent.rb.velocity = Vector3.zero;
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!model.CanGetParent) return;
-        if (DragNDrop.Instance.isClick) return;
+    protected virtual void OnTriggerEnter(Collider other)
+    {     
+        if (Manager.Input.isClick) return;
         if (!IsChoice) return;
         if (model.ParentCard != null) return;
+        if (model.IsFight) return;
+        if(model.IsAccessIgnoreStack) return;
         if (other.gameObject.layer == cardLayer)
         {
             Card parent = other.gameObject.GetComponent<Card>();
-            if (!parent.model.CanGetChild) return;
+
+            if (parent.model.data.isIgnoreStack)
+            {
+                parent.IgnoreStack(this);
+                return;
+            }
             if (model.TopCard == parent.model.TopCard) return;
+            if (!model.CanGetParent) return;
+            if (!parent.model.CanGetChild) return;
             if (parent.model.ChildCard != null) return;
+            
             // 부모 자식 카드 지정
             model.ParentCard = parent;
             parent.model.ChildCard = this;
@@ -147,7 +154,7 @@ public class Card : MonoBehaviour
             parent.rb.velocity = Vector3.zero;
         }
     }
-
+    public virtual void IgnoreStack(Card card) { }
     public void InitCollider()
     {
         if (model.data.cantMove) return;
@@ -165,11 +172,18 @@ public class Card : MonoBehaviour
     }
     public void IgnoreCollider()
     {
-        boxCollider.gameObject.SetActive(false);
+        if (model.Card != null)
+        {
+            boxCollider.gameObject.SetActive(false);
+        }
+
     }
     public void NotIgnoreCollider()
     {
-        boxCollider.gameObject.SetActive(true);
+        if (model.Card != null)
+        {
+            boxCollider.gameObject.SetActive(true);
+        }
     }
     public virtual void Click()
     {
@@ -185,6 +199,7 @@ public class Card : MonoBehaviour
         ChangeTopAllChild(this);
         ClickAllChild();
         model.BottomCard.IgnoreCollider();
+        Manager.Sound.PlaySFX(model.data.clip);
     }
     void ClickAllChild()
     {
@@ -201,6 +216,7 @@ public class Card : MonoBehaviour
         UnClickAllChild();
         StartCoroutine(UnClickDelayRoutine());
         model.BottomCard.NotIgnoreCollider();
+        Manager.Sound.PlaySFX(Manager.Sound.sfx.unclick);
     }
     WaitForSeconds delay = new WaitForSeconds(0.1f);
     IEnumerator UnClickDelayRoutine()
@@ -237,7 +253,7 @@ public class Card : MonoBehaviour
         model.SortOrder = model.ParentCard.model.SortOrder + 1;
         if (model.ChildCard != null)
         {
-            model.ChildCard.ChangeOrderLayerAllChild();
+            model.ChildCard.ChangeOrderLayerAllChild(); 
         }
     }
     public void InitOrderLayerAllChild(int order)
@@ -262,10 +278,13 @@ public class Card : MonoBehaviour
         for (int i = 0; i < rewardCardInfo.count; i++)
         {
             Card rewardCard = Instantiate(rewardCardInfo.item.prefab, transform.position, transform.rotation);
-            Manager.Card.MoveResultCard(transform.position, rewardCard);
+            bool canStack = Manager.Card.InsertStackResultCard(rewardCard);
+            if (!canStack)
+            {
+                Manager.Card.RandomSpawnCard(transform.position, rewardCard);
+            }
         }
     }
-
     void UpdateCurHp()
     {
         sb.Clear();

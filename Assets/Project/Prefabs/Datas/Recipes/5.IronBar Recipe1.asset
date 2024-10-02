@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab29f3598e5e2144eaf3b797869fa11e, type: 3}
+  m_Name: 5.IronBar Recipe1
+  m_EditorClassIdentifier: 
+  reqItems:
+  - item: {fileID: 11400000, guid: ecd5a2ff89179d844a569492dd982a7d, type: 2}
+    count: 1
+  - item: {fileID: 11400000, guid: 0f9c9c079dd8c2b4582c0d0a7eac72da, type: 2}
+    count: 1
+  - item: {fileID: 11400000, guid: 20ef34e4ebbc5d34fac59379a101e56d, type: 2}
+    count: 1
+  resultItem:
+  - item: {fileID: 11400000, guid: 27cbe3dc08f42784ebc77de26daf3d62, type: 2}
+    count: 1
+  craftingTime: 20

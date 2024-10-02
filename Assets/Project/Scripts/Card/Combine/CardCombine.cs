@@ -25,7 +25,10 @@ public abstract class CardCombine : MonoBehaviour
     }
     protected virtual void Start()
     {
-        timerBar.gameObject.SetActive(false);
+        if (timerBar != null)
+        {
+            timerBar.gameObject.SetActive(false);
+        }
     }
 
     public virtual void Delete()
@@ -155,7 +158,11 @@ public abstract class CardCombine : MonoBehaviour
             for (int j = 0; j < result.resultItem[i].count; j++) // 해당 인덱스의 카드 count만큼 생성
             {
                 Card instanceCard = Instantiate(result.resultItem[i].item.prefab, transform.position, transform.rotation);
-                Manager.Card.MoveResultCard(transform.position ,instanceCard);
+                bool canStack = Manager.Card.InsertStackResultCard(instanceCard);
+                if (!canStack) 
+                {
+                    Manager.Card.RandomSpawnCard(transform.position, instanceCard);
+                }
             }
         }
         // 생성 후 재료아이템 처리
