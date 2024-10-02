@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PasueSystem : MonoBehaviour
+public class PauseSystem : MonoBehaviour
 {
     private void Update()
     {
@@ -10,7 +10,7 @@ public class PasueSystem : MonoBehaviour
         {
             if(Time.timeScale > 0f)
             {
-                Pasue();
+                Pause();
             }
             else
             {
@@ -19,9 +19,9 @@ public class PasueSystem : MonoBehaviour
         }
     }
 
-    public void Pasue()
+    public void Pause()
     {
-        Manager.UI.ShowTopPasueButton();
+        Manager.UI.ShowTopPauseButton();
         Manager.UI.HideTopNormalButton();
         Manager.UI.HideTopFastButton();
         Manager.Input.CanClick = false;
@@ -30,7 +30,7 @@ public class PasueSystem : MonoBehaviour
 
     public void normal()
     {
-        Manager.UI.HideTopPasueButton();
+        Manager.UI.HideTopPauseButton();
         Manager.UI.ShowTopNormalButton();
         Manager.UI.HideTopFastButton();
         Manager.Input.CanClick = true;
@@ -39,7 +39,7 @@ public class PasueSystem : MonoBehaviour
 
     public void Fast()
     {
-        Manager.UI.HideTopPasueButton();
+        Manager.UI.HideTopPauseButton();
         Manager.UI.HideTopNormalButton();
         Manager.UI.ShowTopFastButton();
         Time.timeScale = 2f;

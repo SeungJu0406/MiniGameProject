@@ -12,7 +12,8 @@ public class UIManager : MonoBehaviour
     public struct TopUI
     {
         public Animator UI;
-        public Button pasue;
+        public Button pause;
+        public GameObject pauseFillter;
         public Button normal;
         public Button fast;
         public bool isShow;
@@ -91,9 +92,17 @@ public class UIManager : MonoBehaviour
     public struct OptineUI
     {
         public GameObject UI;
+        public Slider BGMVolume;
+        public TextMeshProUGUI BGMVolumeText;
+        public Slider SFXVolume;
+        public TextMeshProUGUI SFXVolumeText;
         public bool isOptineUi;
     }
+    [Header("옵션 UI")]
     [SerializeField] public OptineUI optionUI;
+
+    [Header("화면전환 UI")]
+    [SerializeField] public Animator fadeUI;
 
 
     StringBuilder sb = new StringBuilder();
@@ -282,13 +291,15 @@ public class UIManager : MonoBehaviour
         recipeUI.recipeText.SetText(sb);
     }
     #region 버튼 UI On/Off
-    public void ShowTopPasueButton()
+    public void ShowTopPauseButton()
     {
-        topUI.pasue.gameObject.SetActive(true);
+        topUI.pause.gameObject.SetActive(true);
+        topUI.pauseFillter.gameObject.SetActive(true);
     }
-    public void HideTopPasueButton() 
+    public void HideTopPauseButton() 
     {
-        topUI.pasue.gameObject.SetActive(false);
+        topUI.pause.gameObject.SetActive(false);
+        topUI.pauseFillter.gameObject.SetActive(false);
     }
     public void ShowTopNormalButton()
     {
@@ -329,7 +340,29 @@ public class UIManager : MonoBehaviour
         optionUI.isOptineUi = false;
     }
 
-
+    public void UpdateBGMVolume()
+    {
+        sb.Clear();
+        sb.Append($"{(int)(optionUI.BGMVolume.value * 100)}%");
+        optionUI.BGMVolumeText.SetText(sb);
+    }
+    public void UpdateSFXVolume()
+    {
+        sb.Clear();
+        sb.Append($"{(int)(optionUI.SFXVolume.value * 100)}%");
+        optionUI.SFXVolumeText.SetText(sb);
+    }
+    public void ShowFadeUI()
+    {
+        fadeUI.gameObject.SetActive(true);
+        fadeUI.Play("FadeOut");
+    }
+    IEnumerator HideFadeUIRoutine()
+    {
+        fadeUI.Play("FadeIn");
+        yield return second;
+        fadeUI.gameObject.SetActive(false);
+    }
     void InitUI()
     {
         UpdateMaxDayTime();
@@ -339,10 +372,14 @@ public class UIManager : MonoBehaviour
         UpdateCoinCount();
         UpdateFoodCount();
         ShowTopUI();
-        HideTopPasueButton(); ShowTopNormalButton(); HideTopFastButton();
+        HideTopPauseButton(); ShowTopNormalButton(); HideTopFastButton();
         HideLeftUI();
         HidePopUpUI();
         HideMenuUI();
         HideOptionUI();
+        UpdateBGMVolume();
+        UpdateSFXVolume();
+
+        StartCoroutine(HideFadeUIRoutine());
     }
 }

@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
     {
         if(Instance == null) Instance = this;
         else Destroy(gameObject);
-        OnDefeat += GameOver;
         curState = State.Null;
     }
     private void Start()
@@ -73,10 +72,13 @@ public class GameManager : MonoBehaviour
             OnDefeat?.Invoke();
             curState = State.GameOver;
         }
+        else if (curState == State.GameOver)
+        {
+            ChangeTitleScene();
+        }
     }
-    void GameOver()
+    public void ChangeTitleScene()
     {
-        Debug.Log("게임 오버");
-
+        SceneChanger.Instance.ChangeScene("TitleScene");
     }
 }
