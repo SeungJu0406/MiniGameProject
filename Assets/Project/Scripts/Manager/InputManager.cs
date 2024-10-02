@@ -51,6 +51,18 @@ public class InputManager : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (Time.timeScale > 0f)
+            {
+                Manager.Time.Pause();
+            }
+            else
+            {
+                Manager.Time.Normal();
+            }
+        }
+
     }
     public void Click()
     {

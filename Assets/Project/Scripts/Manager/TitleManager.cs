@@ -78,8 +78,7 @@ public class TitleManager : MonoBehaviour
 
         ShowTitleUI();
         HideOptionUI();
-        UpdateBGMVolume();
-        UpdateSFXVolume();
+        InitSound();
 
         StartCoroutine(PlayBGM());
         hideFadeUIRoutine = hideFadeUIRoutine == null ? StartCoroutine(HideFadeUIRoutine()) : hideFadeUIRoutine;
@@ -125,9 +124,15 @@ public class TitleManager : MonoBehaviour
         sb.Append($"{(int)(optionUI.SFXVolume.value * 100)}%");
         optionUI.SFXVolumeText.SetText(sb);
     }
+    public void InitSound()
+    {
+        optionUI.BGMVolume.value = Manager.Sound.bgmPlayer.volume;
+        optionUI.SFXVolume.value = Manager.Sound.sfxPlayer.volume;
+        UpdateBGMVolume();
+        UpdateSFXVolume();
+    }
     public void ShowFadeUI()
     {
-        Debug.Log("3");
         if (hideFadeUIRoutine != null)
         {
             StopCoroutine(hideFadeUIRoutine);

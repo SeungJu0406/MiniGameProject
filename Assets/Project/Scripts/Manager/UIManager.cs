@@ -345,6 +345,7 @@ public class UIManager : MonoBehaviour
         optionUI.isOptineUi = false;
     }
 
+    // º¼·ý UI  
     public void UpdateBGMVolume()
     {
         sb.Clear();
@@ -356,6 +357,13 @@ public class UIManager : MonoBehaviour
         sb.Clear();
         sb.Append($"{(int)(optionUI.SFXVolume.value * 100)}%");
         optionUI.SFXVolumeText.SetText(sb);
+    }
+    public void InitSound()
+    {
+        optionUI.BGMVolume.value = Manager.Sound.bgmPlayer.volume;
+        optionUI.SFXVolume.value = Manager.Sound.sfxPlayer.volume;
+        UpdateBGMVolume();
+        UpdateSFXVolume();
     }
     public void ShowFadeUI()
     {
@@ -382,8 +390,7 @@ public class UIManager : MonoBehaviour
         HidePopUpUI();
         HideMenuUI();
         HideOptionUI();
-        UpdateBGMVolume();
-        UpdateSFXVolume();
+        InitSound();
 
         StartCoroutine(HideFadeUIRoutine());
     }

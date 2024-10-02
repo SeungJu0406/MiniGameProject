@@ -17,7 +17,7 @@ MonoBehaviour:
   id: 26
   cardName: "\uC0AC\uACFC\uB098\uBB34"
   engName: AppleTree
-  price: 0
+  price: 1
   durability: 2
   isFactory: 1
   canGetParent: 0

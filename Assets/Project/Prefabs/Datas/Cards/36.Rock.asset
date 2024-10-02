@@ -17,7 +17,7 @@ MonoBehaviour:
   id: 36
   cardName: "\uBC14\uC704"
   engName: Rock
-  price: 0
+  price: 1
   durability: 3
   isFactory: 1
   canGetParent: 0

@@ -32,7 +32,6 @@ public class SceneChanger : MonoBehaviour
         }
         else if (Manager.Game != null)
         {
-            Debug.Log("∞‘¿”æ¿ ∆‰¿ÃµÂæ∆øÙ");
             Manager.UI.ShowFadeUI();
         }       
         yield return delay;

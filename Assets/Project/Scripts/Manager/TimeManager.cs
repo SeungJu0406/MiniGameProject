@@ -11,20 +11,6 @@ public class TimeManager : MonoBehaviour
         if(Instance == null) Instance = this;
         else Destroy(gameObject);
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if(Time.timeScale > 0f)
-            {
-                Pause();
-            }
-            else
-            {
-                Normal();
-            }
-        }
-    }
 
     public void Pause()
     {
