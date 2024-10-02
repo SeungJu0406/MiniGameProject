@@ -37,7 +37,16 @@ public class SoundManager : MonoBehaviour
         if (Instance == null)Instance = this;        
         else Destroy(gameObject);
     }
-
+    private void Start()
+    {
+        StartCoroutine(StartMuteRoutine());
+    }
+    IEnumerator StartMuteRoutine()
+    {
+        Mute();
+        yield return new WaitForSeconds(0.1f);
+        UnMute();
+    }
     public void PlayBGM(AudioClip clip)
     {
         bgmPlayer.clip = clip;
@@ -69,5 +78,15 @@ public class SoundManager : MonoBehaviour
     public void SetSFX(float volume)
     {
         sfxPlayer.volume = volume;
+    }
+    public void Mute()
+    {
+        bgmPlayer.mute = true;
+        sfxPlayer.mute = true;
+    }
+    public void UnMute()
+    {
+        bgmPlayer.mute = false;
+        sfxPlayer.mute = false;
     }
 }

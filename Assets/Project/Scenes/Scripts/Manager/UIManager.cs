@@ -126,6 +126,11 @@ public class UIManager : MonoBehaviour
         InitUI();
     }
 
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+        blinkFoodCount = null;
+    }
     public void ShowTopUI()
     {
         topUI.UI.SetBool("Show", true);

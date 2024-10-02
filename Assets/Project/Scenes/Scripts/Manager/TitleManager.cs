@@ -2,7 +2,6 @@ using System.Collections;
 using System.Text;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TitleManager : MonoBehaviour
@@ -60,23 +59,40 @@ public class TitleManager : MonoBehaviour
             ShowTitleUI();
         }
     }
+    public void ExitGame()
+    {
+#if UNITY_EDITOR
+
+        UnityEditor.EditorApplication.isPlaying = false;
+
+#else
+
+        Application.Quit();
+
+#endif
+    }
+
     void Init()
     {
+        Manager.Sound.Mute();
+
         ShowTitleUI();
         HideOptionUI();
         UpdateBGMVolume();
         UpdateSFXVolume();
 
         StartCoroutine(PlayBGM());
-        StartCoroutine(HideFadeUIRoutine());
+        hideFadeUIRoutine = hideFadeUIRoutine == null ? StartCoroutine(HideFadeUIRoutine()) : hideFadeUIRoutine;
+
+        Manager.Sound.UnMute();
     }
+
 
 
 
     #region UI
     public void ShowTitleUI()
     {
-        Manager.Sound.PlaySFX(Manager.Sound.sfx.UIButton);
         titleUI.UI.gameObject.SetActive(true);
         titleUI.isShow = true;
     }
@@ -93,6 +109,7 @@ public class TitleManager : MonoBehaviour
     }
     public void HideOptionUI()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.sfx.UIButton);
         optionUI.UI.gameObject.SetActive(false);
         optionUI.isOptineUi = false;
     }
@@ -110,19 +127,26 @@ public class TitleManager : MonoBehaviour
     }
     public void ShowFadeUI()
     {
+        Debug.Log("3");
+        if (hideFadeUIRoutine != null)
+        {
+            StopCoroutine(hideFadeUIRoutine);
+            hideFadeUIRoutine = null;
+        }
         fadeUI.gameObject.SetActive(true);
         fadeUI.Play("FadeOut");
     }
-    WaitForSeconds second = new WaitForSeconds(1);
+    Coroutine hideFadeUIRoutine;
     IEnumerator HideFadeUIRoutine()
     {
         fadeUI.Play("FadeIn");
-        yield return second;
+        yield return new WaitForSeconds(1);
         fadeUI.gameObject.SetActive(false);
+        hideFadeUIRoutine = null;
     }
     #endregion
 
-    #region 사운드
+    #region 사운드  
     WaitForSeconds BGMDelay = new WaitForSeconds(5f);
     IEnumerator PlayBGM()
     {

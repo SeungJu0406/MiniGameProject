@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
         curState = State.Null;
     }
     private void Start()
-    {
+    {       
         StartCoroutine(BGMRoutine());
     }
 
@@ -76,9 +76,10 @@ public class GameManager : MonoBehaviour
         {
             ChangeTitleScene();
         }
+
     }
     public void ChangeTitleScene()
-    {
+    {       
         SceneChanger.Instance.ChangeScene("TitleScene");
     }
 }
