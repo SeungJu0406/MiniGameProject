@@ -33,7 +33,8 @@ public class GameManager : MonoBehaviour
             {
                 yield return bgmDelay;
                 Manager.Sound.PlayBGM(Manager.Sound.bgm.game[index]);
-                index = index >= Manager.Sound.bgm.game.Length ? 0 : index + 1;
+                index++;
+                index = index >= Manager.Sound.bgm.game.Length ? 0 : index;
             }
             yield return null;
         }

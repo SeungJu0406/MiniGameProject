@@ -30,7 +30,7 @@ public class CardData : ScriptableObject
     [Space(10)]
     [Header("소모 아이템 정보")]
     [SerializeField] public bool isConsumable;
-    [ShowIf("isConsumable")]
+    //[ShowIf("isConsumable")]
     [SerializeField] public bool isCoin;
     [Space(10)]
     [Header("드랍 카드")]

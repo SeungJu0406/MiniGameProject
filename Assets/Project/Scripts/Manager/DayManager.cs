@@ -69,6 +69,7 @@ public class DayManager : MonoBehaviour
         Manager.UI.HideTopUI();
         Manager.UI.HideLeftUI();
         Manager.UI.ShowPopUpUI();
+        Manager.Time.Normal();
         sb.Clear();
         sb.Append($"{Day}번째 달 끝");
         Manager.UI.UpdatePopUpUIMainText(sb);
@@ -87,7 +88,7 @@ public class DayManager : MonoBehaviour
 
     IEnumerator StartMealTimeRoutine()
     {
-        sb.Clear();
+        sb.Clear();       
         Manager.UI.UpdatePopUpUIButtonText(sb);
         sb.Append("식사 중. . .");
         Manager.UI.UpdatePopUpUIMainText(sb);
