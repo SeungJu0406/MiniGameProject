@@ -17,7 +17,7 @@ MonoBehaviour:
   id: 41
   cardName: "\uB098\uBB34"
   engName: Tree
-  price: 0
+  price: 1
   durability: 3
   isFactory: 1
   canGetParent: 0

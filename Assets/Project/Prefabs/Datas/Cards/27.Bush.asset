@@ -17,7 +17,7 @@ MonoBehaviour:
   id: 27
   cardName: "\uB538\uAE30\uB098\uBB34"
   engName: Bush
-  price: 0
+  price: 1
   durability: 3
   isFactory: 1
   canGetParent: 0

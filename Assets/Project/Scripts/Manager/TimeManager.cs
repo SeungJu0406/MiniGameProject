@@ -2,21 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PauseSystem : MonoBehaviour
+public class TimeManager : MonoBehaviour
 {
-    private void Update()
+    public static TimeManager Instance;
+
+    private void Awake()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if(Time.timeScale > 0f)
-            {
-                Pause();
-            }
-            else
-            {
-                normal();
-            }
-        }
+        if(Instance == null) Instance = this;
+        else Destroy(gameObject);
     }
 
     public void Pause()
@@ -28,7 +21,7 @@ public class PauseSystem : MonoBehaviour
         Time.timeScale = 0f;
     }
 
-    public void normal()
+    public void Normal()
     {
         Manager.UI.HideTopPauseButton();
         Manager.UI.ShowTopNormalButton();

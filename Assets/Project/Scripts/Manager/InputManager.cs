@@ -31,24 +31,38 @@ public class InputManager : MonoBehaviour
     }
     private void Update()
     {
-        if (!CanClick) return;
-        if (Input.GetMouseButtonDown(0))
-        {
-            Click();
-        }
-        else if (Input.GetMouseButton(0))
-        {
-            Drag();
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            UnClick();
-        }
-
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             OpenOrCloseMenu();
         }
+        if (CanClick)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                Click();
+            }
+            else if (Input.GetMouseButton(0))
+            {
+                Drag();
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                UnClick();
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (Time.timeScale > 0f)
+            {
+                Manager.Time.Pause();
+            }
+            else
+            {
+                Manager.Time.Normal();
+            }
+        }
+
     }
     public void Click()
     {
@@ -117,18 +131,21 @@ public class InputManager : MonoBehaviour
         canClick = false;
     }
 
-    void OpenOrCloseMenu()
+    public void OpenOrCloseMenu()
     {
         if (Manager.UI.menuUI.isMenuUi) // 메뉴 열렸을때
         {
+            Manager.Time.Normal();
             Manager.UI.HideMenuUI();
         }
         else if (Manager.UI.optionUI.isOptineUi)
         {
+            Manager.Time.Normal();
             Manager.UI.HideOptionUI();
         }
         else
         {
+            Manager.Time.Pause();
             Manager.UI.ShowMenuUI();
         }
     }

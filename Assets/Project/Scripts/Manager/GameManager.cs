@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
         curState = State.Null;
     }
     private void Start()
-    {
+    {       
         StartCoroutine(BGMRoutine());
     }
 
@@ -55,8 +55,9 @@ public class GameManager : MonoBehaviour
         sb.Append("게임 종료");
         Manager.UI.UpdatePopUpUIButtonText(sb);
 
-        StartCoroutine(DefeatDelayRoutine());
+        defeatDelayRoutine = defeatDelayRoutine ==null ? StartCoroutine(DefeatDelayRoutine()) : defeatDelayRoutine;
     }
+    Coroutine defeatDelayRoutine;
     IEnumerator DefeatDelayRoutine()
     {
         yield return new WaitForSeconds(1f);
@@ -76,9 +77,15 @@ public class GameManager : MonoBehaviour
         {
             ChangeTitleScene();
         }
+
     }
     public void ChangeTitleScene()
-    {
+    {       
+        if (defeatDelayRoutine != null)
+        {
+            StopCoroutine(defeatDelayRoutine);
+            defeatDelayRoutine = null;
+        }
         SceneChanger.Instance.ChangeScene("TitleScene");
     }
 }

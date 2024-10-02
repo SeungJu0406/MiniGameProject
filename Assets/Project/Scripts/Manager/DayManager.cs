@@ -105,7 +105,7 @@ public class DayManager : MonoBehaviour
         foreach (VillagerCard villager in Manager.Card.villagers)
         {
             // 주민이 배고플 때
-            while (villager.model.Satiety > 0 )
+            while (villager.model.Satiety > 0 && Manager.Card.foods.Count > 0)
             {
                 if (food == null)
                 {

@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
@@ -24,7 +22,7 @@ public class SoundManager : MonoBehaviour
         public AudioClip settle;
         public AudioClip attack;
         public AudioClip unclick;
-        public AudioClip combine;      
+        public AudioClip combine;
         public AudioClip recipeUI;
         public AudioClip UIButton;
     }
@@ -34,10 +32,27 @@ public class SoundManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)Instance = this;        
-        else Destroy(gameObject);
+        if (Instance == null) Instance = this;
+        else
+        {
+            this.bgmPlayer.volume = Instance.bgmPlayer.volume;
+            this.sfxPlayer.volume = Instance.sfxPlayer.volume;
+            Destroy(Instance.gameObject);
+            Instance = this;
+        }
+        transform.SetParent(null);
+        DontDestroyOnLoad(gameObject);
     }
-
+    private void Start()
+    {
+        StartCoroutine(StartMuteRoutine());
+    }
+    IEnumerator StartMuteRoutine()
+    {
+        Mute();
+        yield return new WaitForSeconds(0.1f);
+        UnMute();
+    }
     public void PlayBGM(AudioClip clip)
     {
         bgmPlayer.clip = clip;
@@ -52,7 +67,7 @@ public class SoundManager : MonoBehaviour
     }
     public void PauseBGM()
     {
-        if (bgmPlayer.isPlaying) 
+        if (bgmPlayer.isPlaying)
         {
             bgmPlayer.Pause();
         }
@@ -69,5 +84,15 @@ public class SoundManager : MonoBehaviour
     public void SetSFX(float volume)
     {
         sfxPlayer.volume = volume;
+    }
+    public void Mute()
+    {
+        bgmPlayer.mute = true;
+        sfxPlayer.mute = true;
+    }
+    public void UnMute()
+    {
+        bgmPlayer.mute = false;
+        sfxPlayer.mute = false;
     }
 }

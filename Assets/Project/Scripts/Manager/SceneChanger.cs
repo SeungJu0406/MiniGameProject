@@ -16,6 +16,8 @@ public class SceneChanger : MonoBehaviour
 
     public void ChangeScene(string scene)
     {
+       Time.timeScale = 1f;
+
        AsyncOperation oper = SceneManager.LoadSceneAsync(scene);
 
        StartCoroutine(ChangeSceneRoutine(oper));
@@ -28,7 +30,7 @@ public class SceneChanger : MonoBehaviour
         {
             Manager.Title.ShowFadeUI();
         }
-        else if (Manager.UI != null)
+        else if (Manager.Game != null)
         {
             Manager.UI.ShowFadeUI();
         }       
