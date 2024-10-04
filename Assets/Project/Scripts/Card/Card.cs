@@ -233,10 +233,12 @@ public class Card : MonoBehaviour
         }
     }
     public void ChangeTopAllChild(Card top)
-    {
+    {       
         model.TopCard = top;
+        Debug.Log($"{name}: {model.ChildCard}");
         if (model.ChildCard != null)
         {
+            
             model.ChildCard.ChangeTopAllChild(top);
         }
     }
@@ -250,7 +252,10 @@ public class Card : MonoBehaviour
     }
     public void ChangeOrderLayerAllChild()
     {
-        model.SortOrder = model.ParentCard.model.SortOrder + 1;
+        if (model.ParentCard != null)
+        {
+            model.SortOrder = model.ParentCard.model.SortOrder + 1;
+        }
         if (model.ChildCard != null)
         {
             model.ChildCard.ChangeOrderLayerAllChild(); 

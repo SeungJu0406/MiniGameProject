@@ -36,6 +36,7 @@ public class TitleManager : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+        Time.timeScale = 1f;
     }
 
     private void Start()

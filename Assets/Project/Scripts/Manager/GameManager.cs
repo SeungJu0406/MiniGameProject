@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
         if(Instance == null) Instance = this;
         else Destroy(gameObject);
         curState = State.Null;
+        Time.timeScale = 1f;
     }
     private void Start()
     {       

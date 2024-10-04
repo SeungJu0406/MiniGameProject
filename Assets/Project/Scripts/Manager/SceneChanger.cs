@@ -16,8 +16,6 @@ public class SceneChanger : MonoBehaviour
 
     public void ChangeScene(string scene)
     {
-       Time.timeScale = 1f;
-
        AsyncOperation oper = SceneManager.LoadSceneAsync(scene);
 
        StartCoroutine(ChangeSceneRoutine(oper));

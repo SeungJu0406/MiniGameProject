@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MonsterCard : Card
@@ -47,10 +48,17 @@ public class MonsterCard : Card
             }
         }
     }
-
     public override void Die()
     {
         base.Die();
+    }
+
+
+    void StartBattle()
+    {
+        if (model.BottomCard == model.Card) return;
+        BattleField battleFields = Pool.BattleField.GetPool(transform.position);
+        battleFields.AddBattleList(this);
     }
     IEnumerator MoveIdleRoutine()
     {
@@ -71,10 +79,5 @@ public class MonsterCard : Card
         }
     }
 
-    void StartBattle()
-    {
-        if (model.BottomCard == model.Card) return;
-        BattleField battleFields = Pool.BattleField.GetPool(transform.position);
-        battleFields.AddBattleList(this);
-    }
+
 }

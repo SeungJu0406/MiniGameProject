@@ -220,7 +220,7 @@ public class BattleField : Card
                 notBattles[i].model.ChildCard = i + 1 < notBattles.Count ? notBattles[i + 1] : null; // 카운트 이상인 인덱스는 존재할 수 없음
             }
             // 자식(탑카드)으로 해당 자식들의 탑카드 교체
-            top.ChangeTopAllChild(model.ChildCard);
+            top.ChangeTopAllChild(notBattles[0]);
             // 마지막 인덱스의 카드로 부모들 바텀 교체
             notBattles[notBattles.Count - 1].ChangeBottomAllParent(notBattles[notBattles.Count - 1]);
             top.InitOrderLayerAllChild(0);
@@ -255,7 +255,7 @@ public class BattleField : Card
             villagers[i].model.CanGetChild = false;
             villagers[i].model.IsFight = true;
             villagersIndex++;
-        }
+        }   
         model.ChildCard = null;
         model.BottomCard = this;
 
