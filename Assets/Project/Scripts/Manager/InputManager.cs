@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
@@ -8,13 +7,13 @@ public class InputManager : MonoBehaviour
     [SerializeField] Transform cardPos;
     [SerializeField] Card choiceCard;
     [SerializeField] public float dragSpeed;
-    [SerializeField] public float dragHeight;
+    [HideInInspector] public Plane _backGroundPlane;
     Vector3 movePos;
     int cardLayer;
     int backGroundLayer;
 
     public bool isClick { get; private set; }
-    bool canClick = true;  
+    bool canClick = true;
     public bool CanClick { get { return canClick; } set { canClick = value; } }
     bool canCamareMove;
     private void Awake()
@@ -74,13 +73,24 @@ public class InputManager : MonoBehaviour
             choiceCard = hit.collider.gameObject.GetComponent<Card>();
             if (choiceCard.model.data.cantMove) return;
             cardPos = hit.transform;
-            choiceCard.Click();           
+            choiceCard.Click();
         }
-
-        dragRoutine = dragRoutine == null ? StartCoroutine(DragRoutine()) : dragRoutine;
     }
     public void Drag()
     {
+
+        Vector3 distanceFormCamera = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, Camera.main.transform.position.z + 15);
+        Plane plane = new Plane(Vector3.forward, distanceFormCamera);
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        
+
+        if (plane.Raycast(ray, out float enter))
+        {
+            Vector3 point = ray.GetPoint(enter);
+            movePos = new Vector3(point.x, point.y, 0);
+        }
+
         if (cardPos != null)
         {
             cardPos.position = Vector3.Lerp(cardPos.position, movePos, dragSpeed * Time.deltaTime);
@@ -90,30 +100,11 @@ public class InputManager : MonoBehaviour
             // 레이를 찍은 곳에 반대 방향 으로 러프?
         }
     }
-    Coroutine dragRoutine;
-    WaitForSeconds delay = new WaitForSeconds(0.05f);
-    IEnumerator DragRoutine()
-    {
-        while (true)
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, 100f, backGroundLayer))
-            {
-                movePos = new Vector3(hit.point.x, hit.point.y, hit.point.z - dragHeight);
-            }
-            yield return delay;
-        }
-    }
-
     public void UnClick()
     {
         isClick = false;
         canCamareMove = true;
-        if (dragRoutine != null)
-        {
-            StopCoroutine(dragRoutine);
-            dragRoutine = null;
-        }
+
         if (cardPos != null)
         {
             choiceCard.UnClick();
