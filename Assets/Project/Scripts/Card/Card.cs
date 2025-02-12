@@ -218,10 +218,9 @@ public class Card : MonoBehaviour
         model.BottomCard.NotIgnoreCollider();
         Manager.Sound.PlaySFX(Manager.Sound.sfx.unclick);
     }
-    WaitForSeconds delay = new WaitForSeconds(0.1f);
     IEnumerator UnClickDelayRoutine()
     {
-        yield return delay;
+        yield return 0.1f.GetRealDelay();
         IsChoice = false;
     }
     void UnClickAllChild()

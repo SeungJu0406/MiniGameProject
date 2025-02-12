@@ -126,9 +126,9 @@ public class ShopCombine : CardCombine
         CraftingCurTime = result.craftingTime;
         while (true)
         {
-            CraftingCurTime -= DelayTime;
+            CraftingCurTime -= Util.GetDeltaTime();
             if (CraftingCurTime < 0) break;
-            yield return delay;
+            yield return null;
         }
         timerBar.gameObject.SetActive(false);
         // »ý¼º

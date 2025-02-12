@@ -10,14 +10,12 @@ public class MonsterCard : Card
     [SerializeField] float moveDistance;
     [SerializeField] float jumpInterval;
     List<Card> notBattles = new List<Card>();
-    WaitForSeconds jumpDelay;
 
     Coroutine idleRoutine;
     protected override void Awake()
     {
         base.Awake();
         model.OnChangeBottom += StartBattle;
-        jumpDelay = new WaitForSeconds(jumpInterval);
     }
     protected override void Start() 
     {
@@ -64,13 +62,21 @@ public class MonsterCard : Card
     {
         while (true)
         {
-            yield return jumpDelay;
+            float delayTime = 0;
+            while (true)
+            {
+                delayTime += Util.GetDeltaTime();
+                if (delayTime > jumpInterval)
+                    break;
+                yield return null;
+            }
+
             Vector3 dir = Random.insideUnitCircle * moveDistance;
             Vector3 pos = transform.position + dir;
             float timer = 0;
             while (Vector3.Distance(transform.position, pos) > 0.01f)
             {
-                transform.position = Vector3.Lerp(transform.position, pos, CardManager.Instance.moveSpeed * Time.deltaTime);
+                transform.position = Vector3.Lerp(transform.position, pos, CardManager.Instance.moveSpeed * Util.GetDeltaTime());
                 timer += Time.deltaTime;
                 if (timer > 1f)
                     break;

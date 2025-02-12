@@ -105,13 +105,29 @@ public class BattleField : Card
             {
                 int targetIndex = Util.Random(0, monstersIndex - 1);
                 StartCoroutine(AttackRoutine(villagers[Util.Random(0, villagers.Count - 1)], monsters[targetIndex]));
-                yield return battleDelay;
+
+                float delayTime = 0;
+                while (true)
+                {
+                    delayTime += Util.GetDeltaTime();
+                    if (delayTime > attackInterval)
+                        break;
+                    yield return null;
+                }
             }
             for (int i = 0; i < Util.Random(0, monsters.Count); i++)
             {
                 int targetIndex = Util.Random(0, villagersIndex - 1);
                 StartCoroutine(AttackRoutine(monsters[Util.Random(0, monsters.Count - 1)], villagers[targetIndex]));
-                yield return battleDelay;
+
+                float delayTime = 0;
+                while (true)
+                {
+                    delayTime += Util.GetDeltaTime();
+                    if (delayTime > attackInterval)
+                        break;
+                    yield return null;
+                }
             }
         }
     }
@@ -125,7 +141,7 @@ public class BattleField : Card
         float timer = 0;
         while (true)
         {
-            attacker.transform.position = Vector3.Lerp(attacker.transform.position, hitCard.transform.position, Manager.Card.moveSpeed * Time.deltaTime);
+            attacker.transform.position = Vector3.Lerp(attacker.transform.position, hitCard.transform.position, Manager.Card.moveSpeed * Util.GetDeltaTime());
             timer += Time.deltaTime;
             if (attacker.IsChoice) break;
             if (timer > 0.1f)
@@ -139,7 +155,7 @@ public class BattleField : Card
         }
         while (Vector3.Distance(attacker.transform.position, originPos) > 0.01f)
         {
-            attacker.transform.position = Vector3.Lerp(attacker.transform.position, originPos, Manager.Card.moveSpeed * Time.deltaTime);
+            attacker.transform.position = Vector3.Lerp(attacker.transform.position, originPos, Manager.Card.moveSpeed * Util.GetDeltaTime());
             if (attacker.IsChoice) break;
             yield return null;
         }

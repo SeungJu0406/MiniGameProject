@@ -136,8 +136,6 @@ public abstract class CardCombine : MonoBehaviour
             return false;
         }
     }
-    protected const float DelayTime = 0.1f;
-    protected WaitForSeconds delay = new WaitForSeconds(DelayTime);
     protected Coroutine createRoutine;
     protected virtual IEnumerator CreateRoutine(RecipeData result)
     {
@@ -147,9 +145,9 @@ public abstract class CardCombine : MonoBehaviour
         CraftingCurTime = result.craftingTime;
         while (true)
         {
-            CraftingCurTime -= DelayTime;
+            CraftingCurTime -= Util.GetDeltaTime();
             if (CraftingCurTime < 0) break;
-            yield return delay;
+            yield return null;
         }
         timerBar.gameObject.SetActive(false);
         // »ý¼º

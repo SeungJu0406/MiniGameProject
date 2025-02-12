@@ -4,14 +4,10 @@ using UnityEngine;
 
 public class AnimalCard : MonsterCard
 {
-
-    WaitForSeconds produceDelay;
-
     protected override void Start()
     {
         base.Start();
 
-        produceDelay = new WaitForSeconds(model.data.produceCard.time);
         StartCoroutine(ProduceCardRoutine());
     }
 
@@ -19,7 +15,15 @@ public class AnimalCard : MonsterCard
     {
         while (true)
         {
-            yield return produceDelay;
+            float delayTime = 0;
+            while (true)
+            {
+                delayTime += Util.GetDeltaTime();
+                if (delayTime > model.data.produceCard.time)
+                    break;
+                yield return null;
+            }
+
             Card produceCard = Instantiate(model.data.produceCard.card.prefab, transform.position, transform.rotation);
             if (!Manager.Card.InsertStackResultCard(produceCard))
             {

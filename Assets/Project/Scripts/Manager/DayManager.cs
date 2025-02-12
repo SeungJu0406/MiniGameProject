@@ -26,8 +26,6 @@ public class DayManager : MonoBehaviour
     public PopUpState curPopUpState;
 
     [HideInInspector] public int cardLayer;
-    WaitForSeconds milliSecond = new WaitForSeconds(0.1f);
-    WaitForSeconds milliSecond5 = new WaitForSeconds(0.5f);
 
     StringBuilder sb = new StringBuilder();
     private void Awake()
@@ -50,12 +48,12 @@ public class DayManager : MonoBehaviour
         curPopUpState = PopUpState.Null;
         while (true)
         {
-            CurDayTime += 0.1f;
+            CurDayTime += Util.GetDeltaTime();
             if (CurDayTime > MaxDayTime)
             {
                 break;
             }
-            yield return milliSecond;
+            yield return null;
         }
         // 식사시간 시작
 
@@ -69,7 +67,7 @@ public class DayManager : MonoBehaviour
         Manager.UI.HideTopUI();
         Manager.UI.HideLeftUI();
         Manager.UI.ShowPopUpUI();
-        Manager.Time.Normal();
+        Manager.Time.PauseDayResult();
         sb.Clear();
         sb.Append($"{Day}번째 달 끝");
         Manager.UI.UpdatePopUpUIMainText(sb);
@@ -179,6 +177,7 @@ public class DayManager : MonoBehaviour
         }
         // 날짜 올리고루프
         Day++;
+        Manager.Time.Normal();
         StartCoroutine(DayRoutine());
     }
 

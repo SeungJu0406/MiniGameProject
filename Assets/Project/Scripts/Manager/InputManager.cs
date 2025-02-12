@@ -52,7 +52,7 @@ public class InputManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (Time.timeScale > 0f)
+            if (Manager.Time.TimeScale > 0f)
             {
                 Manager.Time.Pause();
             }
@@ -65,6 +65,7 @@ public class InputManager : MonoBehaviour
     }
     public void Click()
     {
+       
         isClick = true;
         canCamareMove = true;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -90,10 +91,11 @@ public class InputManager : MonoBehaviour
             Vector3 point = ray.GetPoint(enter);
             movePos = new Vector3(point.x, point.y, 0);
         }
-
+        Debug.Log(Manager.Time.TimeScale);
+       // Debug.Log(Util.GetDeltaTime());
         if (cardPos != null)
         {
-            cardPos.position = Vector3.Lerp(cardPos.position, movePos, dragSpeed * Time.deltaTime);
+            cardPos.position = Vector3.Lerp(cardPos.position, movePos, dragSpeed * Time.deltaTime);          ;
         }
         else
         {

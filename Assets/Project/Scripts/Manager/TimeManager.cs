@@ -6,10 +6,16 @@ public class TimeManager : MonoBehaviour
 {
     public static TimeManager Instance;
 
+    private float _timeScale = 1;
+    public float TimeScale { get { return _timeScale; } set { _timeScale = value; } }
     private void Awake()
     {
         if(Instance == null) Instance = this;
         else Destroy(gameObject);
+    }
+    public void PauseDayResult()
+    {
+        TimeScale = 0;
     }
 
     public void Pause()
@@ -17,8 +23,7 @@ public class TimeManager : MonoBehaviour
         Manager.UI.ShowTopPauseButton();
         Manager.UI.HideTopNormalButton();
         Manager.UI.HideTopFastButton();
-        Manager.Input.CanClick = false;
-        Time.timeScale = 0f;
+        TimeScale = 0;
     }
 
     public void Normal()
@@ -26,8 +31,7 @@ public class TimeManager : MonoBehaviour
         Manager.UI.HideTopPauseButton();
         Manager.UI.ShowTopNormalButton();
         Manager.UI.HideTopFastButton();
-        Manager.Input.CanClick = true;
-        Time.timeScale = 1f;
+        TimeScale = 1;
     }
 
     public void Fast()
@@ -35,6 +39,6 @@ public class TimeManager : MonoBehaviour
         Manager.UI.HideTopPauseButton();
         Manager.UI.HideTopNormalButton();
         Manager.UI.ShowTopFastButton();
-        Time.timeScale = 2f;
+        TimeScale = 2;
     }
 }
