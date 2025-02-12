@@ -17,12 +17,12 @@ public class CellCard : Card
 
     protected override void Start()
     {
-        if (!isInitInStack)
+        if (!IsInitInStack)
         {
             model.TopCard = this;
             model.BottomCard = this;
         }
-        isInitInStack = false;
+        IsInitInStack = false;
         lists.Add(coins);
         lists.Add(unsellables);
     }
@@ -41,10 +41,10 @@ public class CellCard : Card
         // 본인이 코인 팔 수 있는지 없는지 체크하는 bool 변수
         bool isSellableTop;
         // 카드 본인에 대해 먼저 수행
-        if(card.model.data.price > 0)
+        if (card.model.data.price > 0)
         {
             //Debug.Log(name);
-            for(int i = 0; i< card.model.data.price; i++)
+            for (int i = 0; i < card.model.data.price; i++)
             {
                 CardData coin = Dic.Card.GetValue((int)CardKey.Coin);
                 Card instance = Instantiate(coin.prefab, transform.position, transform.rotation);
@@ -106,24 +106,23 @@ public class CellCard : Card
                 // 다음 인덱스는 교체 및 전 인덱스를 부모로 지정 다음 인덱스를 자식으로 지정(없으면 null)
                 for (int i = 0; i < cards.Count; i++)
                 {
+                    cards[i].IsInitInStack = true;
                     cards[i].model.ParentCard = i - 1 >= 0 ? cards[i - 1] : null; // 0 보다 작은 인덱스는 존재할 수 없음
                     cards[i].model.ChildCard = i + 1 < cards.Count ? cards[i + 1] : null; // 카운트 이상인 인덱스는 존재할 수 없음
                 }
-                // 자식(탑카드)으로 해당 자식들의 탑카드 교체
-                model.ChildCard.ChangeTopAllChild(model.ChildCard);
-                // 마지막 인덱스의 카드로 부모들 바텀 교체
+                cards[0].ChangeTopAllChild(cards[0]);
                 cards[cards.Count - 1].ChangeBottomAllParent(cards[cards.Count - 1]);
                 model.ChildCard.InitOrderLayerAllChild(0);
             }
         }
         if (coins.Count > 0)
-        {          
+        {
             if (!Manager.Card.InsertStackResultCard(coins[0].model.TopCard))
             {
                 StartCoroutine(MoveCardRoutine(coins[0].model.TopCard, 0)); // 코인리스트는 살짝 아래
             }
         }
-        if(unsellables.Count > 0) 
+        if (unsellables.Count > 0)
         {
             StartCoroutine(MoveCardRoutine(unsellables[0].model.TopCard, moveCardPosX)); // 못파는 리스트는 살짝 오른쪽으로
         }
@@ -159,12 +158,12 @@ public class CellCard : Card
     WaitForSeconds shortDelay = new WaitForSeconds(0.05f);
     IEnumerator ChangeISAccessIgnoreStack(Card card)
     {
-        if (card.model.Card != null) 
+        if (card.model.Card != null)
         {
             card.model.IsAccessIgnoreStack = true;
-        }   
+        }
         yield return shortDelay;
-        if (card.model.Card != null) 
+        if (card.model.Card != null)
         {
             card.model.IsAccessIgnoreStack = false;
         }

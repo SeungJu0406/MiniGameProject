@@ -29,7 +29,7 @@ public class Card : MonoBehaviour
 
     public event UnityAction<Card> OnClick;
     public event UnityAction<Card> OnDie;
-    protected bool isInitInStack;
+    public bool IsInitInStack;
     protected StringBuilder sb = new StringBuilder();
     protected virtual void Awake()
     {
@@ -42,6 +42,7 @@ public class Card : MonoBehaviour
         model.Card = this;
         model.OnChangeChild += InitCollider;
         model.OnChangeCurHp += UpdateCurHp;
+        model.OnChangeBottom += SetIgnoreCollider;
 
         rb.drag = 50;
         cardLayer = LayerMask.NameToLayer("Card");
@@ -53,12 +54,12 @@ public class Card : MonoBehaviour
 
     protected virtual void Start()
     {
-        if (!isInitInStack)
+        if (!IsInitInStack)
         {
             model.TopCard = this;
             model.BottomCard = this;
         }
-        isInitInStack = false;
+        IsInitInStack = false;
         Manager.Sound.PlaySFX(Manager.Sound.sfx.combine);
         Manager.Card.AddCardList(this);
     }
@@ -114,7 +115,7 @@ public class Card : MonoBehaviour
     {
         if (!model.CanGetParent) return;
         if (!parent.model.CanGetChild) return;
-        isInitInStack = true;
+        IsInitInStack = true;
         model.TopCard = model.TopCard == null ? this : model.TopCard;      
         model.BottomCard = model.BottomCard == null? this : model.BottomCard;
         model.ParentCard = parent;
@@ -185,6 +186,18 @@ public class Card : MonoBehaviour
             boxCollider.gameObject.SetActive(true);
         }
     }
+
+    void SetIgnoreCollider()
+    {
+        if(model.BottomCard == this)
+        {    
+            NotIgnoreCollider();
+        }
+        else
+        {
+            IgnoreCollider();
+        }
+    }
     public virtual void Click()
     {
         if (model.ParentCard != null)
@@ -234,6 +247,7 @@ public class Card : MonoBehaviour
     public void ChangeTopAllChild(Card top)
     {       
         model.TopCard = top;
+        Debug.Log($"{model.GetInstanceID()} {model.TopCard.GetInstanceID()}");
         if (model.ChildCard != null)
         {
             

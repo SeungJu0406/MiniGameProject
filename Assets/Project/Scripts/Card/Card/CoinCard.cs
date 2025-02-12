@@ -6,7 +6,7 @@ public class CoinCard :Card
 {
     protected override void Start()
     {
-        if (!isInitInStack)
+        if (!IsInitInStack)
         {
             model.TopCard = this;
             model.BottomCard = this;

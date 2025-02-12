@@ -6,12 +6,12 @@ public class ShopCard : Card
 {
     protected override void Start()
     {
-        if (!isInitInStack)
+        if (!IsInitInStack)
         {
             model.TopCard = this;
             model.BottomCard = this;
         }
-        isInitInStack = false;
+        IsInitInStack = false;
     }
     protected override void OnDisable() { }
 }

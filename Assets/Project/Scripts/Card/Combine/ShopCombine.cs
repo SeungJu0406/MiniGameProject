@@ -69,12 +69,11 @@ public class ShopCombine : CardCombine
             // 다음 인덱스는 교체 및 전 인덱스를 부모로 지정 다음 인덱스를 자식으로 지정(없으면 null)
             for (int i = 0; i < cards.Count; i++)
             {
+                cards[i].IsInitInStack = true;
                 cards[i].model.ParentCard = i - 1 >= 0 ? cards[i - 1] : null; // 0 보다 작은 인덱스는 존재할 수 없음
                 cards[i].model.ChildCard = i + 1 < cards.Count ? cards[i + 1] : null; // 카운트 이상인 인덱스는 존재할 수 없음
             }
-            // 자식(탑카드)으로 해당 자식들의 탑카드 교체
-            model.ChildCard.ChangeTopAllChild(model.ChildCard);
-            // 마지막 인덱스의 카드로 부모들 바텀 교체
+            cards[0].ChangeTopAllChild(cards[0]);
             cards[cards.Count - 1].ChangeBottomAllParent(cards[cards.Count - 1]);
             model.ChildCard.InitOrderLayerAllChild(0);
         }
@@ -127,7 +126,7 @@ public class ShopCombine : CardCombine
         while (true)
         {
             CraftingCurTime -= Util.GetDeltaTime();
-            if (CraftingCurTime < 0) break;
+            if (CraftingCurTime <= 0) break;
             yield return null;
         }
         timerBar.gameObject.SetActive(false);

@@ -8,13 +8,13 @@ public class ShopItemCard : Card
 
     protected override void Start()
     {
-        if (!isInitInStack)
+        if (!IsInitInStack)
         {
             model.TopCard = this;
             model.BottomCard = this;
         }
         Manager.Sound.PlaySFX(Manager.Sound.sfx.combine);
-        isInitInStack = false;
+        IsInitInStack = false;
     }
     protected override void OnDisable() { }
 
