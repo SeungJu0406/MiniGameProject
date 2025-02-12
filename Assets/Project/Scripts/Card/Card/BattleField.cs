@@ -98,7 +98,15 @@ public class BattleField : Card
     IEnumerator BattleRoutine()
     {
 
-        yield return battleDelay;
+        float delayTime = 0;
+        while (true)
+        {
+            delayTime += Util.GetDeltaTime();
+            if (delayTime > attackInterval)
+                break;
+            yield return null;
+        }
+
         while (true)
         {
             for (int i = 0; i < Util.Random(0, villagers.Count); i++)
@@ -106,7 +114,7 @@ public class BattleField : Card
                 int targetIndex = Util.Random(0, monstersIndex - 1);
                 StartCoroutine(AttackRoutine(villagers[Util.Random(0, villagers.Count - 1)], monsters[targetIndex]));
 
-                float delayTime = 0;
+                delayTime = 0;
                 while (true)
                 {
                     delayTime += Util.GetDeltaTime();
@@ -120,7 +128,7 @@ public class BattleField : Card
                 int targetIndex = Util.Random(0, villagersIndex - 1);
                 StartCoroutine(AttackRoutine(monsters[Util.Random(0, monsters.Count - 1)], villagers[targetIndex]));
 
-                float delayTime = 0;
+                delayTime = 0;
                 while (true)
                 {
                     delayTime += Util.GetDeltaTime();

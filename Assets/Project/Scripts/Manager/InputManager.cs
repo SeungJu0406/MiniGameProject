@@ -91,7 +91,6 @@ public class InputManager : MonoBehaviour
             Vector3 point = ray.GetPoint(enter);
             movePos = new Vector3(point.x, point.y, 0);
         }
-        Debug.Log(Manager.Time.TimeScale);
        // Debug.Log(Util.GetDeltaTime());
         if (cardPos != null)
         {

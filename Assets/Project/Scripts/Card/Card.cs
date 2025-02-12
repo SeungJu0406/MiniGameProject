@@ -234,7 +234,6 @@ public class Card : MonoBehaviour
     public void ChangeTopAllChild(Card top)
     {       
         model.TopCard = top;
-        Debug.Log($"{name}: {model.ChildCard}");
         if (model.ChildCard != null)
         {
             
